@@ -1,0 +1,273 @@
+﻿eQOURSE
+
+About Us Section ΓÇö Website Update Document
+4 Pages: About Us Γöé Testimonials Γöé Careers Γöé FAQs
+
+UPDATED FOR DUAL-VERTICAL: EdTech Solutions + AI Data Services
+SEO-Optimised ┬╖ Content Changes Marked ┬╖ Visual Direction Included
+
+Each section is marked: Γ₧ò NEW CONTENT | Γ£Å∩╕Å UPDATE EXISTING | KEEP AS-IS
+Version 1.0 | April 2026 | CONFIDENTIAL
+
+PAGE 1: About Us
+URL: https://www.eqourse.com/aboutus
+Priority: CRITICAL ΓÇö Company identity page, must reflect both verticals
+
+SEO Meta Tags
+[Γ£Å∩╕Å UPDATE EXISTING]
+
+Hero Section
+[Γ£Å∩╕Å UPDATE EXISTING]
+Pre-Headline: eQOURSE ΓÇö Delivering Operational Excellence
+H1 ΓÇö Main Headline
+Who Are We?
+Hero Image Alt: About eQOURSE ΓÇö EdTech solutions and AI data services company with offices in India and Singapore.
+Hero Visual Direction: Keep existing teal gradient hero background. Update the overlay text to reflect dual identity. Add a subtle split visual: left side shows education/content icons, right side shows AI/data node icons. Both halves united by the eQOURSE logo at centre. Clean, modern, enterprise.
+
+Section: Who Are We? (Updated Copy)
+[Γ£Å∩╕Å UPDATE EXISTING]
+CURRENT TEXT: An ISO [9001:2015] & [27001:2013] certified education solutions organization... We specialize in digital content development, K-12 learning solutions...
+
+UPDATED TEXT: 
+An ISO 9001:2015 & ISO 27001:2022 certified education and AI data services organisation, eQOURSE is a recognised start-up by the Department for Promotion of Industry and Internal Trade (DPIIT), Government of India, with operations in India (Kota, Rajasthan) and Singapore (eQOURSE PTE LTD).
+We operate across two integrated verticals: EdTech Solutions and AI Data Services. Our EdTech division specialises in custom e-learning content development, K-12 curriculum design, exam preparation, video learning solutions, localization in 30+ languages, LMS integration, and subject matter expert services. Our AI Data Services division delivers end-to-end AI training data pipelines ΓÇö custom dataset collection, expert annotation and labeling (NLP, Computer Vision, Audio, RLHF), data cleaning and validation, and real-world model testing through our proprietary TuTrain platform.
+With 500+ specialists spanning STEM-educated content creators, trained data annotators, instructional designers, and domain experts, we serve 200+ clients across 15+ countries. Our vision is to be the trusted global partner where education expertise meets AI data excellence ΓÇö helping organisations create transformative learning experiences and build AI systems that work in the real world.
+
+Section: Our Journey (Updated Timeline)
+[Γ£Å∩╕Å UPDATE EXISTING]
+CURRENT TEXT: The eQOURSE journey began in 2020, led by our CEO, Somveer Tayal... In 2025, eQOURSE was officially registered as eQOURSE PTE LTD in Singapore...
+
+UPDATED TEXT: 
+2020 ΓÇö Founded
+eQOURSE was founded by Somveer Tayal, who brings over 20 years of experience in transforming education. We began as an EdTech content services company, partnering with e-learning platforms to design and develop digital content, assessments, and tutoring support.
+2021ΓÇô2023 ΓÇö Scaled EdTech Operations
+We scaled to 200+ subject matter experts and served 150+ clients across India, the USA, the UK, the UAE, and Africa. We achieved ISO 9001:2015 certification for quality management and established ourselves as a trusted partner for K-12 content, exam preparation, localization, and video solutions.
+2024 ΓÇö ISO 27001 Certification & AI Expansion
+We obtained ISO 27001:2022 certification for information security management. Recognising that our deep education expertise and large STEM-trained workforce were uniquely suited to AI data services, we began building our AI Data Services division ΓÇö offering data collection, annotation, cleaning, and the concept of real-world model testing.
+2025 ΓÇö Singapore Office & TuTrain Launch
+eQOURSE was officially registered as eQOURSE PTE LTD in Singapore to strengthen global operations across the Asia-Pacific region. We launched our proprietary TuTrain platform for real-world AI model testing, connecting AI models to demographically diverse test users across 30+ languages. Our team grew to 500+ specialists spanning EdTech content and AI data operations.
+2026 ΓÇö Dual-Vertical Global Operations
+Today, eQOURSE operates as a dual-vertical company: EdTech Solutions and AI Data Services. We serve 200+ clients across 15+ countries, with offices in India (Kota) and Singapore. Our mission is to help organisations across education and AI build systems that work in the real world ΓÇö powered by high-quality human expertise.
+
+Section: Meet the Founder
+[Γ£Å∩╕Å UPDATE EXISTING]
+CURRENT BIO: Somveer Tayal, the founder of eQOURSE, brings over 20+ years of experience in the education sector...
+
+UPDATED BIO: 
+Somveer Tayal, the founder and CEO of eQOURSE, brings over 20 years of experience in the education and technology sectors. His expertise spans content development, curriculum design, teacher training, academic strategy, and AI data operations. As an Associate Professor for JEE Advanced-level Mathematics, he taught over 20,000 students with 18,000+ hours of teaching. He also served as the Functional Head of R&D for K-12, IIT JEE, and NEET, executing academic content strategy for over 40,000 students.
+In 2020, Somveer founded eQOURSE with a vision to bring operational excellence to education and AI services. Under his leadership, eQOURSE has grown from an EdTech content startup to a dual-vertical company serving 200+ global clients across EdTech Solutions and AI Data Services. In 2025, he expanded eQOURSEΓÇÖs operations to Singapore with the registration of eQOURSE PTE LTD, positioning the company as a global player in both education and AI data.
+
+UPDATED QUOTE: 
+ΓÇ£I believe that the same human expertise that makes great education possible ΓÇö deep subject knowledge, cultural understanding, and rigorous quality standards ΓÇö is exactly what AI needs to work in the real world. At eQOURSE, we bring both together: EdTech solutions that scale learning outcomes, and AI data services that help machines learn from the best of human intelligence. Our mission is to be the trusted partner where education meets AI.ΓÇ¥
+
+Section: Meet Our Team
+STATUS: KEEP AS-IS ΓÇö No changes needed. Existing team profiles remain.
+
+Section: Why Choose Us (Updated)
+[Γ£Å∩╕Å UPDATE EXISTING]
+Update the existing 7-point ΓÇ£Why Choose UsΓÇ¥ section to reflect both verticals:
+
+Comprehensive EdTech & AI Data Solutions
+Two integrated verticals under one roof: custom e-learning content, curriculum development, exam prep, video solutions, localization, LMS builds, and SME services ΓÇö plus AI training data collection, annotation, cleaning, and real-world model testing.
+500+ Specialists from the WorldΓÇÖs Deepest STEM Talent Pool
+Our team of 500+ specialists includes STEM-educated SMEs, trained data annotators, instructional designers, and domain experts. Operating from Kota ΓÇö one of the worldΓÇÖs largest concentrations of STEM-educated professionals ΓÇö we offer a unique talent advantage for both education content and AI data tasks.
+30+ Languages with Native-Speaker Quality
+Content creation, translation, voice-over, and data annotation in 30+ languages spanning South Asian, Southeast Asian, European, and African language families. Every language task is handled by verified native speakers.
+ISO 9001 & ISO 27001 Certified
+Dual ISO certification for quality management (9001:2015) and information security (27001:2022). GDPR-ready processes, full data lineage, and NDA-protected workflows across all projects.
+Real-World AI Model Testing via TuTrain
+The only company offering an integrated pipeline from data collection to real-world model testing. Our TuTrain platform connects AI models to demographically diverse test users, delivering performance insights that benchmark tests cannot replicate.
+Global Operations: India & Singapore
+Offices in India (Kota, Rajasthan) and Singapore (eQOURSE PTE LTD). We serve clients across India, the USA, the UK, Singapore, the UAE, China, Africa, and 15+ countries worldwide.
+Proven Track Record: 200+ Clients
+From K-12 publishers and EdTech startups to AI research labs and autonomous vehicle companies ΓÇö 200+ clients trust eQOURSE with their most critical content and data projects.
+
+Section: We Believe in Counting Numbers (Updated Stats)
+[Γ£Å∩╕Å UPDATE EXISTING]
+Update the existing counter stats to reflect both verticals:
+10M+ Students Reached (keep)
+50K+ Textbook Solutions per Month (keep)
+10K+ Q&A Videos per Month (keep)
+30+ Languages (update from ΓÇ£Regional LanguagesΓÇ¥ to ΓÇ£LanguagesΓÇ¥)
+15+ Countries (update from current number)
+5+ Years (keep)
+Γ₧ò NEW: 500+ Specialists
+Γ₧ò NEW: 98%+ Annotation Accuracy
+Γ₧ò NEW: ISO 9001 & 27001 Certified (badge, not counter)
+
+Section: Newsletter
+[Γ£Å∩╕Å UPDATE EXISTING]
+CURRENT: More on EdTech? Sign up for our weekly newsletter, The eQOURSE Connect. ...talks about the latest developments happening in edtech startups...
+
+UPDATED HEADING: More on EdTech & AI?
+UPDATED TEXT: eQOURSE Connect is a weekly newsletter for education and AI professionals that covers the latest developments in EdTech, AI data services, instructional design, data annotation best practices, and industry trends. Subscribe to stay ahead.
+
+
+PAGE 2: Client Testimonials
+URL: https://www.eqourse.com/clients-testimonials
+Priority: HIGH ΓÇö Social proof for both verticals
+
+SEO Meta Tags
+[Γ£Å∩╕Å UPDATE EXISTING]
+
+Hero Section
+[Γ£Å∩╕Å UPDATE EXISTING]
+H1: What Our Clients Are Saying About eQOURSE
+Subtext (Updated): At eQOURSE, we are proud to have worked with 200+ clients across EdTech and AI sectors, delivering scalable e-learning solutions and production-grade AI training data. From K-12 content and SAT preparation to multilingual data annotation and real-world model testing ΓÇö our clients consistently share positive feedback about their experience with us.
+Hero Visual Direction: Keep existing teal testimonials hero. Add a subtle overlay with both EdTech and AI Data badges/icons in bottom-right corner to signal dual-vertical scope.
+
+Existing EdTech Testimonials
+STATUS: KEEP ALL 7 EXISTING TESTIMONIALS AS-IS. No changes needed.
+Viraj Panwar (ABP Learning), Mira Sood (ContentWize), Khyati Srinivas (eVidyaloka Trust), Shakti Jhala (SPI), Kola Xu (Data-Driven Interactive Technology), Online Learning Platforms client, EdTech Company client.
+
+New AI Data Services Testimonials (Add Below Existing)
+[Γ₧ò NEW CONTENT]
+Add a section heading: ΓÇ£What AI & Data Teams Are SayingΓÇ¥ before these new testimonials. Use the same card layout as existing testimonials but with a navy/cyan accent border to distinguish AI Data testimonials from EdTech ones.
+
+AI Testimonial 1
+ΓÇ£eQOURSE delivered 50,000+ hours of multilingual speech data across 12 Indian languages for our ASR engine. The annotation quality was exceptional ΓÇö their inter-annotator agreement consistently exceeded 0.82. What really set them apart was the TuTrain platform: they tested our retrained model on real users across 8 dialect groups and identified failure modes our internal QA had completely missed. We achieved a 34% WER reduction in two cycles. No other data vendor offers this kind of closed-loop pipeline.ΓÇ¥
+Results: 50,000+ hours of speech data. 12 languages. IAA ΓëÑ 0.82. 34% WER reduction via active learning loop.
+Would Recommend: Yes, for multilingual speech data, audio annotation, and real-world ASR testing.
+Client: VP of Data, Series B Voice AI Startup (NDA ΓÇö name withheld)
+Industry Tag: Voice AI / ASR
+
+AI Testimonial 2
+ΓÇ£We needed pixel-level annotation on 25,000 chest X-rays with radiology-trained annotators. eQOURSE assembled a team of 15 medical annotators supervised by 3 consulting radiologists. The annotation accuracy exceeded our FDA submission thresholds ΓÇö 94.7% sensitivity and 96.1% specificity. Their HIPAA-aware PII redaction and audit trails gave us the compliance documentation we needed. The South Asian pathology variants in their dataset were a critical competitive advantage for our India market expansion.ΓÇ¥
+Results: 25,000 X-rays annotated. 94.7% sensitivity / 96.1% specificity. FDA threshold exceeded.
+Would Recommend: Yes, for medical image annotation, compliance-grade data handling, and domain-specialist annotators.
+Client: CTO, Healthcare AI Startup (NDA ΓÇö name withheld)
+Industry Tag: Healthcare AI / Medical Imaging
+
+AI Testimonial 3
+ΓÇ£eQOURSE provided RLHF annotation for our multilingual LLM across 6 languages. Their 200+ annotators were rigorously trained on our content policy, and the quality of preference ranking and safety labeling was far superior to what weΓÇÖd received from crowdsourcing platforms. After fine-tuning with their data, our modelΓÇÖs human preference scores improved 28% on Indic language responses, and safety violations dropped from 4.2% to 0.6%. They enabled our successful product launch in India.ΓÇ¥
+Results: 6 languages. 28% preference score improvement. Safety violations: 4.2% ΓåÆ 0.6%.
+Would Recommend: Yes, for RLHF annotation, safety labeling, and multilingual LLM fine-tuning data.
+Client: Head of Data, Global AI Research Lab (NDA ΓÇö name withheld)
+Industry Tag: Large Language Models / Generative AI
+
+AI Testimonial 4
+ΓÇ£We chose eQOURSE for our FinTech chatbot training data because they understood both the language complexity (Hindi, Hinglish, Tamil, Telugu, English) and the domain complexity (banking queries, loan processing, fraud reporting). They collected 150,000 realistic utterances, annotated 85 intent categories and financial entities, then tested our retrained NLU on real users through TuTrain. Our intent misclassification dropped from 22% to 4.8%, and agent escalation fell 40%. ThatΓÇÖs real ROI.ΓÇ¥
+Results: 150,000 utterances. 85 intents. Intent error: 22% ΓåÆ 4.8%. 40% less agent escalation.
+Would Recommend: Yes, for multilingual conversational AI data, NLU annotation, and chatbot testing.
+Client: Director of AI, FinTech Company (NDA ΓÇö name withheld)
+Industry Tag: FinTech / Conversational AI
+
+Testimonials Page: Filter System
+[Γ₧ò NEW CONTENT]
+Add filter tabs at the top of the testimonials section, similar to the case study page:
+All (Default)
+EdTech Solutions (shows existing 7 testimonials)
+AI Data Services (shows new 4 testimonials)
+Visual Direction: Same filter tab design as case study page. EdTech testimonial cards: teal left-border. AI Data cards: navy/cyan left-border. Both cohesive but visually distinguishable.
+
+
+PAGE 3: Careers
+URL: https://www.eqourse.com/career
+Priority: MEDIUM
+
+SEO Meta Tags
+[Γ£Å∩╕Å UPDATE EXISTING]
+
+Hero Section
+[Γ£Å∩╕Å UPDATE EXISTING]
+Subtext (Updated): Shape the future of education and AI with eQOURSE. Be part of a dynamic team of 500+ specialists dedicated to innovative EdTech solutions and production-grade AI data services. WeΓÇÖre always looking for talented content creators, instructional designers, data annotators, NLP specialists, project managers, and operations professionals. Grow your career with us across our India and Singapore offices.
+Hero Visual Direction: Keep existing career hero. Add dual-vertical messaging in overlay: ΓÇ£EdTech ┬╖ AI Data ┬╖ India ┬╖ SingaporeΓÇ¥.
+
+Career Form: Department Dropdown Update
+[Γ£Å∩╕Å UPDATE EXISTING]
+CURRENT OPTIONS: Faculty, Marketing, Office Work, Admin, Other
+
+UPDATED OPTIONS: 
+EdTech ΓÇö Subject Matter Expert / Faculty
+EdTech ΓÇö Content Writer / Developer
+EdTech ΓÇö Instructional Designer
+EdTech ΓÇö Video / Animation Producer
+AI Data ΓÇö Data Annotator / Labeler
+AI Data ΓÇö NLP / Linguistics Specialist
+AI Data ΓÇö Computer Vision Annotator
+AI Data ΓÇö Audio / Speech Data Specialist
+AI Data ΓÇö Quality Assurance / Validator
+AI Data ΓÇö Project Manager
+Operations / Admin
+Marketing / Business Development
+Technology / Engineering
+Other
+
+New Section: Why Work at eQOURSE (Add Below Form)
+[Γ₧ò NEW CONTENT]
+Add a ΓÇ£Why Work With UsΓÇ¥ section below the application form:
+
+Two Verticals, Infinite Opportunities
+Whether youΓÇÖre passionate about education or fascinated by AI, eQOURSE offers career paths across both domains. Our EdTech team creates learning content that reaches 10M+ students. Our AI Data team trains models that serve millions of users. You can grow within either vertical or across both.
+Work from IndiaΓÇÖs STEM Capital
+Our headquarters in Kota, Rajasthan ΓÇö one of the worldΓÇÖs largest concentrations of STEM-educated professionals ΓÇö gives you access to a vibrant community of educators, engineers, and data specialists.
+Global Impact
+With clients in 15+ countries and a Singapore office, your work at eQOURSE reaches learners and AI systems worldwide.
+ISO-Certified Quality Culture
+WeΓÇÖre ISO 9001 & 27001 certified. Quality isnΓÇÖt just a metric ΓÇö itΓÇÖs our culture. YouΓÇÖll work in a structured, professional environment that values accuracy and continuous improvement.
+
+
+PAGE 4: FAQs
+URL: https://www.eqourse.com/faq
+Priority: HIGH ΓÇö Critical for SEO (FAQ schema markup)
+
+SEO Meta Tags
+[Γ£Å∩╕Å UPDATE EXISTING]
+
+Hero Section
+[Γ£Å∩╕Å UPDATE EXISTING]
+Subtext (Updated): Find answers to common questions about our EdTech solutions, AI data services, content development process, data annotation quality, scaling options, and more. Whether youΓÇÖre an education company, EdTech platform, or AI team, we aim to provide comprehensive support tailored to your needs.
+
+Existing EdTech FAQs
+STATUS: KEEP ALL EXISTING FAQs AS-IS. No changes to existing questions.
+All 7+ existing EdTech FAQs remain unchanged (K-12 content, SAT/TOEFL prep, LMS integration, translation, digital learning, scaling, etc.).
+
+New Section: AI Data Services FAQs (Add After Existing)
+[Γ₧ò NEW CONTENT]
+Add a visible section divider: ΓÇ£AI Data Services ΓÇö Frequently Asked QuestionsΓÇ¥ before these new FAQs. Implement FAQPage schema markup on ALL FAQs (both existing and new) for Google rich results.
+
+Q1: What AI data services does eQOURSE provide?
+eQOURSE provides end-to-end AI training data services: custom dataset collection (text, audio, image, video) across 30+ languages, expert data annotation and labeling (NLP, Computer Vision, Audio, RLHF), data cleaning and validation with 98%+ accuracy guarantee, and real-world model testing via our TuTrain platform. We are ISO 9001 & ISO 27001 certified.
+
+Q2: What types of data annotation does eQOURSE offer?
+We offer NLP annotation (NER, sentiment, intent classification, relation extraction, coreference resolution), Computer Vision annotation (bounding boxes, semantic segmentation, instance segmentation, polygon annotation, 3D cuboids, keypoint detection, video annotation), Audio annotation (transcription, speaker diarisation, phoneme labeling, emotion detection), and RLHF annotation (preference ranking, safety labeling, instruction-following evaluation, red-teaming).
+
+Q3: What languages do you support for AI data collection and annotation?
+We support 30+ languages spanning Indo-Aryan (Hindi, Bengali, Marathi, Gujarati, Punjabi, Odia, Assamese, Bhojpuri), Dravidian (Tamil, Telugu, Kannada, Malayalam), Southeast Asian (Bahasa, Sinhala, Nepali), and European/Global (English with regional accent variants, French, German, Spanish, Portuguese, Arabic). All language tasks are handled by verified native speakers.
+
+Q4: What is your annotation accuracy guarantee?
+eQOURSE guarantees 98%+ annotation accuracy on all delivered datasets. We maintain inter-annotator agreement (IAA) ΓëÑ 0.80 (KrippendorffΓÇÖs Alpha) across all annotation tasks. Our quality framework includes multi-tier review (annotator ΓåÆ peer review ΓåÆ senior QA audit), gold-standard honeypot validation (15ΓÇô20% of all tasks), and expert arbitration for disagreements.
+
+Q5: What is real-world model testing and how does TuTrain work?
+Real-world model testing is eQOURSEΓÇÖs unique service where we test your trained AI model on actual users through our TuTrain platform. TuTrain connects your model to a demographically diverse, geographically distributed user base across 30+ languages. We measure WER, intent accuracy, task completion, and other performance metrics in genuine usage conditions ΓÇö revealing failure modes that benchmark tests never catch. Results feed back into targeted data collection for 20ΓÇô40% faster model improvement.
+
+Q6: How is my data kept secure?
+We are ISO 27001:2022 certified for information security management. All data is handled under strict access controls, encryption at rest and in transit, GDPR-ready processes with PII detection and redaction, full data lineage and audit trails, and project-specific NDAs for all team members. Data is never shared across client projects. SOC 2 preparation is in progress for US enterprise clients.
+
+Q7: What output formats do you deliver annotated data in?
+We deliver in all standard ML formats: COCO JSON (computer vision), CoNLL (NLP sequence labeling), JSONL (LLM fine-tuning), Parquet (structured data at scale), NIfTI (medical imaging), CSV/TSV (classification), and custom formats on request. All datasets are version-controlled with full documentation.
+
+Q8: How do I get started with AI data services?
+We offer a free pilot dataset to qualifying AI and ML teams. Simply fill out the pilot form with your use case, data modality, language requirements, and annotation type. Our team will deliver a sample dataset within the agreed timeframe ΓÇö no commitment required. Contact us at info@eqourse.com or call +91-92144-45870.
+
+Q9: How is eQOURSE different from other data annotation companies?
+eQOURSE is the only provider offering a closed-loop pipeline from data collection to real-world model testing. We donΓÇÖt just annotate your data ΓÇö we test your trained model on real users via TuTrain and feed results back into targeted data collection (active learning loop). This delivers 20ΓÇô40% faster model improvement compared to static annotation cycles. Additionally, our deep education-sector expertise means our annotators understand context, cultural nuance, and domain-specific content at a level that generic crowdsourcing platforms cannot match.
+
+
+SEO & Technical Notes for Developer
+
+FAQPage Schema Markup
+Implement FAQPage structured data (JSON-LD) on the FAQ page covering ALL questions (both EdTech and AI Data). This enables Google to display FAQ rich results in search, significantly improving click-through rates. Each Q&A pair should be a separate Question entity within the FAQPage schema.
+
+Organization Schema Update (About Us Page)
+Update the Organization schema on the About Us page to include both service verticals. Add ΓÇ£knowsAboutΓÇ¥ fields for: EdTech Solutions, AI Data Services, Data Annotation, E-Learning Content Development, Curriculum Development, etc. Update ΓÇ£areaServedΓÇ¥ to include all 15+ countries. Add both office locations (India + Singapore).
+
+Internal Linking from About Us Pages
+About Us ΓåÆ Link to /edtech-solutions and /ai-data-services in the ΓÇ£Who Are WeΓÇ¥ section
+About Us ΓåÆ Link to /casestudy in the ΓÇ£Our JourneyΓÇ¥ section
+Testimonials ΓåÆ Link to relevant service pages from each testimonial
+Careers ΓåÆ Link to /edtech-solutions and /ai-data-services from the ΓÇ£Why Work With UsΓÇ¥ section
+FAQs ΓåÆ Link to relevant service pages from answer text (e.g., ΓÇ£data annotationΓÇ¥ links to /ai-data-services/annotation-labeling)
+
+Breadcrumb Update
+All 4 pages should have breadcrumb schema: Home > About Us > [Page Name]. This helps Google understand the site hierarchy and displays breadcrumbs in search results.

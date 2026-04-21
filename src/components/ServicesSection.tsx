@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { BookOpen, Lightbulb, GraduationCap, Brain, ArrowRight, Database, Tag, ShieldCheck, FlaskConical } from "lucide-react";
 
 /* ── Decorative SVG illustrations for each card ── */
@@ -145,7 +146,7 @@ const CardIllustrations: Record<string, React.FC<{ className?: string }>> = {
     <svg className={className} viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* Tag shapes */}
       <path d="M50 40 L90 40 L110 60 L90 80 L50 80 Z" fill="currentColor" opacity="0.12" />
-      <circle cx="62" cy="60" r="5" fill="currentColor" opacity="0.08" stroke="currentColor" strokeWidth="1" opacity="0.15" />
+      <circle cx="62" cy="60" r="5" fill="currentColor" stroke="currentColor" strokeWidth="1" opacity="0.15" />
       {/* Bounding box */}
       <rect x="65" y="85" width="50" height="35" rx="3" stroke="currentColor" opacity="0.18" strokeWidth="1.5" strokeDasharray="4 3" fill="none" />
       <rect x="63" y="83" width="6" height="6" fill="currentColor" opacity="0.2" rx="1" />
@@ -241,28 +242,28 @@ const educationServices = [
     icon: BookOpen,
     title: "Academic Content",
     description: "Creating K-12 learning materials, test prep content, and curriculum development.",
-    link: "#",
+    link: "/edtech-solutions/custom-e-learning-content",
     accent: "from-primary/20 to-accent/10",
   },
   {
     icon: Lightbulb,
     title: "Instructional Design",
     description: "Crafting effective instructional designs for better understanding and retention.",
-    link: "#",
+    link: "/edtech-solutions/learning-solutions",
     accent: "from-accent/20 to-primary/10",
   },
   {
     icon: GraduationCap,
     title: "Study Support",
     description: "Offering tutor and SME recruitment, along with content translation and localization services.",
-    link: "#",
+    link: "/edtech-solutions/subject-matter-experts",
     accent: "from-primary/15 to-accent/15",
   },
   {
     icon: Brain,
     title: "AI-Powered Learning",
     description: "Enhancing content with AI for maximum impact and personalized learning experiences.",
-    link: "#",
+    link: "/edtech-solutions/learning-solutions/ai-powered-learning",
     accent: "from-accent/15 to-primary/20",
   },
 ];
@@ -371,9 +372,9 @@ const ServicesSection = () => {
                     <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">{services[0].title}</h3>
                     <p className="text-muted-foreground text-lg leading-relaxed max-w-lg">{services[0].description}</p>
                   </div>
-                  <a href={services[0].link} className="inline-flex items-center text-sm font-semibold text-primary hover:gap-3 gap-2 transition-all mt-8 group/link">
+                  <Link to={services[0].link} className="inline-flex items-center text-sm font-semibold text-primary hover:gap-3 gap-2 transition-all mt-8 group/link">
                     Explore More <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                  </a>
+                  </Link>
                 </div>
               );
             })()}
@@ -406,9 +407,9 @@ const ServicesSection = () => {
                     <h3 className="font-heading text-lg font-bold text-foreground mb-2">{service.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
                   </div>
-                  <a href={service.link} className="inline-flex items-center text-sm font-semibold text-primary hover:gap-3 gap-2 transition-all mt-6 group/link">
+                  <Link to={service.link} className="inline-flex items-center text-sm font-semibold text-primary hover:gap-3 gap-2 transition-all mt-6 group/link">
                     Know More <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             );

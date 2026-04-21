@@ -1,0 +1,474 @@
+eQOURSE
+
+EdTech Solutions
+Website Content Document
+
+GLOBALLY REPOSITIONED — SEO OPTIMISED — VENDOR-READY
+8 Pages · SEO Tags · Full Copy · Poster Briefs
+
+Prepared for: eQOURSE Content & Web Team + Website Vendor
+Version 1.0 | April 2026 | CONFIDENTIAL
+
+Pages Included
+Main Page: EdTech Solutions — Overview / Landing Page (/edtech-solutions)
+Page 1: Custom E-Learning Content (/edtech-solutions/custom-e-learning-content)
+Page 2: Exam Preparation Content (/edtech-solutions/exam-preparation-content)
+Page 3: Learning Solutions (/edtech-solutions/learning-solutions)
+Page 4: E-Learning Video Solutions (/edtech-solutions/elearning-video-solutions)
+Page 5: Localization Services (/edtech-solutions/localization-services)
+Page 6: Technology Solutions (/edtech-solutions/technology-solutions)
+Page 7: Subject Matter Experts (/edtech-solutions/subject-matter-experts)
+
+Each page contains:
+Full SEO meta tags (Title, Meta Description, Keywords, OG tags, Canonical URL, H-tag map)
+Hero section copy (Pre-headline, H1, subtext, CTAs, visual direction)
+All body content sections with H2/H3 structure
+5 poster/banner content briefs (Headline, Subtext, CTA, Image Alt Tag, Visual Direction)
+FAQ section per page
+
+PAGE MAIN OF 8
+
+EdTech Solutions — Overview / Landing Page
+URL: /edtech-solutions
+Priority: CRITICAL — Build First (New Page)
+
+SEO Meta Tags
+
+Hero Section
+Pre-Headline (Above H1): EdTech Solutions — Trusted by 200+ Global Education & E-Learning Companies
+H1 — Main Headline
+End-to-End EdTech Solutions That Scale Learning Outcomes
+Subtext / Supporting Copy: From custom K-12 content development and curriculum design to exam preparation, interactive video learning, localization in 30+ languages, and LMS integration — eQOURSE delivers production-ready educational content and technology solutions. With 200+ subject matter experts, ISO 9001 certification, and operations across India and Singapore, we help EdTech platforms, publishers, and institutions build, scale, and deliver world-class learning experiences.
+Primary CTA: Start Your Free Pilot →
+Secondary CTA: Schedule a Call with Our EdTech Team →
+Hero Visual Direction: Teal/dark gradient background with abstract education-themed illustration: interconnected nodes representing different learning modalities (books, video, assessment, globe). Clean, modern, tech-forward aesthetic. eQOURSE brand teal (#00B4A6) accent colours. NO stock classroom photos. NO country-specific imagery.
+
+Section: What Are EdTech Solutions?
+H2: What Are EdTech Solutions?
+EdTech solutions encompass the full range of services needed to create, deliver, and scale digital education. This includes designing curriculum-aligned content, developing interactive assessments, producing engaging video lessons, localizing materials for multilingual audiences, building LMS-ready course packages, and sourcing qualified subject matter experts.
+At eQOURSE, we combine deep expertise in K-12 and higher education with cutting-edge instructional design methodologies and AI-powered content tools. Our integrated approach means you get a single trusted partner for your entire educational content lifecycle — from initial curriculum planning to final LMS deployment and ongoing content updates.
+Backed by ISO 9001 certification, offices in India and Singapore, and a dedicated team of 200+ specialists, we deliver production-ready educational content that meets global standards.
+
+Section: Our EdTech Services (7 Service Cards)
+H2: Our EdTech Services (7 Service Cards)
+Seven integrated capabilities. One trusted partner for your entire EdTech journey.
+Custom E-Learning Content
+Comprehensive K-12 and higher education content including study materials, lesson plans, workbooks, STEM curriculum, e-books, quizzes, and question banks. Aligned to CBSE, ICSE, IB, State Board, and international standards.
+→ Explore Custom E-Learning Content →
+Exam Preparation Content
+Expert-designed test prep for TOEIC, APTIS, SAT, ACT, IELTS, TOEFL, PTE, CEFR, AP Exams, EmSAT, IIT-JEE, NEET, UPSC, and more. Study guides, practice tests, video lessons, and interactive modules.
+→ Explore Exam Prep Content →
+Learning Solutions
+ILT content, corporate e-learning, training modules, gamified learning, adaptive learning, blended learning, AR/VR immersive simulations, instructional design, and AI-powered learning optimisation.
+→ Explore Learning Solutions →
+E-Learning Video Solutions
+2D & 3D animated videos, PPT-based video lessons, Articulate Storyline interactive courses, and custom animated explainer videos for K-12 and corporate training.
+→ Explore Video Solutions →
+Localization Services
+Content translation, professional voice-over, and subtitling in Hindi, English, and 30+ regional and international languages. Culturally adapted for diverse learner audiences.
+→ Explore Localization Services →
+Technology Solutions
+LMS course builds (SCORM, xAPI, cmi5 compliant), white-label LMS setup and configuration. Seamless content-to-platform integration for scalable delivery.
+→ Explore Technology Solutions →
+Subject Matter Experts
+Tutor and SME recruitment, SME training and certification, and live online tutoring services. 200+ STEM-educated specialists across multiple subjects and languages.
+→ Explore SME Services →
+
+Section: How It Works: Our 5-Step EdTech Delivery Process
+H2: How It Works: Our 5-Step EdTech Delivery Process
+Step 1 — CONSULT: We assess your educational goals, audience, curriculum framework, and platform requirements.
+Step 2 — DESIGN: Our instructional designers create curriculum maps, content outlines, and assessment blueprints aligned to your standards.
+Step 3 — DEVELOP: Our 200+ subject matter experts produce K-12 content, video lessons, assessments, workbooks, and interactive materials.
+Step 4 — LOCALIZE: Content is translated, voice-overed, and subtitled for your target languages and regions.
+Step 5 — DELIVER: Final content is packaged for your LMS, tested for quality, and delivered with documentation and ongoing support.
+
+Section: Industries & Audiences We Serve
+H2: Industries & Audiences We Serve
+K-12 Education: Schools, school networks, state education departments, and K-12 e-learning platforms worldwide.
+Higher Education: Universities, colleges, and online degree programs requiring supplementary academic content.
+EdTech Platforms: E-learning startups and established platforms needing scalable, white-label content production.
+Publishers: Educational publishers seeking digital transformation of print curricula.
+Corporate Training: Enterprises needing onboarding, compliance, soft skills, and technical training content.
+Government & NGOs: Public sector education programmes and international development projects requiring multilingual, accessible learning materials.
+
+Section: Why Global Education Companies Choose eQOURSE
+H2: Why Global Education Companies Choose eQOURSE
+• 200+ subject matter experts spanning STEM, humanities, languages, and professional domains.
+• 30+ languages with native-speaker voice-over and culturally adapted content.
+• Full-stack EdTech: content + video + assessment + localization + LMS + SMEs under one roof.
+• ISO 9001:2015 certified quality management system.
+• Offices in India (Kota) and Singapore for global delivery.
+• 200+ clients across 15+ countries.
+• Scalable delivery: from 50 hours/month to 5,000+ content pieces per month.
+• Free pilot programme for qualifying education and EdTech clients.
+
+Section: Our Quality & Compliance Credentials
+H2: Our Quality & Compliance Credentials
+• ISO 9001:2015 — Quality Management System certified.
+• Curriculum alignment to CBSE, ICSE, IB, State Board, Common Core, and international frameworks.
+• Multi-tier quality assurance: SME review + editorial QC + instructional design audit.
+• 200+ trained professionals with subject-specific expertise.
+• Scalable processes tested across 200+ client engagements.
+• Data privacy and NDA-protected content workflows.
+
+Section: FAQs
+H2: Frequently Asked Questions
+Q1: What types of educational content does eQOURSE create?
+eQOURSE creates K-12 study materials, curriculum-aligned lessons, assessments, workbooks, teacher lesson plans, STEM content, e-books, quiz and question banks, exam preparation content (SAT, IELTS, TOEFL, IIT-JEE, NEET, and more), corporate training modules, and interactive video lessons across 30+ languages.
+Q2: How is eQOURSE different from other EdTech content providers?
+eQOURSE is a full-stack EdTech solutions partner. We don’t just create content — we handle curriculum design, assessment development, video production, localization, LMS integration, and SME recruitment under one roof. This integrated approach eliminates vendor fragmentation, reduces turnaround time, and ensures consistent quality across your entire content library.
+Q3: What curriculum standards do you support?
+We support CBSE, ICSE, IB (International Baccalaureate), State Board curricula across Indian states, Common Core (US), Cambridge (IGCSE/A-Level), and custom curriculum frameworks. Our team adapts to any national or institutional curriculum standard.
+Q4: Can you scale content production quickly?
+Yes. With 200+ active SMEs and a structured production workflow, we can scale from 50 content units per month to 5,000+ depending on complexity and format. We onboard additional specialists within 5–7 business days for large-volume projects.
+Q5: How do I get started?
+We offer a free pilot for qualifying education and EdTech clients. Fill out the pilot form with your content requirements, target audience, and curriculum framework, and our team will deliver a sample content package within the agreed timeframe — no commitment required.
+
+5 Hero/Banner Poster Content Ideas
+
+PAGE 1 OF 8
+
+Custom E-Learning Content — Category Page
+URL: /edtech-solutions/custom-e-learning-content
+Priority: HIGH
+
+SEO Meta Tags
+
+Hero Section
+Pre-Headline (Above H1): Custom E-Learning Content Development Services
+H1 — Main Headline
+Custom E-learning Content for K12 and Higher Education
+Subtext / Supporting Copy: At eQOURSE, we specialize in creating custom e-learning content that meets the specific needs of educational institutions, e-learning platforms, and organizations. Our solutions are designed to align with curriculum standards while integrating multimedia and interactive tools to build better learner engagement. Whether it’s K12 education, higher education, or specialized content like STEM and assessments, our expert team delivers customized content to meet the educational goals of diverse learners.
+Primary CTA: Start Your Free Pilot →
+Secondary CTA: Get Free Consultation →
+Hero Visual Direction: Hero background image: education-themed with books, digital devices, and students. Teal overlay. Clean typography. ALT: Custom e-learning content development solutions, covering K12 academic content, assessments, workbooks, lesson plans, STEM curriculum, and more.
+
+Section: Learning Solutions We Offer
+H2: Learning Solutions We Offer
+This page serves as the category hub linking to 10 individual service sub-pages:
+K12 Higher Education / Academic Content
+Comprehensive and curriculum-aligned academic content for K12 and higher education, focusing on student outcomes and engagement.
+→ /edtech-solutions/custom-e-learning-content/k12-and-higher-education
+K12 Curriculum Development
+Subject-centered, learner-centered, and problem-oriented curriculum design for CBSE, ICSE, IB, and State Board.
+→ /edtech-solutions/custom-e-learning-content/k12-curriculum-development
+Assessment Development Services
+Formative assessments, game-based assessments, adaptive testing, quiz & question bank development, competitive exam assessments, and subject-integrated assessments.
+→ /edtech-solutions/custom-e-learning-content/assessment-development
+Educational Content Development
+Wide range of educational content incorporating multimedia and interactive elements for engaging lessons.
+→ /edtech-solutions/custom-e-learning-content/educational-content-development
+Workbook Development
+Workbooks aligned with curriculum objectives, providing hands-on practice and reinforcing key concepts.
+→ /edtech-solutions/custom-e-learning-content/workbook-development
+Teacher Lesson Plan
+Comprehensive lesson plans that guide teachers through structured, engaging classroom sessions.
+→ /edtech-solutions/custom-e-learning-content/teacher-lesson-plan
+STEM Curriculum Services
+Specialized STEM content integrating science, technology, engineering, and mathematics.
+→ /edtech-solutions/custom-e-learning-content/stem-curriculum
+E-Book Creation
+Interactive e-books with multimedia elements for digital-first learning experiences.
+→ /edtech-solutions/custom-e-learning-content/ebook-creation
+2D and 3D Videos
+Educational animated videos bringing complex concepts to life through visual storytelling.
+→ /edtech-solutions/custom-e-learning-content/2d-3d-videos
+Quiz and Question Bank Development
+Custom quizzes and question banks tailored to curriculum, providing tools for regular evaluation and practice.
+→ /edtech-solutions/custom-e-learning-content/quiz-question-bank
+
+Section: FAQs
+H2: Frequently Asked Questions
+Q1: What types of custom e-learning content do you create?
+We create K-12 study materials, curriculum-aligned lessons, assessments, workbooks, teacher lesson plans, STEM content, e-books, quiz and question banks, and 2D/3D educational videos.
+Q2: What curriculum boards do you support?
+We support CBSE, ICSE, IB, State Board, Common Core, Cambridge, and custom curriculum frameworks.
+Q3: How many SMEs are available for content creation?
+We have 200+ subject matter experts across STEM, humanities, languages, and professional domains.
+
+5 Hero/Banner Poster Content Ideas
+
+PAGE 2 OF 8
+
+Exam Preparation Content — Category Page
+URL: /edtech-solutions/exam-preparation-content
+Priority: HIGH
+
+SEO Meta Tags
+
+Hero Section
+Pre-Headline (Above H1): Equip Your Institution with Competitive Exam Preparation Content
+H1 — Main Headline
+Test Prep Content for SAT, GMAT, TOEFL, IIT-JEE, NEET, UPSC / PCS
+Subtext / Supporting Copy: At eQOURSE, we partner with educational institutions to deliver expert-designed exam preparation content for a wide range of exams, with a focus on TOEIC, APTIS, SAT, IELTS, and ACT. Additionally, we support EmSAT, TOEFL, GRE, IIT-JEE, NEET, UPSC, GMAT, and more. Our offerings cater to diverse levels and subjects, providing customized study guides, video lessons, test papers, and interactive materials.
+Primary CTA: Request Free Pilot Content →
+Secondary CTA: Talk to Our Exam Prep Team →
+Hero Visual Direction: Hero background: exam preparation themed with books, test papers, timer. Teal overlay with bold typography. ALT: Test prep content for IIT-JEE, NEET, UPSC, SAT, GRE, GMAT, TOEFL, IELTS, and more.
+
+Section: Exam Preparation Services
+H2: Exam Preparation Services
+Sub-pages under this category:
+APTIS Prep Content
+British Council APTIS exam preparation materials.
+→ /edtech-solutions/exam-preparation-content/aptis
+TOEIC Prep Content
+TOEIC Listening & Reading and Speaking & Writing preparation.
+→ /edtech-solutions/exam-preparation-content/toeic
+SAT Prep Content
+SAT Math, Evidence-Based Reading & Writing preparation.
+→ /edtech-solutions/exam-preparation-content/sat
+ACT Prep Content
+ACT English, Math, Reading, Science preparation.
+→ /edtech-solutions/exam-preparation-content/act
+AP Exam Prep Content
+Advanced Placement exam preparation across subjects.
+→ /edtech-solutions/exam-preparation-content/ap-exam
+IELTS Prep Content
+IELTS Academic and General Training preparation.
+→ /edtech-solutions/exam-preparation-content/ielts
+CEFR Placement Test Solutions
+CEFR-aligned placement testing and assessment.
+→ /edtech-solutions/exam-preparation-content/cefr
+PTE Prep Content
+PTE Academic exam preparation materials.
+→ /edtech-solutions/exam-preparation-content/pte
+TOEFL Prep Content
+TOEFL iBT exam preparation across all sections.
+→ /edtech-solutions/exam-preparation-content/toefl
+
+Section: High-Quality EmSAT Exam Content
+H2: High-Quality EmSAT Exam Content
+Content development services for the EmSAT (Emirates Standardized Test) providing engaging and impactful materials for educational institutions. Aligned with EmSAT requirements, our modular, computer-based resources include study guides, assessment modules, and structured preparation materials.
+
+Section: Comprehensive Exam Preparation Solutions
+H2: Comprehensive Exam Preparation Solutions
+Our comprehensive exam preparation services cover curriculum design, content creation, reviews, quizzes, and interactive learning sessions. We develop resources aligned with global exam standards.
+Exams covered: SAT (Undergraduate admissions, globally accepted), GRE (Graduate school admissions), GMAT (MBA/business school), TOEFL (English proficiency for non-native speakers), IELTS (English language testing), IIT-JEE (Indian engineering entrance), NEET (Indian medical entrance), UPSC/PCS (Indian civil services).
+
+Section: FAQs
+H2: Frequently Asked Questions
+Q1: What exams do you create content for?
+We create content for TOEIC, APTIS, SAT, ACT, AP Exams, IELTS, CEFR, PTE, TOEFL, EmSAT, GRE, GMAT, IIT-JEE, NEET, UPSC, and more.
+Q2: Do you follow the latest exam patterns?
+Yes. We analyse past papers, follow standardised patterns like NTA and international guidelines, and ensure our content aligns with the latest exam requirements.
+Q3: What formats do you deliver content in?
+Study guides, practice tests, video lessons, interactive quizzes, flashcards, and LMS-ready modules.
+
+5 Hero/Banner Poster Content Ideas
+
+PAGE 3 OF 8
+
+Learning Solutions — Category Page
+URL: /edtech-solutions/learning-solutions
+Priority: HIGH
+
+SEO Meta Tags
+
+Hero Section
+Pre-Headline (Above H1): Innovative Learning Solutions for Education & Training
+H1 — Main Headline
+Learning Solutions for Educational Institutions
+Subtext / Supporting Copy: At eQOURSE, a wide range of custom learning solutions is offered to meet the unique needs of educational institutions. Whether it’s implementing Instructor-Led Training (ILT), interactive e-learning, or cutting-edge technologies like AR/VR, the solutions are customized to improve engagement, retention, and performance. Our services integrate seamlessly with Learning Management Systems (LMS), ensuring scalable and efficient content delivery.
+Primary CTA: Start Your Free Pilot →
+Secondary CTA: Get Free Consultation →
+Hero Visual Direction: Hero background: modern learning environment with digital screens, interactive elements. Teal overlay. ALT: Comprehensive learning solutions for creating effective e-learning content.
+
+Section: Learning Solutions We Offer
+H2: Learning Solutions We Offer
+Sub-pages under this category:
+ILT (Instructor-Led Training Content)
+Comprehensive ILT content to support live, instructor-led sessions with interactive materials.
+→ /edtech-solutions/learning-solutions/ilt
+Corporate E-learning Solutions
+Scalable e-learning modules for businesses — onboarding, skills training, and compliance.
+→ /edtech-solutions/learning-solutions/corporate-elearning
+Training Modules
+Interactive and engaging training modules aligned with learning objectives.
+→ /edtech-solutions/learning-solutions/training-modules
+Gamified Learning
+Gamification elements: rewards, points, leaderboards for fun and effective training.
+→ /edtech-solutions/learning-solutions/gamified-learning
+Adaptive Learning
+AI-driven content that adapts to individual learner pace and performance.
+→ /edtech-solutions/learning-solutions/adaptive-learning
+Blended Learning
+Combining online and offline learning for flexible, comprehensive education.
+→ /edtech-solutions/learning-solutions/blended-learning
+Immersive Simulation AR/VR
+Augmented and virtual reality experiences for hands-on, immersive learning.
+→ /edtech-solutions/learning-solutions/ar-vr
+Instructional Design
+Expert instructional design services for effective content structuring and delivery.
+→ /edtech-solutions/learning-solutions/instructional-design
+Optimizing AI-Powered Learning
+Enhancing content with AI for personalised learning paths and maximum impact.
+→ /edtech-solutions/learning-solutions/ai-powered-learning
+
+Section: FAQs
+H2: Frequently Asked Questions
+Q1: What learning solutions do you offer?
+ILT content, corporate e-learning, training modules, gamified learning, adaptive learning, blended learning, AR/VR simulations, instructional design, and AI-powered learning optimisation.
+Q2: Do your solutions integrate with LMS platforms?
+Yes. All our content is delivered in LMS-compatible formats including SCORM, xAPI, and cmi5.
+
+5 Hero/Banner Poster Content Ideas
+
+PAGE 4 OF 8
+
+E-Learning Video Solutions — Category Page
+URL: /edtech-solutions/elearning-video-solutions
+Priority: HIGH
+
+SEO Meta Tags
+
+Hero Section
+Pre-Headline (Above H1): Enhance Learning with Interactive eLearning Videos
+H1 — Main Headline
+E-Learning Video Solutions
+Subtext / Supporting Copy: Transform complex concepts into engaging visual learning experiences with our professional video production services. From 2D and 3D animations to interactive Articulate Storyline courses, our video solutions make learning accessible, memorable, and scalable across platforms.
+Primary CTA: Request Video Samples →
+Secondary CTA: Get Free Consultation →
+Hero Visual Direction: Hero background: video production themed with play button, animation frames. Teal overlay. ALT: Enhance Learning with Interactive eLearning Videos.
+
+Section: Video Solutions We Offer
+H2: Video Solutions We Offer
+Sub-pages under this category:
+2D & 3D Videos
+Educational animated videos bringing complex concepts to life through professional 2D and 3D animation.
+→ /edtech-solutions/elearning-video-solutions/2d-3d-videos
+PPT Video
+PowerPoint-based video lessons with voice-over and visual enhancements for efficient content delivery.
+→ /edtech-solutions/elearning-video-solutions/ppt-videos
+Articulate Storyline
+Interactive e-learning courses built with Articulate Storyline for rich, engaging learning experiences.
+→ /edtech-solutions/elearning-video-solutions/articulate-storyline
+Animated Videos
+Custom animated explainer videos for educational concepts, product tutorials, and training modules.
+→ /edtech-solutions/elearning-video-solutions/animated-videos
+
+Section: FAQs
+H2: Frequently Asked Questions
+Q1: What types of e-learning videos do you produce?
+2D and 3D animated educational videos, PPT-based video lessons with voice-over, Articulate Storyline interactive courses, and custom animated explainer videos.
+Q2: Can you produce videos in multiple languages?
+Yes. We offer voice-over and subtitling in 30+ languages to make video content accessible globally.
+
+5 Hero/Banner Poster Content Ideas
+
+PAGE 5 OF 8
+
+Localization Services — Category Page
+URL: /edtech-solutions/localization-services
+Priority: HIGH
+
+SEO Meta Tags
+
+Hero Section
+Pre-Headline (Above H1): Localized Learning Solutions in Hindi, English & Regional Languages
+H1 — Main Headline
+Localized Learning Solutions
+Subtext / Supporting Copy: At eQOURSE, we provide specialized localization services for K-12 and higher education, ensuring that educational content is accessible in Hindi, English, and the regional languages of India. Our services include content translation, voice-over, and subtitling to make learning materials engaging and culturally relevant.
+Primary CTA: Get Free Consultation →
+Secondary CTA: Request Localization Quote →
+Hero Visual Direction: Hero background: multilingual text samples, globe with language icons. Teal overlay. ALT: Comprehensive Localization services including content translation, voice over, and subtitling.
+
+Section: Localization Services We Offer
+H2: Localization Services We Offer
+Sub-pages under this category:
+Content Translation
+Expert translation services for educational materials, ensuring accuracy and cultural relevance across India’s diverse linguistic groups.
+→ /edtech-solutions/localization-services/translation
+Voice Over
+Professional voice-over services bringing e-learning modules and videos to life with engaging narration for regional audiences.
+→ /edtech-solutions/localization-services/voice-over
+Subtitling
+Accurate and well-timed subtitles for video content, enhancing accessibility across different regions.
+→ /edtech-solutions/localization-services/subtitling
+
+Section: FAQs
+H2: Frequently Asked Questions
+Q1: What types of content can you localize?
+E-learning modules, video lessons, instructional materials, assessments, workbooks, and e-books in Hindi, English, and regional languages of India.
+Q2: Do you provide voice-over services in regional languages?
+Yes, we offer professional voice-over in Hindi, English, and a wide range of regional languages including Tamil, Bengali, Telugu, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Assamese, and more.
+Q3: How do you ensure cultural relevance?
+Our translators are experts in Indian languages and culture, ensuring content is accurate and culturally relevant for the target audience.
+
+5 Hero/Banner Poster Content Ideas
+
+PAGE 6 OF 8
+
+Technology Solutions — Category Page
+URL: /edtech-solutions/technology-solutions
+Priority: MEDIUM
+
+SEO Meta Tags
+
+Hero Section
+Pre-Headline (Above H1): EdTech Technology Solutions
+H1 — Main Headline
+Technology Solutions
+Subtext / Supporting Copy: Seamless technology integration for e-learning platforms. From LMS course builds to white-label LMS setup, we ensure your educational content is delivered efficiently, at scale, on any platform.
+Primary CTA: Get Free Consultation →
+Secondary CTA: Request Technical Demo →
+Hero Visual Direction: Hero background: technology/platform themed with server, LMS interface mockup. Teal overlay. ALT: Technology solutions for e-learning platforms.
+
+Section: Technology Solutions We Offer
+H2: Technology Solutions We Offer
+Sub-pages under this category:
+LMS Course Builds
+Building and packaging courses for any LMS platform. SCORM, xAPI, cmi5 compliant. Tested across major LMS platforms.
+→ /edtech-solutions/technology-solutions/lms-course-builds
+White Label LMS
+Custom-branded LMS setup and configuration. Your brand, your platform, our technology backbone.
+→ /edtech-solutions/technology-solutions/white-label-lms
+
+Section: FAQs
+H2: Frequently Asked Questions
+Q1: What LMS formats do you support?
+SCORM 1.2, SCORM 2004, xAPI (Tin Can), and cmi5. We test across major LMS platforms including Moodle, Canvas, Blackboard, and custom systems.
+Q2: Can you set up a white-label LMS for our brand?
+Yes. We provide complete white-label LMS setup including branding, configuration, user management, and content integration.
+
+5 Hero/Banner Poster Content Ideas
+
+PAGE 7 OF 8
+
+Subject Matter Experts — Category Page
+URL: /edtech-solutions/subject-matter-experts
+Priority: HIGH
+
+SEO Meta Tags
+
+Hero Section
+Pre-Headline (Above H1): Subject Matter Expert Services
+H1 — Main Headline
+Subject Matter Experts
+Subtext / Supporting Copy: Access 200+ qualified subject matter experts for content creation, academic support, and live tutoring. Our SME services include recruitment, training, certification, and deployment of specialists across STEM, humanities, languages, and professional domains.
+Primary CTA: Request SME Support →
+Secondary CTA: Get Free Consultation →
+Hero Visual Direction: Hero background: education professionals, SME team. Teal overlay. ALT: Subject matter experts for content creation and tutoring.
+
+Section: SME Services We Offer
+H2: SME Services We Offer
+Sub-pages under this category:
+Tutor / SME Recruitment
+Sourcing and recruiting qualified subject matter experts and tutors for your content and tutoring needs.
+→ /edtech-solutions/subject-matter-experts/recruitment
+Tutor / SME Training
+Training and certifying SMEs on your content standards, pedagogy, and quality requirements.
+→ /edtech-solutions/subject-matter-experts/training
+Live Online Tutors
+On-demand live online tutoring services by qualified experts for real-time student support.
+→ /edtech-solutions/subject-matter-experts/live-tutors
+
+Section: FAQs
+H2: Frequently Asked Questions
+Q1: How many SMEs do you have?
+We have 200+ active subject matter experts across STEM, humanities, languages, and professional domains.
+Q2: Can you recruit SMEs for specific subjects?
+Yes. We recruit and train SMEs for any subject, grade level, or curriculum standard based on your requirements.
+Q3: Do you offer live online tutoring?
+Yes. Our live online tutoring services provide real-time student support with qualified experts across subjects and time zones.
+
+5 Hero/Banner Poster Content Ideas

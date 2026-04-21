@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import casestudyEdtech from "@/assets/casestudy-edtech.png";
 import casestudyAi from "@/assets/casestudy-ai.png";
 import casestudyTestprep from "@/assets/casestudy-testprep.png";
@@ -83,9 +84,9 @@ const CaseStudiesSection = () => {
         </div>
         
         <div className="mt-16 text-center">
-          <a href="#" className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 shadow-soft">
+          <Link to="/casestudy" className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 shadow-soft">
             View All Case Studies
-          </a>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,0 +1,663 @@
+﻿__eQOURSE__
+
+__Case Study & Success Stories__
+
+Revamped Page ΓÇö Website Content Document
+
+__EdTech Solutions \+ AI Data Services ΓÇö BALANCED APPROACH__
+
+SEO\-Optimised ┬╖ Category Filtered ┬╖ Full Copy ┬╖ Visual Direction
+
+8 Existing EdTech Case Studies \(Preserved\) \+ 6 New AI Data Services Case Studies
+
+Prepared for: eQOURSE Content & Web Team \+ Vibe Coder Developer
+
+Version 1\.0 | April 2026 | CONFIDENTIAL
+
+# __Case Study Page ΓÇö Page\-Level Configuration__
+
+__URL: __https://www\.eqourse\.com/casestudy
+
+__Priority: __HIGH ΓÇö Critical for SEO credibility across both service verticals
+
+## __SEO Meta Tags__
+
+__Field__
+
+Value
+
+__Title Tag__
+
+Case Studies & Success Stories Γöé EdTech Solutions & AI Data Services Γöé eQOURSE
+
+__Meta Description__
+
+Explore eQOURSE case studies: how we deliver custom e\-learning content, curriculum development, multilingual localization, AI training data collection, annotation & labeling, data cleaning, and real\-world model testing for global education and AI companies\. 200\+ clients\. 30\+ languages\. ISO certified\.
+
+__Meta Keywords__
+
+eQOURSE case studies, EdTech case studies, AI data services case studies, e\-learning success stories, data annotation case study, curriculum development case study, K12 content case study, AI training data case study, multilingual content case study, model testing case study
+
+__OG Title__
+
+Case Studies & Success Stories Γöé EdTech \+ AI Data Services Γöé eQOURSE
+
+__OG Description__
+
+See how eQOURSE helps global education and AI companies with custom content, data annotation, model testing, and more\. Real results from 200\+ client engagements\.
+
+__Canonical URL__
+
+https://www\.eqourse\.com/casestudy
+
+__Schema Type__
+
+CollectionPage / ItemList \(for case study cards\)
+
+__H1 Tag__
+
+Case Studies & Success Stories
+
+__H2 Tags__
+
+EdTech Solutions Case Studies Γöé AI Data Services Case Studies Γöé Featured Results
+
+## __Hero Section__
+
+__Pre\-Headline: __Real Results\. Real Clients\. Real Impact\.
+
+__H1 ΓÇö Main Headline__
+
+Case Studies & Success Stories
+
+__Subtext: __See how eQOURSE partners with global education companies, EdTech platforms, publishers, and AI teams to deliver production\-ready content, high\-quality training data, and measurable learning outcomes\. From K\-12 curriculum development across 6 languages to AI model testing across 30\+ dialects ΓÇö explore the results that set us apart\.
+
+__Primary CTA: __Start Your Free Pilot ΓåÆ
+
+__Secondary CTA: __Talk to Our Team ΓåÆ
+
+__Hero Image Alt: __eQOURSE case studies showcasing successful EdTech and AI data service implementations across global education and AI companies\.
+
+__Hero Visual Direction: __Split\-tone hero: Left half teal gradient \(EdTech feel ΓÇö books, digital screens, students\), right half dark navy gradient \(AI Data feel ΓÇö neural network nodes, data particles\)\. Centre: eQOURSE logo mark\. Bold white H1 text overlaid\. Statistics ribbon below hero: ΓÇ£200\+ Clients Γöé 30\+ Languages Γöé 15\+ Countries Γöé ISO 9001 & 27001 CertifiedΓÇ¥\. Clean, modern, enterprise aesthetic\. NO stock photos of people\.
+
+## __Page Layout: Filter & Category System__
+
+The revamped case study page should have a filterable card grid layout\. Users can filter case studies by category\.
+
+__Filter Tabs \(Sticky/Top\)__
+
+- All \(Default ΓÇö shows all 14 case studies\)
+- EdTech Solutions \(shows 8 EdTech case studies\)
+- AI Data Services \(shows 6 AI Data case studies\)
+
+__Card Grid Layout__
+
+Each case study appears as a card in a responsive grid \(3 columns desktop, 2 tablet, 1 mobile\)\. Each card shows: Category Tag \(teal badge for EdTech, navy/cyan badge for AI Data\) \+ Case Study Title \+ 1\-2 line summary \+ Industry/Region tag \+ ΓÇ£Read MoreΓÇ¥ CTA\. Clicking opens full case study in an expandable accordion or dedicated section below\.
+
+__Visual Direction for Cards__
+
+EdTech cards: Teal left\-border accent, light teal background on hover\. AI Data cards: Navy/cyan left\-border accent, light navy background on hover\. Both card styles should feel cohesive but visually distinguishable\. Rounded corners \(8px\), subtle shadow, clean typography\.
+
+## __Statistics Ribbon \(Below Hero\)__
+
+A horizontal stats bar displaying key numbers\. This ribbon is critical for SEO \(structured data\) and trust\-building\.
+
+- 200\+ Clients Served
+- 30\+ Languages Covered
+- 15\+ Countries
+- 10M\+ Students Reached
+- 10,000\+ Content Pieces/Month
+- 98%\+ Annotation Accuracy
+- ISO 9001 & ISO 27001 Certified
+
+__Visual Direction: __Dark teal background ribbon\. White large numbers with teal accent on the metric label\. Horizontal scroll on mobile\. Clean counter\-up animation on page load\.
+
+# __SECTION A: EdTech Solutions Case Studies \(Existing ΓÇö 8 Studies\)__
+
+These are the 8 existing case studies from the current website\. All content preserved exactly as\-is\. Only additions: category tags, service tags, industry labels, and card summary for the new grid layout\.
+
+__CASE STUDY 1__
+
+__Category: EdTech Solutions__  |  Service Tags: Custom E\-Learning Content, Workbook Development, K12 Content
+
+## __Case Study 1: K\-12 Worksheets & PPT Solutions for 2,000\+ Schools__
+
+__Industry: __K\-12 Education
+
+__Region: __India \(Pan\-India, Multi\-State Board\)
+
+__Services Used: __Workbook Development, Educational Content Development
+
+__Problem Statement__
+
+A company that has an association with 2000\+ Schools in India and supplies study material in multiple languages to multiple state boards approached us to develop high level ΓÇ£WorksheetsΓÇ¥ and ΓÇ£PPT Based SolutionsΓÇ¥ for classes 1 to 10\.
+
+__Solution__
+
+We created multiple high level worksheets each containing 30 questions that exceeded the NCERT\+ level\. Each question of the worksheet was designed to challenge the problem\-solving ability of the student and help them grow\. We also created detailed solution of complete exercises of their books in PPT format for different state boards\.
+
+__Impact__
+
+The worksheets were very well taken by the schools\. It helped the students in improving their performance\. Now we are a trusted partner for them to supply quality worksheets\. PPT based solutions were helpful for teachers and helped students in coping up with online classes as it saved a lot of time due to its crisp format\.
+
+__Key Metrics__
+
+- 2,000\+ schools served
+- Classes 1ΓÇô10 covered
+- Multiple state boards
+- NCERT\+ level content
+
+__Card Summary \(for grid view\): __High\-level worksheets and PPT solutions for 2,000\+ schools across multiple state boards, classes 1ΓÇô10\.
+
+__Card Visual Direction: __Teal card\. Worksheet/PPT icon\. School building silhouette\.
+
+__CASE STUDY 2__
+
+__Category: EdTech Solutions__  |  Service Tags: E\-Learning Video Solutions, Localization Services, Workbook Development
+
+## __Case Study 2: Multilingual Pen\-Tab Videos & Worksheets in 6 Languages__
+
+__Industry: __NGO / EdTech
+
+__Region: __India \(Multi\-State, 6 Languages\)
+
+__Services Used: __E\-Learning Video Solutions, Localization, Workbook Development
+
+__Problem Statement__
+
+An NGO based edtech startup wanted engaging ΓÇ£Pen\-Tab VideosΓÇ¥ and Worksheets for classes 5th to 9th in 6 different languages \(Kannada, Telugu, Tamil, Marathi, Hindi and English\)\.
+
+__Solution__
+
+We created engaging videos in all 6 languages by gathering 30\+ subject matter experts from all over the country\. The SMEs brainstormed on the content together to create content that is simple to understand, engaging and helps students retain what they have learnt\.
+
+__Impact__
+
+We delivered the content before deadline to empower our client to execute their dissemination strategy without any hindrances at very low cost\.
+
+__Key Metrics__
+
+- 6 languages delivered
+- 30\+ SMEs deployed
+- Classes 5ΓÇô9 covered
+- Delivered before deadline
+
+__Card Summary \(for grid view\): __Pen\-tab videos and worksheets in 6 Indian languages for an NGO\-backed edtech startup\.
+
+__Card Visual Direction: __Teal card\. Video play \+ language icons\. Multi\-script text\.
+
+__CASE STUDY 3__
+
+__Category: EdTech Solutions__  |  Service Tags: Custom E\-Learning Content, K12 Content, Curriculum Development
+
+## __Case Study 3: Full Curriculum Content for African EdTech Startup__
+
+__Industry: __EdTech
+
+__Region: __Africa
+
+__Services Used: __Custom E\-Learning Content, Curriculum Development, Educational Content Development
+
+__Problem Statement__
+
+In 2020, an African EdTech Startup approached us to create content for Middle School \(JSS1, JSS2, JSS3\) and High School \(SSS1, SSS2, SSS3\)\. They wanted content for a given curriculum uploaded using their CMS with a deadline of 8 months\.
+
+__Solution__
+
+We created the theory of every chapter for each standard\. We used a team of 40\+ subject matter experts and academic content creators to brainstorm and finalise drafts\. We created highly challenging practice questions, delivering a complete solution for the clientΓÇÖs content needs\.
+
+__Impact__
+
+The simple\-to\-understand theory and challenging practice questions were well received and helped the startup grow its customer base\. We delivered the promised content within 6 months, giving the client enough time to prepare their dissemination strategy\.
+
+__Key Metrics__
+
+- 40\+ SMEs deployed
+- 6 grade levels covered
+- Delivered 2 months ahead of deadline
+- Full curriculum \+ practice questions
+
+__Card Summary \(for grid view\): __Complete middle and high school curriculum content for an African edtech startup, delivered 2 months early\.
+
+__Card Visual Direction: __Teal card\. Africa continent outline \(abstract\)\. Book \+ curriculum icon\.
+
+__CASE STUDY 4__
+
+__Category: EdTech Solutions__  |  Service Tags: Educational Content Development, Subject Matter Experts, AI\-Powered Learning
+
+## __Case Study 4: AI \+ Human QA: 10,000\+ Fact\-Checked Solutions Daily__
+
+__Industry: __EdTech / AI
+
+__Region: __Global
+
+__Services Used: __Educational Content Development, Subject Matter Experts, AI\-Powered Learning
+
+__Problem Statement__
+
+The widespread adoption of AI for generating educational responses raised concerns about authenticity and credibility\. While AI can swiftly generate answers, there was a growing need to incorporate human expertise to ensure accuracy and mitigate plagiarism risks\.
+
+__Solution__
+
+We developed a solution that integrates AI\-generated responses with human expertise\. Our approach involves producing responses using AI while infusing a human\-like touch, with quality assurance through validation by 200\+ SMEs\. We consistently deliver more than 10,000 meticulously fact\-checked solutions daily, catering to 10\+ educational institutions\.
+
+__Impact__
+
+By integrating human oversight within AI systems, we provide students with fact\-checked answers, enhancing authenticity and credibility\. This collaborative approach mitigates plagiarism risks and facilitates swift delivery of accurate information\. The solution empowered our clientΓÇÖs AI\-infused global platform to provide on\-demand solutions to students worldwide\.
+
+__Key Metrics__
+
+- 10,000\+ solutions fact\-checked daily
+- 200\+ SMEs involved
+- 10\+ institutions served
+- Global platform support
+
+__Card Summary \(for grid view\): __AI \+ human QA pipeline delivering 10,000\+ fact\-checked educational solutions daily for a global AI platform\.
+
+__Card Visual Direction: __Teal card\. AI brain \+ human check icon\. Quality badge\.
+
+__CASE STUDY 5__
+
+__Category: EdTech Solutions__  |  Service Tags: E\-Learning Video Solutions, Subject Matter Experts
+
+## __Case Study 5: On\-Demand Video Solutions for US EdTech Company__
+
+__Industry: __Higher Education / EdTech
+
+__Region: __USA
+
+__Services Used: __E\-Learning Video Solutions, Subject Matter Experts
+
+__Problem Statement__
+
+Undergraduate and postgraduate students struggled to grasp complex topics due to limitations in traditional teaching and challenges in accessing timely assistance outside classroom hours\.
+
+__Solution__
+
+Our client, a leading US educational technology company, envisioned comprehensive video solutions across 15\+ subjects\. We harnessed 150\+ SMEs who collaborated to produce video solutions within 2 hours of a student posting a query on the clientΓÇÖs platform\.
+
+__Impact__
+
+Enhanced accessibility: on\-demand video solutions significantly increased learning accessibility regardless of location or schedule\. Higher academic performance: students were better equipped to excel, leading to improved grades\.
+
+__Key Metrics__
+
+- 150\+ SMEs deployed
+- 15\+ subjects covered
+- 2\-hour turnaround per query
+- Undergraduate \+ postgraduate levels
+
+__Card Summary \(for grid view\): __On\-demand video solutions across 15\+ subjects with 2\-hour turnaround for a leading US edtech company\.
+
+__Card Visual Direction: __Teal card\. Video camera \+ clock icon\. USA map \(abstract\)\.
+
+__CASE STUDY 6__
+
+__Category: EdTech Solutions__  |  Service Tags: Educational Content Development, Assessment Development
+
+## __Case Study 6: Math Solutions QA: 10,000\+ Monthly Reviews at 90%\+ Accuracy__
+
+__Industry: __EdTech
+
+__Region: __Global
+
+__Services Used: __Educational Content Development, Assessment Development, Quality Assurance
+
+__Problem Statement__
+
+A leading educational platform for mathematics \(primary to graduation level\) faced challenges maintaining accuracy and quality across 10,000\+ monthly solutions contributed by worldwide contributors\.
+
+__Solution__
+
+We curated a team of 25 mathematics experts\. Solutions underwent rigorous multi\-expert review with stringent quality metrics \(minimum 90% accuracy rate\)\. A feedback mechanism provided constructive feedback to contributors for continuous improvement\.
+
+__Impact__
+
+10,000\+ solutions quality\-checked monthly\. Accuracy rate consistently exceeded 90%, surpassing client expectations\. Enhanced user satisfaction and trust led to increased engagement and retention\.
+
+__Key Metrics__
+
+- 10,000\+ solutions reviewed monthly
+- 90%\+ accuracy achieved
+- 25 math experts deployed
+- Primary to graduation level
+
+__Card Summary \(for grid view\): __Quality assurance of 10,000\+ monthly math solutions at 90%\+ accuracy for a global education platform\.
+
+__Card Visual Direction: __Teal card\. Math symbols \+ QA checkmark\. Accuracy meter\.
+
+__CASE STUDY 7__
+
+__Category: EdTech Solutions__  |  Service Tags: Workbook Development, Localization Services, Custom E\-Learning Content
+
+## __Case Study 7: 400,000\+ Bilingual Workbooks for Rural Chhattisgarh Students__
+
+__Industry: __Government / NGO / Education
+
+__Region: __India \(Chhattisgarh\)
+
+__Services Used: __Workbook Development, Localization Services, Content Development
+
+__Problem Statement__
+
+In September 2022, a client sought to address educational challenges faced by rural students in Chhattisgarh for grades 6ΓÇô10 across Mathematics, Science, English, and Social Studies\. Resources were needed in both English and Hindi\.
+
+__Solution__
+
+Our team of SMEs, curriculum specialists, bilingual writers, proofreaders, designers, and logistics professionals conducted a needs assessment, developed curriculum\-aligned content, translated into English and Hindi, designed visually appealing layouts, printed 400,000\+ copies per subject/language, and facilitated distribution with teacher training\.
+
+__Impact__
+
+400,000\+ students and teachers gained access to high\-quality materials\. Teachers reported enhanced teaching methodologies, student engagement, and academic performance\. Solidified our position as a trusted education partner in Chhattisgarh\.
+
+__Key Metrics__
+
+- 400,000\+ copies printed and distributed
+- Grades 6ΓÇô10 covered
+- 4 subjects in 2 languages
+- Teacher training included
+
+__Card Summary \(for grid view\): __400,000\+ bilingual workbooks printed and distributed across rural Chhattisgarh for grades 6ΓÇô10\.
+
+__Card Visual Direction: __Teal card\. Book stack \+ distribution truck icon\. India map highlight\.
+
+__CASE STUDY 8__
+
+__Category: EdTech Solutions__  |  Service Tags: Exam Preparation Content, Assessment Development
+
+## __Case Study 8: EmSAT & TOEIC Test Prep Content for UAE Institution__
+
+__Industry: __Higher Education / Testing
+
+__Region: __UAE / Middle East
+
+__Services Used: __Exam Preparation Content, Assessment Development
+
+__Problem Statement__
+
+A UAE\-based educational institution needed high\-quality EmSAT and TOEIC exam preparation content aligned with Emirates standardised testing requirements, with modular computer\-based resources\.
+
+__Solution__
+
+We developed comprehensive EmSAT\-aligned curriculum content including study guides, assessment modules, practice tests, and structured preparation materials\. For TOEIC, we created Listening & Reading and Speaking & Writing practice materials aligned to ETS standards\.
+
+__Impact__
+
+The institution was able to offer structured, standards\-aligned test preparation to students, improving pass rates and student confidence\. The modular format allowed flexible deployment across their digital learning platform\.
+
+__Key Metrics__
+
+- EmSAT \+ TOEIC coverage
+- Computer\-based modular format
+- UAE curriculum aligned
+- Improved student pass rates
+
+__Card Summary \(for grid view\): __EmSAT and TOEIC exam preparation content for a UAE educational institution\.
+
+__Card Visual Direction: __Teal card\. Test paper \+ UAE building silhouette\.
+
+# __SECTION B: AI Data Services Case Studies \(New ΓÇö 6 Studies\)__
+
+These are 6 new AI Data Services case studies to be added to the case study page\. They showcase eQOURSEΓÇÖs data collection, annotation, cleaning, and real\-world model testing capabilities across industries\. Each case study is designed to target high\-value SEO keywords for AI data services\.
+
+__CASE STUDY 9__
+
+__Category: AI Data Services__  |  Service Tags: Data Collection, Data Annotation & Labeling, Real\-World Model Testing
+
+## __Case Study 9: Multilingual ASR Training Data for Voice AI Startup__
+
+__Industry: __Voice AI / ASR
+
+__Region: __Global \(South Asian focus\)
+
+__Services Used: __Data Collection, Audio Annotation, Speaker Diarisation, Real\-World Model Testing via TuTrain
+
+__Problem Statement__
+
+A Series B voice AI startup building an Automatic Speech Recognition \(ASR\) engine for South Asian markets was struggling with high Word Error Rates \(WER\) across regional dialects\. Their existing training data was primarily sourced from studio\-recorded standard Hindi and English, which performed poorly on real\-world field audio containing regional accents, ambient noise, and code\-switching between languages\.
+
+__Solution__
+
+eQOURSE deployed a 4\-phase pipeline: \(1\) Data Collection ΓÇö Field\-recorded and crowdsourced 50,000\+ hours of speech data across 12 Indian languages \(Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Assamese, and English with regional accents\) from our contributor network\. Each recording was metadata\-tagged by speaker age, gender, region, dialect group, education level, and noise environment\. \(2\) Annotation ΓÇö Verbatim transcription and clean\-read transcription by native speakers\. Speaker diarisation for multi\-speaker recordings\. Phoneme labeling for TTS model training\. Inter\-annotator agreement maintained at ΓëÑ 0\.82\. \(3\) Cleaning & Validation ΓÇö SNR\-based filtering removed low\-quality audio below threshold\. Deduplication eliminated repeated utterances\. PII redaction removed personally identifiable voice segments\. Gold\-standard validation on 18% honeypot tasks\. \(4\) Real\-World Testing ΓÇö The clientΓÇÖs retrained ASR model was deployed to real users on our TuTrain platform\. We tested across 8 dialect groups, urban and rural cohorts, and 3 noise environments\. WER scores were measured and fed back into a targeted data collection cycle\.
+
+__Impact__
+
+The client achieved a 34% reduction in WER across regional dialects after two active learning cycles\. The modelΓÇÖs accuracy on Tamil and Telugu dialects improved from 62% to 89%\. The TuTrain\-powered testing identified 3 critical failure modes \(code\-switching, numbers\-in\-speech, honorific\-prefix confusion\) that benchmark tests had never revealed\. The client secured Series C funding with the improved model performance as a key differentiator in their investor deck\.
+
+__Key Metrics__
+
+- 50,000\+ hours of speech data collected
+- 12 languages covered
+- 34% WER reduction achieved
+- 62% ΓåÆ 89% accuracy on Tamil/Telugu
+- IAA ΓëÑ 0\.82 maintained
+- 3 critical failure modes discovered via TuTrain
+- Series C funding secured by client
+
+__Card Summary \(for grid view\): __50,000\+ hours of multilingual speech data, annotation, and real\-world ASR testing for a voice AI startup\. 34% WER reduction achieved\.
+
+__Card Visual Direction: __Navy/cyan card\. Audio waveform \+ dialect map\. Cyan accuracy meter\.
+
+__CASE STUDY 10__
+
+__Category: AI Data Services__  |  Service Tags: Data Collection, Data Annotation & Labeling, Data Cleaning & Validation
+
+## __Case Study 10: Computer Vision Annotation for Autonomous Vehicle Company__
+
+__Industry: __Autonomous Vehicles / Computer Vision
+
+__Region: __Global \(APAC focus\)
+
+__Services Used: __Image & Video Data Collection, Bounding Box Annotation, Semantic Segmentation, 3D Cuboid Annotation, Data Cleaning
+
+__Problem Statement__
+
+An autonomous vehicle technology company needed high\-precision annotated driving datasets from South Asian road environments, which differ significantly from Western datasets \(Waymo, nuScenes\) in terms of road markings, vehicle types \(auto\-rickshaws, two\-wheelers, carts\), pedestrian behaviour, and signage\. Their existing models trained on US/EU data failed catastrophically on Indian road scenarios\.
+
+__Solution__
+
+eQOURSE executed: \(1\) Data Collection ΓÇö Dashcam and LiDAR\-synced video collection across 15 Indian cities covering highways, urban intersections, rural roads, and mixed\-traffic scenarios\. 200,000\+ frames collected with calibrated camera parameters\. \(2\) Annotation ΓÇö Bounding box annotation for 45 vehicle classes \(including India\-specific: auto\-rickshaw, cycle\-rickshaw, bullock cart, hand\-pulled cart, overloaded truck\)\. Semantic segmentation for road surfaces, lane markings, footpaths, and construction zones\. 3D cuboid annotation for depth\-aware detection\. Keypoint annotation for pedestrian pose estimation in crowded crossings\. \(3\) Cleaning & Validation ΓÇö Removal of blurred, overexposed, and rain\-obscured frames\. Label consistency checks across annotators\. Gold\-standard validation with 20% honeypot images\. Final delivery in COCO JSON and custom schema formats\.
+
+__Impact__
+
+The clientΓÇÖs perception model accuracy on Indian road scenarios improved from 54% to 91% mAP\. The annotated dataset became the clientΓÇÖs primary training asset for their APAC market expansion\. The India\-specific vehicle class annotations \(auto\-rickshaw, cycle\-rickshaw\) filled a critical gap that no public dataset addressed\.
+
+__Key Metrics__
+
+- 200,000\+ frames annotated
+- 15 Indian cities covered
+- 45 vehicle classes labeled
+- 54% ΓåÆ 91% mAP improvement
+- COCO JSON delivery
+- 20% honeypot validation
+- 98\.2% annotation accuracy
+
+__Card Summary \(for grid view\): __200,000\+ frames of Indian driving data annotated for an autonomous vehicle company\. mAP improved from 54% to 91%\.
+
+__Card Visual Direction: __Navy/cyan card\. Bounding box overlay on road scene\. Cyan accuracy gauge\.
+
+__CASE STUDY 11__
+
+__Category: AI Data Services__  |  Service Tags: Data Annotation & Labeling, Data Cleaning & Validation
+
+## __Case Study 11: RLHF Annotation for LLM Fine\-Tuning ΓÇö Global AI Lab__
+
+__Industry: __Large Language Models / Generative AI
+
+__Region: __Global
+
+__Services Used: __RLHF Annotation, Preference Ranking, Safety Labeling, Data Cleaning
+
+__Problem Statement__
+
+A well\-funded AI research lab building a multilingual large language model \(LLM\) needed high\-quality RLHF \(Reinforcement Learning from Human Feedback\) annotation across English and 5 Indic languages \(Hindi, Bengali, Tamil, Telugu, Marathi\)\. Their existing RLHF data was English\-only and US\-centric, causing the model to produce culturally inappropriate or factually incorrect responses when queried in Indic languages\.
+
+__Solution__
+
+eQOURSE provided: \(1\) RLHF Preference Ranking ΓÇö 200\+ trained annotators ranked model outputs \(best\-to\-worst\) across helpfulness, accuracy, harmlessness, and cultural appropriateness\. Each response pair was evaluated by 3 independent annotators with expert arbitration for disagreements\. \(2\) Safety Labeling ΓÇö Red\-teaming and safety annotation identifying harmful, biased, or policy\-violating outputs in all 6 languages\. Annotators were trained on the clientΓÇÖs specific content policy guidelines\. \(3\) Instruction\-Following Evaluation ΓÇö Assessing whether model outputs correctly followed complex multi\-step instructions in each language\. \(4\) Data Cleaning ΓÇö Deduplication of prompt\-response pairs, PII redaction, format standardisation to JSONL for direct fine\-tuning ingestion\. All delivered with KrippendorffΓÇÖs Alpha ΓëÑ 0\.83\.
+
+__Impact__
+
+The clientΓÇÖs LLM showed a 28% improvement in human preference scores on Indic language responses after RLHF fine\-tuning with our data\. Safety violation rates dropped from 4\.2% to 0\.6% across all languages\. The modelΓÇÖs cultural appropriateness ratings improved significantly, enabling a successful product launch in India\.
+
+__Key Metrics__
+
+- 200\+ RLHF annotators deployed
+- 6 languages covered
+- 28% improvement in human preference scores
+- Safety violations: 4\.2% ΓåÆ 0\.6%
+- IAA ΓëÑ 0\.83 \(KrippendorffΓÇÖs Alpha\)
+- JSONL delivery for direct fine\-tuning
+- Successful India product launch enabled
+
+__Card Summary \(for grid view\): __RLHF annotation in 6 languages for LLM fine\-tuning\. 28% preference score improvement, safety violations cut to 0\.6%\.
+
+__Card Visual Direction: __Navy/cyan card\. LLM response ranking interface icon\. Cyan safety shield\.
+
+__CASE STUDY 12__
+
+__Category: AI Data Services__  |  Service Tags: Data Annotation & Labeling, Data Cleaning & Validation
+
+## __Case Study 12: Medical Image Annotation for Healthcare AI Startup__
+
+__Industry: __Healthcare AI / Medical Imaging
+
+__Region: __Global
+
+__Services Used: __Data Annotation \(Semantic Segmentation, Instance Segmentation\), Data Cleaning, PII Redaction
+
+__Problem Statement__
+
+A healthcare AI startup developing a diagnostic support tool for chest X\-ray analysis needed pixel\-level annotated datasets of pulmonary conditions \(pneumonia, tuberculosis, pleural effusion, cardiomegaly\)\. Public datasets like CheXpert and MIMIC\-CXR lacked region\-specific pathology variants common in South Asian populations and had inconsistent annotation quality\.
+
+__Solution__
+
+eQOURSE assembled a team of 15 medical annotators with radiology backgrounds, supervised by 3 consulting radiologists\. We performed: \(1\) Semantic segmentation of lung fields, cardiac silhouette, and pathological regions on 25,000 chest X\-rays\. \(2\) Instance segmentation for multi\-lesion cases \(patients with concurrent TB \+ effusion\)\. \(3\) HIPAA\-aware PII redaction of patient identifiers from DICOM metadata\. \(4\) Gold\-standard validation where every 5th image was double\-annotated and reconciled by a radiologist\. Final delivery in NIfTI and COCO JSON formats with full audit trails\.
+
+__Impact__
+
+The clientΓÇÖs diagnostic model achieved 94\.7% sensitivity and 96\.1% specificity on their internal test set after training on our annotated data ΓÇö exceeding FDA submission thresholds\. The South Asian pathology variants in our dataset improved the modelΓÇÖs generalisation to Indian hospital deployments, a market segment no competitor could address\.
+
+__Key Metrics__
+
+- 25,000 chest X\-rays annotated
+- 15 medical annotators \+ 3 radiologist supervisors
+- 94\.7% sensitivity / 96\.1% specificity achieved
+- HIPAA\-compliant PII redaction
+- NIfTI \+ COCO JSON delivery
+- FDA submission threshold exceeded
+
+__Card Summary \(for grid view\): __25,000 chest X\-rays annotated by radiology\-trained specialists\. Client exceeded FDA diagnostic accuracy thresholds\.
+
+__Card Visual Direction: __Navy/cyan card\. X\-ray image with segmentation overlay\. Cyan medical cross\.
+
+__CASE STUDY 13__
+
+__Category: AI Data Services__  |  Service Tags: Data Collection, Data Annotation & Labeling, Real\-World Model Testing
+
+## __Case Study 13: Conversational AI Dataset for FinTech Chatbot__
+
+__Industry: __FinTech / Conversational AI
+
+__Region: __India / Southeast Asia
+
+__Services Used: __Text Data Collection, Intent Classification, NER Annotation, Sentiment Analysis, Model Testing via TuTrain
+
+__Problem Statement__
+
+A FinTech company building a multilingual customer service chatbot for banking and insurance queries found that their NLU \(Natural Language Understanding\) model had high intent misclassification rates \(22% error\) on Hindi, Hinglish \(Hindi\-English code\-mixed\), and regional language queries\. Benchmark test sets showed 91% accuracy, but real user interactions told a different story\.
+
+__Solution__
+
+eQOURSE executed: \(1\) Data Collection ΓÇö Crowdsourced 150,000 realistic banking query utterances in Hindi, Hinglish, English, Tamil, and Telugu from our contributor network\. Contributors were briefed on real banking scenarios \(balance enquiry, loan status, insurance claim, fraud reporting\)\. \(2\) Annotation ΓÇö Intent classification across 85 intent categories\. Named Entity Recognition \(NER\) for financial entities \(account numbers, policy IDs, dates, amounts\)\. Sentiment labeling \(frustrated, neutral, urgent\)\. \(3\) Model Testing ΓÇö After the client retrained their NLU, we deployed the chatbot to real users via TuTrain\. We measured intent recognition accuracy, entity extraction precision, and user satisfaction across language groups\. Results fed back into targeted data collection for the weakest intents\.
+
+__Impact__
+
+Intent misclassification dropped from 22% to 4\.8% after two active learning cycles\. Hindi and Hinglish entity extraction F1 improved from 0\.71 to 0\.93\. The client reported a 40% reduction in chatbot\-to\-human\-agent escalation rate, saving significant operational costs\.
+
+__Key Metrics__
+
+- 150,000 utterances collected
+- 85 intent categories labeled
+- 5 languages covered
+- Intent error: 22% ΓåÆ 4\.8%
+- Entity extraction F1: 0\.71 ΓåÆ 0\.93
+- 40% reduction in agent escalation
+
+__Card Summary \(for grid view\): __150,000 multilingual banking utterances for a FinTech chatbot\. Intent error reduced from 22% to 4\.8%\.
+
+__Card Visual Direction: __Navy/cyan card\. Chat bubble \+ banking icons\. Cyan accuracy chart\.
+
+__CASE STUDY 14__
+
+__Category: AI Data Services__  |  Service Tags: Data Collection, Data Annotation & Labeling, Data Cleaning & Validation
+
+## __Case Study 14: OCR Training Data for Document AI ΓÇö Handwritten Indic Scripts__
+
+__Industry: __Document AI / OCR
+
+__Region: __India / Global
+
+__Services Used: __Image Data Collection, Text Annotation, Bounding Box Annotation, Data Cleaning
+
+__Problem Statement__
+
+A Document AI company building an OCR engine for Indian government forms, bank cheques, and handwritten applications found that their model performed well on printed English/Hindi text \(97% character accuracy\) but failed on handwritten Devanagari, Tamil, and Telugu scripts \(below 70% accuracy\)\. No large\-scale labelled dataset existed for handwritten Indic scripts in real\-world document contexts\.
+
+__Solution__
+
+eQOURSE executed: \(1\) Data Collection ΓÇö Collected 100,000\+ images of handwritten documents from our contributor network across India: filled government forms, bank deposit slips, college applications, and handwritten letters in Devanagari, Tamil, and Telugu scripts\. Contributors represented diverse handwriting styles \(neat, cursive, rushed\)\. \(2\) Annotation ΓÇö Character\-level bounding box annotation with UTF\-8 text labels\. Word\-level and line\-level segmentation\. Document layout annotation \(form fields, signatures, stamps\)\. \(3\) Cleaning ΓÇö Removal of illegible samples \(annotator consensus required for borderline cases\)\. Format standardisation to COCO JSON with custom schema\. Metadata tagging by script, document type, and legibility score\.
+
+__Impact__
+
+The clientΓÇÖs OCR accuracy on handwritten Devanagari improved from 68% to 94% character accuracy\. Tamil and Telugu handwritten accuracy reached 91% and 89% respectively\. The dataset became the largest proprietary handwritten Indic script OCR training corpus, giving the client a defensible competitive advantage in the Indian document digitisation market\.
+
+__Key Metrics__
+
+- 100,000\+ handwritten document images collected
+- 3 Indic scripts covered
+- Devanagari OCR: 68% ΓåÆ 94% accuracy
+- Tamil OCR: 91% accuracy
+- Telugu OCR: 89% accuracy
+- Character \+ word \+ line level annotation
+- COCO JSON delivery
+
+__Card Summary \(for grid view\): __100,000\+ handwritten Indic script images for OCR training\. Devanagari accuracy improved from 68% to 94%\.
+
+__Card Visual Direction: __Navy/cyan card\. Handwritten text \+ OCR bounding box\. Cyan accuracy counter\.
+
+# __SEO & Internal Linking Strategy__
+
+## __Internal Linking from Case Studies__
+
+Each case study should contain contextual internal links to the relevant service pages\. This is critical for SEO ΓÇö it tells Google which service pages are authoritative for specific keywords\.
+
+__EdTech Case Studies ΓåÆ Link to EdTech Service Pages__
+
+- Case Study 1 ΓåÆ Link to /edtech\-solutions/custom\-e\-learning\-content/workbook\-development
+- Case Study 2 ΓåÆ Link to /edtech\-solutions/elearning\-video\-solutions \+ /edtech\-solutions/localization\-services
+- Case Study 3 ΓåÆ Link to /edtech\-solutions/custom\-e\-learning\-content/k12\-and\-higher\-education
+- Case Study 4 ΓåÆ Link to /edtech\-solutions/learning\-solutions/ai\-powered\-learning
+- Case Study 5 ΓåÆ Link to /edtech\-solutions/elearning\-video\-solutions \+ /edtech\-solutions/subject\-matter\-experts
+- Case Study 6 ΓåÆ Link to /edtech\-solutions/custom\-e\-learning\-content/educational\-content\-development
+- Case Study 7 ΓåÆ Link to /edtech\-solutions/localization\-services \+ /edtech\-solutions/custom\-e\-learning\-content/workbook\-development
+- Case Study 8 ΓåÆ Link to /edtech\-solutions/exam\-preparation\-content
+
+__AI Data Case Studies ΓåÆ Link to AI Data Service Pages__
+
+- Case Study 9 ΓåÆ Link to /ai\-data\-services/data\-collection \+ /ai\-data\-services/annotation\-labeling \+ /ai\-data\-services/model\-testing
+- Case Study 10 ΓåÆ Link to /ai\-data\-services/data\-collection \+ /ai\-data\-services/annotation\-labeling
+- Case Study 11 ΓåÆ Link to /ai\-data\-services/annotation\-labeling \+ /ai\-data\-services/cleaning\-validation
+- Case Study 12 ΓåÆ Link to /ai\-data\-services/annotation\-labeling \+ /ai\-data\-services/cleaning\-validation
+- Case Study 13 ΓåÆ Link to /ai\-data\-services/data\-collection \+ /ai\-data\-services/annotation\-labeling \+ /ai\-data\-services/model\-testing
+- Case Study 14 ΓåÆ Link to /ai\-data\-services/data\-collection \+ /ai\-data\-services/annotation\-labeling
+
+## __Schema Markup Recommendation__
+
+Implement ItemList schema on the case study page with each case study as a ListItem\. Include name, description, and URL for each\. This helps Google display case studies in rich results and improves crawl efficiency\.
+
+## __Cross\-Linking from Service Pages__
+
+Each EdTech and AI Data service page should include a ΓÇ£Related Case StudiesΓÇ¥ section at the bottom, linking to the relevant case studies from this page\. This creates a bidirectional internal link structure that Google values highly for topical authority\.
+
+
