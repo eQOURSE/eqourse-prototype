@@ -22,6 +22,14 @@ import TechnologySolutions from "./pages/TechnologySolutions.tsx";
 import SubjectMatterExperts from "./pages/SubjectMatterExperts.tsx";
 import EdTechStubPage from "./pages/EdTechStubPage.tsx";
 import CaseStudy from "./pages/CaseStudy.tsx";
+import AboutUs from "./pages/AboutUs.tsx";
+import ClientTestimonials from "./pages/ClientTestimonials.tsx";
+import Careers from "./pages/Careers.tsx";
+import FAQs from "./pages/FAQs.tsx";
+import Samples from "./pages/Samples.tsx";
+import AIDataSample from "./pages/AIDataSample.tsx";
+import EdtechSample from "./pages/EdtechSample.tsx";
+import { edtechSamples } from "./components/samples/edtech/edtechSamplesData";
 import { edtechSubServiceRoutes } from "./components/edtech-solutions/edtechSubServiceRoutes";
 
 const queryClient = new QueryClient();
@@ -43,13 +51,25 @@ const App = () => (
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="/clients-testimonials" element={<ClientTestimonials />} />
+              <Route path="/career" element={<Careers />} />
+              <Route path="/faq" element={<FAQs />} />
               <Route path="/casestudy" element={<CaseStudy />} />
+              <Route path="/samples" element={<Samples />} />
+              <Route path="/ai-data-samples" element={<Samples />} />
+              <Route path="/ai-data-samples/:slug" element={<AIDataSample />} />
+
+              {/* EdTech Sample Pages (17 routes — dynamic template by pathname) */}
+              {edtechSamples.map((s) => (
+                <Route key={s.path} path={s.path} element={<EdtechSample />} />
+              ))}
               <Route path="/ai-data-services" element={<AIDataServicesOverview />} />
               <Route path="/ai-data-services/data-collection" element={<AIDataCollection />} />
               <Route path="/ai-data-services/annotation-labeling" element={<AIAnnotationLabeling />} />
               <Route path="/ai-data-services/cleaning-validation" element={<AICleaningValidation />} />
               <Route path="/ai-data-services/model-testing" element={<AIModelTesting />} />
-              
+
               {/* EdTech Solutions — Category Pages */}
               <Route path="/edtech-solutions" element={<EdTechOverview />} />
               <Route path="/edtech-solutions/custom-e-learning-content" element={<CustomElearningContent />} />
@@ -64,10 +84,10 @@ const App = () => (
               {edtechSubServiceRoutes.map(({ path, Component }) => (
                 <Route key={path} path={path} element={<Component />} />
               ))}
-              
+
               {/* Catch-all for any remaining EdTech stub pages */}
               <Route path="/edtech-solutions/*" element={<EdTechStubPage />} />
-              
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

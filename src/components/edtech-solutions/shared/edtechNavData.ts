@@ -19,6 +19,8 @@ export interface EdTechCategory {
   label: string;
   href: string;
   icon: LucideIcon;
+  image?: string;
+  description?: string;
   subServices: SubServiceLink[];
 }
 
@@ -27,6 +29,8 @@ export const edtechCategories: EdTechCategory[] = [
     label: "Custom E-Learning Content",
     href: "/edtech-solutions/custom-e-learning-content",
     icon: BookOpen,
+    image: "/assets/dropdown/custom_e_learning.png",
+    description: "Tailor-made e-learning modules, K12 curriculum, and engaging digital workbooks.",
     subServices: [
       { label: "K12 & Higher Education", href: "/edtech-solutions/custom-e-learning-content/k12-and-higher-education", icon: GraduationCap },
       { label: "K12 Curriculum Development", href: "/edtech-solutions/custom-e-learning-content/k12-curriculum-development", icon: Layout },
@@ -44,6 +48,8 @@ export const edtechCategories: EdTechCategory[] = [
     label: "Exam Preparation Content",
     href: "/edtech-solutions/exam-preparation-content",
     icon: Pencil,
+    image: "/assets/dropdown/exam_prep.png",
+    description: "Comprehensive adaptive test prep materials for global standardized tests.",
     subServices: [
       { label: "APTIS Prep", href: "/edtech-solutions/exam-preparation-content/aptis", icon: Target },
       { label: "TOEIC Prep", href: "/edtech-solutions/exam-preparation-content/toeic", icon: Headphones },
@@ -60,6 +66,8 @@ export const edtechCategories: EdTechCategory[] = [
     label: "Learning Solutions",
     href: "/edtech-solutions/learning-solutions",
     icon: MonitorPlay,
+    image: "/assets/dropdown/learning_solutions.png",
+    description: "Immersive AR/VR and AI-powered gamified learning environments.",
     subServices: [
       { label: "Instructor Led Training", href: "/edtech-solutions/learning-solutions/ilt", icon: Presentation },
       { label: "Corporate E-learning", href: "/edtech-solutions/learning-solutions/corporate-elearning", icon: Building2 },
@@ -76,6 +84,8 @@ export const edtechCategories: EdTechCategory[] = [
     label: "E-Learning Video Solutions",
     href: "/edtech-solutions/elearning-video-solutions",
     icon: Clapperboard,
+    image: "/assets/dropdown/elearning_video.png",
+    description: "High-quality animated videos, kinetic typography, and PPT-to-video services.",
     subServices: [
       { label: "PPT Video Services", href: "/edtech-solutions/elearning-video-solutions/ppt-videos", icon: MonitorPlay },
       { label: "Articulate Storyline", href: "/edtech-solutions/elearning-video-solutions/articulate-storyline", icon: MousePointerClick },
@@ -86,6 +96,8 @@ export const edtechCategories: EdTechCategory[] = [
     label: "Localization Services",
     href: "/edtech-solutions/localization-services",
     icon: Globe,
+    image: "/assets/dropdown/localization.png",
+    description: "Accurate translation, professional voiceovers, and subtitling for global reach.",
     subServices: [
       { label: "Translation Services", href: "/edtech-solutions/localization-services/translation", icon: Languages },
       { label: "Voice Over Services", href: "/edtech-solutions/localization-services/voice-over", icon: Mic },
@@ -96,6 +108,8 @@ export const edtechCategories: EdTechCategory[] = [
     label: "Technology Solutions",
     href: "/edtech-solutions/technology-solutions",
     icon: Laptop,
+    image: "/assets/dropdown/technology_solutions.png",
+    description: "Robust Learning Management Systems (LMS) and cloud-based architecture.",
     subServices: [
       { label: "LMS Course Builds", href: "/edtech-solutions/technology-solutions/lms-course-builds", icon: HardDrive },
       { label: "White Label LMS", href: "/edtech-solutions/technology-solutions/white-label-lms", icon: Server },
@@ -105,6 +119,8 @@ export const edtechCategories: EdTechCategory[] = [
     label: "Subject Matter Experts",
     href: "/edtech-solutions/subject-matter-experts",
     icon: Users,
+    image: "/assets/dropdown/sme_recruitment.png",
+    description: "Top-tier global subject matter experts for tutoring, recruiting, and mentoring.",
     subServices: [
       { label: "SME Recruitment", href: "/edtech-solutions/subject-matter-experts/recruitment", icon: UserCheck },
       { label: "SME Training & Certification", href: "/edtech-solutions/subject-matter-experts/training", icon: BookOpenCheck },

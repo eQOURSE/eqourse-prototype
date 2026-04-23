@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(npm install:*)",
-      "Bash(where pdftoppm:*)"
+      "Bash(where pdftoppm:*)",
+      "Bash(npx tsc *)",
+      "PowerShell(npx tsc --noEmit 2>&1)",
+      "Bash(pandoc \"C:/Users/yobha/Downloads/eQOURSE_Samples_Section_Update_AI_Data.docx\" -o /tmp/samples.md)",
+      "Read(//tmp/**)",
+      "Bash(python -c \"from docx import Document; d=Document\\(r'C:/Users/yobha/Downloads/eQOURSE_Samples_Section_Update_AI_Data.docx'\\); [print\\(p.text\\) for p in d.paragraphs]\")",
+      "PowerShell(Add-Type -AssemblyName System.IO.Compression.FileSystem; $z = [System.IO.Compression.ZipFile]::OpenRead\\(\"C:\\\\Users\\\\yobha\\\\Downloads\\\\eQOURSE_Samples_Section_Update_AI_Data.docx\"\\); $e = $z.Entries | Where-Object { $_.FullName -eq \"word/document.xml\" }; $s = New-Object System.IO.StreamReader\\($e.Open\\(\\)\\); $xml = $s.ReadToEnd\\(\\); $s.Close\\(\\); $z.Dispose\\(\\); $text = [regex]::Replace\\($xml, '</w:p>', \"`n\"\\); $text = [regex]::Replace\\($text, '<[^>]+>', ''\\); $text)",
+      "PowerShell(Add-Type -AssemblyName System.IO.Compression.FileSystem; $z = [System.IO.Compression.ZipFile]::OpenRead\\(\"C:\\\\Users\\\\yobha\\\\Downloads\\\\eQOURSE_EdTech_Samples_ALL_17_Pages_Content.docx\"\\); $e = $z.Entries | Where-Object { $_.FullName -eq \"word/document.xml\" }; $s = New-Object System.IO.StreamReader\\($e.Open\\(\\)\\); $xml = $s.ReadToEnd\\(\\); $s.Close\\(\\); $z.Dispose\\(\\); $text = [regex]::Replace\\($xml, '</w:p>', \"`n\"\\); $text = [regex]::Replace\\($text, '<[^>]+>', ''\\); $text)",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\yobha\\\\Downloads\\\\eQOURSE_EdTech_Samples_ALL_17_Pages_Content.docx\" \"$env:TEMP\\\\edtech_samples.docx\" -Force; Add-Type -AssemblyName System.IO.Compression.FileSystem; $z = [System.IO.Compression.ZipFile]::OpenRead\\(\"$env:TEMP\\\\edtech_samples.docx\"\\); $e = $z.Entries | Where-Object { $_.FullName -eq \"word/document.xml\" }; $s = New-Object System.IO.StreamReader\\($e.Open\\(\\)\\); $xml = $s.ReadToEnd\\(\\); $s.Close\\(\\); $z.Dispose\\(\\); $text = [regex]::Replace\\($xml, '</w:p>', \"`n\"\\); $text = [regex]::Replace\\($text, '<[^>]+>', ''\\); [System.Web.HttpUtility]::HtmlDecode\\($text\\) 2>$null; if \\(-not $?\\) { $text })",
+      "PowerShell(npm run build 2>&1)"
     ]
   }
 }
