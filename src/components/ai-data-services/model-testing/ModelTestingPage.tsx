@@ -58,7 +58,7 @@ const ModelTestingPage = () => (
       headlineAccent="Just Benchmarks"
       subtext="Closed-loop testing pipeline with real users via TuTrain. A/B testing, dialect audits, and edge case discovery for 20-40% faster model improvement."
       ctaText="Start Testing"
-      ctaLink="#contact"
+      ctaLink="/free-pilot"
     />
 
     <ServiceNarrativeSection

@@ -56,7 +56,7 @@ const CleaningPage = () => (
       headlineAccent="Better Models"
       subtext="Deduplication, PII redaction, noise removal, and multi-tier validation pipelines. 98%+ accuracy guaranteed with full GDPR compliance."
       ctaText="Get Cleaning Quote"
-      ctaLink="#contact"
+      ctaLink="/free-pilot"
     />
 
     <ServiceNarrativeSection

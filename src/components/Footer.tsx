@@ -31,7 +31,7 @@ const aiServiceLinks = [
   { label: "Annotation & Labeling", to: "/ai-data-services/annotation-labeling" },
   { label: "Cleaning & Validation", to: "/ai-data-services/cleaning-validation" },
   { label: "Model Testing", to: "/ai-data-services/model-testing" },
-  { label: "Start Free Pilot", to: "/ai-data-services#contact" },
+  { label: "Start Free Pilot", to: "/free-pilot" },
 ];
 
 /* ── Legal ── */

@@ -57,8 +57,8 @@ const DataCollectionPage = () => (
       headline="Custom Datasets for"
       headlineAccent="Every AI Model"
       subtext="Multi-modal data collection across text, audio, image, and video. 30+ languages, domain-specific sourcing, and rigorous quality controls from day one."
-      ctaText="Start Data Collection"
-      ctaLink="#contact"
+      ctaText="Start Free Pilot"
+      ctaLink="/free-pilot"
     />
 
     <ServiceNarrativeSection

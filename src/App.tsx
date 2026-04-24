@@ -22,10 +22,12 @@ import TechnologySolutions from "./pages/TechnologySolutions.tsx";
 import SubjectMatterExperts from "./pages/SubjectMatterExperts.tsx";
 import EdTechStubPage from "./pages/EdTechStubPage.tsx";
 import CaseStudy from "./pages/CaseStudy.tsx";
+import ContactUs from "./pages/ContactUs.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import ClientTestimonials from "./pages/ClientTestimonials.tsx";
 import Careers from "./pages/Careers.tsx";
 import FAQs from "./pages/FAQs.tsx";
+import FreePilot from "./pages/FreePilot.tsx";
 import Samples from "./pages/Samples.tsx";
 import AIDataSample from "./pages/AIDataSample.tsx";
 import EdtechSample from "./pages/EdtechSample.tsx";
@@ -55,6 +57,9 @@ const App = () => (
               <Route path="/clients-testimonials" element={<ClientTestimonials />} />
               <Route path="/career" element={<Careers />} />
               <Route path="/faq" element={<FAQs />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/contactus" element={<ContactUs />} />
+              <Route path="/free-pilot" element={<FreePilot />} />
               <Route path="/casestudy" element={<CaseStudy />} />
               <Route path="/samples" element={<Samples />} />
               <Route path="/ai-data-samples" element={<Samples />} />

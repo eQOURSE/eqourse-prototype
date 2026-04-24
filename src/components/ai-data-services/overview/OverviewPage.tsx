@@ -53,7 +53,7 @@ const OverviewPage = () => (
       headlineAccent="One Partner."
       subtext="Custom AI training data across 30+ languages - from raw collection to real-world model testing on actual users. The only closed-loop pipeline in the industry."
       ctaText="Start Free Pilot"
-      ctaLink="#contact"
+      ctaLink="/free-pilot"
     />
 
     <ServiceNarrativeSection

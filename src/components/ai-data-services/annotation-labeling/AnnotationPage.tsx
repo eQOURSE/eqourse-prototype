@@ -56,7 +56,7 @@ const AnnotationPage = () => (
       headlineAccent="Production AI"
       subtext="NLP, Computer Vision, Audio, and RLHF labeling with inter-annotator agreement >= 0.80. Multi-tier QA ensures 98%+ accuracy on every project."
       ctaText="Get Annotation Quote"
-      ctaLink="#contact"
+      ctaLink="/free-pilot"
     />
 
     <ServiceNarrativeSection

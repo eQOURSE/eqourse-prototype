@@ -32,7 +32,7 @@ const LearningSolutionsPage = () => (
       headlineAccent="Institutions & Enterprise"
       subtext="Implement modern Instructor-Led Training (ILT), interactive e-learning, or cutting-edge AR/VR technologies customized to improve learner engagement, retention, and performance."
       ctaText="Start Your Free Pilot"
-      ctaLink="#contact"
+      ctaLink="/free-pilot"
     />
 
     <ServiceNarrativeSection

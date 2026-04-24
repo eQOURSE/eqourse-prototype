@@ -37,7 +37,7 @@ const ExamPrepPage = () => (
       headlineAccent="SAT, GMAT, NEET & More"
       subtext="Expert-designed exam preparation materials tailored to global standards like TOEIC, APTIS, IELTS, TOEFL, GRE, and major competitive exams. Diverse levels, subjects, and study guides."
       ctaText="Request Free Pilot Content"
-      ctaLink="#contact"
+      ctaLink="/free-pilot"
     />
 
     <ExamServicesGrid />

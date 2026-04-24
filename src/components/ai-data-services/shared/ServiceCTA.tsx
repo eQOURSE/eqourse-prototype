@@ -13,9 +13,9 @@ const ServiceCTA = ({
   headline = "Ready to Get Started?",
   subtext = "Join global AI teams who trust eQOURSE for production-grade training data. Start with a free pilot - no commitment required.",
   ctaText = "Start Free Pilot",
-  ctaLink = "#contact",
+  ctaLink = "/free-pilot",
 }: ServiceCTAProps) => (
-  <section id="contact" className="py-24 relative overflow-hidden">
+  <section className="py-24 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-hero" />
     <div
       className="absolute inset-0 opacity-[0.03]"

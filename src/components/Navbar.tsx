@@ -593,7 +593,7 @@ const Navbar = () => {
                     : "border-primary/30 text-primary hover:bg-primary/5"
                 }
               >
-                <Link to="/ai-data-services">Free Pilot</Link>
+                <Link to="/free-pilot">Free Pilot</Link>
               </Button>
               <Button asChild size="sm" className="bg-gradient-primary border-0 text-primary-foreground shadow-soft hover:opacity-90 transition-opacity">
                 <Link to="/contact">Contact Us</Link>

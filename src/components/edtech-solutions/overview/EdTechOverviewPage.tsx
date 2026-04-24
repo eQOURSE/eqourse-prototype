@@ -48,7 +48,7 @@ const EdTechOverviewPage = () => (
       headlineAccent="Scale Learning Outcomes"
       subtext="From custom K-12 content and curriculum design to interactive video learning, localization in 30+ languages, and LMS integration."
       ctaText="Start Your Free Pilot"
-      ctaLink="#contact"
+      ctaLink="/free-pilot"
     />
 
     <ServiceNarrativeSection

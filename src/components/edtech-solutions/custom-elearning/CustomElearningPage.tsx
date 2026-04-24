@@ -36,7 +36,7 @@ const CustomElearningPage = () => (
       headlineAccent="K12 & Higher Ed"
       subtext="Expertly crafted educational materials aligned with curriculum standards, integrating multimedia and interactive tools to build robust learner engagement."
       ctaText="Start Your Free Pilot"
-      ctaLink="#contact"
+      ctaLink="/free-pilot"
     />
 
     <ServiceNarrativeSection
