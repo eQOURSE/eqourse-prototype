@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FloatingSocialBar from "@/components/FloatingSocialBar";
+
 
 interface BreadcrumbItem {
   label: string;
@@ -53,7 +53,7 @@ const AIDataServicesLayout = ({ children, breadcrumbs }: AIDataServicesLayoutPro
       {children}
 
       <Footer />
-      <FloatingSocialBar />
+
     </div>
   );
 };

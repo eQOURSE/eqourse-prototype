@@ -15,7 +15,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
-import FloatingSocialBar from "@/components/FloatingSocialBar";
+
 import LeadFormPopup from "@/components/LeadFormPopup";
 
 const Index = () => {
@@ -38,7 +38,7 @@ const Index = () => {
       <BlogSection />
       <NewsletterSection />
       <Footer />
-      <FloatingSocialBar />
+
       <LeadFormPopup />
     </div>
   );
