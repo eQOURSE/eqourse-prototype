@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin as MapPinIcon, Mail as MailIcon, Phone as PhoneIcon, Clock as ClockIcon } from "lucide-react";
+import linkedIn3D from "@/assets/3d_linkedin_logo.png";
+import facebook3D from "@/assets/3d_facebook_logo.png";
+import instagram3D from "@/assets/3d_instagram_logo.png";
+import youtube3D from "@/assets/3d_youtube_logo.png";
+import xTwitter3D from "@/assets/3d_x_twitter_logo.png";
 
 // Social Icons SVGs to avoid extra dependencies
 const LinkedInIcon = ({ className }: { className?: string }) => (
