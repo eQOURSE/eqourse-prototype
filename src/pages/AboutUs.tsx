@@ -37,8 +37,10 @@ const AboutUs = () => {
               "logo": "https://www.eqourse.com/logo.png",
               "sameAs": [
                 "https://www.linkedin.com/company/eqourse",
-                "https://www.facebook.com/eqourse",
-                "https://www.instagram.com/eqourse"
+                "https://www.facebook.com/eQOURSE-102057078229490",
+                "https://www.instagram.com/eqourse/",
+                "https://www.youtube.com/@eqourse",
+                "https://twitter.com/EQourse"
               ],
               "knowsAbout": [
                 "EdTech Solutions",

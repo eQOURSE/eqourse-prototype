@@ -1,4 +1,9 @@
 import { Phone, Mail, MapPin, Shield } from "lucide-react";
+import linkedIn3D from "@/assets/3d_linkedin_logo.png";
+import facebook3D from "@/assets/3d_facebook_logo.png";
+import instagram3D from "@/assets/3d_instagram_logo.png";
+import youtube3D from "@/assets/3d_youtube_logo.png";
+import xTwitter3D from "@/assets/3d_x_twitter_logo.png";
 import { Link } from "react-router-dom";
 
 /* ── Quick Links: key top-level pages for crawlability ── */
@@ -6,7 +11,7 @@ const quickLinks = [
   { label: "About Us", to: "/aboutus" },
   { label: "Case Studies", to: "/casestudy" },
   { label: "Samples", to: "/samples" },
-  { label: "Blog", to: "/#blogs" },
+  { label: "Blog", to: "/blog" },
   { label: "Testimonials", to: "/clients-testimonials" },
   { label: "Careers", to: "/career" },
   { label: "FAQs", to: "/faq" },
@@ -72,14 +77,15 @@ const Footer = () => {
             </div>
             <div className="flex gap-3 pt-2">
               {[
-                { label: "Li", name: "LinkedIn" },
-                { label: "Fb", name: "Facebook" },
-                { label: "In", name: "Instagram" },
-                { label: "Yt", name: "YouTube" },
-                { label: "X", name: "X" },
+                { icon: linkedIn3D, name: "LinkedIn", href: "https://www.linkedin.com/company/eqourse" },
+                { icon: facebook3D, name: "Facebook", href: "https://www.facebook.com/eQOURSE-102057078229490" },
+                { icon: instagram3D, name: "Instagram", href: "https://www.instagram.com/eqourse/" },
+                { icon: youtube3D, name: "YouTube", href: "https://www.youtube.com/@eqourse" },
+                { icon: xTwitter3D, name: "X", href: "https://twitter.com/EQourse" },
               ].map((social) => (
-                <a key={social.name} href="#" aria-label={social.name} className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary hover:bg-gradient-primary hover:text-primary-foreground transition-all text-xs font-bold">
-                  {social.label}
+                <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.name} className="w-10 h-10 rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(20,184,166,0.3)] transition-all duration-300 border border-white/10 bg-white flex items-center justify-center group relative">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent to-black/5 mix-blend-overlay group-hover:opacity-0 transition-opacity" />
+                  <img src={social.icon} alt={social.name} className="w-[120%] h-[120%] object-cover scale-110 group-hover:scale-125 transition-transform duration-500" style={{ filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.1))" }} />
                 </a>
               ))}
             </div>

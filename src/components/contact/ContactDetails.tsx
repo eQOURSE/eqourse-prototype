@@ -141,21 +141,18 @@ const ContactDetails = () => {
       <div className="space-y-4">
         <h3 className="font-heading text-xl font-bold text-foreground border-b border-border pb-2">Connect With Us</h3>
         <div className="flex flex-wrap gap-3">
-          <a href="https://www.linkedin.com/company/eqourse" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/80 hover:-translate-y-1 hover:shadow-soft transition-all">
-            <LinkedInIcon className="w-5 h-5" />
-          </a>
-          <a href="https://www.facebook.com/eQOURSE-102057078229490" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/80 hover:-translate-y-1 hover:shadow-soft transition-all">
-            <FacebookIcon className="w-5 h-5" />
-          </a>
-          <a href="https://www.instagram.com/eqourse/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/80 hover:-translate-y-1 hover:shadow-soft transition-all">
-            <InstagramIcon className="w-5 h-5" />
-          </a>
-          <a href="https://www.youtube.com/@eqourse" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/80 hover:-translate-y-1 hover:shadow-soft transition-all">
-            <YouTubeIcon className="w-5 h-5" />
-          </a>
-          <a href="https://twitter.com/EQourse" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/80 hover:-translate-y-1 hover:shadow-soft transition-all">
-            <XIcon className="w-4 h-4" />
-          </a>
+          {[
+            { icon: linkedIn3D, name: "LinkedIn", href: "https://www.linkedin.com/company/eqourse" },
+            { icon: facebook3D, name: "Facebook", href: "https://www.facebook.com/eQOURSE-102057078229490" },
+            { icon: instagram3D, name: "Instagram", href: "https://www.instagram.com/eqourse/" },
+            { icon: youtube3D, name: "YouTube", href: "https://www.youtube.com/@eqourse" },
+            { icon: xTwitter3D, name: "X", href: "https://twitter.com/EQourse" },
+          ].map((social) => (
+            <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.name} className="w-12 h-12 rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-300 border border-border/50 bg-white flex items-center justify-center group relative shadow-soft">
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent to-black/5 mix-blend-overlay group-hover:opacity-0 transition-opacity" />
+              <img src={social.icon} alt={social.name} className="w-[120%] h-[120%] object-cover scale-110 group-hover:scale-125 transition-transform duration-500" style={{ filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.1))" }} />
+            </a>
+          ))}
         </div>
       </div>
 

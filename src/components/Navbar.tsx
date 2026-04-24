@@ -46,7 +46,7 @@ const navLinks: MainLink[] = [
   { label: "AI Data Services", to: "/ai-data-services", dropdown: aiDataSubLinks },
   { label: "Samples", to: "/samples", samplesMenu: true },
   { label: "Case Studies", to: "/casestudy" },
-  { label: "Blog", to: "/#blogs" },
+  { label: "Blog", to: "/blog" },
 ];
 
 /* ─── EdTech Mega‑Menu (Desktop) ─── */

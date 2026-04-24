@@ -7,6 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Blog from "./pages/Blog.tsx";
+import BlogPost from "./pages/BlogPost.tsx";
 import AIDataServicesOverview from "./pages/AIDataServicesOverview.tsx";
 import AIDataCollection from "./pages/AIDataCollection.tsx";
 import AIAnnotationLabeling from "./pages/AIAnnotationLabeling.tsx";
@@ -61,6 +63,8 @@ const App = () => (
               <Route path="/contactus" element={<ContactUs />} />
               <Route path="/free-pilot" element={<FreePilot />} />
               <Route path="/casestudy" element={<CaseStudy />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/samples" element={<Samples />} />
               <Route path="/ai-data-samples" element={<Samples />} />
               <Route path="/ai-data-samples/:slug" element={<AIDataSample />} />

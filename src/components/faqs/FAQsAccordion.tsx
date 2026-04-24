@@ -202,7 +202,7 @@ const FAQsAccordion = () => {
           <div className="absolute inset-0 bg-gradient-primary opacity-5 group-hover:opacity-10 transition-opacity" />
           <h3 className="text-xl font-bold mb-3">Still have questions?</h3>
           <p className="text-muted-foreground mb-6">Our team is ready to provide tailored answers for your specific requirements.</p>
-          <Link to="/#contact" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-xl shadow-soft hover:opacity-90 transition-opacity">
+          <Link to="/contactus" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-xl shadow-soft hover:opacity-90 transition-opacity">
             Contact Support <ExternalLink className="w-4 h-4" />
           </Link>
         </div>
