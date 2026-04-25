@@ -21,9 +21,11 @@ const CTASection = () => {
               Start Free Pilot Dataset <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="border-primary-foreground/30 hover:bg-primary-foreground/10 transition-all px-8" style={{ color: 'hsl(0, 0%, 95%)' }}>
-            <Phone className="mr-2 w-5 h-5" /> Schedule a Call
-          </Button>
+          <Link to="/contact">
+            <Button size="lg" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:animate-pulse transition-all duration-300 px-8">
+              <Phone className="mr-2 w-5 h-5" /> Schedule a Call
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
