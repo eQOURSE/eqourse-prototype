@@ -4,6 +4,7 @@ import {
   RefreshCw, Film, Megaphone, Glasses, FileStack, PlayCircle,
   type LucideIcon,
 } from "lucide-react";
+import type { PreviewFile } from "../../shared/PreviewFilesModal";
 
 export type SampleKind = "text" | "video" | "text-landing" | "video-landing";
 
@@ -25,6 +26,7 @@ export interface EdtechSample {
   heroImageAlt: string;
   tabs: string[];
   tabContent?: Record<string, string>;   // per-tab blurb
+  previewFiles?: Record<string, PreviewFile[]>; // per-tab preview files
   bodySections?: { title: string; description: string }[];
   faqs?: { question: string; answer: string }[];
 }

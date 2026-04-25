@@ -2,12 +2,14 @@ import {
   Tags, ScanEye, AudioLines, ThumbsUp, Database, Sparkles,
   type LucideIcon,
 } from "lucide-react";
+import type { PreviewFile } from "../../shared/PreviewFilesModal";
 
 export interface SampleShowcase {
   title: string;
   description: string;
   format: string;
   languages: string;
+  previewFiles?: PreviewFile[];
 }
 
 export interface AiDataSample {

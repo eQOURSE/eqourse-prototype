@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Download, Eye, FileText, Play, Sparkles, ChevronRight } from "lucide-react";
 import type { EdtechSample } from "../edtechSamplesData";
+import { PreviewFilesModal, type PreviewFile } from "../../shared/PreviewFilesModal";
 
 interface Props {
   sample: EdtechSample;
@@ -11,10 +12,34 @@ const isVideoKind = (k: EdtechSample["kind"]) =>
 
 const InteractiveSampleTabs = ({ sample }: Props) => {
   const [active, setActive] = useState(0);
+  const [showPreview, setShowPreview] = useState(false);
   const accent = `hsl(${sample.accentHsl})`;
   const accentSoft = `hsl(${sample.accentHsl} / 0.12)`;
   const accentBorder = `hsl(${sample.accentHsl} / 0.35)`;
   const isVideo = isVideoKind(sample.kind);
+
+  const activeTabName = sample.tabs[active];
+  let currentPreviewFiles = sample.previewFiles?.[activeTabName] || [];
+
+  if (currentPreviewFiles.length === 0) {
+    if (isVideo) {
+      currentPreviewFiles = Array.from({ length: 25 }).map((_, i) => ({
+        title: `${activeTabName} Demo Video ${i + 1}`,
+        description: `A sample 1080p export demonstrating ${activeTabName.toLowerCase()} capabilities with full annotations.`,
+        fileType: i % 3 === 0 ? "ZIP" : "MP4",
+        fileUrl: "#",
+        isExternal: false
+      }));
+    } else {
+      currentPreviewFiles = Array.from({ length: 25 }).map((_, i) => ({
+        title: `${activeTabName} - Sample Document ${i + 1}`,
+        description: `Comprehensive sample for ${activeTabName.toLowerCase()} showcasing formatting and editorial standards.`,
+        fileType: i % 2 === 0 ? "PDF" : "DOCX",
+        fileUrl: "#",
+        isExternal: i % 2 === 0
+      }));
+    }
+  }
 
   return (
     <section id="samples" className="relative py-20 bg-background overflow-hidden">
@@ -139,14 +164,14 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <a
-                href="#consultation"
+              <button
+                onClick={() => setShowPreview(true)}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: accent }}
               >
                 {isVideo ? <Play className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 Preview Sample
-              </a>
+              </button>
               <a
                 href="#consultation"
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold border transition-all hover:bg-muted"
@@ -159,6 +184,14 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
           </div>
         </div>
       </div>
+      
+      <PreviewFilesModal 
+        isOpen={showPreview}
+        onClose={() => setShowPreview(false)}
+        files={currentPreviewFiles}
+        tabName={activeTabName}
+        accentHsl={sample.accentHsl}
+      />
     </section>
   );
 };

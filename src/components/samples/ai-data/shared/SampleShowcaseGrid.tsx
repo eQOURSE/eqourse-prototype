@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { FileJson, Globe2, Check } from "lucide-react";
+import { FileJson, Globe2, Check, Download, Eye } from "lucide-react";
 import type { SampleShowcase } from "./aiDataSamplesData";
+import { PreviewFilesModal, type PreviewFile } from "../../shared/PreviewFilesModal";
 
 interface Props {
   showcases: SampleShowcase[];
@@ -14,6 +15,7 @@ const SampleShowcaseGrid = ({
   subtext = "Representative outputs across every task we support — each delivered with full metadata, QA logs, and the output format your pipeline needs.",
 }: Props) => {
   const [active, setActive] = useState(0);
+  const [showPreview, setShowPreview] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,6 +26,20 @@ const SampleShowcaseGrid = ({
   }, [showcases.length]);
 
   const current = showcases[active];
+
+  // Default preview files for AI data
+  let currentPreviewFiles = current.previewFiles || [];
+  if (currentPreviewFiles.length === 0) {
+    currentPreviewFiles = Array.from({ length: 25 }).map((_, i) => ({
+      title: `${current.title} - File ${i + 1}`,
+      description: i === 0 
+        ? "A subset of the raw data showcasing format and typical contents."
+        : "Associated metadata and QA report generated during our validation pipeline.",
+      fileType: i % 4 === 0 ? "PDF" : (current.format.split(' ')[0] || "JSON"),
+      fileUrl: "#",
+      isExternal: i % 2 !== 0
+    }));
+  }
 
   return (
     <section className="py-20 md:py-24 relative overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background">
@@ -154,10 +170,35 @@ const SampleShowcaseGrid = ({
                   </div>
                 </div>
               </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <button
+                  onClick={() => setShowPreview(true)}
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.02] bg-primary"
+                >
+                  <Eye className="w-4 h-4" />
+                  Preview Files
+                </button>
+                <a
+                  href="#consultation"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold border transition-all hover:bg-muted border-border text-foreground"
+                >
+                  <Download className="w-4 h-4" />
+                  Request Full Set
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      
+      <PreviewFilesModal 
+        isOpen={showPreview}
+        onClose={() => setShowPreview(false)}
+        files={currentPreviewFiles}
+        tabName={current.title}
+        accentHsl="220 85% 55%" // Default accent
+      />
     </section>
   );
 };
