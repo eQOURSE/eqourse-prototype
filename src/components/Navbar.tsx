@@ -512,9 +512,20 @@ const Navbar = () => {
               </a>
             </div>
             <div className="flex items-center gap-3">
-              {["LinkedIn", "Instagram", "Facebook", "YouTube"].map((social) => (
-                <a key={social} href="#" className="hover:opacity-80 transition-opacity text-xs font-medium">
-                  {social}
+              {[
+                { name: "LinkedIn", href: "https://www.linkedin.com/company/eqourse" },
+                { name: "Instagram", href: "https://www.instagram.com/eqourse/" },
+                { name: "Facebook", href: "https://www.facebook.com/eQOURSE-102057078229490" },
+                { name: "YouTube", href: "https://www.youtube.com/@eqourse" }
+              ].map((social) => (
+                <a 
+                  key={social.name} 
+                  href={social.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:opacity-80 transition-opacity text-xs font-medium"
+                >
+                  {social.name}
                 </a>
               ))}
             </div>
