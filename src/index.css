@@ -466,3 +466,30 @@
 .sidebar-scroll::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary) / 0.4);
 }
+
+/* ─── Print styling for Privacy Policy ─── */
+@media print {
+  nav, footer, .print\:hidden, aside {
+    display: none !important;
+  }
+  body {
+    font-size: 12pt;
+    color: #000 !important;
+    background: #fff !important;
+  }
+  .print\:py-8 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+  h1, h2, h3 {
+    color: #000 !important;
+    page-break-after: avoid;
+  }
+  article {
+    page-break-inside: avoid;
+  }
+}

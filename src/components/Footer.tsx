@@ -41,7 +41,7 @@ const aiServiceLinks = [
 
 /* ── Legal ── */
 const legalLinks = [
-  { label: "Privacy Policy", to: "#" },
+  { label: "Privacy Policy", to: "/privacy-policy" },
   { label: "Contact Us", to: "/contact" },
   { label: "Sitemap", to: "#" },
 ];

@@ -33,8 +33,25 @@ import FreePilot from "./pages/FreePilot.tsx";
 import Samples from "./pages/Samples.tsx";
 import AIDataSample from "./pages/AIDataSample.tsx";
 import EdtechSample from "./pages/EdtechSample.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import { edtechSamples } from "./components/samples/edtech/edtechSamplesData";
 import { edtechSubServiceRoutes } from "./components/edtech-solutions/edtechSubServiceRoutes";
+
+// Admin
+import AdminLayout from "./admin/components/AdminLayout";
+import ProtectedRoute from "./admin/components/ProtectedRoute";
+import AdminLogin from "./admin/pages/Login";
+import AdminDashboard from "./admin/pages/Dashboard";
+import AdminContactQueries from "./admin/pages/ContactQueries";
+import AdminPilotQueries from "./admin/pages/PilotQueries";
+import AdminBlogs from "./admin/pages/Blogs";
+import AdminBlogEditor from "./admin/pages/BlogEditor";
+import AdminCaseStudies from "./admin/pages/CaseStudies";
+import AdminCaseStudyEditor from "./admin/pages/CaseStudyEditor";
+import AdminSampleCategories from "./admin/pages/SampleCategories";
+import AdminSampleCategoryEditor from "./admin/pages/SampleCategoryEditor";
+import AdminCategorySamples from "./admin/pages/CategorySamples";
+import AdminSampleEditor from "./admin/pages/SampleEditor";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +80,7 @@ const App = () => (
               <Route path="/contactus" element={<ContactUs />} />
               <Route path="/free-pilot" element={<FreePilot />} />
               <Route path="/casestudy" element={<CaseStudy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/samples" element={<Samples />} />
@@ -96,6 +114,33 @@ const App = () => (
 
               {/* Catch-all for any remaining EdTech stub pages */}
               <Route path="/edtech-solutions/*" element={<EdTechStubPage />} />
+
+              {/* Admin */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute>
+                    <AdminLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<AdminDashboard />} />
+                <Route path="contact-queries" element={<AdminContactQueries />} />
+                <Route path="pilot-queries" element={<AdminPilotQueries />} />
+                <Route path="blogs" element={<AdminBlogs />} />
+                <Route path="blogs/new" element={<AdminBlogEditor />} />
+                <Route path="blogs/:id" element={<AdminBlogEditor />} />
+                <Route path="case-studies" element={<AdminCaseStudies />} />
+                <Route path="case-studies/new" element={<AdminCaseStudyEditor />} />
+                <Route path="case-studies/:id" element={<AdminCaseStudyEditor />} />
+                <Route path="sample-categories" element={<AdminSampleCategories />} />
+                <Route path="sample-categories/new" element={<AdminSampleCategoryEditor />} />
+                <Route path="sample-categories/:id" element={<AdminSampleCategoryEditor />} />
+                <Route path="sample-categories/:categoryId/samples" element={<AdminCategorySamples />} />
+                <Route path="sample-categories/:categoryId/samples/new" element={<AdminSampleEditor />} />
+                <Route path="sample-categories/:categoryId/samples/:sampleId" element={<AdminSampleEditor />} />
+              </Route>
 
               <Route path="*" element={<NotFound />} />
             </Routes>

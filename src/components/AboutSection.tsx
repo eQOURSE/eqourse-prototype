@@ -1,6 +1,7 @@
 import { ArrowRight, Shield, Globe, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import aboutImage from "@/assets/about-image.jpg";
+import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   return (
@@ -45,8 +46,10 @@ const AboutSection = () => {
                 <Users className="w-4 h-4 text-primary" /> 500+ Specialists
               </div>
             </div>
-            <Button className="bg-gradient-primary border-0 text-primary-foreground shadow-soft hover:opacity-90 transition-all group">
-              Read More <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <Button asChild className="bg-gradient-primary border-0 text-primary-foreground shadow-soft hover:opacity-90 transition-all group">
+              <Link to="/aboutus">
+                Read More <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </div>
         </div>

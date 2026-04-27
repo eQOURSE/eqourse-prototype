@@ -30,6 +30,9 @@ const CountUpValue = ({ end, isVisible }: { end: number; isVisible: boolean }) =
 const StatsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const videoARef = useRef<HTMLVideoElement>(null);
+  const videoBRef = useRef<HTMLVideoElement>(null);
+  const isSwapping = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,12 +43,97 @@ const StatsSection = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Seamless crossfade loop for the background video
+  useEffect(() => {
+    const vA = videoARef.current;
+    const vB = videoBRef.current;
+    if (!vA || !vB) return;
+
+    vA.play().catch(() => {});
+
+    const startCrossfade = (from: HTMLVideoElement, to: HTMLVideoElement) => {
+      if (isSwapping.current) return;
+      isSwapping.current = true;
+      to.currentTime = 0;
+      to.play().catch(() => {});
+      to.style.zIndex = "2";
+      to.style.opacity = "1";
+      from.style.zIndex = "1";
+      setTimeout(() => {
+        from.pause();
+        from.style.opacity = "0";
+        isSwapping.current = false;
+      }, 1600);
+    };
+
+    const onTimeUpdateA = () => {
+      if (vA.duration && vA.currentTime >= vA.duration - 2) {
+        startCrossfade(vA, vB);
+      }
+    };
+    const onTimeUpdateB = () => {
+      if (vB.duration && vB.currentTime >= vB.duration - 2) {
+        startCrossfade(vB, vA);
+      }
+    };
+
+    vA.addEventListener("timeupdate", onTimeUpdateA);
+    vB.addEventListener("timeupdate", onTimeUpdateB);
+    return () => {
+      vA.removeEventListener("timeupdate", onTimeUpdateA);
+      vB.removeEventListener("timeupdate", onTimeUpdateB);
+    };
+  }, []);
+
+  const videoStyle = (initial: boolean): React.CSSProperties => ({
+    objectFit: "cover",
+    transition: "opacity 1.5s ease-in-out",
+    opacity: initial ? 1 : 0,
+    zIndex: initial ? 2 : 1,
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+  });
+
   return (
-    <section ref={ref} className="py-20 bg-gradient-hero relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'radial-gradient(circle, hsl(170 82% 32%) 1px, transparent 1px)',
-        backgroundSize: '30px 30px'
-      }} />
+    <section ref={ref} id="stats-section" className="py-20 relative overflow-hidden">
+      {/* Background Video A */}
+      <video
+        ref={videoARef}
+        autoPlay
+        muted
+        playsInline
+        style={videoStyle(true)}
+        aria-hidden="true"
+      >
+        <source src="/assets/stats-bg-video.mp4" type="video/mp4" />
+      </video>
+
+      {/* Background Video B — crossfade partner */}
+      <video
+        ref={videoBRef}
+        muted
+        playsInline
+        preload="auto"
+        style={videoStyle(false)}
+        aria-hidden="true"
+      >
+        <source src="/assets/stats-bg-video.mp4" type="video/mp4" />
+      </video>
+
+      {/* On mobile, stretch the video instead of cropping */}
+      <style>{`
+        @media (max-width: 768px) {
+          #stats-section video {
+            object-fit: fill !important;
+          }
+        }
+      `}</style>
+
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-foreground/40 z-[3]" />
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-14">
           <span className="text-sm font-semibold tracking-wider uppercase" style={{ color: 'hsl(170, 82%, 55%)' }}>Our Impact</span>
