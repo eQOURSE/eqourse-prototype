@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { BookOpen, Brain, GraduationCap, Network, Users, Award } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const edtechFeatures = [
   { text: "Custom E-Learning Content", icon: BookOpen },
@@ -115,7 +116,7 @@ const AboutWhoWeAre = () => {
            className="mt-16 max-w-3xl mx-auto text-center"
         >
           <p className="text-muted-foreground text-lg">
-            With 500+ specialists spanning STEM-educated content creators, trained data annotators, instructional designers, and domain experts, we serve 200+ clients across 15+ countries. Our vision is to be the trusted global partner where education expertise meets AI data excellence.
+            With 500+ specialists spanning STEM-educated content creators, trained data annotators, instructional designers, and domain experts, we serve 200+ clients across 15+ countries. Our vision is to be the trusted global partner where education expertise meets AI data excellence. Our consumer tutoring brand <Link to="/tutrain" className="text-primary hover:underline">TUTRAIN</Link> brings this expertise directly to families.
           </p>
         </motion.div>
       </div>

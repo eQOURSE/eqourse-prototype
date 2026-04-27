@@ -1,4 +1,5 @@
 import { Smartphone, BarChart, Users, Zap, Globe, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import SectionHeader from "../shared/SectionHeader";
 
@@ -21,7 +22,7 @@ const TuTrainPlatform = () => {
           label="TuTrain Platform"
           title="Real-World Testing"
           gradientText="Infrastructure"
-          subtitle="Our proprietary TuTrain platform connects your model to real users for authentic, in-the-wild testing at scale."
+          subtitle={<>Our proprietary <Link to="/tutrain" className="text-primary hover:underline">TUTRAIN</Link> platform connects your model to real users for authentic, in-the-wild testing at scale.</>}
         />
 
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">

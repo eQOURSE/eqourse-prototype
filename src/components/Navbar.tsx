@@ -18,6 +18,7 @@ interface MainLink {
   dropdown?: SubLink[];
   megaMenu?: boolean;          // flag: use mega-menu instead of simple dropdown
   samplesMenu?: boolean;       // flag: 3-column Samples mega menu
+  subtext?: string;            // flag: simple tooltip text
 }
 
 const aiDataSubLinks: SubLink[] = [
@@ -44,6 +45,7 @@ const navLinks: MainLink[] = [
   { label: "About Us", to: "/aboutus", dropdown: aboutUsSubLinks },
   { label: "EdTech Solutions", to: "/edtech-solutions", dropdown: edtechSubLinks, megaMenu: true },
   { label: "AI Data Services", to: "/ai-data-services", dropdown: aiDataSubLinks },
+  { label: "TUTRAIN", to: "/tutrain", subtext: "Our Online Tutoring Brand" },
   { label: "Samples", to: "/samples", samplesMenu: true },
   { label: "Case Studies", to: "/casestudy" },
   { label: "Blog", to: "/blog" },
@@ -561,8 +563,8 @@ const Navbar = () => {
                 <div
                   key={link.label}
                   className="relative"
-                  onMouseEnter={() => (link.dropdown || link.megaMenu || link.samplesMenu) && openDropdown(link.label)}
-                  onMouseLeave={() => (link.dropdown || link.megaMenu || link.samplesMenu) && closeDropdownWithDelay()}
+                  onMouseEnter={() => (link.dropdown || link.megaMenu || link.samplesMenu || link.subtext) && openDropdown(link.label)}
+                  onMouseLeave={() => (link.dropdown || link.megaMenu || link.samplesMenu || link.subtext) && closeDropdownWithDelay()}
                 >
                   <Link
                     to={link.to}
@@ -574,6 +576,13 @@ const Navbar = () => {
                     {link.label}
                     {(link.dropdown || link.samplesMenu) && <ChevronDown className="w-3.5 h-3.5" />}
                   </Link>
+
+                  {/* Subtext tooltip */}
+                  {link.subtext && activeDropdown === link.label && (
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-card border border-border/50 shadow-elevated rounded-lg px-4 py-2 text-xs font-medium text-muted-foreground whitespace-nowrap animate-fade-in-up z-50 pointer-events-none">
+                      {link.subtext}
+                    </div>
+                  )}
 
                   {/* Mega‑menu for EdTech */}
                   {link.megaMenu && activeDropdown === link.label && (
@@ -658,11 +667,16 @@ const Navbar = () => {
                       <>
                         <Link
                           to={link.to}
-                          className="px-4 py-3 text-sm font-medium text-foreground/80 hover:text-primary rounded-lg hover:bg-primary/5 flex items-center justify-between"
+                          className="px-4 py-3 text-sm font-medium text-foreground/80 hover:text-primary rounded-lg hover:bg-primary/5 flex flex-col justify-center"
                           onClick={() => !link.dropdown && setIsOpen(false)}
                         >
-                          {link.label}
-                          {link.dropdown && <ChevronDown className="w-4 h-4" />}
+                          <div className="flex items-center justify-between w-full">
+                            {link.label}
+                            {link.dropdown && <ChevronDown className="w-4 h-4" />}
+                          </div>
+                          {link.subtext && (
+                            <span className="text-[10px] text-muted-foreground mt-0.5">{link.subtext}</span>
+                          )}
                         </Link>
 
                         {link.dropdown && (

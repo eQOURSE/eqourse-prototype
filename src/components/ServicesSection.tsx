@@ -293,7 +293,7 @@ const aiServices = [
   {
     icon: FlaskConical,
     title: "Model Testing",
-    description: "Closed-loop pipeline. Real users via TuTrain. 20–40% faster model improvement.",
+    description: <>Closed-loop pipeline. Real users via <Link to="/tutrain" className="text-primary hover:underline">TUTRAIN</Link>. 20–40% faster model improvement.</>,
     link: "/ai-data-services/model-testing",
     accent: "from-accent/15 to-primary/20",
   },

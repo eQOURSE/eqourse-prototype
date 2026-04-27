@@ -1,0 +1,138 @@
+.tutrain-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.tutrain-hero .split-left {
+  background-color: #FAFAFA;
+}
+
+.tutrain-hero .split-right {
+  background-color: #1B3D36;
+}
+
+/* Floating nodes in hero right */
+.hero-node {
+  position: absolute;
+  border-radius: 50%;
+  background: hsl(170 82% 32% / 0.15);
+  box-shadow: 0 0 20px hsl(170 82% 32% / 0.3);
+  animation: nodeFloat 8s ease-in-out infinite alternate;
+}
+
+.hero-node:nth-child(1) { width: 200px; height: 200px; top: 10%; left: 20%; animation-delay: 0s; }
+.hero-node:nth-child(2) { width: 120px; height: 120px; top: 60%; left: 70%; animation-delay: -2s; }
+.hero-node:nth-child(3) { width: 250px; height: 250px; top: 40%; left: -10%; animation-delay: -4s; }
+.hero-node:nth-child(4) { width: 90px; height: 90px; top: 80%; left: 30%; animation-delay: -1s; }
+
+@keyframes nodeFloat {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-40px) translateX(30px); }
+}
+
+/* Connector line in Hero */
+.brand-connector {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 10px 24px;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  font-weight: 800;
+  font-size: 14px;
+  color: #1B3D36;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+.brand-connector::before,
+.brand-connector::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 50vw;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(170, 82%, 40%), transparent);
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.brand-connector::before {
+  right: calc(100% - 10px);
+}
+
+.brand-connector::after {
+  left: calc(100% - 10px);
+}
+
+/* Animated Cards */
+.tutrain-card {
+  perspective: 1000px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s ease;
+  background: white;
+  border: 1px solid hsl(170 82% 32% / 0.1);
+  border-radius: 16px;
+  padding: 32px 24px;
+}
+
+.tutrain-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px -15px hsl(170 82% 32% / 0.2);
+  border-color: hsl(170 82% 32% / 0.4);
+}
+
+.tutrain-card-icon {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: hsl(170, 82%, 35%);
+}
+
+.tutrain-card:hover .tutrain-card-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Bridge Connectors */
+.bridge-container {
+  position: relative;
+  z-index: 1;
+}
+
+.bridge-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bridge-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawTriangle 2.5s ease-out forwards;
+}
+
+@keyframes drawTriangle {
+  to { stroke-dashoffset: 0; }
+}
+
+/* CTA dot scatter */
+.cta-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  opacity: 0;
+  animation: dotFade 4s infinite;
+}
+
+@keyframes dotFade {
+  0%, 100% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 0.12; transform: scale(1.2); }
+}

@@ -1,8 +1,10 @@
+import { ReactNode } from "react";
+
 interface SectionHeaderProps {
   label: string;
   title: string;
   gradientText?: string;
-  subtitle?: string;
+  subtitle?: ReactNode;
   centered?: boolean;
   light?: boolean;
 }

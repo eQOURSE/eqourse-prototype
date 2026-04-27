@@ -54,7 +54,7 @@ const Footer = () => {
   return (
     <footer className="bg-foreground py-16">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-7 gap-8">
           {/* ── Brand Column ── */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="font-heading text-2xl font-extrabold text-gradient">eQOURSE</Link>
@@ -132,6 +132,15 @@ const Footer = () => {
                   {link.label}
                 </Link>
               ))}
+            </div>
+          </div>
+
+          {/* ── Our Brand Family ── */}
+          <div>
+            <h4 className="font-heading font-semibold mb-4" style={headingColor}>Our Brand Family</h4>
+            <div className="space-y-3">
+              <Link to="/tutrain" className={linkClass} style={linkColor}>TUTRAIN</Link>
+              <a href="https://tutrain.com" target="_blank" rel="noopener noreferrer" className={linkClass} style={linkColor}>Visit TUTRAIN.com →</a>
             </div>
           </div>
 
