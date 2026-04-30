@@ -35,7 +35,7 @@ const commonFaqs = [
   {
     question: "Can I request a customized sample?",
     answer:
-      "Yes. Share your curriculum framework, grade level, language, or specific topic and we'll create a tailored sample within 2–5 business days.",
+      "Yes. Share your curriculum framework, grade level, language, or specific topic and we'll create a tailored sample within 2-5 business days.",
   },
   {
     question: "What formats do you deliver in?",
@@ -45,12 +45,12 @@ const commonFaqs = [
   {
     question: "How long does a full project typically take?",
     answer:
-      "Turnaround depends on scope. A single module takes 1–2 weeks, while full curriculum projects run 4–12 weeks with milestone-based delivery.",
+      "Turnaround depends on scope. A single module takes 1-2 weeks, while full curriculum projects run 4-12 weeks with milestone-based delivery.",
   },
 ];
 
 export const edtechSamples: EdtechSample[] = [
-  // ── L1: Text Landing ──────────────────────────────────────────────
+  // L1: Text Landing
   {
     slug: "text-samples",
     path: "/text-samples",
@@ -68,7 +68,7 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Comprehensive Text Samples for",
     headlineAccent: "Educational Institutions",
     subtext:
-      "At eQOURSE, we provide a wide range of text samples to showcase our expertise in educational content development — curriculum writing, instructional materials, translations, solution manuals, question banks and e-books for K-12 and higher education.",
+      "At eQOURSE, we provide a wide range of text samples to showcase our expertise in educational content development - curriculum writing, instructional materials, translations, solution manuals, question banks and e-books for K-12 and higher education.",
     heroImageAlt:
       "K12 and higher education text content samples, offering study guides, lesson plans, curriculum development, and more.",
     tabs: [
@@ -85,7 +85,7 @@ export const edtechSamples: EdtechSample[] = [
       {
         title: "Curriculum Development Samples",
         description:
-          "Curriculum that aligns with academic standards and builds engagement — structured courses, lessons, and assessments across every subject.",
+          "Curriculum that aligns with academic standards and builds engagement - structured courses, lessons, and assessments across every subject.",
       },
       {
         title: "Instructional Content Samples",
@@ -95,7 +95,7 @@ export const edtechSamples: EdtechSample[] = [
       {
         title: "Localized & Translated Samples",
         description:
-          "Malayalam, Tamil, Assamese, Punjabi and 10+ more — culturally relevant, accurately adapted content for diverse learners.",
+          "Malayalam, Tamil, Assamese, Punjabi and 10+ more - culturally relevant, accurately adapted content for diverse learners.",
       },
       {
         title: "Solution Manuals & Question Banks",
@@ -117,7 +117,7 @@ export const edtechSamples: EdtechSample[] = [
       {
         question: "Are the text samples customizable?",
         answer:
-          "Yes — every sample can be tailored to your institution's curriculum framework, grade level, or localization requirements.",
+          "Yes - every sample can be tailored to your institution's curriculum framework, grade level, or localization requirements.",
       },
       {
         question: "How do you ensure quality of translated samples?",
@@ -132,7 +132,7 @@ export const edtechSamples: EdtechSample[] = [
       {
         question: "How quickly can I receive text samples?",
         answer:
-          "Ready samples are shared immediately. Customized samples typically take 2–5 business days depending on scope.",
+          "Ready samples are shared immediately. Customized samples typically take 2-5 business days depending on scope.",
       },
     ],
   },
@@ -161,7 +161,7 @@ export const edtechSamples: EdtechSample[] = [
     tabs: [
       "Articulate Storyline",
       "Pen Tab and PPT",
-      "AI Videos",
+      "AI Avatar Videos",
       "Flash to HTML",
       "2D 3D Animation",
       "Promotional Video",
@@ -176,7 +176,7 @@ export const edtechSamples: EdtechSample[] = [
       {
         title: "Pen Tab and PPT",
         description:
-          "Step-by-step visuals with real-time annotations — the clarity of a whiteboard lesson with the structure of a professional deck.",
+          "Step-by-step visuals with real-time annotations - the clarity of a whiteboard lesson with the structure of a professional deck.",
       },
       {
         title: "AR & VR",
@@ -192,10 +192,10 @@ export const edtechSamples: EdtechSample[] = [
     faqs: commonFaqs,
   },
 
-  // ── T1–T8: Text Sub-Pages ─────────────────────────────────────────
+  // T1-T8: Text Sub-Pages
   {
-    slug: "kindergarden-to-k5-samples",
-    path: "/kindergarden-to-k5-samples",
+    slug: "kindergarten-to-k5-samples",
+    path: "/kindergarten-to-k5-samples",
     kind: "text",
     icon: BookOpen,
     accentHsl: "42 95% 60%",
@@ -208,9 +208,9 @@ export const edtechSamples: EdtechSample[] = [
       "KG-5 text samples, primary school content, early education, lesson plans, reading materials, multilingual children's content",
     preHeadline: "Text Samples for Kindergarten to 5th Class",
     headline: "Foundational Learning Samples for",
-    headlineAccent: "KG–Grade 5",
+    headlineAccent: "KG-Grade 5",
     subtext:
-      "Expertly crafted text samples designed for Kindergarten to 5th Class — Maths, Science, Language Arts and Environmental Studies. Easy-to-follow lesson plans, engaging reading, structured assessments, and multilingual content.",
+      "Expertly crafted text samples designed for Kindergarten to 5th Class - Maths, Science, Language Arts and Environmental Studies. Easy-to-follow lesson plans, engaging reading, structured assessments, and multilingual content.",
     heroImageAlt:
       "K12 Grade text samples for KG-5, providing study guides and lesson plans for early education, customized for EdTech platforms.",
     tabs: ["Course Book", "Lesson Plan", "Work Book"],
@@ -229,11 +229,11 @@ export const edtechSamples: EdtechSample[] = [
       "Explore eQOURSE text samples for K-6 to K-12: Maths, Science, Language Arts. Curriculum-aligned content for classroom teaching and independent learning.",
     keywords:
       "K6-K12 text samples, secondary school content, Maths Science samples, classroom teaching, curriculum aligned",
-    preHeadline: "Engaging & Aligned Learning for Grades 6–12",
+    preHeadline: "Engaging & Aligned Learning for Grades 6-12",
     headline: "Secondary School Text Samples for",
-    headlineAccent: "Grades 6–12",
+    headlineAccent: "Grades 6-12",
     subtext:
-      "Engaging, curriculum-aligned content covering Maths, Science, and Language Arts — helping students understand better and think critically across classroom teaching and independent learning.",
+      "Engaging, curriculum-aligned content covering Maths, Science, and Language Arts - helping students understand better and think critically across classroom teaching and independent learning.",
     heroImageAlt:
       "K12 Grade text samples for classes 6-12, offering study guides and assessments for EdTech platforms seeking content solutions.",
     tabs: ["Course Book", "Lesson Plan", "Work Book"],
@@ -256,7 +256,7 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Competitive Exam Text Samples for",
     headlineAccent: "IIT-JEE & NEET",
     subtext:
-      "Customized content for IIT-JEE and NEET — study guides, test papers and video lessons designed to NTA patterns. Each sample builds strong problem-solving skills and aligns with the latest exam requirements.",
+      "Customized content for IIT-JEE and NEET - study guides, test papers and video lessons designed to NTA patterns. Each sample builds strong problem-solving skills and aligns with the latest exam requirements.",
     heroImageAlt:
       "IIT/JEE/NEET text samples featuring exam prep materials, study guides, and solutions for competitive entrance exams.",
     tabs: ["Theory Content", "Question Banks", "Mock Test"],
@@ -279,7 +279,7 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Civil-Services Text Samples for",
     headlineAccent: "UPSC & State PSC",
     subtext:
-      "Current affairs, general studies, Indian polity, geography, history and economics samples — structured, fact-checked, and aligned to the UPSC / State PSC examination patterns.",
+      "Current affairs, general studies, Indian polity, geography, history and economics samples - structured, fact-checked, and aligned to the UPSC / State PSC examination patterns.",
     heroImageAlt:
       "UPSC and State PSC exam preparation text samples covering general studies and current affairs.",
     tabs: ["General Studies", "Current Affairs", "Previous Year Papers"],
@@ -302,7 +302,7 @@ export const edtechSamples: EdtechSample[] = [
     headline: "STEM Samples for",
     headlineAccent: "Critical Thinkers",
     subtext:
-      "Science, Technology, Engineering and Mathematics integrated with real-world applications — samples designed to promote critical thinking, problem-solving, and hands-on learning across K-12 and higher education.",
+      "Science, Technology, Engineering and Mathematics integrated with real-world applications - samples designed to promote critical thinking, problem-solving, and hands-on learning across K-12 and higher education.",
     heroImageAlt:
       "STEM content text samples covering science, technology, engineering, and mathematics subjects.",
     tabs: ["Science", "Technology", "Engineering", "Mathematics"],
@@ -325,7 +325,7 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Curriculum Content Samples for",
     headlineAccent: "Every Board",
     subtext:
-      "Custom content aligned with CBSE, ICSE, IB, IGCSE, and Indian State Board standards — structured, grade-appropriate, and examination-aligned educational content for every curriculum framework.",
+      "Custom content aligned with CBSE, ICSE, IB, IGCSE, and Indian State Board standards - structured, grade-appropriate, and examination-aligned educational content for every curriculum framework.",
     heroImageAlt:
       "Curriculum content samples aligned with CBSE, ICSE, IB, and State Board standards.",
     tabs: ["CBSE", "ICSE", "IB", "State Board"],
@@ -348,7 +348,7 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Translation & Localization",
     headlineAccent: "Text Samples",
     subtext:
-      "Accurate, culturally relevant translations in Hindi, Tamil, Telugu, Bengali, Kannada, Malayalam, Marathi, Punjabi, Assamese, Odia and more — adapting educational content for every learner.",
+      "Accurate, culturally relevant translations in Hindi, Tamil, Telugu, Bengali, Kannada, Malayalam, Marathi, Punjabi, Assamese, Odia and more - adapting educational content for every learner.",
     heroImageAlt:
       "Translation and localization text samples in multiple Indian regional languages.",
     tabs: ["Hindi", "Tamil", "Telugu", "Bengali", "Kannada", "Malayalam", "Other Languages"],
@@ -371,13 +371,13 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Test Prep & Assessment",
     headlineAccent: "Samples",
     subtext:
-      "Exam-pattern-aligned content across TOEIC, APTIS, SAT, IELTS, ACT, AP, TOEFL, PTE and CEFR placement tests — practice tests, study guides, and interactive assessment materials.",
+      "Exam-pattern-aligned content across TOEIC, APTIS, SAT, IELTS, ACT, AP, TOEFL, PTE and CEFR placement tests - practice tests, study guides, and interactive assessment materials.",
     heroImageAlt: "Test prep and assessment samples for TOEIC, APTIS, SAT, IELTS, ACT, and more.",
     tabs: ["TOEIC", "APTIS", "SAT", "IELTS", "ACT", "AP", "TOEFL", "PTE", "CEFR"],
     faqs: commonFaqs,
   },
 
-  // ── V1–V7: Video Sub-Pages ────────────────────────────────────────
+  // V1-V7: Video Sub-Pages
   {
     slug: "articulate-storyline-video-samples",
     path: "/articulate-storyline-video-samples",
@@ -418,15 +418,15 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Pen Tab & PPT",
     headlineAccent: "Video Samples",
     subtext:
-      "Step-by-step concept explanations with handwritten annotations overlaid on presentation slides — math, science, and language lessons that combine the clarity of handwriting with the structure of a professional deck.",
+      "Step-by-step concept explanations with handwritten annotations overlaid on presentation slides - math, science, and language lessons that combine the clarity of handwriting with the structure of a professional deck.",
     heroImageAlt:
       "Pen Tab and PPT educational video samples with handwritten annotations and step-by-step explanations.",
     tabs: ["Mathematics", "Science", "Language"],
     faqs: commonFaqs,
   },
   {
-    slug: "ai-avater-video-samples",
-    path: "/ai-avater-video-samples",
+    slug: "ai-avatar-video-samples",
+    path: "/ai-avatar-video-samples",
     kind: "video",
     icon: Bot,
     accentHsl: "265 65% 65%",
@@ -441,14 +441,14 @@ export const edtechSamples: EdtechSample[] = [
     headline: "AI Avatar",
     headlineAccent: "Video Samples",
     subtext:
-      "AI-generated presenters delivering educational content — scalable, cost-effective video lessons for K-12 content, corporate training, and multilingual e-learning delivery.",
+      "AI-generated presenters delivering educational content - scalable, cost-effective video lessons for K-12 content, corporate training, and multilingual e-learning delivery.",
     heroImageAlt: "AI avatar educational video samples featuring AI-generated presenters for e-learning.",
-    tabs: ["AI Presenter Videos", "Multilingual AI Videos"],
+    tabs: ["AI Presenter Videos", "Multilingual AI Avatar Videos"],
     faqs: commonFaqs,
   },
   {
-    slug: "flash-to-htm-samples",
-    path: "/flash-to-htm-samples",
+    slug: "flash-to-html-samples",
+    path: "/flash-to-html-samples",
     kind: "video",
     icon: RefreshCw,
     accentHsl: "30 80% 55%",
@@ -486,7 +486,7 @@ export const edtechSamples: EdtechSample[] = [
     headline: "2D & 3D Animation",
     headlineAccent: "Video Samples",
     subtext:
-      "Character-driven educational animations, concept explainer videos, motion graphics, and 3D scientific visualisations — transforming complex concepts into visually engaging, memorable learning experiences.",
+      "Character-driven educational animations, concept explainer videos, motion graphics, and 3D scientific visualisations - transforming complex concepts into visually engaging, memorable learning experiences.",
     heroImageAlt:
       "2D and 3D educational animation video samples showing character animations and concept visualisations.",
     tabs: ["2D Character Animation", "3D Concept Videos", "Motion Graphics", "Whiteboard Animation"],
@@ -509,7 +509,7 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Promotional",
     headlineAccent: "Video Samples",
     subtext:
-      "Brand videos, product demos, course trailers and marketing content for educational institutions, EdTech platforms, and corporate training — designed to attract learners and communicate value effectively.",
+      "Brand videos, product demos, course trailers and marketing content for educational institutions, EdTech platforms, and corporate training - designed to attract learners and communicate value effectively.",
     heroImageAlt: "Promotional video samples for educational institutions and EdTech platforms.",
     tabs: ["Brand Videos", "Course Trailers", "Product Demos"],
     faqs: commonFaqs,
@@ -531,9 +531,9 @@ export const edtechSamples: EdtechSample[] = [
     headline: "Immersive AR/VR",
     headlineAccent: "Simulation Samples",
     subtext:
-      "AR overlays, VR environments, 360-degree learning experiences, and interactive 3D models — safe, repeatable, hands-on learning for science labs, medical procedures, engineering systems and safety training.",
+      "AR overlays, VR environments, 360-degree learning experiences, and interactive 3D models - safe, repeatable, hands-on learning for science labs, medical procedures, engineering systems and safety training.",
     heroImageAlt: "AR and VR immersive simulation video samples for interactive educational experiences.",
-    tabs: ["AR Overlay Demos", "VR Environment Tours", "360° Experiences", "Interactive 3D Models"],
+    tabs: ["AR Overlay Demos", "VR Environment Tours", "360-degree Experiences", "Interactive 3D Models"],
     faqs: commonFaqs,
   },
 ];

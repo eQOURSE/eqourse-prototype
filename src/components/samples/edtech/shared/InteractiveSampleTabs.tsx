@@ -2,6 +2,17 @@ import { useState } from "react";
 import { Download, Eye, FileText, Play, Sparkles, ChevronRight } from "lucide-react";
 import type { EdtechSample } from "../edtechSamplesData";
 import { PreviewFilesModal, type PreviewFile } from "../../shared/PreviewFilesModal";
+import {
+  CharacterAnimationThumb,
+  ThreeDConceptThumb,
+  MotionGraphicsThumb,
+  WhiteboardAnimationThumb,
+} from "./AnimatedThumbnails";
+import { ARVRAnimatedThumbForTab } from "./ARVRAnimatedThumbnails";
+import { ArticulateStorylineThumbForTab } from "./ArticulateStorylineThumbnails";
+import { PenTabPPTThumbForTab } from "./PenTabPPTThumbnails";
+import { FlashToHTMLThumbForTab } from "./FlashToHTMLThumbnails";
+import { PromotionalVideoThumbForTab } from "./PromotionalVideoThumbnails";
 
 interface Props {
   sample: EdtechSample;
@@ -116,7 +127,25 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
               }}
             />
 
-            {isVideo ? <VideoPreview accent={accent} tab={sample.tabs[active]} /> : <PageFlipPreview accent={accent} tab={sample.tabs[active]} />}
+            {sample.slug === "immersive-simulation-ar-vr-video" ? (
+              <ARVRAnimatedThumbForTab tabIndex={active} accent={accent} />
+            ) : sample.slug === "2d-3d-video-samples" ? (
+              <AnimatedThumbForTab tabIndex={active} accent={accent} />
+            ) : sample.slug === "ai-avatar-video-samples" ? (
+              <AIAvatarVideoThumbForTab tabIndex={active} accent={accent} />
+            ) : sample.slug === "articulate-storyline-video-samples" ? (
+              <ArticulateStorylineThumbForTab tabIndex={active} accent={accent} />
+            ) : sample.slug === "pen-tab-and-ppt-samples" ? (
+              <PenTabPPTThumbForTab tabIndex={active} accent={accent} />
+            ) : sample.slug === "flash-to-html-samples" ? (
+              <FlashToHTMLThumbForTab tabIndex={active} accent={accent} />
+            ) : sample.slug === "promotional-video" ? (
+              <PromotionalVideoThumbForTab tabIndex={active} accent={accent} />
+            ) : isVideo ? (
+              <VideoPreview accent={accent} tab={sample.tabs[active]} />
+            ) : (
+              <PageFlipPreview accent={accent} tab={sample.tabs[active]} />
+            )}
           </div>
 
           {/* Right: info */}
@@ -184,8 +213,8 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
           </div>
         </div>
       </div>
-      
-      <PreviewFilesModal 
+
+      <PreviewFilesModal
         isOpen={showPreview}
         onClose={() => setShowPreview(false)}
         files={currentPreviewFiles}
@@ -197,7 +226,8 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
 };
 
 const PageFlipPreview = ({ accent, tab }: { accent: string; tab: string }) => (
-  <div className="relative w-full max-w-[280px] aspect-[3/4]" style={{ perspective: "1200px" }}>
+  <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: "1200px" }}>
+    <div className="relative w-full max-w-[280px] aspect-[3/4]">
     {/* Stack of pages */}
     <div
       className="absolute inset-0 rounded-lg bg-white shadow-2xl border border-white/20"
@@ -244,11 +274,12 @@ const PageFlipPreview = ({ accent, tab }: { accent: string; tab: string }) => (
         }}
       />
     </div>
+    </div>
   </div>
 );
 
 const VideoPreview = ({ accent, tab }: { accent: string; tab: string }) => (
-  <div className="relative w-full max-w-lg aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/20">
+  <div className="absolute inset-0 overflow-hidden">
     <div
       className="absolute inset-0"
       style={{
@@ -307,5 +338,52 @@ const VideoPreview = ({ accent, tab }: { accent: string; tab: string }) => (
     </div>
   </div>
 );
+
+/* ─── Animated thumbnail selector for 2D/3D page ─── */
+const AnimatedThumbForTab = ({ tabIndex, accent }: { tabIndex: number; accent: string }) => {
+  switch (tabIndex) {
+    case 0: return <CharacterAnimationThumb accent={accent} />;
+    case 1: return <ThreeDConceptThumb accent={accent} />;
+    case 2: return <MotionGraphicsThumb accent={accent} />;
+    case 3: return <WhiteboardAnimationThumb accent={accent} />;
+    default: return <CharacterAnimationThumb accent={accent} />;
+  }
+};
+
+/* ─── Real video thumbnail for AI Avatar page ─── */
+const AI_AVATAR_VIDEOS: Record<number, { src: string; label: string }> = {
+  0: { src: "/ai-generated-new.mp4", label: "AI Presenter Videos" },
+  1: { src: "/aiavtar-new.mp4", label: "Multilingual AI Avatar Videos" },
+};
+
+const AIAvatarVideoThumbForTab = ({ tabIndex, accent }: { tabIndex: number; accent: string }) => {
+  const entry = AI_AVATAR_VIDEOS[tabIndex] ?? AI_AVATAR_VIDEOS[0];
+
+  return (
+    <div className="ai-avatar-thumb-wrapper">
+      <video
+        key={entry.src}
+        className="ai-avatar-thumb-video"
+        src={entry.src}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+      />
+      {/* Gradient overlay */}
+      <div
+        className="ai-avatar-thumb-overlay"
+        style={{
+          background: `linear-gradient(0deg, ${accent}55 0%, transparent 40%, transparent 60%, ${accent}22 100%)`,
+        }}
+      />
+      {/* Tab label badge */}
+      <div className="ai-avatar-thumb-badge">
+        <span>{entry.label}</span>
+      </div>
+    </div>
+  );
+};
 
 export default InteractiveSampleTabs;

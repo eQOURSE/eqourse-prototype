@@ -279,7 +279,7 @@
   .glow-border {
     position: relative;
   }
-  
+
   .glow-border::after {
     content: '';
     position: absolute;
@@ -398,6 +398,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -409,6 +410,7 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -419,10 +421,874 @@
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(600%);
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATED THUMBNAIL — Player chrome
+   ═══════════════════════════════════════════════════════════════ */
+.anim-player-frame {
+  background: linear-gradient(180deg, #1a2332, #0d1421);
+  border-radius: 14px;
+  overflow: hidden;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 18px 40px -12px rgba(13, 20, 33, 0.5);
+  position: relative;
+}
+
+.anim-player-top {
+  padding: 14px 18px;
+}
+
+.anim-player-title {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.anim-player-stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.anim-thumb-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.anim-player-bottom {
+  padding: 12px 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+}
+
+.anim-time {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  min-width: 32px;
+}
+
+.anim-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  position: relative;
+}
+
+.anim-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.anim-knob {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ═══ 3D Cube structural ═══ */
+.anim-3d-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 800px;
+}
+
+.cube-scene {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  transform-style: preserve-3d;
+  animation: cubeRot var(--rot-speed, 10s) linear infinite;
+}
+
+.cube {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.face {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border: 1.5px solid;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.face.front {
+  transform: translateZ(65px);
+}
+
+.face.back {
+  transform: rotateY(180deg) translateZ(65px);
+}
+
+.face.right {
+  transform: rotateY(90deg) translateZ(65px);
+}
+
+.face.left {
+  transform: rotateY(-90deg) translateZ(65px);
+}
+
+.face.top {
+  transform: rotateX(90deg) translateZ(65px);
+}
+
+.face.bottom {
+  transform: rotateX(-90deg) translateZ(65px);
+}
+
+.face-grid {
+  position: absolute;
+  inset: 0;
+}
+
+.grid-line {
+  position: absolute;
+}
+
+.grid-line.h {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.grid-line.v {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.face-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+.orbit-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ═══ Whiteboard stroke ═══ */
+.whiteboard-svg .wb-stroke {
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  animation: wbDraw var(--draw-speed, 4.5s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATED THUMBNAIL — Keyframes
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 2D character walk */
+@keyframes charBob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes shadowFlex {
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: .45;
+  }
+
+  50% {
+    transform: scaleX(.9);
+    opacity: .3;
+  }
+}
+
+@keyframes legFront {
+
+  0%,
+  100% {
+    transform: rotate(-22deg);
+  }
+
+  50% {
+    transform: rotate(28deg);
+  }
+}
+
+@keyframes legBack {
+
+  0%,
+  100% {
+    transform: rotate(28deg);
+  }
+
+  50% {
+    transform: rotate(-22deg);
+  }
+}
+
+@keyframes armFront {
+
+  0%,
+  100% {
+    transform: rotate(20deg);
+  }
+
+  50% {
+    transform: rotate(-22deg);
+  }
+}
+
+@keyframes armBack {
+
+  0%,
+  100% {
+    transform: rotate(-22deg);
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+}
+
+@keyframes headTilt {
+
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes scarfFlap {
+
+  0%,
+  100% {
+    transform: rotate(-6deg) translateX(0);
+  }
+
+  50% {
+    transform: rotate(8deg) translateX(-3px);
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  95%,
+  97% {
+    transform: scaleY(.1);
+  }
+}
+
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: .2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes parallaxFar {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-480px);
+  }
+}
+
+@keyframes parallaxMid {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-480px);
+  }
+}
+
+@keyframes parallaxNear {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-480px);
+  }
+}
+
+@keyframes groundFlow {
+  from {
+    transform: translateX(0);
+    opacity: .6;
+  }
+
+  to {
+    transform: translateX(-70px);
+    opacity: 0;
+  }
+}
+
+/* 3D cube */
+@keyframes cubeRot {
+  0% {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateX(-20deg) rotateY(360deg);
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Motion graphics */
+@keyframes mgFloat1 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(20px, 10px) scale(1.15);
+  }
+}
+
+@keyframes mgFloat2 {
+
+  0%,
+  100% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+
+  50% {
+    transform: rotate(45deg) translate(-15px, -10px);
+  }
+}
+
+@keyframes mgFloat3 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(15px, -8px) rotate(30deg);
+  }
+}
+
+@keyframes kineticType {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(.8);
+  }
+
+  10%,
+  28% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  38%,
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(.8);
+  }
+}
+
+@keyframes mgUnderline {
+
+  0%,
+  100% {
+    transform: scaleX(0);
+    opacity: .3;
+  }
+
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tickPulse {
+
+  0%,
+  100% {
+    transform: scaleY(.4);
+    opacity: .3;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Whiteboard */
+@keyframes wbDraw {
+  0% {
+    stroke-dashoffset: var(--len);
+  }
+
+  60% {
+    stroke-dashoffset: 0;
+  }
+
+  85% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  95% {
+    stroke-dashoffset: 0;
+    opacity: .6;
+  }
+
+  100% {
+    stroke-dashoffset: var(--len);
+    opacity: 0;
+  }
+}
+
+@keyframes wbTextFade {
+
+  0%,
+  78% {
+    opacity: 0;
+    transform: scale(.5);
+    transform-origin: center;
+  }
+
+  82%,
+  92% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes handMove {
+  0% {
+    transform: translate(-30px, -10px);
+    opacity: 1;
+  }
+
+  20% {
+    transform: translate(0, 0);
+  }
+
+  60% {
+    transform: translate(120px, -5px);
+  }
+
+  85% {
+    transform: translate(160px, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(160px, 60px);
+    opacity: 0;
+  }
+}
+
+/* 2D cinema reel */
+@keyframes eqBounce {
+  0% {
+    transform: scaleY(0.3);
+  }
+
+  100% {
+    transform: scaleY(1.4);
+  }
+}
+
+@keyframes filmFrameFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: .5;
+  }
+
+  50% {
+    transform: translateY(-8px);
+    opacity: .8;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AI AVATAR VIDEO THUMBNAIL
+   ═══════════════════════════════════════════════════════════════ */
+.ai-avatar-thumb-wrapper {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.ai-avatar-thumb-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.ai-avatar-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 0;
+}
+
+.ai-avatar-thumb-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ai-avatar-thumb-badge span {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* ─── Responsive: no special overrides needed, fills parent at all sizes ─── */
+
+/* ═══════════════════════════════════════════════════════════════
+   ARTICULATE STORYLINE — Browser-chrome thumbnail
+   ═══════════════════════════════════════════════════════════════ */
+.as-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: #0b1622;
+}
+
+.as-frame-top {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 30px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 16, 28, 0.92) 0%,
+    rgba(8, 16, 28, 0.55) 70%,
+    rgba(8, 16, 28, 0) 100%
+  );
+  color: #cbd5e1;
+}
+
+.as-frame-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.as-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.as-frame-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #e2e8f0;
+}
+
+.as-frame-sub {
+  font-size: 11px;
+  color: #7dd3fc;
+  font-weight: 500;
+}
+
+.as-frame-time {
+  margin-left: auto;
+  font-size: 10px;
+  color: #94a3b8;
+  font-variant-numeric: tabular-nums;
+}
+
+.as-frame-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.as-thumb-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.as-frame-bottom {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 32px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 16, 28, 0.92) 0%,
+    rgba(8, 16, 28, 0.55) 70%,
+    rgba(8, 16, 28, 0) 100%
+  );
+}
+
+.as-progress-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  position: relative;
+}
+
+.as-progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: #5eead4;
+  border-radius: 999px;
+  box-shadow: 0 0 8px #5eead4;
+}
+
+.as-progress-knob {
+  position: absolute;
+  top: -4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 0 0 2px rgba(94, 234, 212, 0.6);
+}
+
+.as-frame-play-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #14b8a6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─── Responsive: no special overrides needed, fills parent at all sizes ─── */
+
+/* ═══════════════════════════════════════════════════════════════
+   PEN TAB & PPT — Warm amber browser-chrome thumbnail
+   ═══════════════════════════════════════════════════════════════ */
+.pt-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: #fef3c7;
+}
+
+.pt-frame-top {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 30px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 16, 3, 0.85) 0%,
+    rgba(28, 16, 3, 0.45) 70%,
+    rgba(28, 16, 3, 0) 100%
+  );
+  color: #fef3c7;
+}
+
+.pt-frame-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.pt-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.pt-frame-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fef3c7;
+}
+
+.pt-frame-sub {
+  font-size: 11px;
+  color: #fbbf24;
+  font-weight: 500;
+}
+
+.pt-frame-time {
+  margin-left: auto;
+  font-size: 10px;
+  color: rgba(254, 243, 199, 0.7);
+  font-variant-numeric: tabular-nums;
+}
+
+.pt-frame-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.pt-thumb-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pt-frame-bottom {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 32px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: linear-gradient(
+    0deg,
+    rgba(28, 16, 3, 0.85) 0%,
+    rgba(28, 16, 3, 0.45) 70%,
+    rgba(28, 16, 3, 0) 100%
+  );
+}
+
+.pt-progress-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(254, 243, 199, 0.25);
+  border-radius: 999px;
+  position: relative;
+}
+
+.pt-progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: #fbbf24;
+  border-radius: 999px;
+  box-shadow: 0 0 8px #fbbf24;
+}
+
+.pt-progress-knob {
+  position: absolute;
+  top: -4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 0 0 2px #f59e0b;
+}
+
+.pt-frame-play-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #f59e0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─── Responsive: no special overrides needed, fills parent at all sizes ─── */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -469,26 +1335,37 @@
 
 /* ─── Print styling for Privacy Policy ─── */
 @media print {
-  nav, footer, .print\:hidden, aside {
+
+  nav,
+  footer,
+  .print\:hidden,
+  aside {
     display: none !important;
   }
+
   body {
     font-size: 12pt;
     color: #000 !important;
     background: #fff !important;
   }
+
   .print\:py-8 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
+
   a {
     color: #000 !important;
     text-decoration: underline;
   }
-  h1, h2, h3 {
+
+  h1,
+  h2,
+  h3 {
     color: #000 !important;
     page-break-after: avoid;
   }
+
   article {
     page-break-inside: avoid;
   }

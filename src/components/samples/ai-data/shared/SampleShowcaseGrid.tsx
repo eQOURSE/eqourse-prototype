@@ -19,11 +19,12 @@ const SampleShowcaseGrid = ({
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (showPreview) return;
     const t = setInterval(() => {
       setActive((p) => (p + 1) % showcases.length);
     }, 4200);
     return () => clearInterval(t);
-  }, [showcases.length]);
+  }, [showcases.length, showPreview]);
 
   const current = showcases[active];
 
