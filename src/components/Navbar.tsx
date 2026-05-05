@@ -45,10 +45,8 @@ const navLinks: MainLink[] = [
   { label: "About Us", to: "/aboutus", dropdown: aboutUsSubLinks },
   { label: "EdTech Solutions", to: "/edtech-solutions", dropdown: edtechSubLinks, megaMenu: true },
   { label: "AI Data Services", to: "/ai-data-services", dropdown: aiDataSubLinks },
-  { label: "TUTRAIN", to: "/tutrain", subtext: "Our Online Tutoring Brand" },
   { label: "Samples", to: "/samples", samplesMenu: true },
-  { label: "Case Studies", to: "/casestudy" },
-  { label: "Blog", to: "/blog" },
+  { label: "TUTRAIN", to: "/tutrain", subtext: "Our Online Tutoring Brand" },
 ];
 
 /* ─── EdTech Mega‑Menu (Desktop) ─── */

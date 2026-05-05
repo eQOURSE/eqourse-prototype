@@ -35,6 +35,7 @@ import AIDataSample from "./pages/AIDataSample.tsx";
 import EdtechSample from "./pages/EdtechSample.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TuTrain from "./pages/TuTrain.tsx";
+import Sitemap from "./pages/Sitemap.tsx";
 import { edtechSamples } from "./components/samples/edtech/edtechSamplesData";
 import { edtechSubServiceRoutes } from "./components/edtech-solutions/edtechSubServiceRoutes";
 
@@ -83,6 +84,7 @@ const App = () => (
               <Route path="/casestudy" element={<CaseStudy />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/tutrain" element={<TuTrain />} />
+              <Route path="/sitemap" element={<Sitemap />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/samples" element={<Samples />} />
