@@ -115,9 +115,9 @@ const App = () => (
               <Route path="/localization-services" element={<LocalizationServices />} />
               <Route path="/technology-solutions" element={<TechnologySolutions />} />
               <Route path="/smes" element={<SubjectMatterExperts />} />
-              <Route path="/accessibility" element={<AccessibilityServices />} />
-              <Route path="/talent-assessment-workforce-evaluation" element={<TalentAssessmentWorkforceEvaluation />} />
-              <Route path="/editorial-publishing-designing-services" element={<EditorialPublishingDesigningServices />} />
+              <Route path="/content-services/accessibility" element={<AccessibilityServices />} />
+              <Route path="/content-services/talent-assessment-workforce-evaluation" element={<TalentAssessmentWorkforceEvaluation />} />
+              <Route path="/content-services/editorial-publishing-designing-services" element={<EditorialPublishingDesigningServices />} />
 
               {/* Content Service - 39 Sub-Service Detail Pages (lazy-loaded) */}
               {contentServicesSubServiceRoutes.map(({ path, Component }) => (
