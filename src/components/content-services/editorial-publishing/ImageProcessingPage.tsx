@@ -2,13 +2,13 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { Sparkles, Scissors, ZoomIn, FileImage, FolderOpen, Tag } from "lucide-react";
 
 const PARENT_LABEL = "Editorial, Publishing & Designing Services";
-const PARENT_HREF = "/content-services/editorial-publishing-designing-services";
+const PARENT_HREF = "/editorial-publishing-designing-services";
 
 const ImageProcessingPage = () => (
   <SubServicePageTemplate
     seoTitle="Image Processing Services for Publishing | eQOURSE"
     seoDescription="Image processing support for publishers and education teams, covering restoration, cleanup, enhancement and web-ready visual optimisation."
-    seoCanonical="https://www.eqourse.com/content-services/editorial-publishing-designing-services/image-processing"
+    seoCanonical="https://www.eqourse.com/image-processing"
     seoKeywords="image processing services, educational image editing, digital asset preparation, image restoration, image cleanup, image optimisation, alt text services"
     parentLabel={PARENT_LABEL}
     parentHref={PARENT_HREF}
@@ -17,8 +17,10 @@ const ImageProcessingPage = () => (
     headline="Image Processing"
     headlineAccent="for Learning Content"
     subtext="Image processing support prepares educational visuals, diagrams, screenshots, scanned pages and production assets for consistent use across print and digital formats - covering cleanup, cropping, resizing, naming, format preparation, resolution checks and asset organisation."
-    ctaText="Request Image Processing Support"
+    ctaText="Request Image Support"
     ctaLink="/contact"
+    bannerImage="/assets/banners/editorial-publishing/Image Processing for Learning Content.png"
+    bannerImageAlt="Image processing services for learning content including color correction, masking, and optimization by eQOURSE."
     introLabel="Visual Quality"
     introTitle="Production-Ready Images for"
     introGradient="Every Format"
@@ -98,7 +100,7 @@ const ImageProcessingPage = () => (
       { title: "Editorial Services", href: `${PARENT_HREF}/editorial-services` },
       { title: "Design Services", href: `${PARENT_HREF}/design-services` },
       { title: "Prepress Services", href: `${PARENT_HREF}/prepress-services` },
-      { title: "Accessibility Services", href: "/content-services/accessibility" },
+      { title: "Accessibility Services", href: "/accessibility" },
     ]}
   />
 );

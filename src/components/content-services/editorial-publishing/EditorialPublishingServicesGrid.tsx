@@ -8,7 +8,7 @@ const services = [
   {
     icon: FileText,
     title: "Editorial Services",
-    href: "/content-services/editorial-publishing-designing-services/editorial-services",
+    href: "/editorial-services",
     description:
       "Copy editing, proofreading, substantive, developmental and technical editing for education, publishing and digital learning content.",
     badge: "Content Accuracy",
@@ -18,7 +18,7 @@ const services = [
   {
     icon: BookOpen,
     title: "Publishing Production",
-    href: "/content-services/editorial-publishing-designing-services/publishing-production",
+    href: "/publishing-production",
     description:
       "Typesetting, page composition, templates, indexing, proof review and structured production handover for print and digital assets.",
     badge: "Production Ready",
@@ -28,7 +28,7 @@ const services = [
   {
     icon: RefreshCw,
     title: "Digital Conversion",
-    href: "/content-services/editorial-publishing-designing-services/digital-conversion",
+    href: "/digital-conversion",
     description:
       "Digitisation, OCR, XML, HTML, EPUB, PDF-to-EPUB, LaTeX, XML-first and MathML conversion workflows for modern platforms.",
     badge: "Multi-Format",
@@ -38,7 +38,7 @@ const services = [
   {
     icon: Image,
     title: "Image Processing",
-    href: "/content-services/editorial-publishing-designing-services/image-processing",
+    href: "/image-processing",
     description:
       "Image restoration, cleanup, optimisation, cropping, resizing, alt-text coordination and asset organisation for learning content.",
     badge: "Visual Quality",
@@ -48,7 +48,7 @@ const services = [
   {
     icon: Tag,
     title: "Metadata Services",
-    href: "/content-services/editorial-publishing-designing-services/metadata-services",
+    href: "/metadata-services",
     description:
       "Metadata tagging, content structuring, DOI preparation, ONIX, MARC, Crossref and accessibility metadata for discoverability.",
     badge: "Discoverability",
@@ -58,7 +58,7 @@ const services = [
   {
     icon: Palette,
     title: "Design Services",
-    href: "/content-services/editorial-publishing-designing-services/design-services",
+    href: "/design-services",
     description:
       "Cover design, page layouts, workbooks, journals, brochures, infographics and brand-aligned learning publication design.",
     badge: "Visual Design",
@@ -68,7 +68,7 @@ const services = [
   {
     icon: Printer,
     title: "Prepress Services",
-    href: "/content-services/editorial-publishing-designing-services/prepress-services",
+    href: "/prepress-services",
     description:
       "Preflight checks, colour correction, bleed and margin review, print-ready file preparation and pagination validation.",
     badge: "Print Ready",
@@ -78,7 +78,7 @@ const services = [
   {
     icon: Settings,
     title: "Production Support",
-    href: "/content-services/editorial-publishing-designing-services/production-support",
+    href: "/production-support",
     description:
       "Print vendor coordination, large-volume workflow support, print specification sheets, change management and asset packaging.",
     badge: "Operations",

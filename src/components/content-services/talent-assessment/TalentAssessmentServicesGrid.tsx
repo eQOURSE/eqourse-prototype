@@ -17,49 +17,49 @@ const services = [
     icon: Brain,
     title: "Psychometric Assessments",
     description: "Develop structured psychometric assessment content, scoring logic, reporting structures, validity evidence, reliability analysis and test-construction support.",
-    link: "/content-services/talent-assessment-workforce-evaluation/psychometric-assessments",
+    link: "/psychometric-assessments",
     color: "hsl(170 82% 45%)"
   },
   {
     icon: ClipboardCheck,
     title: "Skill Assessments",
     description: "Create competency-mapped test items, practical task scenarios, scoring rubrics and review-ready assessment documentation for digital or blended evaluation.",
-    link: "/content-services/talent-assessment-workforce-evaluation/skill-assessments",
+    link: "/skill-assessments",
     color: "hsl(280 80% 65%)"
   },
   {
     icon: UserCheck,
     title: "Candidate Evaluation",
     description: "Build B2B candidate evaluation content and assessment support for screening, pre-hiring workflows and behavioural review models.",
-    link: "/content-services/talent-assessment-workforce-evaluation/candidate-evaluation",
+    link: "/candidate-evaluation",
     color: "hsl(210 100% 60%)"
   },
   {
     icon: Layout,
     title: "Competency Frameworks",
     description: "Build role-based competency frameworks, dictionaries and role architecture maps for structured workforce assessment and L&D planning.",
-    link: "/content-services/talent-assessment-workforce-evaluation/competency-frameworks",
+    link: "/competency-frameworks",
     color: "hsl(350 80% 60%)"
   },
   {
     icon: GraduationCap,
     title: "Learning Readiness",
     description: "Develop learning readiness assessments, pathway readiness evaluations and skill gap analysis resources for global workforce and education programmes.",
-    link: "/content-services/talent-assessment-workforce-evaluation/learning-readiness",
+    link: "/learning-readiness",
     color: "hsl(45 90% 50%)"
   },
   {
     icon: Map,
     title: "Organizational Diagnostics",
     description: "Workforce capability mapping, capability assessment, skill benchmarking, job role benchmarking and training needs analysis support.",
-    link: "/content-services/talent-assessment-workforce-evaluation/organizational-diagnostics",
+    link: "/organizational-diagnostics",
     color: "hsl(140 70% 45%)"
   },
   {
     icon: Laptop,
     title: "Digital Assessment Infrastructure",
     description: "Scalable digital assessment content, item-bank workflows and remote proctoring process support for online talent evaluation programmes.",
-    link: "/content-services/talent-assessment-workforce-evaluation/digital-assessment-infrastructure",
+    link: "/digital-assessment-infrastructure",
     color: "hsl(190 90% 50%)"
   }
 ];

@@ -8,7 +8,7 @@ const WorkbookPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/workbook-development"
     seoKeywords="workbook development, academic workbooks, interactive workbooks, K12 workbooks, assessment workbooks"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="Workbook Development"
     bannerImage="/assets/banners/content-services/custom-elearning/workbook-development.png"
     bannerImageAlt="Academic workbook development services illustration showing chapter-wise, topic-based and assessment-integrated K-12 workbooks designed by eQOURSE"

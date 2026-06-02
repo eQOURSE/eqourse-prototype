@@ -8,7 +8,7 @@ const services = [
     icon: Pencil,
     title: "Custom E-Learning Content",
     description: "K-12 and higher ed content including study materials, workbooks, STEM, quizzes, and e-books aligned to global standards.",
-    link: "/content-services/custom-e-learning-content",
+    link: "/custom-e-learning-content",
     gradient: "from-blue-500/20 to-cyan-500/10",
   },
   {
@@ -57,21 +57,21 @@ const services = [
     icon: Accessibility,
     title: "Accessibility Services",
     description: "WCAG, Section 508, ADA compliance, accessible media, and inclusive learning environments.",
-    link: "/content-services/accessibility",
+    link: "/accessibility",
     gradient: "from-yellow-500/20 to-orange-500/10",
   },
   {
     icon: ClipboardCheck,
     title: "Talent Assessment",
     description: "Psychometric evaluations, skill assessments, candidate evaluation, and organizational diagnostics.",
-    link: "/content-services/talent-assessment-workforce-evaluation",
+    link: "/talent-assessment-workforce-evaluation",
     gradient: "from-sky-500/20 to-cyan-500/10",
   },
   {
     icon: FileEdit,
     title: "Editorial & Publishing",
     description: "Copy editing, proofreading, XML publishing, digital conversion, and metadata structuring.",
-    link: "/content-services/editorial-publishing-designing-services",
+    link: "/editorial-publishing-designing-services",
     gradient: "from-violet-500/20 to-purple-500/10",
   },
 ];

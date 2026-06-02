@@ -2,21 +2,21 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { FileText, FileCheck, BookOpen, MonitorPlay, Presentation } from "lucide-react";
 
 const relatedPages = [
-  { title: "Standards Compliance", href: "/content-services/accessibility/standards-compliance" },
-  { title: "Accessible Media", href: "/content-services/accessibility/accessible-media-enhancements" },
-  { title: "Assessment Accessibility", href: "/content-services/accessibility/assessment-accessibility" },
-  { title: "Assistive Tech Compatibility", href: "/content-services/accessibility/assistive-technology-compatibility" },
-  { title: "Audit & Compliance Support", href: "/content-services/accessibility/audit-compliance-support" },
+  { title: "Standards Compliance", href: "/standards-compliance" },
+  { title: "Accessible Media", href: "/accessible-media-enhancements" },
+  { title: "Assessment Accessibility", href: "/assessment-accessibility" },
+  { title: "Assistive Tech Compatibility", href: "/assistive-technology-compatibility" },
+  { title: "Audit & Compliance Support", href: "/audit-compliance-support" },
 ];
 
 const DocumentRemediationPage = () => (
   <SubServicePageTemplate
     seoTitle="Document & eContent Accessibility Remediation | eQOURSE"
     seoDescription="Expert document remediation services for PDFs, EPUBs, LMS courses, and HTML content, ensuring full compatibility with screen readers and assistive technologies."
-    seoCanonical="https://www.eqourse.com/content-services/accessibility/document-content-remediation"
+    seoCanonical="https://www.eqourse.com/document-content-remediation"
     seoKeywords="document accessibility remediation, PDF remediation services, accessible EPUB creation, LMS course accessibility, accessible HTML content, Section 508 document compliance"
     parentLabel="Accessibility"
-    parentHref="/content-services/accessibility"
+    parentHref="/accessibility"
     currentLabel="Document & eContent Remediation"
     bannerImage="/assets/banners/content-services/accessibility/document-content-remediation.png"
     bannerImageAlt="Document and eContent accessibility remediation services banner showing PDF tagging, EPUB 3 enhancement, LMS course remediation and HTML accessibility work by eQOURSE"

@@ -5,10 +5,10 @@ const LearningReadinessPage = () => (
   <SubServicePageTemplate
     seoTitle="Learning Readiness Assessments | eQOURSE"
     seoDescription="eQOURSE develops learning readiness assessments, pathway readiness evaluations and skill gap analysis resources for global workforce and education programmes."
-    seoCanonical="https://www.eqourse.com/content-services/talent-assessment-workforce-evaluation/learning-readiness"
+    seoCanonical="https://www.eqourse.com/learning-readiness"
     seoKeywords="learning readiness, talent assessment, B2B workforce evaluation, eQOURSE"
     parentLabel="Talent Assessment & Workforce Evaluation"
-    parentHref="/content-services/talent-assessment-workforce-evaluation"
+    parentHref="/talent-assessment-workforce-evaluation"
     currentLabel="Learning Readiness"
     preHeadline="LEARNING READINESS"
     headline="Learning Readiness Assessment"
@@ -43,7 +43,7 @@ const LearningReadinessPage = () => (
     ctaHeadline="Build Readiness Diagnostics Before Learning Begins"
     ctaSubtext="eQOURSE develops assessment content, readiness checks and reporting assets that support informed placement and learning pathway design."
     ctaButtonText="Discuss Learner Readiness"
-    relatedPages={[{"title":"Psychometric Assessments","href":"/content-services/talent-assessment-workforce-evaluation/psychometric-assessments"},{"title":"Skill Assessments","href":"/content-services/talent-assessment-workforce-evaluation/skill-assessments"},{"title":"Candidate Evaluation","href":"/content-services/talent-assessment-workforce-evaluation/candidate-evaluation"}]}
+    relatedPages={[{"title":"Psychometric Assessments","href":"/psychometric-assessments"},{"title":"Skill Assessments","href":"/skill-assessments"},{"title":"Candidate Evaluation","href":"/candidate-evaluation"}]}
   />
 );
 

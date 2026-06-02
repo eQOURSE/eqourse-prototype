@@ -58,15 +58,15 @@ const TestimonialsSection = () => {
 
         <div className="max-w-3xl mx-auto relative">
           <div className="bg-card rounded-2xl p-8 md:p-12 shadow-elevated border border-border/50 relative overflow-hidden">
-            <Quote className="absolute top-6 left-6 w-12 h-12 text-primary/10" />
-            
+            <Quote className="absolute top-6 left-6 w-12 h-12 text-primary/10 shrink-0" />
+
             <div key={current} className="animate-slide-up">
               <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-8 relative z-10">
                 "{testimonials[current].quote}"
               </p>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold">
+                <div className="w-12 h-12 shrink-0 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold">
                   {testimonials[current].name[0]}
                 </div>
                 <div>

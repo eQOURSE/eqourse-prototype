@@ -8,7 +8,7 @@ const TeacherLessonPlanPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/teacher-lesson-plan"
     seoKeywords="teacher lesson plans, lesson plan development, K12 lesson plans, curriculum-aligned lessons, instructional delivery"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="Teacher Lesson Plan"
     bannerImage="/assets/banners/content-services/custom-elearning/teacher-lesson-plan.png"
     bannerImageAlt="Teacher lesson plan solutions banner showing curriculum-aligned daily, weekly and subject-specific lesson plans crafted by eQOURSE for K-12 and higher education educators"

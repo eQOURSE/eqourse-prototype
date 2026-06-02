@@ -5,10 +5,10 @@ const PsychometricAssessmentsPage = () => (
   <SubServicePageTemplate
     seoTitle="Psychometric Assessments for Workforce Evaluation | eQOURSE"
     seoDescription="Develop psychometric assessments, reports, scales, validity studies, norming, equating and test construction support for workforce evaluation."
-    seoCanonical="https://www.eqourse.com/content-services/talent-assessment-workforce-evaluation/psychometric-assessments"
+    seoCanonical="https://www.eqourse.com/psychometric-assessments"
     seoKeywords="psychometric assessments, talent assessment, B2B workforce evaluation, eQOURSE"
     parentLabel="Talent Assessment & Workforce Evaluation"
-    parentHref="/content-services/talent-assessment-workforce-evaluation"
+    parentHref="/talent-assessment-workforce-evaluation"
     currentLabel="Psychometric Assessments"
     preHeadline="PSYCHOMETRICS"
     headline="Psychometric Assessments for"
@@ -63,7 +63,7 @@ const PsychometricAssessmentsPage = () => (
     ctaHeadline="Build Psychometric Assessments with eQOURSE"
     ctaSubtext="eQOURSE develops psychometric assessments, test construction frameworks and reporting structures for organisations requiring validated, structured and professionally developed assessment solutions across workforce, education and certification contexts."
     ctaButtonText="Discuss Your Assessment Needs"
-    relatedPages={[{"title":"Skill Assessments","href":"/content-services/talent-assessment-workforce-evaluation/skill-assessments"},{"title":"Candidate Evaluation","href":"/content-services/talent-assessment-workforce-evaluation/candidate-evaluation"},{"title":"Competency Frameworks","href":"/content-services/talent-assessment-workforce-evaluation/competency-frameworks"}]}
+    relatedPages={[{"title":"Skill Assessments","href":"/skill-assessments"},{"title":"Candidate Evaluation","href":"/candidate-evaluation"},{"title":"Competency Frameworks","href":"/competency-frameworks"}]}
   />
 );
 

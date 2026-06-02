@@ -8,7 +8,7 @@ const EducationalContentPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/educational-content-development"
     seoKeywords="educational content development, instructional materials, textbook content, study guides, curriculum development"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="Educational Content Development"
     bannerImage="/assets/banners/content-services/custom-elearning/educational-content-development.png"
     bannerImageAlt="Educational content development services banner illustrating textbook content, solution manuals, study guides and curriculum design for K-12 and higher education by eQOURSE"

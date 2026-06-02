@@ -102,7 +102,6 @@ const TalentAssessmentPage = () => (
       headline="Build a Workforce Assessment System Decision-Makers Rely On"
       subtext="Partner with eQOURSE to develop structured assessment content, competency frameworks, scoring rubrics and digital-ready workforce evaluation assets for your organisation."
       ctaText="Discuss Assessment Needs"
-      secondaryMicrocopy="Share your roles, assessment goals and delivery requirements - we will help structure the right assessment plan."
     />
   </ContentServicesLayout>
 );

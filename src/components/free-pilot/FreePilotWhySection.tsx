@@ -78,9 +78,8 @@ const FreePilotWhySection = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`text-center mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <span className="text-sm font-semibold tracking-wider uppercase text-primary">Why Choose Us</span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3">
@@ -95,9 +94,8 @@ const FreePilotWhySection = () => {
             return (
               <div
                 key={index}
-                className={`group bg-white rounded-2xl p-8 border border-border/50 shadow-sm hover:shadow-elevated transition-all duration-500 text-center flex flex-col items-center relative overflow-hidden ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                }`}
+                className={`group bg-white rounded-2xl p-8 border border-border/50 shadow-sm hover:shadow-elevated transition-all duration-500 text-center flex flex-col items-center relative overflow-hidden ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  }`}
                 style={{ transitionDelay: `${benefit.delay}ms` }}
               >
                 {/* Hover gradient overlay */}
@@ -109,7 +107,7 @@ const FreePilotWhySection = () => {
                 <div className="relative z-10">
                   {/* Icon */}
                   <div
-                    className={`w-16 h-16 rounded-2xl ${benefit.iconBg} flex items-center justify-center mb-6 transform group-hover:-translate-y-2 group-hover:shadow-lg transition-all duration-500`}
+                    className={`w-16 h-16 mx-auto rounded-2xl ${benefit.iconBg} flex items-center justify-center mb-6 transform group-hover:-translate-y-2 group-hover:shadow-lg transition-all duration-500`}
                   >
                     <Icon className="w-8 h-8 text-white" />
                   </div>

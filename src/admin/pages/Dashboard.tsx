@@ -101,9 +101,8 @@ export default function Dashboard() {
               <div className="text-sm text-muted-foreground">{k.label}</div>
               {typeof k.delta === "number" && (
                 <div
-                  className={`mt-2 text-xs flex items-center gap-1 ${
-                    k.delta >= 0 ? "text-emerald-600" : "text-red-600"
-                  }`}
+                  className={`mt-2 text-xs flex items-center gap-1 ${k.delta >= 0 ? "text-emerald-600" : "text-red-600"
+                    }`}
                 >
                   {k.delta >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                   {Math.abs(k.delta).toFixed(1)}% vs last period

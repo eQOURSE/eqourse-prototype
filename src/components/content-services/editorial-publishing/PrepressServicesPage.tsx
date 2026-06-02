@@ -2,13 +2,13 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { CheckSquare, Palette, Printer, FileCheck, Type, AlignLeft } from "lucide-react";
 
 const PARENT_LABEL = "Editorial, Publishing & Designing Services";
-const PARENT_HREF = "/content-services/editorial-publishing-designing-services";
+const PARENT_HREF = "/editorial-publishing-designing-services";
 
 const PrepressServicesPage = () => (
   <SubServicePageTemplate
     seoTitle="Prepress Services for Publishing Production | eQOURSE"
     seoDescription="Prepress services for publishers and education teams: print-ready files, preflight checks, colour correction, bleed setup and proof preparation."
-    seoCanonical="https://www.eqourse.com/content-services/editorial-publishing-designing-services/prepress-services"
+    seoCanonical="https://www.eqourse.com/prepress-services"
     seoKeywords="prepress services, print production support, publication prepress checks, preflight checks, colour correction, bleed margin, print-ready files"
     parentLabel={PARENT_LABEL}
     parentHref={PARENT_HREF}
@@ -19,6 +19,8 @@ const PrepressServicesPage = () => (
     subtext="Prepress services prepare publication files for print and production review - through layout checks, pagination validation, image readiness, font consistency, bleed and margin review, proofing support and final file preparation for printer or production handover."
     ctaText="Request Prepress Support"
     ctaLink="/contact"
+    bannerImage="/assets/banners/editorial-publishing/Prepress Services for Publication Production.png"
+    bannerImageAlt="Prepress services for publication production including color management, preflight checks, and print-ready files by eQOURSE."
     introLabel="Print Readiness"
     introTitle="Files Prepared for"
     introGradient="Production Sign-Off"

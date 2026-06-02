@@ -2,13 +2,13 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { BookOpen, Layout, PenTool, FileImage, BarChart3, Layers } from "lucide-react";
 
 const PARENT_LABEL = "Editorial, Publishing & Designing Services";
-const PARENT_HREF = "/content-services/editorial-publishing-designing-services";
+const PARENT_HREF = "/editorial-publishing-designing-services";
 
 const DesignServicesPage = () => (
   <SubServicePageTemplate
     seoTitle="Design Services for Educational Publishing | eQOURSE"
     seoDescription="Design services for publishers, EdTech platforms and institutions, including covers, layouts, workbooks, journals, brochures and learning illustrations."
-    seoCanonical="https://www.eqourse.com/content-services/editorial-publishing-designing-services/design-services"
+    seoCanonical="https://www.eqourse.com/design-services"
     seoKeywords="educational design services, learning content design, publication design, cover design, page layout design, workbook design, journal design, infographic design"
     parentLabel={PARENT_LABEL}
     parentHref={PARENT_HREF}
@@ -19,6 +19,8 @@ const DesignServicesPage = () => (
     subtext="Design services support the visual presentation of learning content across worksheets, workbooks, instructor resources, digital learning assets, decks, infographics and publication layouts - aligned with brand guidelines, readability requirements and output format."
     ctaText="Request Design Support"
     ctaLink="/contact"
+    bannerImage="/assets/banners/editorial-publishing/Design Services for Educational Publishing.png"
+    bannerImageAlt="Design services for educational publishing including layout design, graphics, and visual structuring by eQOURSE."
     introLabel="Visual Presentation"
     introTitle="Design That Supports"
     introGradient="Learning Outcomes"
@@ -99,7 +101,7 @@ const DesignServicesPage = () => (
       { title: "Publishing Production", href: `${PARENT_HREF}/publishing-production` },
       { title: "Prepress Services", href: `${PARENT_HREF}/prepress-services` },
       { title: "Image Processing", href: `${PARENT_HREF}/image-processing` },
-      { title: "Custom E-Learning Content", href: "/content-services/custom-e-learning-content" },
+      { title: "Custom E-Learning Content", href: "/custom-e-learning-content" },
     ]}
   />
 );

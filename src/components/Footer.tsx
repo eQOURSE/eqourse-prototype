@@ -23,9 +23,9 @@ const contentServicesLinks = [
   { label: "Localization Services", to: "/localization-services" },
   { label: "Technology Solutions", to: "/technology-solutions" },
   { label: "Subject Matter Experts", to: "/smes" },
-  { label: "Accessibility Services", to: "/content-services/accessibility" },
-  { label: "Talent Assessment", to: "/content-services/talent-assessment-workforce-evaluation" },
-  { label: "Editorial & Publishing", to: "/content-services/editorial-publishing-designing-services" },
+  { label: "Accessibility Services", to: "/accessibility" },
+  { label: "Talent Assessment", to: "/talent-assessment-workforce-evaluation" },
+  { label: "Editorial & Publishing", to: "/editorial-publishing-designing-services" },
 ];
 
 /* ── AI Data Services ── */

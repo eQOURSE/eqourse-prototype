@@ -152,7 +152,7 @@ const TestimonialCard = ({ data, index }: { data: Testimonial; index: number }) 
       )}
 
       <div className="flex items-center gap-4 mt-auto border-t border-border/50 pt-4 relative z-10">
-        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg
+        <div className={`w-12 h-12 shrink-0 rounded-full flex items-center justify-center text-white font-bold text-lg
           ${isContentServices ? "bg-gradient-to-br from-teal-400 to-teal-600" : "bg-gradient-to-br from-indigo-500 to-purple-600"}
         `}>
           {data.name[0]}

@@ -2,21 +2,21 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { MonitorPlay, Keyboard, Search, Maximize, Brain } from "lucide-react";
 
 const relatedPages = [
-  { title: "Assessment Accessibility", href: "/content-services/accessibility/assessment-accessibility" },
-  { title: "Audit & Compliance Support", href: "/content-services/accessibility/audit-compliance-support" },
-  { title: "Standards Compliance", href: "/content-services/accessibility/standards-compliance" },
-  { title: "Document Remediation", href: "/content-services/accessibility/document-content-remediation" },
-  { title: "Accessible Media", href: "/content-services/accessibility/accessible-media-enhancements" },
+  { title: "Assessment Accessibility", href: "/assessment-accessibility" },
+  { title: "Audit & Compliance Support", href: "/audit-compliance-support" },
+  { title: "Standards Compliance", href: "/standards-compliance" },
+  { title: "Document Remediation", href: "/document-content-remediation" },
+  { title: "Accessible Media", href: "/accessible-media-enhancements" },
 ];
 
 const AssistiveTechPage = () => (
   <SubServicePageTemplate
     seoTitle="Assistive Technology Compatibility Services | eQOURSE"
     seoDescription="Manual accessibility testing using JAWS, NVDA, and VoiceOver to ensure educational content is functionally usable with assistive technology."
-    seoCanonical="https://www.eqourse.com/content-services/accessibility/assistive-technology-compatibility"
+    seoCanonical="https://www.eqourse.com/assistive-technology-compatibility"
     seoKeywords="assistive technology compatibility, screen reader testing, JAWS testing, NVDA testing, VoiceOver testing, keyboard accessibility"
     parentLabel="Accessibility"
-    parentHref="/content-services/accessibility"
+    parentHref="/accessibility"
     currentLabel="Assistive Technology Compatibility"
     bannerImage="/assets/banners/content-services/accessibility/assistive-technology-compatibility.png"
     bannerImageAlt="Assistive technology compatibility services banner showing manual screen reader testing with JAWS, NVDA and VoiceOver plus keyboard and screen magnification verification by eQOURSE"

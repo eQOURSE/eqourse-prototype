@@ -2,13 +2,13 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { Truck, Layers, FileText, GitBranch, PackageCheck, MessageSquare } from "lucide-react";
 
 const PARENT_LABEL = "Editorial, Publishing & Designing Services";
-const PARENT_HREF = "/content-services/editorial-publishing-designing-services";
+const PARENT_HREF = "/editorial-publishing-designing-services";
 
 const ProductionSupportPage = () => (
   <SubServicePageTemplate
     seoTitle="Production Support Services | eQOURSE"
     seoDescription="Print production support for publishers and education teams: vendor coordination, large-volume workflows, print specification sheets and asset packaging."
-    seoCanonical="https://www.eqourse.com/content-services/editorial-publishing-designing-services/production-support"
+    seoCanonical="https://www.eqourse.com/production-support"
     seoKeywords="production support services, publishing operations support, content update support, print vendor coordination, large-volume print, print specification sheets"
     parentLabel={PARENT_LABEL}
     parentHref={PARENT_HREF}

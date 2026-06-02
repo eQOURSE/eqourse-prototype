@@ -61,9 +61,8 @@ const FreePilotChooseTracks = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`text-center mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <span className="text-sm font-semibold tracking-wider uppercase text-primary">Two Verticals, One Platform</span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3">
@@ -78,9 +77,8 @@ const FreePilotChooseTracks = () => {
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Track A: Content Services */}
           <div
-            className={`group relative bg-white rounded-3xl overflow-hidden border-l-[5px] border-l-primary shadow-lg transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-            } hover:shadow-[0_20px_60px_-15px_rgba(0,180,166,0.25)] hover:-translate-y-2`}
+            className={`group relative bg-white rounded-3xl overflow-hidden  border-l-[5px] border-primary shadow-lg transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+              } hover:shadow-[0_20px_60px_-15px_rgba(0,180,166,0.25)] hover:-translate-y-2`}
             onMouseEnter={() => setHoveredTrack("content services")}
             onMouseLeave={() => setHoveredTrack(null)}
           >
@@ -96,14 +94,12 @@ const FreePilotChooseTracks = () => {
               {/* Icon + Heading */}
               <div className="flex items-center gap-4 mb-6">
                 <div
-                  className={`w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 ${
-                    hoveredTrack === "content services" ? "bg-primary shadow-[0_0_20px_rgba(0,180,166,0.3)] scale-110" : ""
-                  }`}
+                  className={`w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 ${hoveredTrack === "content services" ? "bg-primary shadow-[0_0_20px_rgba(0,180,166,0.3)] scale-110" : ""
+                    }`}
                 >
                   <BookOpen
-                    className={`w-7 h-7 transition-colors duration-300 ${
-                      hoveredTrack === "content services" ? "text-white" : "text-primary"
-                    }`}
+                    className={`w-7 h-7 transition-colors duration-300 ${hoveredTrack === "content services" ? "text-white" : "text-primary"
+                      }`}
                   />
                 </div>
                 <div>
@@ -123,9 +119,8 @@ const FreePilotChooseTracks = () => {
                   {contentServicesFeatures.map((item, i) => (
                     <li
                       key={i}
-                      className={`flex items-start gap-3 transition-all duration-500 ${
-                        isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
-                      }`}
+                      className={`flex items-start gap-3 transition-all duration-500 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+                        }`}
                       style={{ transitionDelay: `${400 + i * 100}ms` }}
                     >
                       <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
@@ -161,9 +156,8 @@ const FreePilotChooseTracks = () => {
 
           {/* Track B: AI Data */}
           <div
-            className={`group relative bg-white rounded-3xl overflow-hidden border-l-[5px] border-l-[#1B9AAA] shadow-lg transition-all duration-700 delay-150 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-            } hover:shadow-[0_20px_60px_-15px_rgba(27,154,170,0.25)] hover:-translate-y-2`}
+            className={`group relative bg-white rounded-3xl overflow-hidden border-l-[5px] border-l-[#1B9AAA] shadow-lg transition-all duration-700 delay-150 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+              } hover:shadow-[0_20px_60px_-15px_rgba(27,154,170,0.25)] hover:-translate-y-2`}
             onMouseEnter={() => setHoveredTrack("ai")}
             onMouseLeave={() => setHoveredTrack(null)}
           >
@@ -179,14 +173,12 @@ const FreePilotChooseTracks = () => {
               {/* Icon + Heading */}
               <div className="flex items-center gap-4 mb-6">
                 <div
-                  className={`w-14 h-14 rounded-2xl bg-[#1B9AAA]/10 flex items-center justify-center transition-all duration-500 ${
-                    hoveredTrack === "ai" ? "bg-[#1B9AAA] shadow-[0_0_20px_rgba(27,154,170,0.3)] scale-110" : ""
-                  }`}
+                  className={`w-14 h-14 rounded-2xl bg-[#1B9AAA]/10 flex items-center justify-center transition-all duration-500 ${hoveredTrack === "ai" ? "bg-[#1B9AAA] shadow-[0_0_20px_rgba(27,154,170,0.3)] scale-110" : ""
+                    }`}
                 >
                   <Database
-                    className={`w-7 h-7 transition-colors duration-300 ${
-                      hoveredTrack === "ai" ? "text-white" : "text-[#1B9AAA]"
-                    }`}
+                    className={`w-7 h-7 transition-colors duration-300 ${hoveredTrack === "ai" ? "text-white" : "text-[#1B9AAA]"
+                      }`}
                   />
                 </div>
                 <div>
@@ -206,9 +198,8 @@ const FreePilotChooseTracks = () => {
                   {aiDataFeatures.map((item, i) => (
                     <li
                       key={i}
-                      className={`flex items-start gap-3 transition-all duration-500 ${
-                        isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
-                      }`}
+                      className={`flex items-start gap-3 transition-all duration-500 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+                        }`}
                       style={{ transitionDelay: `${550 + i * 100}ms` }}
                     >
                       <CheckCircle2 className="w-5 h-5 text-[#1B9AAA] shrink-0 mt-0.5" />

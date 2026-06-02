@@ -72,7 +72,7 @@ const TuTrain = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="tutrain-hero pt-24 min-h-[500px] flex flex-col md:flex-row relative">
+      <section className="tutrain-hero min-h-[500px] flex flex-col md:flex-row relative">
         <div className="md:w-1/2 split-left flex items-center justify-center p-8 md:p-16 relative z-10">
           <div className="max-w-lg mx-auto md:ml-auto md:mr-12 text-center md:text-left">
             <Reveal>

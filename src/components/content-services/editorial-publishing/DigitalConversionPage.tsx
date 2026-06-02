@@ -2,13 +2,13 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { ScanLine, Code2, Globe, BookOpen, RefreshCw, FileCode, Sigma, Layers } from "lucide-react";
 
 const PARENT_LABEL = "Editorial, Publishing & Designing Services";
-const PARENT_HREF = "/content-services/editorial-publishing-designing-services";
+const PARENT_HREF = "/editorial-publishing-designing-services";
 
 const DigitalConversionPage = () => (
   <SubServicePageTemplate
     seoTitle="Digital Conversion Services for EdTech & Publishing | eQOURSE"
     seoDescription="Digital conversion services for publishers and EdTech platforms: Digitisation, OCR, XML, HTML, EPUB, PDF to EPUB, LaTeX, MathML and XML-first workflows."
-    seoCanonical="https://www.eqourse.com/content-services/editorial-publishing-designing-services/digital-conversion"
+    seoCanonical="https://www.eqourse.com/digital-conversion"
     seoKeywords="digital conversion services, eBook conversion, LMS content conversion, XML conversion, EPUB conversion, PDF to EPUB, OCR services, LaTeX conversion"
     parentLabel={PARENT_LABEL}
     parentHref={PARENT_HREF}
@@ -19,6 +19,8 @@ const DigitalConversionPage = () => (
     subtext="eQOURSE prepares learning content for web, LMS, eBook and platform-based delivery through structured conversion from source files into clean digital formats - including HTML-ready content, EPUB 3-aligned eBook preparation, accessible-friendly structure and asset organisation."
     ctaText="Request Conversion Support"
     ctaLink="/contact"
+    bannerImage="/assets/banners/editorial-publishing/Digital Conversion for Modern Publishing.png"
+    bannerImageAlt="Digital conversion services for modern publishing including XML, EPUB3, and HTML5 formats by eQOURSE."
     introLabel="Format Transformation"
     introTitle="Convert Content for"
     introGradient="Every Platform"
@@ -110,7 +112,7 @@ const DigitalConversionPage = () => (
       { title: "Editorial Services", href: `${PARENT_HREF}/editorial-services` },
       { title: "Publishing Production", href: `${PARENT_HREF}/publishing-production` },
       { title: "Metadata Services", href: `${PARENT_HREF}/metadata-services` },
-      { title: "Accessibility Services", href: "/content-services/accessibility" },
+      { title: "Accessibility Services", href: "/accessibility" },
       { title: "Technology Solutions", href: "/content-services/technology-solutions" },
     ]}
   />

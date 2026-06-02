@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -8,6 +9,8 @@ import {
   FolderTree,
   LogOut,
   ExternalLink,
+  Menu,
+  X,
 } from "lucide-react";
 import { adminApi } from "../lib/api";
 import { Button } from "@/components/ui/button";
@@ -24,6 +27,7 @@ const navItems = [
 
 export default function AdminLayout() {
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const user = adminApi.getCurrentUser();
 
   const handleLogout = async () => {
@@ -32,11 +36,44 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-muted/30 flex">
-      {/* Sidebar */}
-      <aside className="w-64 bg-card border-r border-border flex flex-col fixed inset-y-0 left-0 z-30">
-        <div className="px-6 py-5 border-b border-border">
+    <div className="min-h-screen bg-muted/30 flex flex-col md:flex-row">
+      {/* Mobile Header */}
+      <header className="md:hidden h-16 bg-card border-b border-border flex items-center justify-between px-4 sticky top-0 z-40">
+        <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsSidebarOpen(true)}
+            aria-label="Open sidebar"
+          >
+            <Menu className="w-6 h-6" />
+          </Button>
           <Link to="/admin" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
+              eQ
+            </div>
+            <span className="font-semibold text-sm">eQourse Admin</span>
+          </Link>
+        </div>
+      </header>
+
+      {/* Backdrop (mobile only) */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/45 z-40 md:hidden transition-opacity"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          "bg-card border-r border-border flex flex-col fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out md:translate-x-0",
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <div className="px-6 py-5 border-b border-border flex items-center justify-between">
+          <Link to="/admin" className="flex items-center gap-2" onClick={() => setIsSidebarOpen(false)}>
             <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold">
               eQ
             </div>
@@ -45,6 +82,15 @@ export default function AdminLayout() {
               <div className="text-xs text-muted-foreground">Admin Panel</div>
             </div>
           </Link>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+            aria-label="Close sidebar"
+          >
+            <X className="w-5 h-5" />
+          </Button>
         </div>
 
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
@@ -53,6 +99,7 @@ export default function AdminLayout() {
               key={item.to}
               to={item.to}
               end={item.end}
+              onClick={() => setIsSidebarOpen(false)}
               className={({ isActive }) =>
                 cn(
                   "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors",
@@ -90,7 +137,7 @@ export default function AdminLayout() {
       </aside>
 
       {/* Main */}
-      <main className="flex-1 ml-64 min-h-screen">
+      <main className="flex-1 md:ml-64 min-h-screen">
         <Outlet />
       </main>
     </div>

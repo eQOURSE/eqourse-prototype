@@ -2,13 +2,13 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { BookOpen, Layers, List, ClipboardList, GitBranch, PackageCheck } from "lucide-react";
 
 const PARENT_LABEL = "Editorial, Publishing & Designing Services";
-const PARENT_HREF = "/content-services/editorial-publishing-designing-services";
+const PARENT_HREF = "/editorial-publishing-designing-services";
 
 const PublishingProductionPage = () => (
   <SubServicePageTemplate
     seoTitle="Publishing Production Services | eQOURSE"
     seoDescription="Publishing production services for educational content, including typesetting, page composition, templates, indexing and accessibility layout support."
-    seoCanonical="https://www.eqourse.com/content-services/editorial-publishing-designing-services/publishing-production"
+    seoCanonical="https://www.eqourse.com/publishing-production"
     seoKeywords="publishing production, education publishing production, typesetting, page composition, indexing services, proof review, production handover"
     parentLabel={PARENT_LABEL}
     parentHref={PARENT_HREF}
@@ -19,6 +19,8 @@ const PublishingProductionPage = () => (
     subtext="Publishing production support covers the structured handover between editorial, design, layout, conversion and final delivery teams - coordinating production-ready content, version control, asset tracking, proof review support and client-specific production requirements."
     ctaText="Request Production Support"
     ctaLink="/contact"
+    bannerImage="/assets/banners/editorial-publishing/Publishing Production for Learning Content.png"
+    bannerImageAlt="Publishing production services for learning content including XML workflows, typesetting and layout design by eQOURSE."
     introLabel="Production Workflow"
     introTitle="Production Support That"
     introGradient="Moves Content Forward"

@@ -242,7 +242,7 @@ const educationServices = [
     icon: BookOpen,
     title: "Institutional Learning Solutions",
     description: "Standards-aligned K–12 and higher education curriculum, instructional design, lesson plans, assessments, STEAM modules, digital learning assets, multilingual content, and scalable academic program development across global curriculum frameworks and learning ecosystems.",
-    link: "/content-services/custom-e-learning-content",
+    link: "/custom-e-learning-content",
     accent: "from-primary/20 to-accent/10",
   },
   {
@@ -305,7 +305,7 @@ const educationServices = [
     icon: FileEdit,
     title: "Editorial & Publishing Services",
     description: "Copy editing, proofreading, XML-first publishing workflows, EPUB conversion, metadata structuring, ONIX and CrossRef metadata support, typesetting, textbook layout design, accessibility layout remediation, print-ready production support, and large-scale publishing workflow optimization.",
-    link: "/content-services/editorial-publishing-designing-services",
+    link: "/editorial-publishing-designing-services",
     accent: "from-accent/15 to-primary/20",
   },
 ];

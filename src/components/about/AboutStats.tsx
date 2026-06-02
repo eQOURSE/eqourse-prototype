@@ -80,13 +80,13 @@ const AboutStats = () => {
              <div className="flex items-center gap-3">
                <CheckCircle2 className="w-8 h-8 text-indigo-500" />
                <div className="text-left">
-                 <div className="text-2xl font-bold bg-gradient-brand bg-clip-text text-transparent">98%+</div>
+                 <div className="text-2xl font-bold bg-gradient-brand bg-clip-text text-primary">98%+</div>
                  <div className="text-sm text-foreground/70 font-semibold uppercase tracking-wider">Annotation Accuracy</div>
                </div>
              </div>
              
              <div className="flex items-center gap-3">
-               <div className="w-12 h-12 bg-gradient-to-br from-primary to-teal-500 rounded-xl flex items-center justify-center shadow-soft transform rotate-3">
+               <div className="w-12 h-12 bg-gradient-to-br from-primary to-teal-500 rounded-xl flex items-center justify-center shadow-soft transform hover:rotate-3">
                  <span className="text-white font-black text-sm">ISO</span>
                </div>
                <div className="text-left font-semibold text-foreground/80 leading-tight">

@@ -8,7 +8,7 @@ const K12CurriculumPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/k12-curriculum-development"
     seoKeywords="K12 curriculum development, curriculum design, CBSE curriculum, ICSE curriculum, IB curriculum"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="K12 Curriculum Development"
     bannerImage="/assets/banners/content-services/custom-elearning/k12-curriculum-development.png"
     bannerImageAlt="K-12 curriculum development services banner depicting subject-centered, learner-centered and problem-oriented design for CBSE, ICSE, IB and State Board education by eQOURSE"

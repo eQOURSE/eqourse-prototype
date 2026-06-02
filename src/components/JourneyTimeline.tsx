@@ -82,15 +82,15 @@ const PulseRing = ({ isActive }: { isActive: boolean }) => (
     {/* Outer pulse ring */}
     <div
       className={`absolute inset-[-6px] rounded-full border-2 transition-all duration-500 ${isActive
-          ? "border-primary/50 animate-[pulse-ring_2s_ease-out_infinite]"
-          : "border-primary/20 animate-[pulse-ring_3s_ease-out_infinite]"
+        ? "border-primary/50 animate-[pulse-ring_2s_ease-out_infinite]"
+        : "border-primary/20 animate-[pulse-ring_3s_ease-out_infinite]"
         }`}
     />
     {/* Inner glow */}
     <div
       className={`absolute inset-[-3px] rounded-full transition-all duration-500 ${isActive
-          ? "bg-primary/20 shadow-[0_0_20px_hsl(170_82%_32%/0.4)]"
-          : "bg-primary/5"
+        ? "bg-primary/20 shadow-[0_0_20px_hsl(170_82%_32%/0.4)]"
+        : "bg-primary/5"
         }`}
     />
   </div>
@@ -102,18 +102,20 @@ const GlassPopup = ({
   position,
   onMouseEnter,
   onMouseLeave,
+  index
 }: {
   milestone: Milestone;
   position: "above" | "below";
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  index: number;
 }) => {
   return (
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`absolute z-50 w-[280px] md:w-[320px] left-1/2 -translate-x-1/2 transition-all duration-500 ease-out
-        ${position === "above" ? "bottom-full mb-4" : "top-full mt-4"}
+      className={`absolute z-70 w-[280px] md:w-[320px] left-1/2 -translate-x-1/2 transition-all duration-500 ease-out
+        ${position === "above" ? "bottom-full mb-4" : "top-full mt-4"} ${index === 0 ? "md:!left-0 md:!translate-x-0" : ""} ${index === 6 ? " md:!left-auto md:!right-0 md:!translate-x-0" : ""}
         animate-[popupFadeIn_0.4s_ease-out_forwards]
       `}
     >
@@ -165,7 +167,9 @@ const GlassPopup = ({
 
       {/* Arrow/pointer */}
       <div
-        className={`absolute left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 border border-white/20 ${position === "above"
+        className={`absolute left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 border border-white/20 
+          ${index === 0 ? "md:left-5 md:-translate-x-0" : ""} ${index === 6 ? " md:!left-auto md:!right-5 md:-translate-x-0" : ""}
+          ${position === "above"
             ? "bottom-[-6px] border-t-0 border-l-0"
             : "top-[-6px] border-b-0 border-r-0"
           }`}
@@ -289,7 +293,7 @@ const JourneyTimeline = () => {
         </div>
 
         {/* ── DESKTOP TIMELINE (horizontal) ── */}
-        <div className="hidden md:block" ref={timelineRef}>
+        <div className="hidden md:block overflow-x-clip overflow-y-visible" ref={timelineRef}>
           <div className="relative">
             {/* The main connecting line */}
             <div className="absolute top-1/2 left-0 right-0 h-[2px] -translate-y-1/2">
@@ -330,10 +334,10 @@ const JourneyTimeline = () => {
                   >
                     {/* Year label - alternating position */}
                     <div
-                      className={`absolute whitespace-nowrap text-center ${index % 2 === 0
-                          ? "top-full mt-4"
-                          : "bottom-full mb-4"
-                        }`}
+                      className={`absolute text-center ${index % 2 === 0
+                        ? "top-full mt-4"
+                        : "bottom-full mb-4"
+                        } ${index === 0 ? " md:left-0 md:text-left" : ""} ${index === milestones.length - 1 ? " md:right-0 md:text-right" : ""}`}
                     >
                       <div className="text-2xl font-heading font-bold text-foreground tracking-tight">
                         {milestone.year}
@@ -341,7 +345,7 @@ const JourneyTimeline = () => {
                       <div className="text-xs font-semibold text-primary mt-0.5 tracking-wide">
                         {milestone.title}
                       </div>
-                      <div className="text-[11px] text-muted-foreground mt-1 max-w-[140px] leading-snug">
+                      <div className="text-[11px] text-muted-foreground mt-1 min-w-[200px] w-full leading-snug">
                         {milestone.shortDesc}
                       </div>
                     </div>
@@ -358,8 +362,8 @@ const JourneyTimeline = () => {
                       {/* Main dot with thumbnail */}
                       <div
                         className={`relative w-14 h-14 rounded-full overflow-hidden border-[3px] transition-all duration-400 ${isActive
-                            ? "border-primary scale-125 shadow-[0_0_25px_hsl(170_82%_32%/0.5)]"
-                            : "border-primary/50 group-hover:border-primary group-hover:scale-110 shadow-[0_0_10px_hsl(170_82%_32%/0.2)]"
+                          ? "border-primary scale-125 shadow-[0_0_25px_hsl(170_82%_32%/0.5)]"
+                          : "border-primary/50 group-hover:border-primary group-hover:scale-110 shadow-[0_0_10px_hsl(170_82%_32%/0.2)]"
                           }`}
                       >
                         <img
@@ -386,6 +390,7 @@ const JourneyTimeline = () => {
                         position={popupPosition}
                         onMouseEnter={handlePopupEnter}
                         onMouseLeave={handlePopupLeave}
+                        index={index}
                       />
                     )}
                   </div>
@@ -423,8 +428,8 @@ const JourneyTimeline = () => {
                       <PulseRing isActive={isActive} />
                       <div
                         className={`relative w-10 h-10 rounded-full overflow-hidden border-[2px] transition-all duration-300 ${isActive
-                            ? "border-primary scale-110 shadow-[0_0_20px_hsl(170_82%_32%/0.5)]"
-                            : "border-primary/50"
+                          ? "border-primary scale-110 shadow-[0_0_20px_hsl(170_82%_32%/0.5)]"
+                          : "border-primary/50"
                           }`}
                       >
                         <img

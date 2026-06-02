@@ -2,13 +2,13 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { Tag, Layers, Hash, BookOpen, Library, Link2, ShieldCheck } from "lucide-react";
 
 const PARENT_LABEL = "Editorial, Publishing & Designing Services";
-const PARENT_HREF = "/content-services/editorial-publishing-designing-services";
+const PARENT_HREF = "/editorial-publishing-designing-services";
 
 const MetadataServicesPage = () => (
   <SubServicePageTemplate
     seoTitle="Metadata Services for Publishers | eQOURSE"
     seoDescription="eQOURSE delivers metadata tagging, content structuring, DOI preparation, ONIX, MARC records, Crossref and accessibility metadata for education publishing."
-    seoCanonical="https://www.eqourse.com/content-services/editorial-publishing-designing-services/metadata-services"
+    seoCanonical="https://www.eqourse.com/metadata-services"
     seoKeywords="metadata services, publishing metadata, content taxonomy services, DOI metadata, ONIX metadata, MARC records, Crossref metadata, accessibility metadata"
     parentLabel={PARENT_LABEL}
     parentHref={PARENT_HREF}
@@ -19,6 +19,8 @@ const MetadataServicesPage = () => (
     subtext="Metadata services improve the structure, discoverability and management of learning-content assets across catalogues, publishing systems and digital platforms - preparing descriptive metadata, file naming conventions, asset tags, taxonomy inputs and structured records."
     ctaText="Request Metadata Support"
     ctaLink="/contact"
+    bannerImage="/assets/banners/editorial-publishing/Metadata Services for Education Publishing.png"
+    bannerImageAlt="Metadata services for education publishing including taxonomy, ONIX, and MARC records by eQOURSE."
     introLabel="Content Discovery"
     introTitle="Metadata That Makes"
     introGradient="Content Findable"
@@ -104,7 +106,7 @@ const MetadataServicesPage = () => (
       { title: "Editorial Services", href: `${PARENT_HREF}/editorial-services` },
       { title: "Digital Conversion", href: `${PARENT_HREF}/digital-conversion` },
       { title: "Production Support", href: `${PARENT_HREF}/production-support` },
-      { title: "Accessibility Services", href: "/content-services/accessibility" },
+      { title: "Accessibility Services", href: "/accessibility" },
     ]}
   />
 );

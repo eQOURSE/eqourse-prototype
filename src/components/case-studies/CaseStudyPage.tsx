@@ -26,16 +26,16 @@ const CaseStudyPage = () => {
         const lowercaseTags = tags.map(t => t.toLowerCase());
 
         if (lowercaseTags.some(t => t.includes("worksheets") || t.includes("workbook") || t.includes("k12") || t.includes("content service"))) {
-          links.push({ label: "Workbook Development", href: "/content-services/custom-e-learning-content" });
+          links.push({ label: "Workbook Development", href: "/custom-e-learning-content" });
         }
         if (lowercaseTags.some(t => t.includes("video") || t.includes("pen-tab"))) {
-          links.push({ label: "E-Learning Video Solutions", href: "/content-services/elearning-video-solutions" });
+          links.push({ label: "E-Learning Video Solutions", href: "/elearning-video-solutions" });
         }
         if (lowercaseTags.some(t => t.includes("localization") || t.includes("language") || t.includes("multilingual"))) {
-          links.push({ label: "Localization Services", href: "/content-services/localization-services" });
+          links.push({ label: "Localization Services", href: "/localization-services" });
         }
         if (lowercaseTags.some(t => t.includes("sme") || t.includes("expert") || t.includes("smes"))) {
-          links.push({ label: "Subject Matter Experts", href: "/content-services/subject-matter-experts" });
+          links.push({ label: "Subject Matter Experts", href: "/smes" });
         }
         if (lowercaseTags.some(t => t.includes("data collection") || t.includes("speech data"))) {
           links.push({ label: "AI Data Collection", href: "/ai-data-services/data-collection" });

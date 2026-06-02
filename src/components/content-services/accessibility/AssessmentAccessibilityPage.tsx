@@ -2,21 +2,21 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { ClipboardCheck, Keyboard, Timer, MonitorPlay, ImageOff } from "lucide-react";
 
 const relatedPages = [
-  { title: "Accessible Media", href: "/content-services/accessibility/accessible-media-enhancements" },
-  { title: "Standards Compliance", href: "/content-services/accessibility/standards-compliance" },
-  { title: "Assistive Tech Compatibility", href: "/content-services/accessibility/assistive-technology-compatibility" },
-  { title: "Document Remediation", href: "/content-services/accessibility/document-content-remediation" },
-  { title: "Audit & Compliance Support", href: "/content-services/accessibility/audit-compliance-support" },
+  { title: "Accessible Media", href: "/accessible-media-enhancements" },
+  { title: "Standards Compliance", href: "/standards-compliance" },
+  { title: "Assistive Tech Compatibility", href: "/assistive-technology-compatibility" },
+  { title: "Document Remediation", href: "/document-content-remediation" },
+  { title: "Audit & Compliance Support", href: "/audit-compliance-support" },
 ];
 
 const AssessmentAccessibilityPage = () => (
   <SubServicePageTemplate
     seoTitle="Assessment Accessibility Services | eQOURSE"
     seoDescription="Design inclusive tests with accessible item types, keyboard navigation, and AT-aware review services."
-    seoCanonical="https://www.eqourse.com/content-services/accessibility/assessment-accessibility"
+    seoCanonical="https://www.eqourse.com/assessment-accessibility"
     seoKeywords="accessible assessments, inclusive test design, keyboard accessible quizzes, screen reader accessible tests"
     parentLabel="Accessibility"
-    parentHref="/content-services/accessibility"
+    parentHref="/accessibility"
     currentLabel="Assessment Accessibility"
     bannerImage="/assets/banners/content-services/accessibility/assessment-accessibility.png"
     bannerImageAlt="Assessment accessibility services banner showing inclusive item design, keyboard-only operability, screen reader testing and equitable WCAG-aligned testing experiences by eQOURSE"

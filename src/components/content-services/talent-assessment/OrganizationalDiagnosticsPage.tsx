@@ -5,10 +5,10 @@ const OrganizationalDiagnosticsPage = () => (
   <SubServicePageTemplate
     seoTitle="Organisational Diagnostics Services | eQOURSE"
     seoDescription="eQOURSE delivers organisational diagnostics support for workforce capability mapping, job role benchmarking, skill gap analysis and training needs analysis for global B2B teams."
-    seoCanonical="https://www.eqourse.com/content-services/talent-assessment-workforce-evaluation/organizational-diagnostics"
+    seoCanonical="https://www.eqourse.com/organizational-diagnostics"
     seoKeywords="organizational diagnostics, talent assessment, B2B workforce evaluation, eQOURSE"
     parentLabel="Talent Assessment & Workforce Evaluation"
-    parentHref="/content-services/talent-assessment-workforce-evaluation"
+    parentHref="/talent-assessment-workforce-evaluation"
     currentLabel="Organizational Diagnostics"
     preHeadline="ORGANISATIONAL DIAGNOSTICS"
     headline="Organisational Diagnostics for"
@@ -53,7 +53,7 @@ const OrganizationalDiagnosticsPage = () => (
     ctaHeadline="Build a Clearer View of Workforce Capability"
     ctaSubtext="eQOURSE develops structured diagnostics, benchmarks and training needs analysis assets for HR, L&D and workforce planning teams managing capability assessment at organisational scale."
     ctaButtonText="Request Diagnostic Support"
-    relatedPages={[{"title":"Psychometric Assessments","href":"/content-services/talent-assessment-workforce-evaluation/psychometric-assessments"},{"title":"Skill Assessments","href":"/content-services/talent-assessment-workforce-evaluation/skill-assessments"},{"title":"Candidate Evaluation","href":"/content-services/talent-assessment-workforce-evaluation/candidate-evaluation"}]}
+    relatedPages={[{"title":"Psychometric Assessments","href":"/psychometric-assessments"},{"title":"Skill Assessments","href":"/skill-assessments"},{"title":"Candidate Evaluation","href":"/candidate-evaluation"}]}
   />
 );
 

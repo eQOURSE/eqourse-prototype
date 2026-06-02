@@ -63,13 +63,13 @@ const ContentServicesMegaMenu = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <nav
-      className="absolute top-full -left-[450px] w-[1100px] bg-card/95 rounded-3xl border border-border/50 shadow-elevated animate-slide-up z-50 overflow-hidden"
+      className="absolute top-full -left-[28vw] w-[1100px] bg-card/95 rounded-3xl border border-border/50 shadow-elevated animate-slide-up z-50  max-h-[80vh]"
       style={{ backdropFilter: "blur(20px)" }}
       aria-label="Content Services navigation"
     >
       <div className="flex min-h-[450px]">
         {/* Left: Categories (300px) */}
-        <div className="w-[300px] border-r border-border/40 py-6 bg-secondary/30 flex flex-col" role="list" aria-label="Service categories">
+        <div className="w-[300px] border-r border-border/40 py-6 bg-secondary/30 flex flex-col overflow-auto max-h-[80vh]" role="list" aria-label="Service categories">
           <span className="px-6 py-2 text-[11px] font-bold uppercase tracking-widest text-muted-foreground/70">Our Expertise</span>
           {contentServicesCategories.map((c, i) => {
             const Icon = c.icon;
@@ -93,7 +93,7 @@ const ContentServicesMegaMenu = ({ onClose }: { onClose: () => void }) => {
         </div>
 
         {/* Middle: Sub‑services */}
-        <div className="flex-1 py-6 px-6 border-r border-border/40 bg-card">
+        <div className="flex-1 py-6 px-6 border-r border-border/40 ">
           <Link
             to={cat.href}
             className="flex items-center gap-2 px-3 py-2 mb-4 text-xl font-bold text-foreground hover:text-primary transition-colors group"
@@ -130,8 +130,8 @@ const ContentServicesMegaMenu = ({ onClose }: { onClose: () => void }) => {
           </div>
         </div>
 
-        {/* Right: Preview Panel (320px) - shows sub-service highlights OR category overview */}
-        <div className="w-[320px] p-6 flex flex-col bg-card/80">
+        {/* Right: Preview Panel (320px) — shows sub-service highlights OR category overview */}
+        <div className="w-[320px] p-6 flex flex-col overflow-auto max-h-[80vh]">
           {hoveredSub && hoveredSub.serviceHighlights && hoveredSub.serviceHighlights.length > 0 ? (
             /* ── Sub-service Highlights View ── */
             <div className="flex flex-col h-full animate-fade-in" key={`sub-${hoveredCatIndex}-${hoveredSubIndex}`}>
@@ -180,7 +180,7 @@ const ContentServicesMegaMenu = ({ onClose }: { onClose: () => void }) => {
           ) : (
             /* ── Category Overview (default) ── */
             <div className="flex flex-col h-full animate-fade-in group" key={`cat-${cat.label}`}>
-              <div className="relative w-full h-[220px] rounded-2xl overflow-hidden mb-5 shadow-md border border-border/30 bg-secondary/30">
+              <div className="relative w-full h-[220px]  rounded-2xl overflow-hidden mb-5 shadow-md border border-border/30 bg-secondary/30">
                 {cat.image ? (
                   <img src={cat.image} alt={cat.imageAlt || cat.label} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 ) : (
@@ -315,7 +315,7 @@ const videoSampleLinks = [
 
 const SamplesMegaMenu = ({ onClose }: { onClose: () => void }) => (
   <div
-    className="absolute top-full -left-[430px] w-[1040px] bg-card/95 rounded-3xl border border-border/50 shadow-elevated animate-slide-up z-50 overflow-hidden"
+    className="absolute top-full -left-[45vw] w-[1040px] bg-card/95 rounded-3xl border border-border/50 shadow-elevated animate-slide-up z-50 overflow-hidden"
     style={{ backdropFilter: "blur(20px)" }}
   >
     <div className="grid grid-cols-3 min-h-[440px]">
@@ -563,6 +563,23 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
   const openDropdown = (label: string) => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
@@ -650,13 +667,13 @@ const Navbar = () => {
               to="/"
               className="flex items-center flex-shrink-0 relative h-8 sm:h-10"
             >
-              {/* Dark logo - visible on light/scrolled backgrounds */}
+              {/* Dark logo — visible on light/scrolled backgrounds */}
               <img
                 src={eqourseLogoDark}
                 alt="eQOURSE Logo - Professional AI Data and Content Services"
                 className={`h-8 sm:h-10 w-auto object-contain absolute left-0 top-0 transition-opacity duration-300 ${transparent ? 'opacity-0' : 'opacity-100'}`}
               />
-              {/* Light logo - visible on transparent/dark hero background */}
+              {/* Light logo — visible on transparent/dark hero background */}
               <img
                 src={eqourseLogoLight}
                 alt="eQOURSE Logo - Professional AI Data and Content Services"
@@ -738,7 +755,7 @@ const Navbar = () => {
 
           {/* Mobile menu */}
           {isOpen && (
-            <div className="lg:hidden glass border-t border-border/50 animate-slide-up max-h-[80vh] overflow-y-auto">
+            <div className="lg:hidden glass border-t border-border/50 animate-slide-up max-h-[80dvh] overflow-y-auto shadow-sm">
               <div className="container mx-auto py-4 px-4 flex flex-col gap-2">
                 {navLinks.map((link) => (
                   <div key={link.label}>

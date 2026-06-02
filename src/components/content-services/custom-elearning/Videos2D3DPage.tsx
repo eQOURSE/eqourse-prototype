@@ -8,7 +8,7 @@ const Videos2D3DPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/2d-3d-videos"
     seoKeywords="2D animation, 3D animation, educational videos, animated explainers, whiteboard animation, motion graphics"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="2D & 3D Videos"
     bannerImage="/assets/banners/content-services/custom-elearning/2d-3d-videos.png"
     bannerImageAlt="2D and 3D educational video solutions banner showing animated explainer videos, motion graphics and whiteboard animations produced by eQOURSE for K-12 and higher education"

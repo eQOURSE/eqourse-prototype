@@ -2,21 +2,21 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { FileSearch, ShieldCheck, FileCheck, ClipboardCheck, Eye } from "lucide-react";
 
 const relatedPages = [
-  { title: "Standards Compliance", href: "/content-services/accessibility/standards-compliance" },
-  { title: "Assistive Tech Compatibility", href: "/content-services/accessibility/assistive-technology-compatibility" },
-  { title: "Document Remediation", href: "/content-services/accessibility/document-content-remediation" },
-  { title: "Accessible Media", href: "/content-services/accessibility/accessible-media-enhancements" },
-  { title: "Assessment Accessibility", href: "/content-services/accessibility/assessment-accessibility" },
+  { title: "Standards Compliance", href: "/standards-compliance" },
+  { title: "Assistive Tech Compatibility", href: "/assistive-technology-compatibility" },
+  { title: "Document Remediation", href: "/document-content-remediation" },
+  { title: "Accessible Media", href: "/accessible-media-enhancements" },
+  { title: "Assessment Accessibility", href: "/assessment-accessibility" },
 ];
 
 const AuditCompliancePage = () => (
   <SubServicePageTemplate
     seoTitle="Audit & Compliance Support for Digital Accessibility | eQOURSE"
     seoDescription="Comprehensive accessibility audits, gap analysis, and VPAT/ACR documentation support for educational content and platforms."
-    seoCanonical="https://www.eqourse.com/content-services/accessibility/audit-compliance-support"
+    seoCanonical="https://www.eqourse.com/audit-compliance-support"
     seoKeywords="accessibility audit services, WCAG gap analysis, VPAT creation, ACR documentation, digital accessibility compliance, Content Services accessibility auditing"
     parentLabel="Accessibility"
-    parentHref="/content-services/accessibility"
+    parentHref="/accessibility"
     currentLabel="Audit & Compliance Support"
     bannerImage="/assets/banners/content-services/accessibility/audit-compliance-support.png"
     bannerImageAlt="Accessibility audit and compliance support services banner showing comprehensive WCAG audits, gap analysis, VPAT and ACR documentation by eQOURSE for educational platforms"

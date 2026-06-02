@@ -8,7 +8,7 @@ const EbookCreationPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/ebook-creation"
     seoKeywords="ebook creation, interactive ebooks, digital textbooks, EPUB3, educational ebooks"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="E-Book Creation"
     bannerImage="/assets/banners/content-services/custom-elearning/ebook-creation.png"
     bannerImageAlt="Interactive eBook creation services illustration showing EPUB3 digital textbooks with embedded videos, quizzes and accessibility features built by eQOURSE"

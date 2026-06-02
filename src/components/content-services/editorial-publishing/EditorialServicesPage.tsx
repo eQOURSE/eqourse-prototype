@@ -2,13 +2,13 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { Pencil, BookOpenCheck, Search, PenTool, FileSearch, BookMarked } from "lucide-react";
 
 const PARENT_LABEL = "Editorial, Publishing & Designing Services";
-const PARENT_HREF = "/content-services/editorial-publishing-designing-services";
+const PARENT_HREF = "/editorial-publishing-designing-services";
 
 const EditorialServicesPage = () => (
   <SubServicePageTemplate
     seoTitle="Editorial Services for Learning and Publishing Content | eQOURSE"
     seoDescription="eQOURSE delivers copy editing, proofreading, substantive, developmental and technical editing for education, publishing and digital learning content."
-    seoCanonical="https://www.eqourse.com/content-services/editorial-publishing-designing-services/editorial-services"
+    seoCanonical="https://www.eqourse.com/editorial-services"
     seoKeywords="editorial services, copyediting services, proofreading services, educational content editing, substantive editing, developmental editing, technical editing"
     parentLabel={PARENT_LABEL}
     parentHref={PARENT_HREF}
@@ -19,6 +19,8 @@ const EditorialServicesPage = () => (
     subtext="eQOURSE delivers editorial services for education publishers, EdTech teams and institutions working with curriculum content, assessments, learning resources and digital products - including copyediting, language refinement, consistency checks and style-guide application."
     ctaText="Request Editorial Support"
     ctaLink="/contact"
+    bannerImage="/assets/banners/editorial-publishing/Editorial Services for Global Learning Content.png"
+    bannerImageAlt="Editorial services for global learning content including copy editing, proofreading, and developmental editing by eQOURSE."
     introLabel="Content Quality"
     introTitle="Editorial Support That"
     introGradient="Preserves Intent"
@@ -98,8 +100,8 @@ const EditorialServicesPage = () => (
       { title: "Publishing Production", href: `${PARENT_HREF}/publishing-production` },
       { title: "Digital Conversion", href: `${PARENT_HREF}/digital-conversion` },
       { title: "Metadata Services", href: `${PARENT_HREF}/metadata-services` },
-      { title: "Accessibility Services", href: "/content-services/accessibility" },
-      { title: "Custom E-Learning Content", href: "/content-services/custom-e-learning-content" },
+      { title: "Accessibility Services", href: "/accessibility" },
+      { title: "Custom E-Learning Content", href: "/custom-e-learning-content" },
     ]}
   />
 );

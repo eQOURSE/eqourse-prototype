@@ -16,7 +16,7 @@ const K12HigherEducationPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/k12-and-higher-education"
     seoKeywords="K12 content services, higher education solutions, curriculum development, e-learning content, academic content"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="K12 & Higher Education"
     bannerImage="/assets/banners/content-services/custom-elearning/k12-and-higher-education.png"
     bannerImageAlt="K-12 and higher education content development illustration showing students learning with curriculum-aligned digital materials and SME-led instructional design at eQOURSE"

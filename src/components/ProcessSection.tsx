@@ -156,8 +156,8 @@ const ProcessTimeline = ({ steps, loopLabel }: { steps: Step[]; loopLabel: strin
 
       {/* Mobile: Vertical timeline */}
       <div className="lg:hidden">
-        <div className="relative pl-[72px]">
-          {/* Vertical line - centered under the icons */}
+        <div className="relative pl-[60px]">
+          {/* Vertical line — centered under the icons */}
           <div className="absolute left-[28px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/40 via-primary/20 to-primary/40" />
 
           {steps.map((step, i) => {

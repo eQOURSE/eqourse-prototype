@@ -8,7 +8,7 @@ const subServices = [
     icon: ShieldCheck,
     title: "Standards Compliance",
     description: "Ensure your digital learning content meets WCAG 2.2, Section 508, EN 301 549, and EPUB 3 accessibility standards.",
-    link: "/content-services/accessibility/standards-compliance",
+    link: "/standards-compliance",
     colorClass: "group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]",
     iconColor: "text-blue-500",
     bgClass: "bg-blue-500/10 group-hover:bg-blue-500 group-hover:text-white"
@@ -17,7 +17,7 @@ const subServices = [
     icon: FileText,
     title: "Document & eContent Remediation",
     description: "Transform PDFs, EPUBs, Word docs, and LMS courses into fully accessible, screen-reader optimized formats.",
-    link: "/content-services/accessibility/document-content-remediation",
+    link: "/document-content-remediation",
     colorClass: "group-hover:border-teal-500/50 group-hover:shadow-[0_0_20px_rgba(20,184,166,0.15)]",
     iconColor: "text-teal-500",
     bgClass: "bg-teal-500/10 group-hover:bg-teal-500 group-hover:text-white"
@@ -26,7 +26,7 @@ const subServices = [
     icon: Video,
     title: "Accessible Media & Enhancements",
     description: "Make multimedia content inclusive with expert alt text, closed captioning, audio descriptions, and accessible STEM notation.",
-    link: "/content-services/accessibility/accessible-media-enhancements",
+    link: "/accessible-media-enhancements",
     colorClass: "group-hover:border-purple-500/50 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]",
     iconColor: "text-purple-500",
     bgClass: "bg-purple-500/10 group-hover:bg-purple-500 group-hover:text-white"
@@ -35,7 +35,7 @@ const subServices = [
     icon: ClipboardCheck,
     title: "Assessment Accessibility",
     description: "Design inclusive tests with accessible item types, keyboard navigation, and cognitive-friendly visual presentations.",
-    link: "/content-services/accessibility/assessment-accessibility",
+    link: "/assessment-accessibility",
     colorClass: "group-hover:border-emerald-500/50 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]",
     iconColor: "text-emerald-500",
     bgClass: "bg-emerald-500/10 group-hover:bg-emerald-500 group-hover:text-white"
@@ -44,7 +44,7 @@ const subServices = [
     icon: MonitorPlay,
     title: "Assistive Technology Compatibility",
     description: "Verify content functionality across major screen readers (JAWS, NVDA, VoiceOver) and alternative input devices.",
-    link: "/content-services/accessibility/assistive-technology-compatibility",
+    link: "/assistive-technology-compatibility",
     colorClass: "group-hover:border-amber-500/50 group-hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]",
     iconColor: "text-amber-500",
     bgClass: "bg-amber-500/10 group-hover:bg-amber-500 group-hover:text-white"
@@ -53,7 +53,7 @@ const subServices = [
     icon: FileSearch,
     title: "Audit & Compliance Support",
     description: "Comprehensive accessibility audits, actionable remediation roadmaps, and VPAT / ACR documentation support.",
-    link: "/content-services/accessibility/audit-compliance-support",
+    link: "/audit-compliance-support",
     colorClass: "group-hover:border-rose-500/50 group-hover:shadow-[0_0_20px_rgba(244,63,94,0.15)]",
     iconColor: "text-rose-500",
     bgClass: "bg-rose-500/10 group-hover:bg-rose-500 group-hover:text-white"

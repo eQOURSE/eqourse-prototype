@@ -8,7 +8,7 @@ const STEMCurriculumPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/stem-curriculum-services"
     seoKeywords="STEM curriculum, STEM education, science curriculum, coding curriculum, robotics, K12 STEM"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="STEM Curriculum Services"
     bannerImage="/assets/banners/content-services/custom-elearning/stem-curriculum-services.png"
     bannerImageAlt="STEM curriculum development services banner showing science, technology, engineering and mathematics integrated learning, coding and robotics programs by eQOURSE"

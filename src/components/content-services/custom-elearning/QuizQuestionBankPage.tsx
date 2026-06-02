@@ -8,7 +8,7 @@ const QuizQuestionBankPage = () => (
     seoCanonical="https://www.eqourse.com/content-services/custom-e-learning-content/quiz-question-bank"
     seoKeywords="quiz development, question bank, MCQ question bank, adaptive testing, exam-pattern questions"
     parentLabel="Custom E-Learning Content"
-    parentHref="/content-services/custom-e-learning-content"
+    parentHref="/custom-e-learning-content"
     currentLabel="Quiz & Question Bank"
     bannerImage="/assets/banners/content-services/custom-elearning/quiz-question-bank.png"
     bannerImageAlt="Quiz and question bank development services banner showing MCQ pools, case-based questions and adaptive question banks crafted by eQOURSE subject matter experts"

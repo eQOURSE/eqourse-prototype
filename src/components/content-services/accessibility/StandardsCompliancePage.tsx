@@ -2,21 +2,21 @@ import SubServicePageTemplate from "../shared/SubServicePageTemplate";
 import { ShieldCheck, Globe, BookOpen, Scale } from "lucide-react";
 
 const relatedPages = [
-  { title: "Document Remediation", href: "/content-services/accessibility/document-content-remediation" },
-  { title: "Accessible Media", href: "/content-services/accessibility/accessible-media-enhancements" },
-  { title: "Audit & Compliance Support", href: "/content-services/accessibility/audit-compliance-support" },
-  { title: "Assessment Accessibility", href: "/content-services/accessibility/assessment-accessibility" },
-  { title: "Assistive Tech Compatibility", href: "/content-services/accessibility/assistive-technology-compatibility" },
+  { title: "Document Remediation", href: "/document-content-remediation" },
+  { title: "Accessible Media", href: "/accessible-media-enhancements" },
+  { title: "Audit & Compliance Support", href: "/audit-compliance-support" },
+  { title: "Assessment Accessibility", href: "/assessment-accessibility" },
+  { title: "Assistive Tech Compatibility", href: "/assistive-technology-compatibility" },
 ];
 
 const StandardsCompliancePage = () => (
   <SubServicePageTemplate
     seoTitle="Accessibility Standards Compliance | eQOURSE"
     seoDescription="eQOURSE provides technical guidance and structural alignment services to help your digital learning content meet WCAG, Section 508, EN 301 549, and EPUB 3 standards."
-    seoCanonical="https://www.eqourse.com/content-services/accessibility/standards-compliance"
+    seoCanonical="https://www.eqourse.com/standards-compliance"
     seoKeywords="accessibility standards compliance, WCAG compliance services, Section 508 alignment, EN 301 549 support, EPUB 3 accessibility, digital learning compliance"
     parentLabel="Accessibility"
-    parentHref="/content-services/accessibility"
+    parentHref="/accessibility"
     currentLabel="Standards Compliance"
     bannerImage="/assets/banners/content-services/accessibility/standards-compliance.png"
     bannerImageAlt="Accessibility standards compliance services banner illustrating WCAG 2.1 and 2.2, Section 508, EN 301 549 and EPUB 3 alignment for digital learning content by eQOURSE"
