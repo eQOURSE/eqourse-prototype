@@ -105,7 +105,8 @@ router.post("/talent-pool/smart-filter", workforceCtrl.adminSmartFilterTalent);
 
 // ── Vendor Registration & Verification ─────────────────────
 router.get("/vendors", workforceCtrl.adminListVendors);
-router.get("/vendors/:id/documents/:kind/:index?", workforceCtrl.adminDownloadVendorDocument);
+router.get("/vendors/:id/documents/registration", workforceCtrl.adminDownloadVendorRegistrationDocument);
+router.get("/vendors/:id/documents/tax/:index", workforceCtrl.adminDownloadVendorTaxDocument);
 router.patch("/vendors/:id", workforceCtrl.adminUpdateVendor);
 router.delete("/vendors/:id", workforceCtrl.adminDeleteVendor);
 router.post("/vendors/smart-filter", workforceCtrl.adminSmartFilterVendors);

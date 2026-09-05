@@ -52,3 +52,7 @@ test("stored attachments resolve only inside explicitly allowed folders", () => 
   assert.equal(resolveStoredAttachment({ url: "/api/uploads/vendor-tax/itr.pdf" }, new Set(["resumes"])), null);
   assert.equal(resolveStoredAttachment({ url: "/api/uploads/resumes/../secret.pdf" }, new Set(["resumes"])), null);
 });
+
+test("admin routes compile with the installed Express 5 router", () => {
+  assert.doesNotThrow(() => require("../router/adminRouter"));
+});

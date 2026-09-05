@@ -210,11 +210,11 @@ const adminDownloadTalentResume = async (req, res) => {
   }
 };
 
-const adminDownloadVendorDocument = async (req, res) => {
+const adminDownloadVendorDocument = async (req, res, requestedKind) => {
   try {
     const vendor = await VendorRegistration.findById(req.params.id).lean();
     if (!vendor) return res.status(404).json({ success: false, message: "Vendor not found." });
-    const { kind } = req.params;
+    const kind = requestedKind || req.params.kind;
     let attachment;
     let allowedFolders;
     if (kind === "registration") {
@@ -235,6 +235,9 @@ const adminDownloadVendorDocument = async (req, res) => {
     return res.status(500).json({ success: false, message: "Unable to download document." });
   }
 };
+
+const adminDownloadVendorRegistrationDocument = (req, res) => adminDownloadVendorDocument(req, res, "registration");
+const adminDownloadVendorTaxDocument = (req, res) => adminDownloadVendorDocument(req, res, "tax");
 
 const adminDeleteVendor = async (req, res) => {
   try {
@@ -293,7 +296,8 @@ module.exports = {
   adminUpdateTalent,
   adminUpdateVendor,
   adminDownloadTalentResume,
-  adminDownloadVendorDocument,
+  adminDownloadVendorRegistrationDocument,
+  adminDownloadVendorTaxDocument,
   adminDeleteVendor,
   adminSmartFilterTalent,
   adminSmartFilterVendors,
