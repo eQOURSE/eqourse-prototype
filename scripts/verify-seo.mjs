@@ -253,6 +253,9 @@ if (!headersConfig.includes("/admin/*") || !headersConfig.includes("X-Robots-Tag
 if (!nginxConfig.includes("try_files $uri/index.html $uri =404;")) {
   failures.push("Nginx config does not internally serve prerendered routes at no-trailing-slash canonicals");
 }
+if (!nginxConfig.includes("location = /career {") || !nginxConfig.includes("try_files /career/index.html =404;")) {
+  failures.push("Nginx config is missing query-safe handling for career and vendor share links");
+}
 if (/try_files[^;]*\$uri\//.test(nginxConfig.replace("$uri/index.html", ""))) {
   failures.push("Nginx config contains a directory try_files fallback that can force trailing slashes");
 }

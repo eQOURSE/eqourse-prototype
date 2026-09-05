@@ -998,6 +998,18 @@ const Navbar = () => {
               >
                 <Link to="/free-pilot">Free Pilot</Link>
               </Button>
+              {isHome && (
+                <Link
+                  to="/career?pathway=vendor#future-opportunities"
+                  className={`hidden xl:inline-flex min-h-9 items-center rounded-md px-2 text-xs font-semibold transition-colors ${
+                    transparent
+                      ? "text-white/90 hover:bg-white/10 hover:text-white"
+                      : "text-primary hover:bg-primary/5"
+                  }`}
+                >
+                  Register as Vendor
+                </Link>
+              )}
               <Button asChild size="sm" className="bg-gradient-primary border-0 text-primary-foreground shadow-soft hover:opacity-90 transition-opacity">
                 <Link to="/contact-us">Contact Us</Link>
               </Button>
@@ -1130,6 +1142,15 @@ const Navbar = () => {
                     </div>
                   );
                 })}
+                {isHome && (
+                  <Link
+                    to="/career?pathway=vendor#future-opportunities"
+                    onClick={() => setIsOpen(false)}
+                    className="flex min-h-12 items-center justify-center rounded-xl border border-primary/30 bg-primary/5 px-4 text-base font-bold text-primary transition-colors hover:bg-primary/10"
+                  >
+                    Register as a Vendor
+                  </Link>
+                )}
                 <Button asChild className="mt-4 bg-gradient-primary border-0 text-primary-foreground shadow-md h-12 rounded-xl text-base font-bold">
                   <Link to="/contact-us" onClick={() => setIsOpen(false)}>Contact Us</Link>
                 </Button>
