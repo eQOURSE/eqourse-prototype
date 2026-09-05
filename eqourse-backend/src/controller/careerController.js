@@ -3,6 +3,7 @@ const JobApplication = require("../model/jobApplication");
 const logger = require("../utils/logger");
 const { extractCandidateText } = require("../utils/chatResponse");
 const path = require("path");
+const { sendStoredAttachment, removeUploadedFiles } = require("../utils/privateUploads");
 const {
   sendApplicationReceivedNotification,
   sendCandidateConfirmation,
@@ -161,6 +162,7 @@ const getJobOpeningBySlug = async (req, res) => {
  * Supports multipart/form-data for resume upload
  */
 const submitApplication = async (req, res) => {
+  let applicationSaved = false;
   try {
     const { jobId } = req.params;
     const {
@@ -182,6 +184,7 @@ const submitApplication = async (req, res) => {
 
     // Validate required fields
     if (!fullName || !email || !qualification) {
+      await removeUploadedFiles([req.file]);
       return res.status(400).json({
         success: false,
         message: "Missing required fields: fullName, email, qualification",
@@ -191,6 +194,7 @@ const submitApplication = async (req, res) => {
     // Check job exists and is active
     const job = await JobOpening.findById(jobId);
     if (!job || job.status !== "active") {
+      await removeUploadedFiles([req.file]);
       return res.status(404).json({
         success: false,
         message: "This position is no longer accepting applications.",
@@ -200,6 +204,7 @@ const submitApplication = async (req, res) => {
     // Check for duplicate application
     const existing = await JobApplication.findOne({ jobId, email: email.toLowerCase() });
     if (existing) {
+      await removeUploadedFiles([req.file]);
       return res.status(409).json({
         success: false,
         message: "You have already applied for this position. Our team will review your application and get back to you.",
@@ -220,6 +225,7 @@ const submitApplication = async (req, res) => {
 
     // Validate at least one resume source
     if (!resumeFile && !safeResumeDriveLink) {
+      await removeUploadedFiles([req.file]);
       return res.status(400).json({
         success: false,
         message: "Please upload your resume or provide a Google Drive link.",
@@ -258,6 +264,7 @@ const submitApplication = async (req, res) => {
     });
 
     await application.save();
+    applicationSaved = true;
 
     // Increment application count on the job opening
     await JobOpening.findByIdAndUpdate(jobId, { $inc: { applicationCount: 1 } });
@@ -281,6 +288,7 @@ const submitApplication = async (req, res) => {
       },
     });
   } catch (error) {
+    if (!applicationSaved) await removeUploadedFiles([req.file]);
     // Handle MongoDB duplicate key error (race condition on the unique index)
     if (error.code === 11000) {
       return res.status(409).json({
@@ -290,6 +298,20 @@ const submitApplication = async (req, res) => {
     }
     logger.error("Error submitting application:", error);
     return res.status(500).json({ success: false, message: "Server error. Please try again later." });
+  }
+};
+
+/** GET /api/admin/applications/:id/resume — authenticated private download. */
+const adminDownloadApplicationResume = async (req, res) => {
+  try {
+    const application = await JobApplication.findById(req.params.id).lean();
+    if (!application?.resumeFile) {
+      return res.status(404).json({ success: false, message: "Resume not found." });
+    }
+    return sendStoredAttachment(res, application.resumeFile, new Set(["resumes"]));
+  } catch (error) {
+    logger.error("Application resume download failed:", error);
+    return res.status(500).json({ success: false, message: "Unable to download resume." });
   }
 };
 
@@ -861,6 +883,7 @@ module.exports = {
   adminDeleteJobOpening,
   adminListApplications,
   adminGetApplication,
+  adminDownloadApplicationResume,
   adminUpdateApplicationStatus,
   adminUpdateApplicationNotes,
   adminSmartFilter,

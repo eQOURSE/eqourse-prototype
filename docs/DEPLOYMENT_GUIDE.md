@@ -213,6 +213,18 @@ Open the active HTTPS `www.eqourse.com` server block:
 sudo nano /etc/nginx/sites-available/eqourse
 ```
 
+In every eQOURSE HTTP/HTTPS server block (both `eqourse.com` and
+`www.eqourse.com`), add this include before route handling:
+
+```nginx
+include /opt/eqourse-prototype/deploy/nginx/eqourse-canonical-origin.conf;
+```
+
+This is required on the non-`www` HTTPS block as well. Without it,
+`https://eqourse.com/...` can return `200` and create duplicate-host canonical
+signals. The guard sends HTTP and bare-domain requests directly to the final
+`https://www.eqourse.com/...` URL in one permanent redirect.
+
 Inside that server block, remove the existing public `location /`, admin
 locations, trailing-slash handling and 404 handling, then add this include:
 
@@ -238,10 +250,13 @@ single `301` back to the canonical URL:
 ```bash
 curl -I https://www.eqourse.com/blog/scaling-exam-performance-blueprint-aligned-test-prep-content
 curl -I https://www.eqourse.com/blog/scaling-exam-performance-blueprint-aligned-test-prep-content/
+curl -I https://eqourse.com/ai-data-services
+curl -I http://eqourse.com/ai-data-services
 ```
 
 The first command must return `200`; the second must return `301` with a
-non-trailing-slash `Location` value.
+non-trailing-slash `Location` value. Both bare-domain checks must return one
+`301` whose `Location` is the same path on `https://www.eqourse.com`.
 
 ---
 

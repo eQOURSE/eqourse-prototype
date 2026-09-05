@@ -178,6 +178,30 @@ export async function del<T = { ok: boolean }>(path: string): Promise<T> {
   return parseResponse<T>(res);
 }
 
+/** Download an authenticated private file without exposing its storage URL. */
+export async function downloadFile(path: string, fallbackFilename: string): Promise<void> {
+  const res = await fetch(`${getBaseUrl()}${path}`, {
+    method: "GET",
+    headers: buildHeaders(),
+  });
+  if (!res.ok) await parseResponse<never>(res);
+
+  const disposition = res.headers.get("Content-Disposition") || "";
+  const utf8Name = disposition.match(/filename\*=UTF-8''([^;]+)/i)?.[1];
+  const plainName = disposition.match(/filename="?([^";]+)"?/i)?.[1];
+  let filename = fallbackFilename;
+  try { filename = decodeURIComponent(utf8Name || plainName || fallbackFilename); } catch { /* keep fallback */ }
+
+  const objectUrl = URL.createObjectURL(await res.blob());
+  const anchor = document.createElement("a");
+  anchor.href = objectUrl;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(objectUrl);
+}
+
 /**
  * Upload a file via multipart/form-data.
  * Does NOT set Content-Type header (browser sets it with boundary).

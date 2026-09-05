@@ -24,6 +24,7 @@ const adminRouter = require("./src/router/adminRouter");
 
 // Upload directory for static file serving
 const { UPLOAD_DIR } = require("./src/controller/uploadController");
+const { isPrivateUploadRequest, removeUploadedFiles } = require("./src/utils/privateUploads");
 
 const app = express();
 
@@ -31,15 +32,21 @@ const app = express();
 app.use(cors({
   origin: '*',
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  exposedHeaders: ["Content-Disposition"],
   credentials: true,
 }));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(logger.requestLogger);
 
-// Serve uploaded files
-app.use("/api/uploads", express.static(UPLOAD_DIR));
-app.use("/uploads", express.static(UPLOAD_DIR)); // Fallback for existing resume URLs without /api prefix
+// Public media remains static, but candidate resumes and vendor verification
+// documents are only downloadable through authenticated admin endpoints.
+const blockPrivateUploads = (req, res, next) => {
+  if (isPrivateUploadRequest(req.path)) return res.status(404).end();
+  return next();
+};
+app.use("/api/uploads", blockPrivateUploads, express.static(UPLOAD_DIR));
+app.use("/uploads", blockPrivateUploads, express.static(UPLOAD_DIR));
 
 // ── Public Routes ────────────────────────────────────────────────────────────
 app.use("/api/contact", contactRouter);       // POST /api/contact (public submit)
@@ -50,6 +57,17 @@ app.use("/api/sample-categories", sampleRouter); // GET /api/sample-categories
 app.use("/api/samples", sampleRouter);           // GET /api/samples, GET /api/samples/files
 app.use("/api/chat", chatRouter);                 // POST /api/chat (Gemini AI proxy)
 app.use("/api/careers", careerRouter);               // GET /api/careers, POST /api/careers/:jobId/apply
+app.use("/api/careers", async (error, req, res, next) => {
+  await removeUploadedFiles(req.file ? [req.file] : req.files);
+  if (res.headersSent) return next(error);
+  logger.warn(`Career upload rejected: ${error.message}`);
+  const message = error.code === "LIMIT_FILE_SIZE"
+    ? "Each uploaded file must be 5 MB or smaller."
+    : error.code === "LIMIT_UNEXPECTED_FILE"
+      ? "Too many files or an unexpected upload field was provided."
+      : error.message || "The uploaded document could not be accepted.";
+  return res.status(400).json({ success: false, message });
+});
 
 // ── Admin Routes ─────────────────────────────────────────────────────────────
 app.use("/api/admin", adminRouter);            // All admin routes under /api/admin/*

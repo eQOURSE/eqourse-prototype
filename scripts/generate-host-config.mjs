@@ -30,6 +30,16 @@ if (invalidTargets.length > 0) {
   throw new Error(`Redirect targets missing from pageSeo: ${invalidTargets.map(({ to }) => to).join(", ")}`);
 }
 
+const redirectSources = new Set(redirects.map(({ from }) => from));
+const redirectChains = redirects.filter(({ to }) => redirectSources.has(to));
+if (redirectChains.length > 0) {
+  throw new Error(
+    `Redirect chains found; every legacy URL must point directly to a canonical page: ${redirectChains
+      .map(({ from, to }) => `${from} -> ${to}`)
+      .join(", ")}`,
+  );
+}
+
 const trailingSlashRedirects = [...canonicalPaths]
   .filter((path) => path !== "/")
   .map((path) => `${path}/ ${path} 301!`);
@@ -165,10 +175,21 @@ const nginx = [
   "",
 ].join("\n");
 
+const nginxCanonicalOrigin = [
+  "# Generated canonical-origin guard for eQOURSE.",
+  "# Include this file at server scope in every eqourse.com and www.eqourse.com",
+  "# HTTP/HTTPS server block, before route handling. The fixed destination avoids",
+  "# host-header reflection and makes every non-canonical request one direct 301.",
+  "if ($host != www.eqourse.com) { return 301 https://www.eqourse.com$request_uri; }",
+  "if ($scheme != https) { return 301 https://www.eqourse.com$request_uri; }",
+  "",
+].join("\n");
+
 writeFileSync(join(root, "public", "_redirects"), netlify, "utf8");
 writeFileSync(join(root, "public", "_headers"), headers, "utf8");
 writeFileSync(join(root, "public", ".htaccess"), apache, "utf8");
 mkdirSync(join(root, "deploy", "nginx"), { recursive: true });
 writeFileSync(join(root, "deploy", "nginx", "eqourse-route-handling.conf"), nginx, "utf8");
+writeFileSync(join(root, "deploy", "nginx", "eqourse-canonical-origin.conf"), nginxCanonicalOrigin, "utf8");
 
 console.log(`[seo-host-config] Generated ${redirects.length} permanent redirect rules for Netlify/Cloudflare Pages, Apache and Nginx.`);

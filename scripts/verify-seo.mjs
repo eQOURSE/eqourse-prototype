@@ -146,6 +146,8 @@ for (const configName of ["_redirects", "_headers", ".htaccess"]) {
 }
 const nginxConfigPath = join(root, "deploy", "nginx", "eqourse-route-handling.conf");
 if (!existsSync(nginxConfigPath)) failures.push("missing generated Nginx route handling config");
+const nginxCanonicalOriginPath = join(root, "deploy", "nginx", "eqourse-canonical-origin.conf");
+if (!existsSync(nginxCanonicalOriginPath)) failures.push("missing generated Nginx canonical-origin config");
 
 const cmsShellPath = join(distDir, "cms-shell.html");
 if (!existsSync(cmsShellPath)) {
@@ -192,6 +194,28 @@ const headersConfig = existsSync(join(distDir, "_headers"))
 const nginxConfig = existsSync(nginxConfigPath)
   ? readFileSync(nginxConfigPath, "utf8")
   : "";
+const nginxCanonicalOrigin = existsSync(nginxCanonicalOriginPath)
+  ? readFileSync(nginxCanonicalOriginPath, "utf8")
+  : "";
+
+const parsedRedirects = [...redirectsSource.matchAll(/"(\/[^\"]*)"\s*:\s*"(\/[^\"]*)"/g)]
+  .map((item) => ({ from: item[1], to: item[2] }));
+const parsedRedirectSources = new Set(parsedRedirects.map(({ from }) => from));
+for (const { from, to } of parsedRedirects) {
+  if (parsedRedirectSources.has(to)) failures.push(`redirect chain detected: ${from} -> ${to}`);
+}
+
+for (const entry of entries) {
+  const htmlPath = entry.path === "/" ? join(distDir, "index.html") : join(distDir, entry.path, "index.html");
+  if (!existsSync(htmlPath)) continue;
+  const html = readFileSync(htmlPath, "utf8");
+  const redirectingLinks = [...html.matchAll(/\bhref="(\/[^"?#]*)/g)]
+    .map((item) => item[1])
+    .filter((href) => parsedRedirectSources.has(href));
+  if (redirectingLinks.length > 0) {
+    failures.push(`${entry.path}: internal links point through redirects: ${[...new Set(redirectingLinks)].join(", ")}`);
+  }
+}
 if (!redirectsConfig.includes("/blogs/* /blog/:splat 301!")) failures.push("_redirects is missing the legacy /blogs/ migration");
 if (!redirectsConfig.includes("/admin/* /index.html 200")) failures.push("_redirects is missing the admin SPA fallback");
 if (/^\/\* \/index\.html 200!?$/m.test(redirectsConfig)) failures.push("_redirects still soft-200s unknown public routes");
@@ -240,6 +264,12 @@ if (!nginxConfig.includes('add_header X-Robots-Tag "noindex, nofollow" always;')
 }
 if (!nginxConfig.includes("error_page 404 /404.html;")) {
   failures.push("Nginx config is missing the real public 404 handler");
+}
+if (!nginxCanonicalOrigin.includes("if ($host != www.eqourse.com) { return 301 https://www.eqourse.com$request_uri; }")) {
+  failures.push("Nginx canonical-origin config does not redirect the bare domain directly to HTTPS www");
+}
+if (!nginxCanonicalOrigin.includes("if ($scheme != https) { return 301 https://www.eqourse.com$request_uri; }")) {
+  failures.push("Nginx canonical-origin config does not redirect HTTP directly to HTTPS www");
 }
 
 if (failures.length > 0) {

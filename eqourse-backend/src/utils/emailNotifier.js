@@ -665,12 +665,124 @@ async function sendCandidateStatusUpdate(application, job, status) {
   }
 }
 
+async function sendCareerMail({ to, replyTo, subject, title, emoji, subtitle, bodyHtml, footerNote }) {
+  const mailer = getCareerTransporter();
+  if (!mailer) return;
+  const smtpUser = process.env.CAREERS_SMTP_USER || "team@eqourse.com";
+  await mailer.sendMail({
+    from: `eQOURSE Careers <${smtpUser}>`,
+    to,
+    replyTo,
+    subject,
+    html: baseTemplate({ title, emoji, headerSubtitle: subtitle, bodyHtml, footerNote }),
+  });
+}
+
+/** Confirmation to the candidate and notification to HR for evergreen talent profiles. */
+async function sendTalentPoolEmails(profile) {
+  const hr = process.env.CAREERS_NOTIFY_EMAIL || "team@eqourse.com";
+  const details = `<table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid ${BORDER};border-radius:8px;overflow:hidden;">
+    ${fieldRow("Reference", profile.receiptId, { highlight: true })}
+    ${fieldRow("Candidate", profile.fullName, { highlight: true })}
+    ${fieldRow("Email", profile.email)}${fieldRow("Phone", profile.phone)}
+    ${fieldRow("Location", profile.location)}${fieldRow("Preferred roles", (profile.preferredRoles || []).join(", "))}
+    ${fieldRow("Experience", profile.experience)}${fieldRow("Qualification", profile.qualification)}
+    ${fieldRow("Skills", (profile.skills || []).join(", "))}${fieldRow("Resume", profile.resumeFile?.originalName)}
+  </table>`;
+  await Promise.all([
+    sendCareerMail({ to: hr, replyTo: profile.email, subject: `🌱 New talent-pool profile — ${profile.fullName}`, title: "New Talent-Pool Profile", emoji: "🌱", subtitle: profile.receiptId, bodyHtml: details, footerNote: "Review and search this profile in the eQOURSE admin talent pool." }),
+    sendCareerMail({ to: profile.email, subject: `Profile received by eQOURSE — ${profile.receiptId}`, title: "Your profile is in our talent pool", emoji: "✅", subtitle: profile.receiptId, bodyHtml: `<p style="font-size:15px;line-height:1.7;color:#334155;">Thank you, <strong>${escapeHtml(profile.fullName)}</strong>. We have securely received your profile and resume. Our hiring team may contact you when a suitable opportunity matches your experience.</p><div style="padding:16px;background:#f0fdfa;border-left:4px solid ${BRAND_COLOR};border-radius:8px;">Keep this reference: <strong>${escapeHtml(profile.receiptId)}</strong></div>`, footerNote: "Submitting a profile does not guarantee placement or employment." }),
+  ]);
+}
+
+/** Notify an evergreen talent-pool candidate when HR changes their status. */
+async function sendTalentStatusUpdate(profile, status) {
+  const copy = {
+    shortlisted: {
+      title: "Your profile has been shortlisted",
+      subject: "Talent-pool update from eQOURSE",
+      emoji: "🎉",
+      message: "Your profile has been shortlisted for further review. Our hiring team will contact you if a suitable opportunity progresses.",
+    },
+    hired: {
+      title: "Talent-pool status updated",
+      subject: "Career update from eQOURSE",
+      emoji: "✅",
+      message: "Our hiring team has updated your talent-pool profile following a successful engagement. Your eQOURSE contact will share any next steps directly.",
+    },
+    rejected: {
+      title: "Talent-pool profile update",
+      subject: "Talent-pool update from eQOURSE",
+      emoji: "📝",
+      message: "Thank you for sharing your experience with eQOURSE. We are not progressing your profile at this time, but we appreciate your interest in working with us.",
+    },
+    applied: {
+      title: "Your profile remains in our talent pool",
+      subject: "Talent-pool update from eQOURSE",
+      emoji: "🌱",
+      message: "Your profile is active in our talent pool and may be considered when a suitable opportunity becomes available.",
+    },
+  }[status];
+  if (!copy) return;
+  await sendCareerMail({
+    to: profile.email,
+    subject: `${copy.subject} — ${profile.receiptId}`,
+    title: copy.title,
+    emoji: copy.emoji,
+    subtitle: `${profile.fullName} • ${profile.receiptId}`,
+    bodyHtml: `<div style="padding:20px;background:#f8fafc;border-left:4px solid ${BRAND_COLOR};border-radius:8px;"><p style="margin:0;font-size:15px;line-height:1.7;color:#334155;">${escapeHtml(copy.message)}</p></div>`,
+    footerNote: "This message relates to the profile you submitted to the eQOURSE talent pool.",
+  });
+}
+
+/** Confirmation to the company and notification to the vendor-review team. */
+async function sendVendorRegistrationEmails(vendor) {
+  const hr = process.env.CAREERS_NOTIFY_EMAIL || "team@eqourse.com";
+  const details = `<table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid ${BORDER};border-radius:8px;overflow:hidden;">
+    ${fieldRow("Reference", vendor.receiptId, { highlight: true })}${fieldRow("Company", vendor.companyName, { highlight: true })}
+    ${fieldRow("Country", vendor.country)}${fieldRow("Registration no.", vendor.registrationNumber)}
+    ${fieldRow("Contact", vendor.contactName)}${fieldRow("Email", vendor.email)}${fieldRow("Phone", vendor.phone)}
+    ${fieldRow("Services", (vendor.services || []).join(", "))}${fieldRow("Registration file", vendor.registrationDocument?.originalName)}
+    ${fieldRow("Tax documents", (vendor.taxReturns || []).map((file) => file.originalName).join(", "))}
+  </table>`;
+  await Promise.all([
+    sendCareerMail({ to: hr, replyTo: vendor.email, subject: `🏢 New vendor registration — ${vendor.companyName}`, title: "Vendor Registration Received", emoji: "🏢", subtitle: vendor.receiptId, bodyHtml: details, footerNote: "Verify the company and uploaded documents in the eQOURSE admin vendor workspace." }),
+    sendCareerMail({ to: vendor.email, subject: `Vendor registration received — ${vendor.receiptId}`, title: "Registration received", emoji: "✅", subtitle: vendor.companyName, bodyHtml: `<p style="font-size:15px;line-height:1.7;color:#334155;">Thank you for registering <strong>${escapeHtml(vendor.companyName)}</strong> with eQOURSE. Our team will verify the submitted company and tax documents before making a decision.</p><div style="padding:16px;background:#f0fdfa;border-left:4px solid ${BRAND_COLOR};border-radius:8px;">Reference: <strong>${escapeHtml(vendor.receiptId)}</strong></div>`, footerNote: "Registration does not create a supplier agreement or guarantee project allocation." }),
+  ]);
+}
+
+/** Email the company on approval, hold, or rejection. Hold messages include HR's reason. */
+async function sendVendorStatusUpdate(vendor, status, message) {
+  const labels = { registered: "Registered for review", approved: "Approved", hold: "Placed on hold", rejected: "Registration update" };
+  const colours = { registered: BRAND_COLOR, approved: "#059669", hold: "#d97706", rejected: "#64748b" };
+  const explanation = status === "registered"
+    ? "Your registration is active and awaiting verification by our review team. We will email you when its status changes."
+    : status === "approved"
+    ? "Your company verification has been approved. Our team may contact you when a suitable engagement becomes available."
+    : status === "hold"
+      ? `Your registration is currently on hold. Reason from our review team: <strong>${escapeHtml(message)}</strong>`
+      : "Thank you for your interest. We are unable to approve the registration at this time.";
+  await sendCareerMail({
+    to: vendor.email,
+    subject: `${labels[status] || "Vendor status updated"} — eQOURSE [${vendor.receiptId}]`,
+    title: labels[status] || "Vendor status updated",
+    emoji: status === "approved" ? "✅" : status === "hold" ? "⏸️" : status === "registered" ? "🏢" : "📝",
+    subtitle: `${vendor.companyName} • ${vendor.receiptId}`,
+    bodyHtml: `<div style="padding:20px;border-radius:12px;border-left:4px solid ${colours[status] || BRAND_COLOR};background:#f8fafc;"><p style="margin:0;font-size:15px;line-height:1.7;color:#334155;">${explanation}</p></div>`,
+    footerNote: "This message relates to your eQOURSE vendor registration.",
+  });
+}
+
 module.exports = {
   sendContactNotification,
   sendPilotNotification,
   sendApplicationReceivedNotification,
   sendCandidateConfirmation,
   sendCandidateStatusUpdate,
+  sendTalentPoolEmails,
+  sendTalentStatusUpdate,
+  sendVendorRegistrationEmails,
+  sendVendorStatusUpdate,
   smtpHealthCheck,
   sendTestEmail,
 };

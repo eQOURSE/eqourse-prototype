@@ -96,6 +96,8 @@ const AdminSampleEditor = lazy(() => import("./admin/pages/SampleEditor"));
 const AdminCareers = lazy(() => import("./admin/pages/Careers"));
 const AdminCareerEditor = lazy(() => import("./admin/pages/CareerEditor"));
 const AdminCareerApplicants = lazy(() => import("./admin/pages/CareerApplicants"));
+const AdminTalentPool = lazy(() => import("./admin/pages/TalentPool"));
+const AdminVendors = lazy(() => import("./admin/pages/Vendors"));
 
 const queryClient = new QueryClient();
 
@@ -231,6 +233,8 @@ const App = () => (
                 <Route path="careers/new" element={<AdminCareerEditor />} />
                 <Route path="careers/:id" element={<AdminCareerEditor />} />
                 <Route path="careers/:id/applicants" element={<AdminCareerApplicants />} />
+                <Route path="talent-pool" element={<AdminTalentPool />} />
+                <Route path="vendors" element={<AdminVendors />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />

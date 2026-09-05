@@ -14,7 +14,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "verify:seo": "node scripts/verify-seo.mjs"
+    "verify:seo": "node scripts/verify-seo.mjs",
+    "audit:seo:live": "node scripts/audit-live-seo.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

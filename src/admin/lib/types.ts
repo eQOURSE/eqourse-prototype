@@ -235,3 +235,55 @@ export interface JobApplication {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TalentProfile {
+  id: string;
+  receiptId: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  location: string;
+  preferredRoles: string[];
+  experience: string;
+  currentRole: string;
+  qualification: string;
+  skills: string[];
+  portfolioLink: string;
+  message: string;
+  resumeFile: Attachment | null;
+  status: ApplicationStatus;
+  internalNotes: string;
+  notesUpdatedAt?: string;
+  statusChangedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type VendorStatus = "registered" | "approved" | "hold" | "rejected";
+
+export interface VendorRegistration {
+  id: string;
+  receiptId: string;
+  companyName: string;
+  country: string;
+  registrationNumber: string;
+  taxNumber: string;
+  website: string;
+  yearsInBusiness: number;
+  teamSize: string;
+  contactName: string;
+  contactRole: string;
+  email: string;
+  phone: string;
+  services: string[];
+  capabilitySummary: string;
+  registrationDocument: Attachment;
+  taxReturns: Attachment[];
+  status: VendorStatus;
+  internalNotes: string;
+  statusMessage: string;
+  notesUpdatedAt?: string;
+  statusChangedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}

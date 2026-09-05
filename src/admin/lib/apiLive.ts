@@ -26,6 +26,9 @@ import type {
   QueryListParams,
   Sample,
   SampleCategory,
+  TalentProfile,
+  VendorRegistration,
+  VendorStatus,
 } from "./types";
 import type { LoginInput } from "./apiMock";
 
@@ -359,5 +362,50 @@ export const liveApi = {
 
   async smartFilterApplications(jobId: string, query: string): Promise<{ items: JobApplication[]; total: number }> {
     return client.post(`/api/admin/careers/${jobId}/smart-filter`, { query });
+  },
+
+  async downloadApplicationResume(id: string, filename: string): Promise<void> {
+    return client.downloadFile(`/api/admin/applications/${id}/resume`, filename);
+  },
+
+  async listTalentProfiles(params: { status?: string; q?: string; page?: number; pageSize?: number } = {}): Promise<PagedResponse<TalentProfile> & { statusCounts?: Record<string, number> }> {
+    const qs = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => value !== undefined && qs.set(key, String(value)));
+    return client.get(`/api/admin/talent-pool?${qs}`);
+  },
+
+  async updateTalentProfile(id: string, patch: { status?: ApplicationStatus; internalNotes?: string }): Promise<TalentProfile> {
+    return client.patch<TalentProfile>(`/api/admin/talent-pool/${id}`, patch);
+  },
+
+  async downloadTalentResume(id: string, filename: string): Promise<void> {
+    return client.downloadFile(`/api/admin/talent-pool/${id}/resume`, filename);
+  },
+
+  async smartFilterTalentProfiles(query: string): Promise<{ items: TalentProfile[]; total: number }> {
+    return client.post("/api/admin/talent-pool/smart-filter", { query });
+  },
+
+  async listVendors(params: { status?: string; q?: string; page?: number; pageSize?: number } = {}): Promise<PagedResponse<VendorRegistration> & { statusCounts?: Record<string, number> }> {
+    const qs = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => value !== undefined && qs.set(key, String(value)));
+    return client.get(`/api/admin/vendors?${qs}`);
+  },
+
+  async updateVendor(id: string, patch: { status?: VendorStatus; internalNotes?: string; statusMessage?: string }): Promise<VendorRegistration> {
+    return client.patch<VendorRegistration>(`/api/admin/vendors/${id}`, patch);
+  },
+
+  async deleteVendor(id: string): Promise<{ ok: boolean }> {
+    return client.del(`/api/admin/vendors/${id}`);
+  },
+
+  async downloadVendorDocument(id: string, kind: "registration" | "tax", index: number | undefined, filename: string): Promise<void> {
+    const suffix = kind === "tax" ? `/tax/${index ?? 0}` : "/registration";
+    return client.downloadFile(`/api/admin/vendors/${id}/documents${suffix}`, filename);
+  },
+
+  async smartFilterVendors(query: string): Promise<{ items: VendorRegistration[]; total: number }> {
+    return client.post("/api/admin/vendors/smart-filter", { query });
   },
 };

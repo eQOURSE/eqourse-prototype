@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { adminApi } from "../lib/api";
 import type { JobOpening, JobStatus, JobDepartment } from "../lib/types";
@@ -17,6 +17,8 @@ import {
   Pause,
   Play,
   XCircle,
+  Building2,
+  UserRoundSearch,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -46,7 +48,7 @@ export default function AdminCareers() {
   const [deptFilter, setDeptFilter] = useState<string>("all");
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
-  const fetchOpenings = async () => {
+  const fetchOpenings = useCallback(async () => {
     setLoading(true);
     try {
       const res = await adminApi.listJobOpenings({
@@ -61,16 +63,12 @@ export default function AdminCareers() {
     } finally {
       setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchOpenings();
-  }, [statusFilter, deptFilter]);
+  }, [deptFilter, search, statusFilter]);
 
   useEffect(() => {
     const timer = setTimeout(fetchOpenings, 400);
     return () => clearTimeout(timer);
-  }, [search]);
+  }, [fetchOpenings]);
 
   const handleStatusChange = async (id: string, newStatus: JobStatus) => {
     try {
@@ -89,8 +87,8 @@ export default function AdminCareers() {
       await adminApi.deleteJobOpening(id);
       toast.success("Opening deleted");
       fetchOpenings();
-    } catch (err: any) {
-      toast.error(err?.message || "Cannot delete — has applications");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Cannot delete — has applications");
     }
     setActiveMenu(null);
   };
@@ -108,9 +106,11 @@ export default function AdminCareers() {
             {total} {total === 1 ? "opening" : "openings"} total
           </p>
         </div>
-        <Button onClick={() => navigate("/admin/careers/new")} className="bg-primary text-white">
-          <Plus className="w-4 h-4 mr-2" /> Create Opening
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="outline" onClick={() => navigate("/admin/talent-pool")}><UserRoundSearch className="mr-2 h-4 w-4" />Talent Pool</Button>
+          <Button variant="outline" onClick={() => navigate("/admin/vendors")}><Building2 className="mr-2 h-4 w-4" />Vendors</Button>
+          <Button onClick={() => navigate("/admin/careers/new")} className="bg-primary text-white"><Plus className="mr-2 h-4 w-4" />Create Opening</Button>
+        </div>
       </div>
 
       {/* Filters */}
