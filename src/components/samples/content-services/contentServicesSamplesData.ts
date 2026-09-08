@@ -1,6 +1,6 @@
 import {
   BookOpen, GraduationCap, Atom, Globe2, Calculator, FileText,
-  Languages, ClipboardCheck, MousePointerClick, Pencil, Bot,
+  Languages, ClipboardCheck, MousePointerClick, Pencil,
   RefreshCw, Film, Megaphone, Glasses, FileStack, PlayCircle,
   type LucideIcon,
 } from "lucide-react";
@@ -422,28 +422,6 @@ export const contentServicesSamples: ContentServicesSample[] = [
     heroImageAlt:
       "Pen Tab and PPT educational video samples with handwritten annotations and step-by-step explanations.",
     tabs: ["Mathematics", "Science", "Language"],
-    faqs: commonFaqs,
-  },
-  {
-    slug: "ai-avatar-video-samples",
-    path: "/ai-avatar-video-samples",
-    kind: "video",
-    icon: Bot,
-    accentHsl: "265 65% 65%",
-    navLabel: "AI Avatar Videos",
-    title: "AI Avatar Video Samples",
-    seoTitle: "AI Avatar Video Samples - eQOURSE",
-    seoDescription:
-      "AI avatar educational video samples by eQOURSE. AI-generated presenter videos for e-learning, training, and educational content delivery.",
-    keywords:
-      "AI avatar videos, AI presenter samples, multilingual AI videos, scalable e-learning, synthetic video",
-    preHeadline: "AI-Powered Avatar Videos for Modern E-Learning",
-    headline: "AI Avatar",
-    headlineAccent: "Video Samples",
-    subtext:
-      "AI-generated presenters delivering educational content - scalable, cost-effective video lessons for K-12 content, corporate training, and multilingual e-learning delivery.",
-    heroImageAlt: "AI avatar educational video samples featuring AI-generated presenters for e-learning.",
-    tabs: ["AI Presenter Videos", "Multilingual AI Avatar Videos"],
     faqs: commonFaqs,
   },
   {

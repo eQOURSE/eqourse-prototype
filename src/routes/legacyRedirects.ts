@@ -30,7 +30,10 @@ export const legacyRedirects: Record<string, string> = {
   "/blogs": "/blog",
   "/blogs/career": "/career",
   "/custom-elearning-solutions": "/custom-e-learning-content",
-  "/avatar-video-samples": "/ai-avatar-video-samples",
+  // GSC reported the old AI-avatar sample URL as a soft 404. Consolidate both
+  // historical variants directly into the substantial video samples hub.
+  "/avatar-video-samples": "/video-samples",
+  "/ai-avatar-video-samples": "/video-samples",
 
   // Old article URLs consolidated into substantial, current service pages.
   // Blog and case-study publishing remains controlled by the admin panel.
