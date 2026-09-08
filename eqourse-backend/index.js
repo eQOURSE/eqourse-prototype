@@ -75,6 +75,13 @@ app.use("/api/admin", adminRouter);            // All admin routes under /api/ad
 // ── Health check ─────────────────────────────────────────────────────────────
 const { smtpHealthCheck, sendTestEmail } = require("./src/utils/emailNotifier");
 app.get("/", (req, res) => res.json({ status: "eQOURSE backend is running", version: "2.0.0" }));
+app.get("/api/health", (req, res) => {
+  const databaseConnected = mongoose.connection.readyState === 1;
+  res.status(databaseConnected ? 200 : 503).json({
+    status: databaseConnected ? "ok" : "degraded",
+    database: databaseConnected ? "connected" : "disconnected",
+  });
+});
 app.get("/api/health/smtp", async (req, res) => {
   const result = await smtpHealthCheck();
   res.status(result.ok ? 200 : 503).json(result);
@@ -108,16 +115,17 @@ async function reconcilePublishedCmsSeo() {
 
 mongoose
   .connect(MONGO_URI)
-  .then(async () => {
+  .then(() => {
     logger.info(`✅ MongoDB connected: ${MONGO_URI}`);
-    try {
-      await reconcilePublishedCmsSeo();
-    } catch (error) {
-      logger.error(`CMS SEO reconciliation failed: ${error.message}`);
-      const syncRequired = process.env.CMS_SEO_SYNC_REQUIRED === "true" || process.env.NODE_ENV === "production";
-      if (syncRequired) throw error;
-    }
     app.listen(PORT, () => logger.info(`🚀 Server running on http://localhost:${PORT}`));
+
+    // Static CMS SEO publishing is important, but a filesystem permission or
+    // deployment-order problem must never take careers, blogs, case studies,
+    // samples and the admin API offline. Reconcile after the HTTP server is
+    // listening and report failures for operations to repair independently.
+    reconcilePublishedCmsSeo().catch((error) => {
+      logger.error(`CMS SEO reconciliation failed: ${error.message}`);
+    });
   })
   .catch((err) => {
     logger.error(`❌ MongoDB connection failed: ${err.message}`);

@@ -47,10 +47,6 @@ export const pageSeo: Record<string, PageSeo> = {
     title: "Adaptive Learning – Personalized E-Learning | Eqourse",
     description: "Personalize learning pathways with adaptive content that responds to learner skills and progress. Explore eQOURSE solutions.",
   },
-  "/ai-avatar-video-samples": {
-    title: "AI Avatar Videos – Watch Samples | Eqourse",
-    description: "Explore AI avatar video samples created for scalable education, training and communication. View eQOURSE work today.",
-  },
   "/ai-data-samples": {
     title: "AI Data Samples – High-Quality Datasets | Eqourse",
     description: "Explore AI data samples for NLP, computer vision, speech, RLHF and data collection. Review eQOURSE capabilities today.",

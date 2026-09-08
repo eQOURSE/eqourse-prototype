@@ -114,7 +114,6 @@ const sitemapData = [
       { name: "Test Prep & Assessments", to: "/test-prep-and-assessments" },
       { name: "Articulate Storyline", to: "/articulate-storyline-video-samples" },
       { name: "Pen Tab and PPT", to: "/pen-tab-and-ppt-samples" },
-      { name: "AI Avatar Videos", to: "/ai-avatar-video-samples" },
       { name: "Flash to HTML", to: "/flash-to-htm-samples" },
       { name: "2D 3D Animation", to: "/2d-3d-video-samples" },
       { name: "Promotional Video", to: "/promotional-video" },

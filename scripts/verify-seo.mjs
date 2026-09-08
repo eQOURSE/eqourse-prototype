@@ -10,7 +10,8 @@ const manifestPath = join(distDir, "seo-manifest.json");
 const SITE_URL = "https://www.eqourse.com";
 const requiredLegacyRedirects = new Map([
   ["/contact-us.html", "/contact-us"],
-  ["/avatar-video-samples", "/ai-avatar-video-samples"],
+  ["/avatar-video-samples", "/video-samples"],
+  ["/ai-avatar-video-samples", "/video-samples"],
   ["/blog/detail.php", "/blog"],
   ["/blog/detail", "/blog"],
   ["/blog/understanding-the-value-of-edtech-in-higher-education", "/blog"],

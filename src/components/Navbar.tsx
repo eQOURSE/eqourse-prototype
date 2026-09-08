@@ -539,7 +539,6 @@ const textSampleLinks = [
 const videoSampleLinks = [
   { label: "Articulate Storyline", href: "/articulate-storyline-video-samples" },
   { label: "Pen Tab and PPT", href: "/pen-tab-and-ppt-samples" },
-  { label: "AI Videos", href: "/ai-avatar-video-samples" },
   { label: "Flash to HTML", href: "/flash-to-htm-samples" },
   { label: "2D 3D Animation", href: "/2d-3d-video-samples" },
   { label: "Promotional Video", href: "/promotional-video" },

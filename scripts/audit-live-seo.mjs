@@ -4,7 +4,13 @@ const REQUEST_TIMEOUT_MS = 15_000;
 const CONCURRENCY = 12;
 const GSC_CRITICAL_URLS = [
   `${SITE_URL}/blog/scaling-exam-performance-blueprint-aligned-test-prep-content`,
+  `${SITE_URL}/kindergarten-to-k5-samples`,
 ];
+const GSC_REDIRECTS = new Map([
+  [`${SITE_URL}/avatar-video-samples`, `${SITE_URL}/video-samples`],
+  [`${SITE_URL}/ai-avatar-video-samples`, `${SITE_URL}/video-samples`],
+  [`${SITE_URL}/ai-avatar-video-samples/`, `${SITE_URL}/video-samples`],
+]);
 
 const request = (url, init = {}) => fetch(url, {
   ...init,
@@ -28,6 +34,14 @@ if (urls.length === 0) failures.push("sitemap.xml contains no URLs");
 if (new Set(urls).size !== urls.length) failures.push("sitemap.xml contains duplicate URLs");
 for (const url of GSC_CRITICAL_URLS) {
   if (!urls.includes(url)) failures.push(`GSC priority URL is missing from sitemap.xml: ${url}`);
+}
+
+for (const [url, expectedLocation] of GSC_REDIRECTS) {
+  const response = await request(url, { method: "HEAD" });
+  const location = response.headers.get("location");
+  if (response.status !== 301 || location !== expectedLocation) {
+    failures.push(`${url} must return one 301 directly to ${expectedLocation}; got ${response.status} ${location || "(no Location)"}`);
+  }
 }
 
 for (const url of urls) {
