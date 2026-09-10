@@ -80,7 +80,7 @@ export default function SampleTabFiles() {
         title={sub.label}
         description={`Manage sample files for each tab. Files uploaded here appear on the public /${sub.slug} page.`}
         actions={
-          <Button onClick={() => navigate(`/admin/samples/${mainCategoryId}/${pageSlug}/upload?tab=${encodeURIComponent(currentTabName)}`)}>
+          <Button onClick={() => navigate(`/admin/samples/${mainCategoryId}/${pageSlug}/${encodeURIComponent(currentTabName)}/new`)}>
             <Upload className="w-4 h-4 mr-2" /> Upload file
           </Button>
         }
@@ -115,7 +115,7 @@ export default function SampleTabFiles() {
           <p className="text-muted-foreground">No files uploaded for <strong>{currentTabName}</strong> yet.</p>
           <Button
             size="sm"
-            onClick={() => navigate(`/admin/samples/${mainCategoryId}/${pageSlug}/upload?tab=${encodeURIComponent(currentTabName)}`)}
+            onClick={() => navigate(`/admin/samples/${mainCategoryId}/${pageSlug}/${encodeURIComponent(currentTabName)}/new`)}
           >
             <Plus className="w-4 h-4 mr-1.5" /> Upload first file
           </Button>
@@ -153,7 +153,7 @@ export default function SampleTabFiles() {
                     <FileDown className="w-4 h-4" />
                   </Button>
                 )}
-                <Button size="sm" variant="ghost" onClick={() => navigate(`/admin/samples/${mainCategoryId}/${pageSlug}/${s.id}`)}>
+                <Button size="sm" variant="ghost" onClick={() => navigate(`/admin/samples/${mainCategoryId}/${pageSlug}/${encodeURIComponent(currentTabName)}/${s.id}`)}>
                   <Pencil className="w-4 h-4" />
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => setConfirmDelete(s)}>

@@ -19,13 +19,13 @@ import { toast } from "sonner";
 const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MP3", "WAV", "PNG", "JPG", "SCORM", "Other"];
 
 export default function SampleFileEditor() {
-  const { mainCategoryId, pageSlug, sampleId } = useParams();
+  const { mainCategoryId, pageSlug, tabName, sampleId } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const match = getSubCategory(pageSlug ?? "");
 
-  const isNew = !sampleId || sampleId === "upload";
-  const tabFromUrl = searchParams.get("tab") ?? "";
+  const isNew = !sampleId || sampleId === "new";
+  const tabFromUrl = searchParams.get("tab") ?? tabName ?? "";
 
   const [form, setForm] = useState({
     title: "",

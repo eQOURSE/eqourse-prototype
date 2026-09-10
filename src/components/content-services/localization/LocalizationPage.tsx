@@ -1,4 +1,5 @@
 import ContentServicesLayout from "../shared/ContentServicesLayout";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import SEOHead from "@/components/ai-data-services/shared/SEOHead";
 import ServiceHero from "@/components/ai-data-services/shared/ServiceHero";
 import ServiceNarrativeSection from "@/components/ai-data-services/shared/ServiceNarrativeSection";
@@ -81,6 +82,7 @@ const LocalizationPage = () => (
 
     <LocalizationServicesGrid />
     <section className="border-y border-border/60 bg-muted/30 py-10"><div className="container mx-auto px-4"><div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-5 rounded-2xl border border-border bg-card p-6 md:flex-row md:items-center"><div><span className="text-xs font-bold uppercase tracking-wider text-primary">AI language data</span><h2 className="mt-2 font-heading text-xl font-bold">Need machine translation post-editing at dataset scale?</h2><p className="mt-2 text-sm text-muted-foreground">Connect localisation expertise with taxonomy-tested text and NLP annotation services.</p></div><Link to="/ai-data-services/annotation-labeling/text-nlp-annotation" className="shrink-0 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Explore Text &amp; NLP Annotation</Link></div></div></section>
+    <RelatedBlogs />
     <FAQSection faqs={faqs} />
     
     <ServiceCTA 

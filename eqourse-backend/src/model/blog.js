@@ -52,6 +52,19 @@ const blogSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+    categories: {
+      type: [{
+        category: { type: String, trim: true },
+        subcategories: {
+          type: [{
+            subcategory: { type: String, trim: true },
+            subSubcategories: { type: [String], default: [] },
+          }],
+          default: [],
+        },
+      }],
+      default: [],
+    },
     grade: {
       type: String,
       enum: ["4", "5", "6", "7", "8", "9", "10", "11", "12", ""],

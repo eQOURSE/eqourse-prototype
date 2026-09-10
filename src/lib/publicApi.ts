@@ -51,6 +51,17 @@ export interface PublicBlog {
   bodyFormat: "html" | "markdown";
   tags: string[];
   author: { name: string; avatarUrl?: string };
+  categories: [
+  {
+    category: string;
+    subcategories: [
+      {
+        subcategory: string;
+        subSubcategories: string[];
+      }
+    ];
+  }
+  ];
   seo: {
     title?: string;
     description?: string;
@@ -78,6 +89,23 @@ export async function fetchPublishedBlogs(): Promise<PublicBlog[] | null> {
     return null;
   }
 }
+
+export async function fetchBlogByFilterCategory(category: string, subcategory: string, subSubcategory: string): Promise<PublicBlog[] | null> {
+  if (!isApiAvailable()) return null;
+  try {
+    const params = new URLSearchParams();
+    if (category) params.set("category", category);
+    if (subcategory) params.set("sub_category", subcategory);
+    if (subSubcategory) params.set("sub_sub_category", subSubcategory);
+
+    const res = await fetch(`${getBaseUrl()}/api/blogs?${params.toString()}`);
+    const data = await safeParse<{ items: PublicBlog[] }>(res);
+    return data?.items ?? null;
+  } catch {
+    return null;
+  }
+}
+
 
 /**
  * Fetch a single published blog post by slug.

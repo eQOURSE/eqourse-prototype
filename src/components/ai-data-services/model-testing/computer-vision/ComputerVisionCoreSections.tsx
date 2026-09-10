@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Link } from "react-router-dom";
 import { ArrowRight, Camera, CheckCircle2, CircleDot, Eye, FileScan, Focus, Layers3, ScanLine, ShieldCheck } from "lucide-react";
 import FAQSection from "../../shared/FAQSection";
@@ -314,6 +315,7 @@ export const FailuresBoundariesRelated = () => (
       "ISO 9001 and ISO 27001 certified processes",
     ].map((text)=><div key={text} className="flex gap-3 bg-white p-6"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-primary"/><p className="text-sm font-semibold leading-6">{text}</p></div>)}</div></Reveal></div></section>
     <section className="bg-background py-20 md:py-24"><div className="container mx-auto px-4"><SectionHeader label="One data-to-evidence loop" title="Related" gradientText="Services" subtitle="Move from real-world collection to reference labels, independent testing and formal fairness analysis."/><Reveal className="mx-auto grid max-w-7xl gap-px overflow-hidden rounded-[2rem] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">{relatedServices.map(([title,path])=><Link key={title} to={path} className="group flex items-center justify-between bg-white p-6 transition-colors hover:bg-primary/5"><span className="font-heading font-bold">{title}</span><ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1"/></Link>)}</Reveal></div></section>
+    <RelatedBlogs />
     <FAQSection title="Computer Vision Model Testing FAQs" faqs={computerVisionFaqs.map(([question, answer]) => ({ question, answer }))}/>
   </>
 );

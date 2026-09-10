@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -130,4 +131,5 @@ export const PipelineProofWhy = () => (
   </>
 );
 
+<RelatedBlogs />
 export const TestingFAQ = () => <FAQSection faqs={modelTestingFaqs.map(([question,answer])=>({question,answer}))} label="Model testing FAQ" title="Questions Before You Test"/>;
