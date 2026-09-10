@@ -20,6 +20,7 @@ import {
 import SectionHeader from "../shared/SectionHeader";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { cleaningFaqs } from "./CleaningContent";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 
 const Reveal = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
   const { ref, isVisible } = useScrollReveal();
@@ -248,5 +249,5 @@ export const PipelineProofWhy = () => (
 );
 
 export const CleaningFAQ = () => (
-  <section className="bg-background py-24"><div className="container mx-auto px-4"><SectionHeader label="Questions answered" title="Data Cleaning & Validation" gradientText="FAQ"/><div className="mx-auto max-w-4xl divide-y divide-border border-y border-border">{cleaningFaqs.map(([q,a],i)=><details key={q} className="group py-1"><summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-heading font-bold"><span><span className="mr-4 font-mono text-xs text-primary">{String(i+1).padStart(2,"0")}</span>{q}</span><span className="text-2xl font-light text-primary transition-transform group-open:rotate-45">+</span></summary><p className="max-w-3xl pb-6 pl-10 text-sm leading-7 text-muted-foreground">{a}</p></details>)}</div></div></section>
+  <><RelatedBlogs/><section className="bg-background py-24"><div className="container mx-auto px-4"><SectionHeader label="Questions answered" title="Data Cleaning & Validation" gradientText="FAQ"/><div className="mx-auto max-w-4xl divide-y divide-border border-y border-border">{cleaningFaqs.map(([q,a],i)=><details key={q} className="group py-1"><summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-heading font-bold"><span><span className="mr-4 font-mono text-xs text-primary">{String(i+1).padStart(2,"0")}</span>{q}</span><span className="text-2xl font-light text-primary transition-transform group-open:rotate-45">+</span></summary><p className="max-w-3xl pb-6 pl-10 text-sm leading-7 text-muted-foreground">{a}</p></details>)}</div></div></section></>
 );

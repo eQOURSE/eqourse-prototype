@@ -11,6 +11,16 @@
 const SampleCategory = require("../model/sampleCategory");
 const SampleItem = require("../model/sampleItem");
 
+function normalizePagePath(value = "") {
+  const clean = String(value).trim().split(/[?#]/, 1)[0].replace(/^\/+|\/+$/g, "");
+  return clean ? `/${clean}` : "";
+}
+
+function normalizePagePaths(values) {
+  if (!Array.isArray(values)) return [];
+  return [...new Set(values.map(normalizePagePath).filter(Boolean))];
+}
+
 // ─── Formatters ──────────────────────────────────────────────
 function formatCategory(doc, sampleCount = 0) {
   return {
@@ -41,6 +51,7 @@ function formatItem(doc) {
     tabName: doc.tabName || "",
     fileType: doc.fileType || "",
     isExternal: doc.isExternal || false,
+    pagePaths: doc.pagePaths || [],
     createdAt: doc.createdAt.toISOString(),
     updatedAt: doc.updatedAt.toISOString(),
   };
@@ -89,17 +100,19 @@ const listItemsByCategory = async (req, res) => {
  */
 const listFilesByPage = async (req, res) => {
   try {
-    const { pageSlug, tab } = req.query;
-    if (!pageSlug) {
-      return res.status(400).json({ success: false, message: "pageSlug query param is required" });
+    const { pageSlug, tab, page_path } = req.query;
+    if (!pageSlug && !page_path) {
+      return res.status(400).json({ success: false, message: "pageSlug or page_path query param is required" });
     }
-    const filter = { pageSlug };
+    const filter = page_path ? { pagePaths: normalizePagePath(page_path) } : { pageSlug };
     if (tab) filter.tabName = tab;
     const items = await SampleItem.find(filter).sort({ order: 1 });
     // Return in the PreviewFile shape expected by the frontend modal
     const files = items.map((doc) => ({
+      id: doc._id.toString(),
       title: doc.title,
       description: doc.description || "",
+      thumbnailUrl: doc.thumbnailUrl || "",
       fileType: doc.fileType || "",
       fileUrl: doc.fileUrl || "",
       isExternal: doc.isExternal || false,
@@ -222,7 +235,7 @@ const adminGetItem = async (req, res) => {
 const createItem = async (req, res) => {
   try {
     const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
-            pageSlug, tabName, fileType, isExternal } = req.body;
+            pageSlug, tabName, fileType, isExternal, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
     const existing = await SampleItem.find({ categoryId: req.params.categoryId });
     const item = await SampleItem.create({
@@ -232,6 +245,7 @@ const createItem = async (req, res) => {
       fileSize: fileSize || undefined, order: order ?? existing.length + 1,
       pageSlug: pageSlug || "", tabName: tabName || "",
       fileType: fileType || "", isExternal: isExternal || false,
+      pagePaths: normalizePagePaths(pagePaths),
     });
     return res.status(201).json({ success: true, data: formatItem(item) });
   } catch (err) {
@@ -242,6 +256,9 @@ const createItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   try {
+    if (Object.prototype.hasOwnProperty.call(req.body, "pagePaths")) {
+      req.body.pagePaths = normalizePagePaths(req.body.pagePaths);
+    }
     const item = await SampleItem.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
     if (!item) return res.status(404).json({ success: false, message: "Sample not found" });
     return res.json({ success: true, data: formatItem(item) });
@@ -278,7 +295,7 @@ const adminListItemsByPage = async (req, res) => {
 const createItemForPage = async (req, res) => {
   try {
     const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
-            pageSlug, tabName, fileType, isExternal } = req.body;
+            pageSlug, tabName, fileType, isExternal, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
     if (!pageSlug) return res.status(400).json({ success: false, message: "pageSlug is required" });
     
@@ -308,6 +325,7 @@ const createItemForPage = async (req, res) => {
       tabName: tabName || "",
       fileType: fileType || "", 
       isExternal: isExternal || false,
+      pagePaths: normalizePagePaths(pagePaths),
     });
     return res.status(201).json({ success: true, data: formatItem(item) });
   } catch (err) {

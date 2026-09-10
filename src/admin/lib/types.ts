@@ -63,6 +63,7 @@ export interface BlogPost {
   bodyFormat: "html" | "markdown";
   tags: string[];
   categories?: BlogCategorySelection[];
+  pagePaths?: string[];
   author: { name: string; avatarUrl?: string };
   seo: {
     title?: string;
@@ -91,6 +92,7 @@ export interface CaseStudy {
   results: string;
   metrics: { label: string; value: string }[];
   tags: string[];
+  pagePaths?: string[];
   relatedLinks?: { label: string; href: string }[];
   bodyFormat: "html" | "markdown";
   seo: {
@@ -132,6 +134,7 @@ export interface Sample {
   tabName?: string;
   fileType?: string;
   isExternal?: boolean;
+  pagePaths?: string[];
   createdAt: string;
   updatedAt: string;
 }

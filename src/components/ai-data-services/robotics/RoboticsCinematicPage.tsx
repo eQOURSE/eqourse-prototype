@@ -31,6 +31,7 @@ import CinematicHero from "../shared/CinematicHero";
 import RoboticsMediaSlot from "./RoboticsMediaSlot";
 import RoboticsLottie from "./RoboticsLottie";
 import { trackRoboticsEvent } from "@/lib/roboticsAnalytics";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import "./robotics-cinematic.css";
 
 const PAGE_PATH = "/robotics-training-data-services";
@@ -442,6 +443,7 @@ const RoboticsCinematicPage = () => {
           </div>
         </section>
 
+        <RelatedBlogs />
         <section className="rx-faq">
           <div className="rx-faq__intro"><span className="rx-section-index">10 / FREQUENTLY ASKED QUESTIONS</span><h2>Robotics data questions, answered.</h2><p>Practical answers about scope, hardware, modalities, validation and governance.</p></div>
           <Accordion type="single" collapsible className="rx-faq__list" onValueChange={(value) => value && trackRoboticsEvent("robotics_faq_open", { question_id: value, device_category: window.innerWidth < 768 ? "mobile" : "desktop" })}>

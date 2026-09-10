@@ -19,6 +19,8 @@ const caseStudySchema = new mongoose.Schema(
       },
     ],
     tags: [{ type: String, trim: true }],
+    // Exact public service-page paths selected in the admin panel.
+    pagePaths: { type: [String], default: [], index: true },
     relatedLinks: [
       {
         label: { type: String, required: true },

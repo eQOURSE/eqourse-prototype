@@ -20,6 +20,8 @@ const sampleItemSchema = new mongoose.Schema(
     fileType: { type: String, trim: true, default: "" },
     // Whether this is an external link or a downloadable file
     isExternal: { type: Boolean, default: false },
+    // Service pages where this sample is promoted above the FAQ section.
+    pagePaths: { type: [String], default: [], index: true },
   },
   { timestamps: true }
 );

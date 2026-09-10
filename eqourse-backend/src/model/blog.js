@@ -65,6 +65,8 @@ const blogSchema = new mongoose.Schema(
       }],
       default: [],
     },
+    // Exact public service-page paths selected in the admin panel.
+    pagePaths: { type: [String], default: [], index: true },
     grade: {
       type: String,
       enum: ["4", "5", "6", "7", "8", "9", "10", "11", "12", ""],

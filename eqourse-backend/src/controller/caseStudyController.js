@@ -1,6 +1,16 @@
 const CaseStudy = require("../model/caseStudy");
 const { syncCmsSeoPage, removeCmsSeoPage } = require("../utils/cmsSeoPublisher");
 
+function normalizePagePath(value = "") {
+  const clean = String(value).trim().split(/[?#]/, 1)[0].replace(/^\/+|\/+$/g, "");
+  return clean ? `/${clean}` : "";
+}
+
+function normalizePagePaths(values) {
+  if (!Array.isArray(values)) return [];
+  return [...new Set(values.map(normalizePagePath).filter(Boolean))];
+}
+
 // ─── Helper: format DB doc → frontend-compatible object ───────────────────────
 function formatCaseStudy(doc) {
   return {
@@ -16,6 +26,7 @@ function formatCaseStudy(doc) {
     results: doc.results || "",
     metrics: (doc.metrics || []).map((m) => ({ label: m.label, value: m.value })),
     tags: doc.tags || [],
+    pagePaths: doc.pagePaths || [],
     relatedLinks: (doc.relatedLinks || []).map((rl) => ({ label: rl.label, href: rl.href })),
     bodyFormat: doc.bodyFormat || "markdown",
     seo: {
@@ -42,9 +53,16 @@ function formatCaseStudy(doc) {
  */
 const listPublishedCaseStudies = async (req, res) => {
   try {
-    const { limit = 100 } = req.query;
+    const { limit = 100, page_path } = req.query;
 
-    const caseStudies = await CaseStudy.find({ status: "published" })
+    const filter = { status: "published" };
+    if (page_path) {
+      const pagePath = normalizePagePath(page_path);
+      // relatedLinks.href is the legacy admin assignment used before pagePaths.
+      filter.$or = [{ pagePaths: pagePath }, { "relatedLinks.href": pagePath }];
+    }
+
+    const caseStudies = await CaseStudy.find(filter)
       .sort({ publishedAt: -1, createdAt: -1 })
       .limit(Number(limit));
 
@@ -141,7 +159,7 @@ const adminGetCaseStudyById = async (req, res) => {
  */
 const createCaseStudy = async (req, res) => {
   try {
-    const { title, slug, client, industry, heroImageUrl, summary, challenge, solution, results, metrics, tags, bodyFormat, seo, status, relatedLinks } = req.body;
+    const { title, slug, client, industry, heroImageUrl, summary, challenge, solution, results, metrics, tags, bodyFormat, seo, status, relatedLinks, pagePaths } = req.body;
 
     if (!title || !client) {
       return res.status(400).json({ success: false, message: "Title and client are required" });
@@ -169,6 +187,7 @@ const createCaseStudy = async (req, res) => {
       metrics: metrics || [],
       tags: tags || [],
       relatedLinks: relatedLinks || [],
+      pagePaths: normalizePagePaths(pagePaths),
       bodyFormat: bodyFormat || "markdown",
       seo: seo || {},
       status: status || "draft",
@@ -193,6 +212,10 @@ const createCaseStudy = async (req, res) => {
 const updateCaseStudy = async (req, res) => {
   try {
     const { slug, status } = req.body;
+
+    if (Object.prototype.hasOwnProperty.call(req.body, "pagePaths")) {
+      req.body.pagePaths = normalizePagePaths(req.body.pagePaths);
+    }
 
     if (slug) {
       const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
