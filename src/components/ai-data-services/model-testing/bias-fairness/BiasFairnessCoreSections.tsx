@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, FileCheck2, Globe2, LockKeyhole, Scale, ShieldCheck, UsersRound } from "lucide-react";
 import SectionHeader from "../../shared/SectionHeader";
@@ -93,6 +94,7 @@ export const RelatedAndFaq = () => (
     <section className="bg-background py-20 md:py-24"><div className="container mx-auto px-4"><SectionHeader label="Connected evidence" title="Related" gradientText="Services"/><div className="mx-auto grid max-w-6xl gap-px overflow-hidden rounded-[2rem] border border-border bg-border md:grid-cols-3">{[
       ["AI Red Teaming & Adversarial Testing", "Try to make the system fail and document reproducible attacks", "/ai-data-services/model-testing/ai-red-teaming"], ["LLM Evaluation", "Measure quality, groundedness, task success and automated-judge reliability", "/ai-data-services/model-testing/llm-evaluation"], ["ASR & Speech Model Testing", "WER, CER, semantic, entity, accent and acoustic-condition testing", "/ai-data-services/model-testing/asr-speech-model-testing"], ["Computer Vision Model Testing", "Real-world test sets and slice-level visual failure analysis", "/ai-data-services/model-testing/computer-vision-model-testing"], ["Dataset QA & Label Audit", "Review label quality before measuring fairness", "/ai-data-services/cleaning-validation/dataset-qa-label-audit"], ["LLM & RLHF Annotation", "Build alignment data with a separate evidence boundary", "/ai-data-services/annotation-labeling/llm-rlhf-annotation"],
     ].map(([title, text, href]) => href ? <Link key={title} to={href} className="group bg-card p-6 transition-colors hover:bg-primary/[.045]"><h3 className="font-heading font-bold">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{text}</p><ArrowRight className="mt-6 h-4 w-4 text-primary transition-transform group-hover:translate-x-1"/></Link> : <div key={title} className="bg-card p-6"><h3 className="font-heading font-bold">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{text}</p></div>)}</div><p className="mt-7 text-center text-sm text-muted-foreground">Return to <Link to="/ai-data-services/model-testing" className="font-bold text-primary hover:underline">AI model testing and evaluation services</Link>.</p></div></section>
+    <RelatedBlogs />
     <FAQSection faqs={biasFairnessFaqs.map(([question, answer]) => ({ question, answer }))} label="Fairness audit FAQ" title="Questions Before an Audit"/>
   </>
 );

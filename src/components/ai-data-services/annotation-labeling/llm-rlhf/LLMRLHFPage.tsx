@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { BookOpenCheck, Scale, ShieldCheck } from "lucide-react";
 import AIDataServicesLayout from "../../shared/AIDataServicesLayout";
 import SEOHead from "../../shared/SEOHead";
@@ -114,6 +115,7 @@ const LLMRLHFPage = () => (
     <LanguagesDeliverySecurity />
     <CommercialAndAudience />
     <RelatedProofWhy />
+    <RelatedBlogs />
     <FAQSection faqs={faqs} label="LLM & RLHF FAQs" title="Frequently Asked Questions About RLHF & LLM Data" />
     <ServiceCTA headline="Align Your Model With Expert Human Feedback" subtext="Tell us the model, the behaviour you want to change and the domain—we'll draft a rubric and run a pilot on your own data." ctaText="Start Free Pilot" ctaLink="/free-pilot" secondaryCtaText="Talk to a Data Specialist" secondaryCtaLink="/contact-us" note="Rubric-led pilot on your data" />
   </AIDataServicesLayout>

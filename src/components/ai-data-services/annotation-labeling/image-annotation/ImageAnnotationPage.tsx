@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Boxes, Layers3, ScanLine } from "lucide-react";
 import AIDataServicesLayout from "../../shared/AIDataServicesLayout";
 import SEOHead from "../../shared/SEOHead";
@@ -39,6 +40,7 @@ const ImageAnnotationPage=()=> <AIDataServicesLayout breadcrumbs={[{label:"AI Da
   <Helmet><link rel="preload" as="image" href="/assets/ai-data/annotation-labeling/image-annotation/image-annotation-services-hero.avif" type="image/avif" fetchPriority="high"/><script type="application/ld+json">{JSON.stringify(schema)}</script></Helmet>
   <ServiceHero tone="dark" preHeadline="Pixel-Accurate Ground Truth for Visual AI" headline="Image Annotation Services for Computer Vision and" headlineAccent="Visual AI" subtext="Pixel-accurate labels for object detection, segmentation, pose estimation and classification—with trained annotators, written edge-case rules and multi-tier quality review." ctaText="Start Free Pilot" ctaLink="/free-pilot" secondaryCtaText="Talk to a Data Specialist" secondaryCtaLink="/contact-us" imageSrc="/assets/ai-data/annotation-labeling/image-annotation/image-annotation-services-hero.webp" imageAvifSrc="/assets/ai-data/annotation-labeling/image-annotation/image-annotation-services-hero.avif" imageAlt="Computer vision specialists annotating urban street images with bounding boxes, polygons and segmentation masks" imageWidth={1200} imageHeight={800} trustStats={imageTrustStats} rotatingBadges={[{icon:Boxes,title:"Object detection",subtitle:"Boxes · Classes · Attributes",color:"hsl(170 82% 55%)"},{icon:Layers3,title:"Pixel precision",subtitle:"Semantic · Instance · Panoptic",color:"hsl(190 80% 58%)"},{icon:ScanLine,title:"Edge cases ruled",subtitle:"Occlusion · Truncation · Crowds",color:"hsl(35 92% 58%)"}]} bottomBadge={{iconText:"IoU",title:"Measured geometry quality",subtitle:"Ground truth · Gold sets · QA"}}/>
   <ImageAnnotationDefinition/><ImageAnnotationTypes/><AnnotationComparison/><ImageAnnotationProcess/><ImageQualityAndEdges/><DeliveryIndustriesAndCommercial/><SecurityRelatedWhy/>
+  <RelatedBlogs />
   <FAQSection faqs={faqs} label="Image Annotation FAQs" title="Frequently Asked Questions About Image Annotation"/>
   <ServiceCTA headline="Get Your Images Annotated for Production" subtext="Tell us the annotation type, volume, class list, accuracy target and timeline—we'll scope a pilot on your own images." ctaText="Start Free Pilot" ctaLink="/free-pilot" secondaryCtaText="Talk to a Data Specialist" secondaryCtaLink="/contact-us" note="Pilot output includes a QA report"/>
 </AIDataServicesLayout>;

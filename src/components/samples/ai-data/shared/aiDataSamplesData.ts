@@ -1,6 +1,7 @@
 import {
   Tags, ScanEye, AudioLines, ThumbsUp, Database, Sparkles,
   type LucideIcon,
+  Bot,
 } from "lucide-react";
 import type { PreviewFile } from "../../shared/PreviewFilesModal";
 
@@ -586,6 +587,97 @@ export const aiDataSamples: AiDataSample[] = [
     ],
     serviceLink: "/ai-data-services/cleaning-validation/dataset-qa-label-audit",
   },
+  {
+    slug: "robotics-samples",
+    path: "/ai-data-samples/robotics-samples",
+    icon: Bot,
+    navLabel: "Robotics Samples",
+    title: "Robotics Dataset Samples",
+    seoTitle:
+      "Robotics Dataset Samples | Sensor, Vision & Trajectory QA | eQOURSE",
+    seoDescription:
+      "Explore robotics dataset samples covering sensor synchronization, trajectory cleaning, 3D perception labels, failure recovery and multimodal QA. Review production-ready outputs, validation metrics and complete data lineage.",
+    keywords:
+      "robotics dataset samples, robot learning data, imitation learning dataset, teleoperation data, trajectory cleaning, sensor synchronization, RGB-D annotation, 3D object detection, point cloud annotation, robot data QA, multimodal dataset validation, failure recovery data, ROS bag curation, RLDS, LeRobot, audit trail",
+    preHeadline: "Robotics Data Samples",
+    headline: "Robot Data",
+    headlineAccent: "Made Model-Ready",
+    subtext:
+      "See how raw robot experience becomes reliable training data. Explore representative samples across teleoperation, demonstrations, camera and depth streams, trajectories, 3D labels, and failure-recovery episodes—with synchronization checks, schema validation, quality metrics, and traceable provenance at every stage.",
+    ctaText: "Request a Robotics Pilot",
+    heroVisual: "collection",
+    shortDescription:"Representative robotics data samples spanning demonstrations, trajectories, sensor streams, 3D labels and recovery behaviours—with measurable QA and lineage.",
+    showcases: [
+      {
+        id: "trajectory",
+        title: "Demonstration Trajectories: Raw / Curated",
+        teaser:
+          "Turn teleoperation and human demonstrations into clean learning episodes.",
+        description:
+          "A before-and-after episode set showing how incomplete trajectories, idle frames, repeated demonstrations, unsafe actions, dropped observations and inconsistent task outcomes are identified and handled. The curated export preserves episode boundaries, timestamps, actions, observations, rewards or success labels, and the reason for every exclusion or edit.",
+        format: "RLDS / LeRobot + JSONL QA log",
+        languages: "Robot actions, state and language instructions",
+        qa: [
+          { label: "Episode integrity", 
+            detail: "start-to-end checked" },
+          { label: "Action validity", detail: "range and safety rules" },
+          { label: "Lineage retained", detail: "raw-to-curated mapping" },
+        ],
+      },
+      {
+        id: "sync",
+        title: "Multimodal Sensor Synchronization",
+        teaser:
+          "Align vision, depth, proprioception and action streams on one trusted timeline.",
+        description:
+          "A multimodal robotics sample with RGB, depth, joint states, gripper state, force or torque and control actions. The QA view exposes clock drift, missing frames, duplicate timestamps, dropped packets and calibration mismatches, then provides synchronized windows with explicit sampling policy and sensor metadata.",
+        format: "ROS 2 / MCAP + Parquet manifest",
+        languages: "RGB, depth, proprioception and force streams",
+        qa: [
+          { label: "Clock drift", detail: "measured and flagged" },
+          { label: "Calibration", detail: "intrinsics and extrinsics" },
+          { label: "Frame coverage", detail: "missingness reported" },
+        ],
+      },
+      {
+        id: "perception",
+        title: "3D Perception Labels: Review & Validation",
+        teaser:"Give perception models spatial labels they can trust in real scenes.",
+        description:
+          "A camera, depth and point-cloud annotation sample covering cuboids, masks, keypoints, poses, occlusion, truncation and object attributes. Labels are checked against sensor geometry, class taxonomy, coordinate frames and scene-level consistency, with disputed cases escalated for expert review.",
+        format: "COCO / YOLO / KITTI + point-cloud JSON",
+        languages: "RGB, RGB-D and 3D point-cloud scenes",
+        qa: [
+          { label: "Geometry checked", detail: "3D consistency" },
+          { label: "Taxonomy locked", detail: "versioned classes" },
+          { label: "Review sampled", detail: "gold-set agreement" },
+        ],
+      },
+      {
+        id: "recovery",
+        title: "Failure & Recovery Episode Set",
+        teaser:
+          "Train robust policies on what happens when the perfect run breaks down.",
+        description:
+          "A structured collection of blocked, failed and recovered task attempts: grasp slips, object occlusion, navigation obstacles, missed detections, collisions avoided, human interventions and successful recovery. Each episode includes the trigger, observed context, intervention or policy response, outcome, severity and reviewer rationale.",
+        format: "JSONL / Parquet + event timeline",
+        languages: "Robot state, event labels and natural-language rationale",
+        qa: [
+          { label: "Failure taxonomy", detail: "root cause tagged" },
+          { label: "Outcome labels", detail: "success and severity" },
+          { label: "Human review", detail: "rationale captured" },
+        ],
+      },
+    ],
+    metrics: [
+      "Episode-level QA for completeness, validity, safety and task outcome",
+      "Cross-modal timestamp, calibration and sensor-coverage checks",
+      "Versioned taxonomies, dataset manifests and raw-to-curated lineage",
+      "Gold-set review with agreement, error categories and corrective actions",
+    ],
+    serviceLink:
+      "/ai-data-services/robotics-data/robotics-data-collection",
+  }
 ];
 
 export const getSampleBySlug = (slug: string) =>

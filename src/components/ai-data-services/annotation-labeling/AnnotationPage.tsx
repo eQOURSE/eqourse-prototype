@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { BadgeCheck, BookOpenCheck, Braces, ScanLine } from "lucide-react";
 import AIDataServicesLayout from "../shared/AIDataServicesLayout";
 import SEOHead from "../shared/SEOHead";
@@ -114,6 +115,7 @@ const AnnotationPage = () => (
     <EngagementComparisonPricing />
     <IndustriesPipelineProof />
     <WhyEqourse />
+    <RelatedBlogs />
     <FAQSection faqs={faqs} label="Data Annotation FAQs" title="Frequently Asked Questions About Data Annotation" />
     <ServiceCTA headline="Turn Your Raw Data Into Model-Ready Training Data" subtext="Tell us the data type, volume, label schema, quality target and timeline—we'll scope a pilot on your own data." ctaText="Start Free Pilot" ctaLink="/free-pilot" secondaryCtaText="Talk to a Data Specialist" secondaryCtaLink="/contact-us" note="Pilot setup in the first week" />
   </AIDataServicesLayout>
