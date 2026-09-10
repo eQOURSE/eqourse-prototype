@@ -4,6 +4,7 @@ import AIDataServicesLayout from "../../shared/AIDataServicesLayout";
 import SEOHead from "../../shared/SEOHead";
 import ServiceHero from "../../shared/ServiceHero";
 import ServiceCTA from "../../shared/ServiceCTA";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { metadataFaqs, metadataOffers } from "./MetadataEnrichmentContent";
 import {
   CommercialRelatedWhyFAQ,
@@ -129,6 +130,7 @@ const MetadataEnrichmentPage = () => (
     <TaxonomyAndProvenance />
     <ProcessAndDeliverables />
     <LanguageFormatsSecurity />
+    <RelatedBlogs />
     <CommercialRelatedWhyFAQ />
     <ServiceCTA
       headline="Turn a Dataset into a System Your Team Can Reuse"

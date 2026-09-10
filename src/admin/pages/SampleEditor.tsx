@@ -11,6 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import PageHeader from "../components/PageHeader";
 import ImageUpload from "../components/ImageUpload";
 import FileUpload from "../components/FileUpload";
+import ContentPlacementPicker from "../components/ContentPlacementPicker";
 import { adminApi } from "../lib/api";
 import type { Sample } from "../lib/types";
 import { toast } from "sonner";
@@ -63,13 +64,18 @@ const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "category
   tabName: "",
   fileType: "PDF",
   isExternal: false,
+  pagePaths: [],
 };
 
 export default function SampleEditor() {
-  const { categoryId, sampleId } = useParams();
+  const { categorySlug, pageSlug: routePageSlug, tabName: routeTabName, sampleId } = useParams();
   const navigate = useNavigate();
   const isNew = !sampleId || sampleId === "new";
-  const [form, setForm] = useState(empty);
+  const [form, setForm] = useState(() => ({
+    ...empty,
+    pageSlug: routePageSlug ?? "",
+    tabName: routeTabName ?? "",
+  }));
   const [customType, setCustomType] = useState(false);
   const [customFileType, setCustomFileType] = useState(false);
   const [fileMeta, setFileMeta] = useState<{ originalName: string } | null>(null);
@@ -81,7 +87,7 @@ export default function SampleEditor() {
     adminApi.getSample(sampleId!).then((s) => {
       if (!s) {
         toast.error("Not found");
-        navigate(`/admin/sample-categories/${categoryId}/samples`);
+        navigate(`/admin/samples/${categorySlug}/${routePageSlug}`);
         return;
       }
       setForm({
@@ -95,13 +101,14 @@ export default function SampleEditor() {
         tabName: s.tabName ?? "",
         fileType: s.fileType ?? "PDF",
         isExternal: s.isExternal ?? false,
+        pagePaths: s.pagePaths ?? [],
       });
       if (!TYPES.includes(s.type)) setCustomType(true);
       if (s.fileType && !FILE_TYPES.includes(s.fileType)) setCustomFileType(true);
       setFileMeta({ originalName: s.title + " (existing file)" });
       setLoaded(true);
     });
-  }, [sampleId, categoryId, isNew, navigate]);
+  }, [sampleId, categorySlug, routePageSlug, isNew, navigate]);
 
   const setField = <K extends keyof typeof form>(key: K, value: typeof form[K]) =>
     setForm((f) => ({ ...f, [key]: value }));
@@ -138,13 +145,13 @@ export default function SampleEditor() {
     setSaving(true);
     try {
       if (isNew) {
-        await adminApi.createSample({ ...form, categoryId: categoryId! });
+        await adminApi.createSampleForPage(form);
         toast.success("Sample added");
       } else {
         await adminApi.updateSample(sampleId!, form);
         toast.success("Saved");
       }
-      navigate(`/admin/sample-categories/${categoryId}/samples`);
+      navigate(`/admin/samples/${categorySlug}/${form.pageSlug}`);
     } catch {
       toast.error("Save failed");
     } finally {
@@ -159,7 +166,7 @@ export default function SampleEditor() {
 
   return (
     <div className="p-8 max-w-3xl">
-      <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/sample-categories/${categoryId}/samples`)} className="mb-3">
+      <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/samples/${categorySlug}/${form.pageSlug || routePageSlug}`)} className="mb-3">
         <ArrowLeft className="w-4 h-4 mr-2" /> Back to samples
       </Button>
       <PageHeader
@@ -208,6 +215,18 @@ export default function SampleEditor() {
             </Select>
             <p className="text-xs text-muted-foreground mt-1">Which tab within the preview modal this belongs to.</p>
           </div>
+        </div>
+
+        <div className="space-y-3 border-t border-border/40 pt-5">
+          <div>
+            <h4 className="font-medium text-sm">Show this sample on service pages</h4>
+            <p className="mt-1 text-xs text-muted-foreground">This is separate from its sample-gallery page. Select all service pages where it should appear above FAQs.</p>
+          </div>
+          <ContentPlacementPicker
+            contentLabel="sample"
+            value={form.pagePaths}
+            onChange={(pagePaths) => setField("pagePaths", pagePaths)}
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

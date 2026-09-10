@@ -51,17 +51,18 @@ export interface PublicBlog {
   bodyFormat: "html" | "markdown";
   tags: string[];
   author: { name: string; avatarUrl?: string };
-  categories: [
+  categories: Array<
   {
     category: string;
-    subcategories: [
+    subcategories: Array<
       {
         subcategory: string;
         subSubcategories: string[];
       }
-    ];
+    >;
   }
-  ];
+  >;
+  pagePaths?: string[];
   seo: {
     title?: string;
     description?: string;
@@ -106,6 +107,18 @@ export async function fetchBlogByFilterCategory(category: string, subcategory: s
   }
 }
 
+export async function fetchBlogsForPage(pagePath: string): Promise<PublicBlog[] | null> {
+  if (!isApiAvailable()) return null;
+  try {
+    const params = new URLSearchParams({ page_path: pagePath, limit: "12" });
+    const res = await fetch(`${getBaseUrl()}/api/blogs?${params.toString()}`);
+    const data = await safeParse<{ items: PublicBlog[] }>(res);
+    return data?.items ?? null;
+  } catch {
+    return null;
+  }
+}
+
 
 /**
  * Fetch a single published blog post by slug.
@@ -138,6 +151,7 @@ export interface PublicCaseStudy {
   metrics: { label: string; value: string }[];
   tags: string[];
   relatedLinks?: { label: string; href: string }[];
+  pagePaths?: string[];
   seo: {
     title?: string;
     description?: string;
@@ -158,6 +172,18 @@ export async function fetchPublishedCaseStudies(): Promise<PublicCaseStudy[] | n
 
   try {
     const res = await fetch(`${getBaseUrl()}/api/case-studies?limit=100`);
+    const data = await safeParse<{ items: PublicCaseStudy[] }>(res);
+    return data?.items ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchCaseStudiesForPage(pagePath: string): Promise<PublicCaseStudy[] | null> {
+  if (!isApiAvailable()) return null;
+  try {
+    const params = new URLSearchParams({ page_path: pagePath, limit: "12" });
+    const res = await fetch(`${getBaseUrl()}/api/case-studies?${params.toString()}`);
     const data = await safeParse<{ items: PublicCaseStudy[] }>(res);
     return data?.items ?? null;
   } catch {
@@ -285,11 +311,25 @@ export async function submitFreePilotForm(data: FreePilotFormData): Promise<{ ok
 // ─── Samples API ─────────────────────────────────────────────
 
 export interface PreviewFile {
+  id?: string;
   title: string;
   description: string;
+  thumbnailUrl?: string;
   fileType: string;
   fileUrl: string;
   isExternal: boolean;
+}
+
+export async function fetchSamplesForPage(pagePath: string): Promise<PreviewFile[] | null> {
+  if (!isApiAvailable()) return null;
+  try {
+    const params = new URLSearchParams({ page_path: pagePath });
+    const res = await fetch(`${getBaseUrl()}/api/samples/files?${params.toString()}`);
+    const data = await safeParse<{ files: PreviewFile[] }>(res);
+    return data?.files ?? null;
+  } catch {
+    return null;
+  }
 }
 
 /**

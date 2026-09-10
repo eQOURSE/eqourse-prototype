@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import PageHeader from "../components/PageHeader";
 import ImageUpload from "../components/ImageUpload";
+import ContentPlacementPicker from "../components/ContentPlacementPicker";
 import { PublishBadge } from "../components/StatusBadge";
 import { adminApi, slugify } from "../lib/api";
 import type { CaseStudy, PublishStatus } from "../lib/types";
@@ -26,6 +27,7 @@ const empty: Omit<CaseStudy, "id" | "createdAt" | "updatedAt"> = {
   results: "",
   metrics: [],
   tags: [],
+  pagePaths: [],
   relatedLinks: [],
   bodyFormat: "markdown",
   seo: {},
@@ -77,6 +79,7 @@ export default function CaseStudyEditor() {
       setForm({
         ...c,
         relatedLinks: c.relatedLinks || [],
+        pagePaths: c.pagePaths || [],
       });
       setTagsText(c.tags.join(", "));
       setSlugTouched(true);
@@ -290,7 +293,20 @@ export default function CaseStudyEditor() {
           </Card>
 
           <Card className="p-6 space-y-4">
-            <h4 className="font-medium text-sm">Services Used (Internal SEO Links)</h4>
+            <div>
+              <h4 className="font-medium text-sm">Show this case study on service pages</h4>
+              <p className="mt-1 text-xs text-muted-foreground">Select every exact page where this case study should appear above the FAQ section.</p>
+            </div>
+            <ContentPlacementPicker
+              contentLabel="case study"
+              value={form.pagePaths}
+              onChange={(pagePaths) => setField("pagePaths", pagePaths)}
+            />
+          </Card>
+
+          <Card className="p-6 space-y-4">
+            <h4 className="font-medium text-sm">Links shown inside the case study</h4>
+            <p className="text-xs text-muted-foreground">These contextual links support readers and SEO. They do not control which service pages promote this case study.</p>
             
             {PREDEFINED_SERVICES.map((group) => (
               <div key={group.group} className="space-y-2">

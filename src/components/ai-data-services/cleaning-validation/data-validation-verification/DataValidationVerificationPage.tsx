@@ -3,6 +3,7 @@ import { AlertTriangle, CheckCheck, FileSearch } from "lucide-react";
 import AIDataServicesLayout from "../../shared/AIDataServicesLayout";
 import SEOHead from "../../shared/SEOHead";
 import ServiceCTA from "../../shared/ServiceCTA";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import ServiceHero from "../../shared/ServiceHero";
 import { verificationFaqs, verificationOffers } from "./DataValidationVerificationContent";
 import {
@@ -125,6 +126,7 @@ const DataValidationVerificationPage = () => (
     <ConflictConsequenceDecay />
     <ProcessAndDelivery />
     <ExpertiseLanguageSecurity />
+    <RelatedBlogs />
     <CommercialRelatedProofFAQ />
     <ServiceCTA
       headline="Find Out How Much of Your Data Is Actually True"

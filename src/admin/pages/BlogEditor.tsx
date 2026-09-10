@@ -1,28 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Save, Eye, EyeOff, X } from "lucide-react";
+import { ArrowLeft, Save, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import PageHeader from "../components/PageHeader";
 import ImageUpload from "../components/ImageUpload";
+import ContentPlacementPicker from "../components/ContentPlacementPicker";
 import { PublishBadge } from "../components/StatusBadge";
 import { adminApi, slugify } from "../lib/api";
-import type { BlogCategorySelection, BlogPost, PublishStatus } from "../lib/types";
-import { aiDataServicesCategories } from "@/components/ai-data-services/shared/aiDataServicesNavData";
-import { contentServicesCategories } from "@/components/content-services/shared/contentServicesNavData";
+import type { BlogPost, PublishStatus } from "../lib/types";
 import { toast } from "sonner";
-
-const hrefValue = (href: string) => href.replace(/^\/+|\/+$/g, "").split("/").pop() ?? "";
-
-const BLOG_TAXONOMY = [
-  { label: "Content Services", value: "content-services", categories: contentServicesCategories },
-  { label: "AI Data Services", value: "ai-data-services", categories: aiDataServicesCategories },
-];
 
 const empty: Omit<BlogPost, "id" | "createdAt" | "updatedAt"> = {
   title: "",
@@ -33,6 +23,7 @@ const empty: Omit<BlogPost, "id" | "createdAt" | "updatedAt"> = {
   bodyFormat: "markdown",
   tags: [],
   categories: [],
+  pagePaths: [],
   author: { name: "eQourse Editorial" },
   seo: {},
   status: "draft",
@@ -47,8 +38,6 @@ export default function BlogEditor() {
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(isNew);
   const [slugTouched, setSlugTouched] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("");
-  const [activeSubcategory, setActiveSubcategory] = useState("");
 
   useEffect(() => {
     if (isNew) return;
@@ -59,9 +48,7 @@ export default function BlogEditor() {
         return;
       }
       const categories = b.categories ?? [];
-      setForm({ ...b, categories });
-      setActiveCategory(categories[0]?.category ?? "");
-      setActiveSubcategory(categories[0]?.subcategories[0]?.subcategory ?? "");
+      setForm({ ...b, categories, pagePaths: b.pagePaths ?? [] });
       setTagsText(b.tags.join(", "));
       setSlugTouched(true);
       setLoaded(true);
@@ -77,76 +64,6 @@ export default function BlogEditor() {
     if (!slugTouched) setField("slug", slugify(v));
   };
 
-  const categorySelections = form.categories ?? [];
-  const activeTopCategory = BLOG_TAXONOMY.find((category) => category.value === activeCategory);
-  const categoryOptions = activeTopCategory?.categories ?? [];
-  const activeSelection = categorySelections.find((selection) => selection.category === activeCategory);
-  const subcategoryOptions = categoryOptions;
-  const subSubcategoryOptions = categoryOptions.find((subcategory) => hrefValue(subcategory.href) === activeSubcategory)?.subServices ?? [];
-
-  const selectCategory = (category: string) => {
-    setActiveCategory(category);
-    setActiveSubcategory("");
-    if (!categorySelections.some((selection) => selection.category === category)) {
-      setField("categories", [...categorySelections, { category, subcategories: [] }]);
-    }
-  };
-
-  const selectSubcategory = (subcategory: string) => {
-    setActiveSubcategory(subcategory);
-    if (!activeCategory) return;
-    const selection = activeSelection ?? { category: activeCategory, subcategories: [] };
-    if (selection.subcategories.some((item) => item.subcategory === subcategory)) return;
-    setField(
-      "categories",
-      categorySelections.map((selection) =>
-        selection.category === activeCategory && !selection.subcategories.some((item) => item.subcategory === subcategory)
-          ? { ...selection, subcategories: [...selection.subcategories, { subcategory, subSubcategories: [] }] }
-          : selection,
-      ),
-    );
-  };
-
-  const addSubSubcategory = (subSubcategory: string) => {
-    if (!activeCategory || !activeSubcategory) return;
-    setField(
-      "categories",
-      categorySelections.map((selection) => selection.category !== activeCategory ? selection : {
-        ...selection,
-        subcategories: selection.subcategories.map((subcategory) =>
-          subcategory.subcategory === activeSubcategory && !subcategory.subSubcategories.includes(subSubcategory)
-            ? { ...subcategory, subSubcategories: [...subcategory.subSubcategories, subSubcategory] }
-            : subcategory,
-        ),
-      }),
-    );
-  };
-
-  const removeCategory = (category: string) => {
-    setField("categories", categorySelections.filter((selection) => selection.category !== category));
-    if (activeCategory === category) setActiveCategory("");
-  };
-
-  const removeSubcategory = (category: string, subcategory: string) => {
-    setField(
-      "categories",
-      categorySelections.map((selection) =>
-        selection.category === category
-          ? { ...selection, subcategories: selection.subcategories.filter((item) => item.subcategory !== subcategory) }
-          : selection,
-      ),
-    );
-  };
-
-  const removeSubSubcategory = (category: string, subcategory: string, subSubcategory: string) => {
-    setField("categories", categorySelections.map((selection) => selection.category !== category ? selection : {
-      ...selection,
-      subcategories: selection.subcategories.map((item) => item.subcategory !== subcategory ? item : {
-        ...item,
-        subSubcategories: item.subSubcategories.filter((value) => value !== subSubcategory),
-      }),
-    }));
-  };
 
   const save = async (publishOverride?: PublishStatus) => {
     setSaving(true);
@@ -268,88 +185,14 @@ export default function BlogEditor() {
 
           <Card className="p-6 space-y-4">
             <div>
-              <Label>Categories</Label>
-              <Select value={activeCategory} onValueChange={selectCategory}>
-                <SelectTrigger><SelectValue placeholder="Select a category" /></SelectTrigger>
-                <SelectContent>
-                  {BLOG_TAXONOMY.map((category) => (
-                    <SelectItem key={category.value} value={category.value}>{category.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <h4 className="font-medium text-sm">Show this blog on service pages</h4>
+              <p className="mt-1 text-xs text-muted-foreground">Select every exact page where this blog should appear above the FAQ section.</p>
             </div>
-            <div>
-              <Label>Subcategory</Label>
-              <Select value={activeSubcategory} onValueChange={selectSubcategory} disabled={!activeCategory}>
-                <SelectTrigger><SelectValue placeholder={activeCategory ? "Select a subcategory" : "Select a category first"} /></SelectTrigger>
-                <SelectContent>
-                  {subcategoryOptions.map((subcategory) => (
-                    <SelectItem
-                      key={hrefValue(subcategory.href)}
-                      value={hrefValue(subcategory.href)}
-                    >
-                      {subcategory.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label>Sub-subcategory</Label>
-              <Select value="" onValueChange={addSubSubcategory} disabled={!activeSubcategory}>
-                <SelectTrigger><SelectValue placeholder={activeSubcategory ? "Select a sub-subcategory" : "Select a subcategory first"} /></SelectTrigger>
-                <SelectContent>
-                  {subSubcategoryOptions.map((item) => (
-                    <SelectItem
-                      key={hrefValue(item.href)}
-                      value={hrefValue(item.href)}
-                      disabled={activeSelection?.subcategories.find((subcategory) => subcategory.subcategory === activeSubcategory)?.subSubcategories.includes(hrefValue(item.href))}
-                    >
-                      {item.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            {categorySelections.length > 0 && (
-              <div className="rounded-md border bg-muted/30 p-3 space-y-3">
-                <p className="text-xs font-medium text-muted-foreground">Selected categories & subcategories</p>
-                {categorySelections.map((selection: BlogCategorySelection) => (
-                  <div key={selection.category} className="space-y-2">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-medium">{BLOG_TAXONOMY.find((category) => category.value === selection.category)?.label ?? selection.category}</span>
-                      <Button type="button" variant="ghost" size="icon" className="h-6 w-6" onClick={() => removeCategory(selection.category)} aria-label={`Remove ${selection.category}`}>
-                        <X className="h-3.5 w-3.5" />
-                      </Button>
-                    </div>
-                    <div className="space-y-2 pl-2">
-                      {selection.subcategories.length > 0 ? selection.subcategories.map((subcategory) => (
-                        <div key={subcategory.subcategory}>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-medium">
-                              {BLOG_TAXONOMY.find((category) => category.value === selection.category)?.categories.find((item) => hrefValue(item.href) === subcategory.subcategory)?.label ?? subcategory.subcategory}
-                            </span>
-                            <Button type="button" variant="ghost" size="icon" className="h-5 w-5" onClick={() => removeSubcategory(selection.category, subcategory.subcategory)} aria-label={`Remove ${subcategory.subcategory}`}>
-                              <X className="h-3 w-3" />
-                            </Button>
-                          </div>
-                          <div className="flex flex-wrap gap-1.5 pl-2 pt-1">
-                            {subcategory.subSubcategories.length > 0 ? subcategory.subSubcategories.map((subSubcategory) => (
-                              <Badge key={subSubcategory} variant="secondary" className="gap-1 pr-1 text-[11px]">
-                                {BLOG_TAXONOMY.find((category) => category.value === selection.category)?.categories.find((item) => hrefValue(item.href) === subcategory.subcategory)?.subServices.find((item) => hrefValue(item.href) === subSubcategory)?.label ?? subSubcategory}
-                                <button type="button" onClick={() => removeSubSubcategory(selection.category, subcategory.subcategory, subSubcategory)} aria-label={`Remove ${subSubcategory}`}>
-                                  <X className="h-3 w-3" />
-                                </button>
-                              </Badge>
-                            )) : <span className="text-xs text-muted-foreground">No sub-subcategory selected</span>}
-                          </div>
-                        </div>
-                      )) : <span className="text-xs text-muted-foreground">No subcategory selected</span>}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+            <ContentPlacementPicker
+              contentLabel="blog"
+              value={form.pagePaths}
+              onChange={(pagePaths) => setField("pagePaths", pagePaths)}
+            />
           </Card>
 
           <Card className="p-6 space-y-4">

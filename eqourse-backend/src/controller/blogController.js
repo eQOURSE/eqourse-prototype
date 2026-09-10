@@ -20,6 +20,30 @@ function buildCategoryFilter({ category, sub_category, sub_sub_category }) {
     : {};
 }
 
+function normalizePagePath(value = "") {
+  const clean = String(value).trim().split(/[?#]/, 1)[0].replace(/^\/+|\/+$/g, "");
+  return clean ? `/${clean}` : "";
+}
+
+function normalizePagePaths(values) {
+  if (!Array.isArray(values)) return [];
+  return [...new Set(values.map(normalizePagePath).filter(Boolean))];
+}
+
+// Reads assignments created by the earlier nested-taxonomy UI so existing
+// published posts keep working while editors move them to exact pagePaths.
+function buildLegacyPageFilter(pagePath) {
+  const segments = pagePath.replace(/^\//, "").split("/").filter(Boolean);
+  if (!segments.length) return null;
+  if (segments[0] === "ai-data-services") {
+    return buildCategoryFilter({ category: segments[0], sub_category: segments[1], sub_sub_category: segments[2] });
+  }
+  if (segments[0] === "robotics-training-data-services") {
+    return buildCategoryFilter({ category: "ai-data-services", sub_category: segments[0], sub_sub_category: segments[1] });
+  }
+  return buildCategoryFilter({ category: "content-services", sub_category: segments[0], sub_sub_category: segments[1] });
+}
+
 /**
  * GET /api/blogs
  * Public — list published blog posts with optional filters (tags, grade, board_course, subject)
@@ -34,6 +58,7 @@ const listPublishedBlogs = async (req, res) => {
       category,
       sub_category,
       sub_sub_category,
+      page_path,
       q,
       is_featured,
       limit = 10,
@@ -54,16 +79,28 @@ const listPublishedBlogs = async (req, res) => {
     if (subject) {
       filter.subject = subject;
     }
-    Object.assign(filter, buildCategoryFilter({ category, sub_category, sub_sub_category }));
+    if (page_path) {
+      const pagePath = normalizePagePath(page_path);
+      const legacyFilter = buildLegacyPageFilter(pagePath);
+      filter.$or = [{ pagePaths: pagePath }, ...(legacyFilter ? [legacyFilter] : [])];
+    } else {
+      Object.assign(filter, buildCategoryFilter({ category, sub_category, sub_sub_category }));
+    }
     if (is_featured !== undefined) {
       filter.is_featured = is_featured === "true";
     }
     if (q) {
-      filter.$or = [
+      const textSearch = { $or: [
         { title: { $regex: q, $options: "i" } },
         { excerpt: { $regex: q, $options: "i" } },
         { body: { $regex: q, $options: "i" } }
-      ];
+      ] };
+      if (filter.$or) {
+        filter.$and = [{ $or: filter.$or }, textSearch];
+        delete filter.$or;
+      } else {
+        Object.assign(filter, textSearch);
+      }
     }
 
     const total = await Blog.countDocuments(filter);
@@ -185,6 +222,7 @@ const createBlog = async (req, res) => {
       author,
       tags,
       categories,
+      pagePaths,
       grade,
       board_course,
       subject,
@@ -217,6 +255,7 @@ const createBlog = async (req, res) => {
       author: author || {},
       tags: tags || [],
       categories: categories || [],
+      pagePaths: normalizePagePaths(pagePaths),
       grade: grade || "",
       board_course: board_course || "",
       subject: subject || "",
@@ -244,6 +283,10 @@ const createBlog = async (req, res) => {
 const updateBlog = async (req, res) => {
   try {
     const { slug, status } = req.body;
+
+    if (Object.prototype.hasOwnProperty.call(req.body, "pagePaths")) {
+      req.body.pagePaths = normalizePagePaths(req.body.pagePaths);
+    }
 
     if (slug) {
       const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -348,6 +391,7 @@ function formatBlog(doc) {
     },
     tags: doc.tags || [],
     categories: doc.categories || [],
+    pagePaths: doc.pagePaths || [],
     grade: doc.grade || "",
     board_course: doc.board_course || "",
     subject: doc.subject || "",
