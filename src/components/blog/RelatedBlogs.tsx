@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BlogCard from "./BlogCard";
 import { type BlogPost } from "./blogData";
-import { fetchBlogByFilterCategory, type PublicBlog } from "@/lib/publicApi";
+import { fetchBlogByFilterCategory, fetchPublishedBlogs, type PublicBlog } from "@/lib/publicApi";
 import { useLocation } from "react-router-dom";
 
 interface RelatedBlogsProps {
@@ -65,21 +65,40 @@ const RelatedBlogs = ({
     const subcategories = pathSegments[2] ?? "";
     const subSubcategories = pathSegments[3] ?? "";
 
-    fetchBlogByFilterCategory(category, subcategories, subSubcategories).then(
-      (published) => {
-        if (cancelled) return;
-        if (published?.length) {
-          setPosts(
-            published
-              .filter((blog) => matches(blog.tags))
-              .slice(0, limit)
-              .map(mapApiBlog),
-          );
-        } else {
-          setPosts([]);
+    const loadRelated = async () => {
+      // 1. Try fetching by exact category path
+      let published = await fetchBlogByFilterCategory(category, subcategories, subSubcategories);
+      
+      // 2. Filter by keywords
+      let filtered = (published || []).filter((blog) => matches(blog.tags));
+      
+      // 3. Fallback: If keywords filtered out everything, use the category matches
+      if (!filtered.length && published?.length) {
+        filtered = published;
+      }
+      
+      // 4. Fallback: If category search found nothing (e.g. legacy blogs without categories), fetch all
+      if (!filtered.length) {
+        const allBlogs = await fetchPublishedBlogs();
+        if (allBlogs?.length) {
+          filtered = allBlogs.filter((blog) => matches(blog.tags));
+          if (!filtered.length) {
+            filtered = allBlogs; // Ultimate fallback: just show latest blogs
+          }
         }
-      },
-    );
+      }
+
+      if (cancelled) return;
+      
+      if (filtered?.length) {
+        setPosts(filtered.slice(0, limit).map(mapApiBlog));
+      } else {
+        setPosts([]);
+      }
+    };
+
+    loadRelated();
+
     return () => {
       cancelled = true;
     };
