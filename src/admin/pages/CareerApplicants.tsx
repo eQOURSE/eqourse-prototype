@@ -457,15 +457,17 @@ export default function AdminCareerApplicants() {
                       <span className="text-muted-foreground text-xs font-medium uppercase tracking-wider">Documents</span>
                       
                       {app.resumeFile ? (
-                        <a 
-                          href={app.resumeFile.url?.startsWith("/") ? `${import.meta.env.VITE_API_BASE_URL || ""}${app.resumeFile.url}` : app.resumeFile.url} 
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="flex items-center justify-between p-2 rounded-lg border border-border bg-secondary/50 hover:bg-secondary transition-colors text-sm"
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            try { await adminApi.downloadApplicationResume(app.id, app.resumeFile?.originalName || "resume"); }
+                            catch (cause) { toast.error(cause instanceof Error ? cause.message : "Failed to download resume"); }
+                          }}
+                          className="flex w-full items-center justify-between p-2 rounded-lg border border-border bg-secondary/50 hover:bg-secondary transition-colors text-sm"
                         >
                           <span className="truncate font-medium">{app.resumeFile.originalName}</span>
                           <Download className="w-4 h-4 text-muted-foreground shrink-0 ml-2" />
-                        </a>
+                        </button>
                       ) : app.resumeDriveLink ? (
                         <a 
                           href={app.resumeDriveLink} 

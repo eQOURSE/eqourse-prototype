@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { adminApi } from "../../admin/lib/api"; // Re-using api client for now (it has public endpoints too via API_BASE)
+import { useState, useEffect, useRef, useCallback } from "react";
 import type { JobOpening, JobDepartment } from "../../admin/lib/types";
-import { Briefcase, MapPin, Clock, ArrowRight, Loader2, Search } from "lucide-react";
+import { Briefcase, MapPin, Clock, Loader2, Search, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const DEPARTMENTS: { value: JobDepartment | "all"; label: string }[] = [
   { value: "all", label: "All Departments" },
@@ -15,21 +14,24 @@ const DEPARTMENTS: { value: JobDepartment | "all"; label: string }[] = [
   { value: "hr", label: "HR" },
 ];
 
-export default function JobListings({ onApplyClick }: { onApplyClick: (job: JobOpening) => void }) {
+export default function JobListings({ onApplyClick, initialJobSlug }: { onApplyClick: (job: JobOpening) => void; initialJobSlug?: string }) {
   const [openings, setOpenings] = useState<JobOpening[]>([]);
   const [loading, setLoading] = useState(true);
   const [department, setDepartment] = useState<string>("all");
   const [locationSearch, setLocationSearch] = useState("");
+  const openedSharedJob = useRef(false);
+  const handledMissingSharedJob = useRef(false);
 
-  const fetchJobs = async () => {
+  const fetchJobs = useCallback(async () => {
     setLoading(true);
     try {
       // NOTE: Using the public endpoint path via the live client
       const qs = new URLSearchParams();
       if (department !== "all") qs.set("department", department);
       if (locationSearch) qs.set("location", locationSearch);
+      qs.set("pageSize", "100");
       
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/careers?${qs}`);
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ""}/api/careers?${qs}`);
       const data = await res.json();
       if (data.success) {
         setOpenings(data.data.items);
@@ -39,20 +41,53 @@ export default function JobListings({ onApplyClick }: { onApplyClick: (job: JobO
     } finally {
       setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchJobs();
-  }, [department]);
+  }, [department, locationSearch]);
 
   useEffect(() => {
     const timer = setTimeout(fetchJobs, 400);
     return () => clearTimeout(timer);
-  }, [locationSearch]);
+  }, [fetchJobs]);
+
+  useEffect(() => {
+    if (!initialJobSlug || openedSharedJob.current || openings.length === 0) return;
+    const sharedJob = openings.find((job) => job.slug === initialJobSlug);
+    if (sharedJob) {
+      openedSharedJob.current = true;
+      onApplyClick(sharedJob);
+    }
+  }, [initialJobSlug, onApplyClick, openings]);
+
+  useEffect(() => {
+    if (loading || !initialJobSlug || openedSharedJob.current || handledMissingSharedJob.current) return;
+    handledMissingSharedJob.current = true;
+    if (!openings.some((job) => job.slug === initialJobSlug)) {
+      toast.error("This role is no longer open. View the current positions below.");
+    }
+  }, [initialJobSlug, loading, openings]);
+
+  const copyJobLink = async (job: JobOpening) => {
+    const url = new URL("/career", window.location.origin);
+    url.searchParams.set("job", job.slug);
+    url.hash = "open-positions";
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      toast.success("Shareable job link copied");
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = url.toString();
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const copied = document.execCommand("copy");
+      textarea.remove();
+      copied ? toast.success("Shareable job link copied") : toast.error("Could not copy the link");
+    }
+  };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center max-w-3xl mx-auto mb-16">
+    <div id="open-positions" className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
+      <div className="mx-auto mb-10 max-w-3xl text-center">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">
           Open Positions
         </h2>
@@ -147,12 +182,15 @@ export default function JobListings({ onApplyClick }: { onApplyClick: (job: JobO
                 </p>
               </div>
 
-              <div className="flex flex-row md:flex-col gap-3 shrink-0">
+              <div className="flex shrink-0 flex-row gap-3 md:flex-col">
                 <Button
                   onClick={() => onApplyClick(job)}
                   className="bg-[#6BCB77] hover:bg-[#5bb865] text-white shadow-md shadow-[#6BCB77]/20 flex-1 md:flex-none"
                 >
                   Apply Now
+                </Button>
+                <Button variant="outline" onClick={() => copyJobLink(job)} aria-label={`Copy share link for ${job.title}`}>
+                  <Share2 className="mr-2 h-4 w-4" /> Share role
                 </Button>
               </div>
             </div>

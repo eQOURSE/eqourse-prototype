@@ -24,6 +24,7 @@ const adminRouter = require("./src/router/adminRouter");
 
 // Upload directory for static file serving
 const { UPLOAD_DIR } = require("./src/controller/uploadController");
+const { isPrivateUploadRequest, removeUploadedFiles } = require("./src/utils/privateUploads");
 
 const app = express();
 
@@ -31,15 +32,21 @@ const app = express();
 app.use(cors({
   origin: '*',
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  exposedHeaders: ["Content-Disposition"],
   credentials: true,
 }));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(logger.requestLogger);
 
-// Serve uploaded files
-app.use("/api/uploads", express.static(UPLOAD_DIR));
-app.use("/uploads", express.static(UPLOAD_DIR)); // Fallback for existing resume URLs without /api prefix
+// Public media remains static, but candidate resumes and vendor verification
+// documents are only downloadable through authenticated admin endpoints.
+const blockPrivateUploads = (req, res, next) => {
+  if (isPrivateUploadRequest(req.path)) return res.status(404).end();
+  return next();
+};
+app.use("/api/uploads", blockPrivateUploads, express.static(UPLOAD_DIR));
+app.use("/uploads", blockPrivateUploads, express.static(UPLOAD_DIR));
 
 // ── Public Routes ────────────────────────────────────────────────────────────
 app.use("/api/contact", contactRouter);       // POST /api/contact (public submit)
@@ -50,6 +57,17 @@ app.use("/api/sample-categories", sampleRouter); // GET /api/sample-categories
 app.use("/api/samples", sampleRouter);           // GET /api/samples, GET /api/samples/files
 app.use("/api/chat", chatRouter);                 // POST /api/chat (Gemini AI proxy)
 app.use("/api/careers", careerRouter);               // GET /api/careers, POST /api/careers/:jobId/apply
+app.use("/api/careers", async (error, req, res, next) => {
+  await removeUploadedFiles(req.file ? [req.file] : req.files);
+  if (res.headersSent) return next(error);
+  logger.warn(`Career upload rejected: ${error.message}`);
+  const message = error.code === "LIMIT_FILE_SIZE"
+    ? "Each uploaded file must be 5 MB or smaller."
+    : error.code === "LIMIT_UNEXPECTED_FILE"
+      ? "Too many files or an unexpected upload field was provided."
+      : error.message || "The uploaded document could not be accepted.";
+  return res.status(400).json({ success: false, message });
+});
 
 // ── Admin Routes ─────────────────────────────────────────────────────────────
 app.use("/api/admin", adminRouter);            // All admin routes under /api/admin/*
@@ -57,6 +75,13 @@ app.use("/api/admin", adminRouter);            // All admin routes under /api/ad
 // ── Health check ─────────────────────────────────────────────────────────────
 const { smtpHealthCheck, sendTestEmail } = require("./src/utils/emailNotifier");
 app.get("/", (req, res) => res.json({ status: "eQOURSE backend is running", version: "2.0.0" }));
+app.get("/api/health", (req, res) => {
+  const databaseConnected = mongoose.connection.readyState === 1;
+  res.status(databaseConnected ? 200 : 503).json({
+    status: databaseConnected ? "ok" : "degraded",
+    database: databaseConnected ? "connected" : "disconnected",
+  });
+});
 app.get("/api/health/smtp", async (req, res) => {
   const result = await smtpHealthCheck();
   res.status(result.ok ? 200 : 503).json(result);
@@ -90,16 +115,17 @@ async function reconcilePublishedCmsSeo() {
 
 mongoose
   .connect(MONGO_URI)
-  .then(async () => {
+  .then(() => {
     logger.info(`✅ MongoDB connected: ${MONGO_URI}`);
-    try {
-      await reconcilePublishedCmsSeo();
-    } catch (error) {
-      logger.error(`CMS SEO reconciliation failed: ${error.message}`);
-      const syncRequired = process.env.CMS_SEO_SYNC_REQUIRED === "true" || process.env.NODE_ENV === "production";
-      if (syncRequired) throw error;
-    }
     app.listen(PORT, () => logger.info(`🚀 Server running on http://localhost:${PORT}`));
+
+    // Static CMS SEO publishing is important, but a filesystem permission or
+    // deployment-order problem must never take careers, blogs, case studies,
+    // samples and the admin API offline. Reconcile after the HTTP server is
+    // listening and report failures for operations to repair independently.
+    reconcilePublishedCmsSeo().catch((error) => {
+      logger.error(`CMS SEO reconciliation failed: ${error.message}`);
+    });
   })
   .catch((err) => {
     logger.error(`❌ MongoDB connection failed: ${err.message}`);

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import PageLayout from "@/components/shared/PageLayout";
 import { BreadcrumbSchema } from "@/components/shared/BreadcrumbSchema";
 import { Helmet } from "react-helmet-async";
@@ -11,6 +12,7 @@ import JobDetailModal from "@/components/careers/JobDetailModal";
 import JobApplicationForm from "@/components/careers/JobApplicationForm";
 import type { JobOpening } from "@/admin/lib/types";
 import { pageSeo } from "@/seo/pageSeo";
+import CareerPathways from "@/components/careers/CareerPathways";
 
 /* Approved title + meta description for this route (see src/seo/pageSeo.ts). */
 const PAGE_SEO = pageSeo["/career"];
@@ -19,6 +21,7 @@ const Careers = () => {
   // Two-step flow: first view JD details, then apply
   const [detailJob, setDetailJob] = useState<JobOpening | null>(null);
   const [applyJob, setApplyJob] = useState<JobOpening | null>(null);
+  const [searchParams] = useSearchParams();
 
   const handleViewDetails = (job: JobOpening) => {
     setDetailJob(job);
@@ -67,7 +70,7 @@ const Careers = () => {
         headlineAccent="Education & AI"
         subtext="Shape the future of education and AI with eQOURSE. Be part of a dynamic team of 500+ specialists dedicated to innovative Content Services and production-grade AI data services. We're always looking for talented content creators, instructional designers, data annotators, NLP specialists, project managers, and operations professionals. Grow your career with our India-led delivery organisation serving clients worldwide."
         ctaText="View Openings"
-        ctaLink="#apply"
+        ctaLink="#open-positions"
         imageSrc="/assets/about/Carrer.webp"
         imageAlt="Careers at eQOURSE - Professionals collaborating on education and AI solutions"
         rotatingBadges={[
@@ -78,12 +81,13 @@ const Careers = () => {
         bottomBadge={{ iconText: "HR", title: "Join Us", subtitle: "Global team, local impact" }}
       />
       
-      <CareersWhyWork />
-      
       {/* Job Board Section */}
-      <section id="apply" className="bg-slate-50 border-t border-slate-200">
-        <JobListings onApplyClick={handleViewDetails} />
+      <section className="border-t border-slate-200 bg-slate-50">
+        <JobListings initialJobSlug={searchParams.get("job") || undefined} onApplyClick={handleViewDetails} />
       </section>
+
+      <CareerPathways />
+      <CareersWhyWork />
 
       {/* Job Detail Modal — shows full JD before applying */}
       {detailJob && (

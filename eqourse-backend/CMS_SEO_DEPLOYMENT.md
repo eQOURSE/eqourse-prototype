@@ -16,7 +16,6 @@ Recommended production values:
 ```dotenv
 PUBLIC_SITE_URL=https://www.eqourse.com
 FRONTEND_DIST_DIR=/var/www/eqourse/dist
-CMS_SEO_SYNC_REQUIRED=true
 ```
 
 After copying a new frontend build, restore write ownership before restarting
@@ -29,8 +28,9 @@ sudo chown -R deployer:deployer /var/www/eqourse/dist
 
 If `FRONTEND_DIST_DIR` is accidentally omitted, Linux production now detects
 `/var/www/eqourse/dist` when that live directory exists. An explicit value is
-still recommended, and a write failure stops production startup instead of
-silently updating the unused `/opt/.../dist` copy.
+still recommended. A write failure is logged, but it does not stop the public
+API: careers, blogs, case studies, samples and admin data remain available while
+the SEO publishing permission is repaired.
 
 Restart the backend after deploying. At startup it reconciles every published
 blog and case study, so existing entries are repaired automatically. Afterward,

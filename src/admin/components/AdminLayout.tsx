@@ -12,6 +12,8 @@ import {
   Menu,
   X,
   Briefcase,
+  Building2,
+  UserRoundSearch,
 } from "lucide-react";
 import { adminApi } from "../lib/api";
 import { Button } from "@/components/ui/button";
@@ -22,6 +24,8 @@ const navItems = [
   { to: "/admin/contact-queries", label: "Contact Queries", icon: Mail },
   { to: "/admin/pilot-queries", label: "Free-Pilot Queries", icon: Rocket },
   { to: "/admin/careers", label: "Careers", icon: Briefcase },
+  { to: "/admin/talent-pool", label: "Talent Pool", icon: UserRoundSearch },
+  { to: "/admin/vendors", label: "Vendors", icon: Building2 },
   { to: "/admin/blogs", label: "Blogs", icon: FileText },
   { to: "/admin/case-studies", label: "Case Studies", icon: BookOpen },
   { to: "/admin/sample-categories", label: "Samples", icon: FolderTree },

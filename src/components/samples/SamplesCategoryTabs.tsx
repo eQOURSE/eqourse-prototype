@@ -23,7 +23,6 @@ const textSamples: CardItem[] = [
 const videoSamples: CardItem[] = [
   { label: "Articulate Storyline", href: "/articulate-storyline-video-samples", description: "Interactive Storyline courses with branching and variables." },
   { label: "Pen Tab and PPT", href: "/pen-tab-and-ppt-samples", description: "Classroom-style whiteboard and narrated PPT walkthroughs." },
-  { label: "AI Videos", href: "/ai-avatar-video-samples", description: "AI-presenter videos with realistic avatars and localized voices." },
   { label: "Flash to HTML", href: "/flash-to-html-samples", description: "Legacy Flash modules reborn as responsive HTML5 courses." },
   { label: "2D 3D Animation", href: "/2d-3d-video-samples", description: "Animated explainers across science, math, and skills." },
   { label: "Promotional Video", href: "/promotional-video", description: "Brand and product promo videos for Content Services and enterprise." },
@@ -32,7 +31,7 @@ const videoSamples: CardItem[] = [
 
 const tabs = [
   { id: "text", label: "Text Content Samples", sub: "8 categories", Icon: FileText, accent: "from-primary to-accent", count: 8 },
-  { id: "video", label: "Video Content Samples", sub: "7 formats", Icon: PlayCircle, accent: "from-accent to-primary", count: 7 },
+  { id: "video", label: "Video Content Samples", sub: "6 formats", Icon: PlayCircle, accent: "from-accent to-primary", count: 6 },
   { id: "ai-data", label: "AI Data Samples", sub: "6 datasets", Icon: Database, accent: "from-[hsl(220_85%_55%)] to-[hsl(190_85%_55%)]", count: 6, isNew: true },
 ] as const;
 
