@@ -1,4 +1,5 @@
 import ContentServicesLayout from "../shared/ContentServicesLayout";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import SEOHead from "@/components/ai-data-services/shared/SEOHead";
 import ServiceHero from "@/components/ai-data-services/shared/ServiceHero";
 import ServiceNarrativeSection from "@/components/ai-data-services/shared/ServiceNarrativeSection";
@@ -80,6 +81,7 @@ const CustomElearningPage = () => (
     />
 
     <SubServicesGrid />
+    <RelatedBlogs />
     <FAQSection faqs={faqs} />
     
     <ServiceCTA 

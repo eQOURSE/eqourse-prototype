@@ -1,4 +1,5 @@
 import ContentServicesLayout from "../shared/ContentServicesLayout";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import SEOHead from "@/components/ai-data-services/shared/SEOHead";
 import ServiceHero from "@/components/ai-data-services/shared/ServiceHero";
 import FAQSection from "@/components/ai-data-services/shared/FAQSection";
@@ -52,6 +53,7 @@ const ExamPrepPage = () => (
     <ExamServicesGrid />
     <EmSATSection />
     <ComprehensiveSolutions />
+    <RelatedBlogs />
     <FAQSection faqs={faqs} />
     
     <ServiceCTA 

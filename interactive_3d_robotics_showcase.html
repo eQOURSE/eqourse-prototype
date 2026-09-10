@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eQOURSE - Robotics Data Samples</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            green: '#0ab68b',
+                            dark: '#0a0f1c',
+                            light: '#e6f7f3',
+                            gray: '#f3f4f6',
+                            text: '#1f2937'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fafafa; }
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0d1117; /* GitHub dark theme-like background */
+            cursor: grab;
+        }
+        #canvas-container:active {
+            cursor: grabbing;
+        }
+        .tab-btn { transition: all 0.2s ease-in-out; }
+        .tab-btn.active { background-color: #0ab68b; color: white; border-color: #0ab68b; }
+        .tab-btn.inactive { background-color: white; color: #4b5563; border-color: #e5e7eb; }
+        .tab-btn.inactive:hover { background-color: #f3f4f6; }
+        .tab-number { transition: all 0.2s ease-in-out; }
+        .tab-btn.active .tab-number { background-color: rgba(255,255,255,0.2); }
+        .tab-btn.inactive .tab-number { background-color: #e5e7eb; color: #10b981; }
+    </style>
+</head>
+<body class="text-brand-text">
+
+    <!-- Top Contact Bar -->
+    <div class="bg-brand-green text-white text-xs py-2 px-6 flex justify-between items-center hidden md:flex">
+        <div class="flex space-x-6">
+            <span class="flex items-center"><i class="fas fa-phone-alt mr-2"></i> +91 92144 45870</span>
+            <span class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@eqourse.com</span>
+        </div>
+        <div class="flex space-x-4">
+            <a href="#" class="hover:text-gray-200"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="#" class="hover:text-gray-200"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#" class="hover:text-gray-200"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="#" class="hover:text-gray-200"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="#" class="hover:text-gray-200"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="bg-white border-b border-gray-100 py-4 px-6 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <!-- Logo Mock -->
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full border-4 border-l-brand-green border-r-blue-500 border-t-yellow-400 border-b-purple-500 mr-2 flex items-center justify-center">
+                        <div class="w-4 h-4 rounded-full border-2 border-brand-green"></div>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-gray-800">eQOURSE<span class="text-xs align-super text-gray-400 font-normal">TM</span></span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex space-x-6 text-sm font-medium text-gray-600">
+                <a href="#" class="hover:text-brand-green">Home</a>
+                <a href="#" class="hover:text-brand-green flex items-center">AI Data Services <i class="fas fa-chevron-down ml-1 text-xs text-gray-400"></i></a>
+                <a href="#" class="hover:text-brand-green flex items-center">Content Services <i class="fas fa-chevron-down ml-1 text-xs text-gray-400"></i></a>
+                <a href="#" class="hover:text-brand-green flex items-center">About Us <i class="fas fa-chevron-down ml-1 text-xs text-gray-400"></i></a>
+                <a href="#" class="text-brand-green flex items-center">Samples <i class="fas fa-chevron-down ml-1 text-xs text-brand-green"></i></a>
+                <a href="#" class="hover:text-brand-green">TUTRAIN</a>
+                <a href="#" class="hover:text-brand-green">eQOURSE+</a>
+            </div>
+
+            <div class="flex space-x-3">
+                <button class="border border-brand-green text-brand-green hover:bg-brand-light px-4 py-2 rounded-full text-sm font-semibold transition-colors">Free Pilot</button>
+                <button class="bg-brand-green hover:bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">Contact Us</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#1a202c] mb-4">Sample Showcase</h1>
+            <p class="text-gray-500 text-lg max-w-3xl mx-auto leading-relaxed">
+                Representative outputs across every task we support - each delivered with full metadata, QA logs, and the output format your pipeline needs.
+            </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Left Sidebar (Tabs) -->
+            <div class="w-full lg:w-1/3 flex flex-col gap-3" id="tab-container">
+                <!-- Tabs will be injected here by JS -->
+            </div>
+
+            <!-- Right Content Panel -->
+            <div class="w-full lg:w-2/3 bg-white rounded-2xl shadow-sm border border-gray-100 p-8 flex flex-col">
+                
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <p class="text-brand-green text-xs font-bold tracking-wider mb-2" id="sample-indicator">— SAMPLE 1 OF 4</p>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-3" id="content-title">Demonstration Trajectories: Raw / Curated</h2>
+                        <p class="text-gray-500" id="content-subtitle">Turn teleoperation and human demonstrations into clean learning episodes.</p>
+                    </div>
+                    <div class="flex flex-col items-end gap-2" id="content-tags">
+                        <!-- Tags injected by JS -->
+                    </div>
+                </div>
+
+                <!-- 3D Interactive Window (Terminal Mockup) -->
+                <div class="rounded-xl overflow-hidden shadow-lg border border-gray-800 flex flex-col flex-grow relative" style="min-height: 450px;">
+                    <!-- Terminal Header -->
+                    <div class="bg-[#161b22] px-4 py-3 flex items-center justify-between border-b border-gray-800 z-10 absolute w-full top-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="text-gray-500 text-xs font-mono tracking-wider flex items-center space-x-4" id="terminal-title">
+                            <span>interactive · trajectory.live</span>
+                            <span class="flex items-center text-brand-green"><span class="w-2 h-2 rounded-full bg-brand-green mr-1 animate-pulse"></span> LIVE 3D</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 3D Canvas Container -->
+                    <div id="canvas-container" class="mt-10">
+                        <!-- Three.js will render here -->
+                    </div>
+                    
+                    <!-- Interaction Hint overlay -->
+                    <div class="absolute bottom-4 left-0 w-full flex justify-center pointer-events-none z-10">
+                        <div class="bg-black bg-opacity-50 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm flex items-center">
+                            <i class="fas fa-mouse mr-2"></i> Click & Drag to Interact
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-8 flex gap-4">
+                    <button class="flex-1 bg-brand-green hover:bg-teal-600 text-white py-3 rounded-xl font-semibold transition flex justify-center items-center">
+                        <i class="far fa-eye mr-2"></i> Preview Files
+                    </button>
+                    <button class="flex-1 border border-gray-200 hover:border-brand-green hover:text-brand-green text-gray-700 py-3 rounded-xl font-semibold transition flex justify-center items-center">
+                        <i class="fas fa-download mr-2"></i> Request Full Set
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        const tabData = [
+            {
+                id: 1,
+                title: "Demonstration Trajectories: Raw / Curated",
+                subtitle: "Turn teleoperation and human demonstrations into clean learning episodes.",
+                tags: [
+                    { icon: "far fa-file-code", text: "RLDS / LeRobot + JSONL QA log" },
+                    { icon: "fas fa-robot", text: "Robot actions, state and language instructions" }
+                ],
+                terminalText: "interactive · trajectory.live"
+            },
+            {
+                id: 2,
+                title: "Multimodal Sensor Synchronization",
+                subtitle: "Time-aligned sensor streams (Lidar, RGB, Depth, IMU) for robust perception models.",
+                tags: [
+                    { icon: "fas fa-database", text: "ROS 2 / MCAP + Parquet manifest" },
+                    { icon: "fas fa-satellite-dish", text: "Multi-sensor fusion & calibration" }
+                ],
+                terminalText: "interactive · sensor_fusion.live"
+            },
+            {
+                id: 3,
+                title: "3D Perception Labels: Review & Validation",
+                subtitle: "High-precision 3D bounding boxes and semantic segmentation on point cloud data.",
+                tags: [
+                    { icon: "fas fa-cubes", text: "COCO / YOLO / KITTI + point-cloud JSON" },
+                    { icon: "fas fa-check-double", text: "Human-in-the-loop validation" }
+                ],
+                terminalText: "interactive · perception_labels.live"
+            },
+            {
+                id: 4,
+                title: "Failure & Recovery Episode Set",
+                subtitle: "Curated edge cases showing robotic failure states and successful recovery actions.",
+                tags: [
+                    { icon: "fas fa-history", text: "JSONL / Parquet + event timeline" },
+                    { icon: "fas fa-tools", text: "Error state classification" }
+                ],
+                terminalText: "interactive · physics_recovery.live"
+            }
+        ];
+
+        let activeTabId = 1;
+
+        function initUI() {
+            const container = document.getElementById('tab-container');
+            container.innerHTML = '';
+
+            tabData.forEach((tab) => {
+                const isActive = tab.id === activeTabId;
+                const btn = document.createElement('div');
+                btn.className = `tab-btn flex p-5 rounded-2xl cursor-pointer border ${isActive ? 'active' : 'inactive'}`;
+                btn.onclick = () => switchTab(tab.id);
+
+                btn.innerHTML = `
+                    <div class="mr-4">
+                        <div class="tab-number w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm">
+                            0${tab.id}
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1 leading-tight">${tab.title.split(': ')[0]} <br/> ${tab.title.split(': ')[1] ? tab.title.split(': ')[1] : ''}</h3>
+                        <p class="text-xs opacity-80 font-medium">${tab.tags[0].text.split(' + ')[0]}</p>
+                    </div>
+                `;
+                container.appendChild(btn);
+            });
+
+            updateContent();
+        }
+
+        function updateContent() {
+            const data = tabData.find(t => t.id === activeTabId);
+            
+            document.getElementById('sample-indicator').textContent = `— SAMPLE ${data.id} OF ${tabData.length}`;
+            document.getElementById('content-title').textContent = data.title;
+            document.getElementById('content-subtitle').textContent = data.subtitle;
+            document.getElementById('terminal-title').innerHTML = `
+                <span>${data.terminalText}</span>
+                <span class="flex items-center text-brand-green"><span class="w-2 h-2 rounded-full bg-brand-green mr-1 animate-pulse"></span> LIVE 3D</span>
+            `;
+
+            const tagsContainer = document.getElementById('content-tags');
+            tagsContainer.innerHTML = data.tags.map(tag => `
+                <div class="bg-brand-light text-brand-green px-3 py-1.5 rounded-full text-xs font-semibold flex items-center border border-teal-100">
+                    <i class="${tag.icon} mr-1.5"></i> ${tag.text}
+                </div>
+            `).join('');
+        }
+
+        function switchTab(id) {
+            if (activeTabId === id) return;
+            activeTabId = id;
+            initUI();
+            
+            // Switch 3D Scene
+            scenes.forEach((scene, index) => {
+                scene.visible = (index + 1 === id);
+            });
+            
+            // Reset camera slightly for effect
+            camera.position.set(3, 4, 6);
+            controls.target.set(0, 0, 0);
+        }
+
+        // Three.js Global Variables
+        let scene, camera, renderer, controls;
+        let scenes = []; // Array to hold the 4 distinct scene groups
+        let animationFrameId;
+
+        // Animation variables for specific scenes
+        let robotArm, armJoint, armHand;
+        let sensorNodes = [];
+        let radarRings = [];
+        let boundingBoxes = [];
+        let recoveryBall, recoveryPlatform;
+        let time = 0;
+
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+            
+            // Core setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0d1117); // Match dark terminal background
+            // Add a subtle grid/fog for depth
+            scene.fog = new THREE.FogExp2(0x0d1117, 0.05);
+
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(4, 5, 8);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            // Soft shadows
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // Controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.autoRotate = true; // Slowly rotate to show it's live
+            controls.autoRotateSpeed = 1.0;
+            controls.enablePan = false;
+            controls.maxPolarAngle = Math.PI / 2 + 0.1; // Don't go too far below ground
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(5, 10, 5);
+            dirLight.castShadow = true;
+            scene.add(dirLight);
+            
+            const spotLight = new THREE.SpotLight(0x0ab68b, 1);
+            spotLight.position.set(0, 8, 0);
+            spotLight.angle = Math.PI/4;
+            scene.add(spotLight);
+
+            // Base Grid (Common to all)
+            const gridHelper = new THREE.GridHelper(20, 20, 0x0ab68b, 0x222222);
+            gridHelper.material.opacity = 0.2;
+            gridHelper.material.transparent = true;
+            scene.add(gridHelper);
+
+            // Initialize all 4 scene groups
+            for(let i = 0; i < 4; i++) {
+                let group = new THREE.Group();
+                group.visible = (i === 0); // Only first is visible initially
+                scenes.push(group);
+                scene.add(group);
+            }
+
+            buildScene1(scenes[0]);
+            buildScene2(scenes[1]);
+            buildScene3(scenes[2]);
+            buildScene4(scenes[3]);
+
+            // Handle Resize
+            window.addEventListener('resize', onWindowResize, false);
+            
+            // Start Loop
+            animate();
+        }
+
+        function buildScene1(group) {
+            // Materials for the Robot
+            const matDark = new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.7, metalness: 0.3 });
+            const matLight = new THREE.MeshStandardMaterial({ color: 0xe5e7eb, roughness: 0.3, metalness: 0.1 });
+            const matAccent = new THREE.MeshStandardMaterial({ color: 0x0ab68b, roughness: 0.4, metalness: 0.5 });
+            const matJoint = new THREE.MeshStandardMaterial({ color: 0x374151, roughness: 0.5 });
+
+            // Build Robot Arm Hierarchy (6-DOF industrial style)
+            const base = new THREE.Group();
+            group.add(base);
+            const baseMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 1, 0.4, 32), matDark);
+            baseMesh.position.y = 0.2;
+            baseMesh.castShadow = true;
+            base.add(baseMesh);
+
+            const swivel = new THREE.Group();
+            swivel.position.y = 0.4;
+            base.add(swivel);
+            const swivelMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 0.8, 32), matAccent);
+            swivelMesh.position.y = 0.4;
+            swivelMesh.castShadow = true;
+            swivel.add(swivelMesh);
+
+            const shoulder = new THREE.Group();
+            shoulder.position.y = 0.8;
+            swivel.add(shoulder);
+            const shoulderJoint = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 16), matJoint);
+            shoulder.add(shoulderJoint);
+            const upperArm = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 3, 16), matLight);
+            upperArm.position.y = 1.5;
+            upperArm.castShadow = true;
+            shoulder.add(upperArm);
+
+            const elbow = new THREE.Group();
+            elbow.position.y = 3;
+            shoulder.add(elbow);
+            const elbowJoint = new THREE.Mesh(new THREE.SphereGeometry(0.4, 32, 16), matJoint);
+            elbow.add(elbowJoint);
+            const forearm = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.2, 2.5, 16), matLight);
+            forearm.position.y = 1.25;
+            forearm.castShadow = true;
+            elbow.add(forearm);
+
+            const wrist = new THREE.Group();
+            wrist.position.y = 2.5;
+            elbow.add(wrist);
+            const wristJoint = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 16), matAccent);
+            wrist.add(wristJoint);
+            
+            // Gripper / End Effector
+            const gripper = new THREE.Group();
+            gripper.position.y = 0.2;
+            wrist.add(gripper);
+            const handBase = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.3), matDark);
+            gripper.add(handBase);
+            const finger1 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.4, 0.2), matAccent);
+            finger1.position.set(-0.2, 0.3, 0);
+            gripper.add(finger1);
+            const finger2 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.4, 0.2), matAccent);
+            finger2.position.set(0.2, 0.3, 0);
+            gripper.add(finger2);
+
+            // Calculate exact paths to visualize "Raw vs Curated"
+            const curatedPoints = [];
+            const rawPoints = [];
+            const numPoints = 120;
+            const tempVector = new THREE.Vector3();
+            
+            // Pre-simulate the animation path to draw the tracking lines perfectly
+            for(let i=0; i<=numPoints; i++) {
+                const t = (i / numPoints) * Math.PI * 2; // One full cycle
+                
+                // Kinematics matching the animation loop exactly
+                swivel.rotation.y = Math.sin(t) * 1.5;
+                shoulder.rotation.z = Math.cos(t) * 0.7 + 0.4;
+                elbow.rotation.z = Math.sin(t + Math.PI/4) * 0.9 - 0.5;
+                wrist.rotation.x = Math.sin(t * 2) * 0.5;
+                
+                base.updateMatrixWorld(true);
+                // Get point just between the gripper fingers
+                tempVector.set(0, 0.4, 0); 
+                gripper.localToWorld(tempVector);
+                
+                curatedPoints.push(new THREE.Vector3().copy(tempVector));
+                
+                // Raw point (add noise to represent human teleop tremor/imperfections)
+                const noise = new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.3,
+                    (Math.random() - 0.5) * 0.3,
+                    (Math.random() - 0.5) * 0.3
+                );
+                rawPoints.push(new THREE.Vector3().copy(tempVector).add(noise));
+            }
+            
+            // Reset rotations after calculation
+            swivel.rotation.set(0,0,0);
+            shoulder.rotation.set(0,0,0);
+            elbow.rotation.set(0,0,0);
+            wrist.rotation.set(0,0,0);
+
+            // 1. Draw Raw Human Demonstration Trajectory (Messy, Red)
+            const rawGeo = new THREE.BufferGeometry().setFromPoints(rawPoints);
+            const rawMat = new THREE.LineBasicMaterial({ color: 0xef4444, transparent: true, opacity: 0.4 });
+            const rawLine = new THREE.Line(rawGeo, rawMat);
+            group.add(rawLine);
+
+            // 2. Draw Curated Clean Trajectory (Smooth, Green)
+            const curatedGeo = new THREE.BufferGeometry().setFromPoints(curatedPoints);
+            const curatedMat = new THREE.LineBasicMaterial({ color: 0x0ab68b, linewidth: 3 });
+            const curatedLine = new THREE.Line(curatedGeo, curatedMat);
+            group.add(curatedLine);
+
+            // 3. Add Waypoints (representing JSONL states/language instructions)
+            const waypoints = [10, 40, 70, 100]; // Keyframes along the path
+            waypoints.forEach((idx, i) => {
+                const pos = curatedPoints[idx];
+                
+                // Core data dot
+                const wp = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.08, 16, 16),
+                    new THREE.MeshBasicMaterial({ color: 0xffffff })
+                );
+                wp.position.copy(pos);
+                group.add(wp);
+                
+                // Outer glow ring
+                const ring = new THREE.Mesh(
+                    new THREE.RingGeometry(0.12, 0.18, 16),
+                    new THREE.MeshBasicMaterial({ color: 0x0ab68b, side: THREE.DoubleSide, transparent: true, opacity: 0.7 })
+                );
+                ring.position.copy(pos);
+                ring.rotation.x = Math.PI / 2; // Lay flat
+                group.add(ring);
+                
+                // Mock floating label marker
+                const label = new THREE.Mesh(
+                    new THREE.PlaneGeometry(0.4, 0.15),
+                    new THREE.MeshBasicMaterial({ color: 0x1f2937, transparent: true, opacity: 0.8 })
+                );
+                label.position.copy(pos);
+                label.position.y += 0.3;
+                group.add(label);
+            });
+
+            // Add target block on the table to interact with
+            const targetBlock = new THREE.Mesh(
+                new THREE.BoxGeometry(0.4, 0.4, 0.4),
+                new THREE.MeshStandardMaterial({color: 0xf59e0b, roughness: 0.2})
+            );
+            targetBlock.position.copy(curatedPoints[40]); // Place exactly at one of the arm's lowest dips
+            targetBlock.position.y = 0.2; 
+            targetBlock.castShadow = true;
+            group.add(targetBlock);
+
+            // Save references for the animate loop
+            group.userData = { swivel, shoulder, elbow, wrist };
+        }
+
+        function buildScene2(group) {
+            radarRings = []; // Clear array for scene 2
+            
+            // 1. Ego Vehicle (Robot Base)
+            const vehicle = new THREE.Group();
+            
+            // Chassis
+            const chassis = new THREE.Mesh(
+                new THREE.BoxGeometry(1.2, 0.6, 2.4), 
+                new THREE.MeshStandardMaterial({color: 0x1f2937, roughness: 0.6, metalness: 0.5})
+            );
+            chassis.position.y = 0.5;
+            chassis.castShadow = true;
+            vehicle.add(chassis);
+            
+            // Sensor Pod (Lidar on top)
+            const sensorPod = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.25, 0.25, 0.4, 32), 
+                new THREE.MeshStandardMaterial({color: 0x0ab68b, emissive: 0x055b45})
+            );
+            sensorPod.position.set(0, 1.0, 0.5);
+            vehicle.add(sensorPod);
+
+            // Camera Frustum (representing RGB/Depth FOV)
+            const frustumGeo = new THREE.ConeGeometry(3, 5, 4);
+            const frustumMat = new THREE.MeshBasicMaterial({color: 0x3b82f6, wireframe: true, transparent: true, opacity: 0.15});
+            const frustum = new THREE.Mesh(frustumGeo, frustumMat);
+            frustum.rotation.x = -Math.PI / 2;
+            frustum.rotation.y = Math.PI / 4;
+            frustum.position.set(0, 0.8, -2.5);
+            vehicle.add(frustum);
+
+            group.add(vehicle);
+
+            // 2. Lidar Scan Plane (Rotating laser effect)
+            const scanPlane = new THREE.Mesh(
+                new THREE.PlaneGeometry(12, 0.05),
+                new THREE.MeshBasicMaterial({color: 0x0ab68b, transparent: true, opacity: 0.4, side: THREE.DoubleSide})
+            );
+            scanPlane.position.set(0, 1.0, 0.5);
+            scanPlane.rotation.x = Math.PI / 2;
+            group.add(scanPlane);
+
+            // 3. Point Cloud Environment (Representing Lidar/Depth Map of a street)
+            const pointsCount = 8000;
+            const pts = new Float32Array(pointsCount * 3);
+            const colors = new Float32Array(pointsCount * 3);
+            
+            for(let i = 0; i < pointsCount; i++) {
+                let x, y, z;
+                
+                const rand = Math.random();
+                if (rand < 0.6) {
+                    // Ground plane points
+                    x = (Math.random() - 0.5) * 30;
+                    y = 0;
+                    z = (Math.random() - 0.5) * 30;
+                } else if (rand < 0.8) {
+                    // Left wall / obstacle points
+                    x = 4 + Math.random() * 2;
+                    y = Math.random() * 4;
+                    z = (Math.random() - 0.5) * 30;
+                } else {
+                    // Right wall / obstacle points
+                    x = -4 - Math.random() * 2;
+                    y = Math.random() * 3;
+                    z = (Math.random() - 0.5) * 30;
+                }
+                
+                pts[i*3] = x;
+                pts[i*3+1] = y;
+                pts[i*3+2] = z;
+
+                // Color mapping: Ground is darker blue, height increases to cyan/green
+                const heightFactor = Math.min(y / 4, 1.0);
+                const color = new THREE.Color();
+                // Interpolate from deep blue to bright cyan
+                color.lerpColors(new THREE.Color(0x1e3a8a), new THREE.Color(0x0ab68b), heightFactor + 0.2);
+                
+                colors[i*3] = color.r;
+                colors[i*3+1] = color.g;
+                colors[i*3+2] = color.b;
+            }
+            
+            const pointGeo = new THREE.BufferGeometry();
+            pointGeo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
+            pointGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            const pointMat = new THREE.PointsMaterial({size: 0.08, vertexColors: true, transparent: true, opacity: 0.7});
+            
+            const pointCloud = new THREE.Points(pointGeo, pointMat);
+            group.add(pointCloud);
+
+            // 4. Expanding Radar Rings (IMU / generic sensor pulse)
+            for(let i = 0; i < 3; i++) {
+                const ringGeo = new THREE.RingGeometry(0.9, 1.0, 64);
+                const ringMat = new THREE.MeshBasicMaterial({ 
+                    color: 0x3b82f6, 
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    opacity: 0.5
+                });
+                const ring = new THREE.Mesh(ringGeo, ringMat);
+                ring.rotation.x = Math.PI / 2;
+                ring.position.y = 0.1;
+                group.add(ring);
+                radarRings.push({mesh: ring, offset: i * 2});
+            }
+
+            // Save references for the animate loop
+            group.userData = { sensorPod, scanPlane, pointCloud, frustum };
+        }
+
+        function buildScene3(group) {
+            boundingBoxes = []; // Clear array for scene 3
+            
+            // Add sparse background points to simulate raw Lidar environment noise
+            const bgGeo = new THREE.BufferGeometry();
+            const bgPos = new Float32Array(5000 * 3);
+            for(let i=0; i<5000; i++) {
+                bgPos[i*3] = (Math.random() - 0.5) * 30;
+                bgPos[i*3+1] = (Math.random() * 0.5) - 0.5; // Mostly ground level
+                bgPos[i*3+2] = (Math.random() - 0.5) * 30;
+            }
+            bgGeo.setAttribute('position', new THREE.BufferAttribute(bgPos, 3));
+            const bgMat = new THREE.PointsMaterial({color: 0x334455, size: 0.03, transparent: true, opacity: 0.4});
+            group.add(new THREE.Points(bgGeo, bgMat));
+
+            // Helper function to create a point-cloud object with Bounding Box and Label
+            function createLabeledObject(width, height, depth, hexColor, pointCount, text, startPos, speed, dirX, dirZ) {
+                const wrapper = new THREE.Group();
+                wrapper.position.copy(startPos);
+                
+                // 1. Semantic Point Cloud (The detected object)
+                const geo = new THREE.BufferGeometry();
+                const pos = new Float32Array(pointCount * 3);
+                for(let i=0; i<pointCount; i++) {
+                    pos[i*3] = (Math.random() - 0.5) * width;
+                    pos[i*3+1] = (Math.random() - 0.5) * height;
+                    pos[i*3+2] = (Math.random() - 0.5) * depth;
+                }
+                geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+                const mat = new THREE.PointsMaterial({color: new THREE.Color(hexColor), size: 0.06});
+                wrapper.add(new THREE.Points(geo, mat));
+                
+                // 2. 3D Bounding Box (KITTI/YOLO format visualization)
+                const boxGeo = new THREE.BoxGeometry(width + 0.1, height + 0.1, depth + 0.1);
+                const edges = new THREE.EdgesGeometry(boxGeo);
+                const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: new THREE.Color(hexColor), linewidth: 2 }));
+                wrapper.add(line);
+                
+                // 3. Floating Classification Label (Canvas Sprite)
+                const canvas = document.createElement('canvas');
+                canvas.width = 256; canvas.height = 64;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = hexColor;
+                ctx.fillRect(0, 0, 256, 64);
+                ctx.fillStyle = '#0a0f1c'; // Dark text for contrast
+                ctx.font = 'bold 30px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 128, 32);
+                
+                const tex = new THREE.CanvasTexture(canvas);
+                const sprite = new THREE.Sprite(new THREE.SpriteMaterial({map: tex}));
+                sprite.scale.set(1.5, 0.375, 1);
+                sprite.position.y = (height / 2) + 0.4;
+                wrapper.add(sprite);
+                
+                group.add(wrapper);
+                boundingBoxes.push({ mesh: wrapper, speed: speed, dirX: dirX, dirZ: dirZ, bounds: 12 });
+            }
+
+            // Create specific detected entities moving in different directions
+            // Car (Teal)
+            createLabeledObject(1.8, 1.4, 4.2, "#0ab68b", 800, "Vehicle 99%", new THREE.Vector3(2, 0.2, -8), 0.08, 0, 1);
+            // Pedestrian (Red)
+            createLabeledObject(0.6, 1.7, 0.6, "#ef4444", 200, "Pedestrian 92%", new THREE.Vector3(-3, 0.35, 2), 0.02, 1, 0);
+            // Cyclist (Blue)
+            createLabeledObject(0.8, 1.6, 2.0, "#3b82f6", 350, "Cyclist 85%", new THREE.Vector3(5, 0.3, 5), 0.05, -0.7, -0.7);
+        }
+
+        function buildScene4(group) {
+            // Base pedestal
+            const pedestal = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.5, 0.8, 2, 32), 
+                new THREE.MeshStandardMaterial({color: 0x1f2937, roughness: 0.8})
+            );
+            pedestal.position.y = 1;
+            pedestal.castShadow = true;
+            group.add(pedestal);
+
+            // Active Joint
+            const joint = new THREE.Mesh(
+                new THREE.SphereGeometry(0.6, 32, 16), 
+                new THREE.MeshStandardMaterial({color: 0x0ab68b})
+            );
+            joint.position.y = 2;
+            group.add(joint);
+
+            // Balancing Platform
+            const platform = new THREE.Group();
+            platform.position.y = 2;
+            group.add(platform);
+
+            const platMesh = new THREE.Mesh(
+                new THREE.BoxGeometry(6, 0.15, 2), 
+                new THREE.MeshStandardMaterial({color: 0x374151, metalness: 0.4})
+            );
+            platMesh.castShadow = true;
+            platform.add(platMesh);
+
+            // Payload (Box sliding on platform)
+            const payload = new THREE.Mesh(
+                new THREE.BoxGeometry(1, 1, 1), 
+                new THREE.MeshStandardMaterial({color: 0x0ab68b, roughness: 0.2})
+            );
+            payload.position.set(0, 0.575, 0);
+            payload.castShadow = true;
+            platform.add(payload);
+
+            // Floating Status Label Sprite (Representing JSONL event timeline)
+            const canvas = document.createElement('canvas');
+            canvas.width = 1024; canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+            const tex = new THREE.CanvasTexture(canvas);
+            const labelSprite = new THREE.Sprite(new THREE.SpriteMaterial({map: tex}));
+            labelSprite.scale.set(6, 1.5, 1);
+            labelSprite.position.set(0, 4.5, 0);
+            group.add(labelSprite);
+
+            // Helper function to draw dynamic states on the sprite canvas
+            group.userData.updateLabel = function(text, colorHex, bgColor) {
+                ctx.clearRect(0, 0, 1024, 256);
+                
+                // Background Pill
+                ctx.fillStyle = bgColor;
+                ctx.beginPath();
+                if (ctx.roundRect) {
+                    ctx.roundRect(50, 50, 924, 156, 40);
+                } else {
+                    ctx.rect(50, 50, 924, 156); // fallback
+                }
+                ctx.fill();
+                
+                // Border
+                ctx.strokeStyle = colorHex;
+                ctx.lineWidth = 12;
+                ctx.stroke();
+
+                // State Text
+                ctx.fillStyle = colorHex;
+                ctx.font = 'bold 60px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 512, 128);
+                tex.needsUpdate = true;
+            };
+
+            // Initialize State Machine Data
+            group.userData = {
+                ...group.userData,
+                platform: platform,
+                payload: payload,
+                joint: joint,
+                state: 0, // 0: Nominal, 1: Disturbance, 2: Recovery Action
+                timeInState: 0
+            };
+            
+            group.userData.updateLabel("STATE: NOMINAL", "#0ab68b", "rgba(10, 15, 28, 0.8)");
+        }
+
+        function animate() {
+            animationFrameId = requestAnimationFrame(animate);
+            time += 0.01;
+
+            controls.update();
+
+            // Animate Scene 1 (Robot Arm Trajectory)
+            if (scenes[0].visible && scenes[0].userData.swivel) {
+                const data = scenes[0].userData;
+                const t = time; 
+                
+                // This kinematic logic exactly matches the loop used to generate the green line,
+                // ensuring the robotic arm precisely traces the curated trajectory.
+                data.swivel.rotation.y = Math.sin(t) * 1.5;
+                data.shoulder.rotation.z = Math.cos(t) * 0.7 + 0.4;
+                data.elbow.rotation.z = Math.sin(t + Math.PI/4) * 0.9 - 0.5;
+                data.wrist.rotation.x = Math.sin(t * 2) * 0.5;
+            }
+
+            // Animate Scene 2 (Sensors)
+            if (scenes[1].visible && scenes[1].userData.sensorPod) {
+                const sceneData = scenes[1].userData;
+                
+                // Spin Lidar head and the scanning laser plane
+                sceneData.sensorPod.rotation.y -= 0.1;
+                sceneData.scanPlane.rotation.z += 0.1; 
+                
+                // Pulse the RGB/Depth camera frustum
+                sceneData.frustum.material.opacity = 0.1 + Math.sin(time * 4) * 0.1;
+
+                // Animate radar pulse rings from the vehicle
+                radarRings.forEach(ringObj => {
+                    // Expand and fade out
+                    const scale = ((time * 2.5 + ringObj.offset) % 8);
+                    // Start scaling from 1 (outside vehicle) to 8
+                    ringObj.mesh.scale.set(scale + 1, scale + 1, scale + 1);
+                    ringObj.mesh.material.opacity = (1.0 - (scale / 8)) * 0.6;
+                });
+                
+                // Move the point cloud backwards to simulate ego-vehicle forward motion
+                sceneData.pointCloud.position.z += 0.1;
+                if (sceneData.pointCloud.position.z > 15) {
+                    sceneData.pointCloud.position.z = -15; // Loop the environment
+                }
+            }
+
+            // Animate Scene 3 (Labels)
+            if (scenes[2].visible) {
+                boundingBoxes.forEach((obj) => {
+                    // Move objects linearly based on direction and speed
+                    obj.mesh.position.x += obj.dirX * obj.speed;
+                    obj.mesh.position.z += obj.dirZ * obj.speed;
+                    
+                    // Wrap around boundaries to keep them in view
+                    if (obj.mesh.position.x > obj.bounds) obj.mesh.position.x = -obj.bounds;
+                    if (obj.mesh.position.x < -obj.bounds) obj.mesh.position.x = obj.bounds;
+                    if (obj.mesh.position.z > obj.bounds) obj.mesh.position.z = -obj.bounds;
+                    if (obj.mesh.position.z < -obj.bounds) obj.mesh.position.z = obj.bounds;
+                });
+            }
+
+            // Animate Scene 4 (Failure & Recovery Episode Timeline)
+            if (scenes[3].visible && scenes[3].userData.platform) {
+                const data = scenes[3].userData;
+                data.timeInState += 0.016; 
+
+                // State Machine for Episode Simulation
+                if (data.state === 0) { 
+                    // Phase 1: Nominal Balancing
+                    data.platform.rotation.z = Math.sin(time * 1.5) * 0.03; 
+                    data.payload.position.x = 0;
+                    data.payload.material.color.setHex(0x0ab68b);
+                    data.joint.material.color.setHex(0x0ab68b);
+                    
+                    // Trigger Failure
+                    if (data.timeInState > 3.0) {
+                        data.state = 1;
+                        data.timeInState = 0;
+                        data.updateLabel("EVENT: FAILURE DETECTED", "#ef4444", "rgba(50, 10, 10, 0.9)");
+                    }
+                } else if (data.state === 1) { 
+                    // Phase 2: Failure State (Uncontrolled Tilt)
+                    data.platform.rotation.z -= 0.015; // Rapidly tilt left
+                    data.payload.position.x -= 0.04; // Payload begins to slip off
+                    data.payload.material.color.setHex(0xef4444); // Red Alert
+                    data.joint.material.color.setHex(0xef4444);
+                    
+                    // Trigger Recovery
+                    if (data.timeInState > 1.2) {
+                        data.state = 2;
+                        data.timeInState = 0;
+                        data.updateLabel("ACTION: RECOVERY POLICY", "#f59e0b", "rgba(50, 30, 10, 0.9)");
+                    }
+                } else if (data.state === 2) { 
+                    // Phase 3: Recovery Execution (System Intervenes)
+                    // Sharp counter-tilt to catch sliding payload
+                    const targetTilt = 0.35;
+                    data.platform.rotation.z = THREE.MathUtils.lerp(data.platform.rotation.z, targetTilt, 0.08);
+                    
+                    // Gravity physics pull payload back towards center
+                    const slideForce = data.platform.rotation.z * 0.2;
+                    data.payload.position.x += slideForce;
+                    
+                    // Prevent over-correcting past center instantly
+                    if(data.payload.position.x > 0) data.payload.position.x = 0;
+
+                    data.payload.material.color.setHex(0xf59e0b); // Warning/Active color
+                    data.joint.material.color.setHex(0xf59e0b);
+
+                    // Restore to Nominal
+                    if (data.timeInState > 2.5) {
+                        data.state = 0;
+                        data.timeInState = 0;
+                        data.updateLabel("STATE: NOMINAL", "#0ab68b", "rgba(10, 15, 28, 0.8)");
+                    }
+                }
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            if(camera && renderer) {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+        }
+
+        // Initialize everything on load
+        window.onload = () => {
+            initUI();
+            initThreeJS();
+        };
+
+    </script>
+</body>
+</html>

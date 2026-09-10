@@ -235,6 +235,7 @@ const createItem = async (req, res) => {
     });
     return res.status(201).json({ success: true, data: formatItem(item) });
   } catch (err) {
+    console.log(err)
     return res.status(500).json({ success: false, message: err.message });
   }
 };

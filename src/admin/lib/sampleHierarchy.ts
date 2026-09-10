@@ -103,6 +103,7 @@ export const SAMPLE_HIERARCHY: MainCategory[] = [
       { slug: "rlhf", label: "RLHF", description: "Preference ranking, response quality scoring, and safety labels.", icon: ThumbsUp, tabs: ["Preference Ranking", "Response Quality Scoring", "Instruction-Following Evaluation", "Safety & Red-Teaming Labels"] },
       { slug: "data-collection", label: "Data Collection", description: "Text, audio, image, and video data collection samples.", icon: FolderSearch, tabs: ["Text Collection Samples", "Audio Collection Samples", "Image Collection Samples", "Video Collection Samples"] },
       { slug: "cleaned-datasets", label: "Cleaned Datasets", description: "Deduplication, PII redaction, filtering, and gold-standard reports.", icon: Sparkles, tabs: ["Text Deduplication: Before / After", "PII Redaction: Before / After", "Audio Quality Filtering: Before / After", "Gold-Standard Validation Report"] },
+     {slug: "robotics-datasets",label: "Robotics Datasets",description: "Sensor data cleaning, trajectory validation, annotation quality, and simulation-to-real dataset reports.",icon: Bot,tabs: ["Sensor Data Cleaning: Before / After","Trajectory Validation: Before / After","Annotation Quality: Before / After","Simulation-to-Real Validation Report"]},
     ],
   },
 ];

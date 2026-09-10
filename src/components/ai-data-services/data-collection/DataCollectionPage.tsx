@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import AIDataServicesLayout from "../shared/AIDataServicesLayout";
 import SEOHead from "../shared/SEOHead";
 import CinematicHero from "../shared/CinematicHero";
@@ -164,6 +165,7 @@ const DataCollectionPage = () => (
     <TalentAdvantage />
     <CollectionLifecycleAndPricing />
     <RoboticsServiceBridge context="collection" />
+    <RelatedBlogs />
     <FAQSection faqs={faqs} label="AI Data Collection FAQs" title="Frequently Asked Questions About AI Data Collection" />
     <ServiceCTA
       headline="Ready to Build Your AI Training Dataset?"

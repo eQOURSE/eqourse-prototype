@@ -1,4 +1,5 @@
 import AIDataServicesLayout from "../shared/AIDataServicesLayout";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import SEOHead from "../shared/SEOHead";
 import CinematicHero from "../shared/CinematicHero";
 import ServicesGrid from "./ServicesGrid";
@@ -107,6 +108,7 @@ const OverviewPage = () => (
     <IndustriesServed />
     <WhyEqourse />
     <TrustSignals />
+    <RelatedBlogs />
     <FAQSection faqs={faqs} />
     <ServiceCTA />
   </AIDataServicesLayout>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Link } from "react-router-dom";
 import { ArrowDown, ArrowRight, Bot, BrainCircuit, CheckCircle2, Database, FileKey2, Globe2, HeartHandshake, MessageSquareWarning, ShieldCheck, Siren, UserRound, UsersRound, Wrench } from "lucide-react";
 import SectionHeader from "../../shared/SectionHeader";
@@ -171,6 +172,7 @@ export const WhyRelatedFaq = () => (
       ["LLM Evaluation","Quality, groundedness and task scoring.","/ai-data-services/model-testing/llm-evaluation"],
       ["ASR & Speech Model Testing","WER, CER, accent and acoustic-segment testing.","/ai-data-services/model-testing/asr-speech-model-testing"],
     ].map(([t,d,href])=><article key={t} className="bg-card p-6"><h3 className="font-heading text-lg font-bold">{href?<Link to={href} className="transition-colors hover:text-primary">{t}</Link>:t}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{d}</p>{href&&<Link to={href} className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">Explore service <ArrowRight className="h-4 w-4"/></Link>}</article>)}</div></div></section>
+    <RelatedBlogs />
     <FAQSection faqs={redTeamFaqs.map(([question,answer])=>({question,answer}))} label="AI red teaming FAQs" title="Frequently Asked Questions"/>
   </>
 );

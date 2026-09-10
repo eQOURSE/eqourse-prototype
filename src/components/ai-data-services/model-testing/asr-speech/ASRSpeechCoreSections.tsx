@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Link } from "react-router-dom";
 import { ArrowRight, AudioLines, CheckCircle2, FileCheck2, Headphones, Languages, Mic2, ShieldCheck, Sparkles, UsersRound, Volume2 } from "lucide-react";
 import FAQSection from "../../shared/FAQSection";
@@ -101,5 +102,6 @@ export const FailuresBoundariesRelated = () => (
   ].map(([Icon,t,d])=>{const C=Icon as typeof Languages;return <article key={String(t)} className="bg-card p-7"><C className="h-6 w-6 text-primary"/><h3 className="mt-5 font-heading text-lg font-bold">{String(t)}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{String(d)}</p></article>})}</Reveal><Reveal className="mx-auto mt-12 max-w-7xl"><h2 className="font-heading text-2xl font-bold">Related services</h2><div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{[
     ["AI Model Testing","/ai-data-services/model-testing"],["Audio & Speech Annotation","/ai-data-services/annotation-labeling/audio-speech-annotation"],["AI Bias & Fairness Audit","/ai-data-services/model-testing/bias-fairness-audit"],["LLM Evaluation","/ai-data-services/model-testing/llm-evaluation"],["Data Collection","/ai-data-services/data-collection"],["Dataset QA & Label Audit","/ai-data-services/cleaning-validation/dataset-qa-label-audit"],
   ].map(([t,h])=><Link key={t} to={h} className="flex items-center justify-between rounded-2xl border border-border bg-card px-5 py-4 font-semibold transition-colors hover:border-primary/40 hover:text-primary">{t}<ArrowRight className="h-4 w-4"/></Link>)}<Link to="/ai-data-services/model-testing/human-evaluation-ab-testing" className="flex items-center justify-between rounded-2xl border border-border bg-card px-5 py-4 font-semibold transition-colors hover:border-primary/40 hover:text-primary">Human Evaluation &amp; A/B Testing<ArrowRight className="h-4 w-4"/></Link></div></Reveal></div></section>
+  <RelatedBlogs />
   <FAQSection title="ASR & Speech Model Testing FAQs" faqs={asrSpeechFaqs.map(([question,answer])=>({question,answer}))}/></>
 );
