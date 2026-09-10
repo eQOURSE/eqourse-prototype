@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Link } from "react-router-dom";
 import {
   Aperture, ArrowRight, Boxes, BriefcaseBusiness, Building2, Camera, CheckCircle2,
@@ -170,6 +171,8 @@ const ImageDataCollectionPage = () => {
 
     <section className="py-24 bg-background"><div className="container mx-auto px-4"><SectionHeader label="Why eQOURSE" title="Why Choose eQOURSE for" gradientText="Image Data Collection?"/><div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">{[[Focus,"Custom capture specifications"],[Globe2,"Multilingual and multi-region coordination"],[Users,"Domain-specialist workforce where required"],[Layers3,"Collection to annotation, validation and testing"],[ShieldCheck,"ISO 9001 and ISO 27001 processes"],[Camera,"Contributor, controlled and field capture"]].map(([Icon,title])=><article key={String(title)} className="border-t-2 border-primary pt-6">{typeof Icon!=="string"&&<Icon className="w-6 h-6 text-primary mb-8" aria-hidden="true"/>}<h3 className="font-heading font-bold">{String(title)}</h3></article>)}</div><div className="mt-12 text-center"><Link className="text-primary font-semibold hover:underline" to="/ai-data-services/data-collection">Explore all AI Data Collection Services</Link></div></div></section>
 
+
+    <RelatedBlogs />
     <FAQSection faqs={faqs} label="Image Data Collection FAQs" title="Frequently Asked Questions About Image Data Collection" />
 
     <section className="py-14 bg-muted/30 border-y border-border/60"><div className="container mx-auto px-4"><div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6"><div><p className="text-xs uppercase tracking-wider font-semibold text-primary">Related AI Data Services</p><h2 className="font-heading text-2xl font-bold mt-2">Continue from collection to model readiness</h2></div><div className="flex flex-wrap gap-3 justify-center">{[["Annotation & Labeling","/ai-data-services/annotation-labeling"],["Cleaning & Validation","/ai-data-services/cleaning-validation"],["Model Testing","/ai-data-services/model-testing"],["Robotics Training Data","/robotics-training-data-services"]].map(([label,to])=><Link key={to} to={to} className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium hover:border-primary hover:text-primary transition-colors">{label}</Link>)}</div></div></div></section>

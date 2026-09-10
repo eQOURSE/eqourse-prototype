@@ -45,6 +45,14 @@ export interface PilotQuery {
 
 export type PublishStatus = "draft" | "published";
 
+export interface BlogCategorySelection {
+  category: string;
+  subcategories: {
+    subcategory: string;
+    subSubcategories: string[];
+  }[];
+}
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -54,6 +62,7 @@ export interface BlogPost {
   body: string;
   bodyFormat: "html" | "markdown";
   tags: string[];
+  categories?: BlogCategorySelection[];
   author: { name: string; avatarUrl?: string };
   seo: {
     title?: string;

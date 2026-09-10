@@ -79,11 +79,17 @@ const StrategyDiagram = () => {
             <div
               key={step.title}
               className="absolute group"
+              // style={{
+              //   top: `calc(50% + ${y}px)`,
+              //   left: `calc(50% + ${x}px)`,
+              //   transform: 'translate(-50%, -50%)',
+              //   willChange: 'top, left',
+              // }}
               style={{
-                top: `calc(50% + ${y}px)`,
-                left: `calc(50% + ${x}px)`,
-                transform: 'translate(-50%, -50%)',
-                willChange: 'top, left',
+                top: '50%',
+                left: '50%',
+                transform: `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`,
+                willChange: 'transform',
               }}
             >
               {/* Node */}

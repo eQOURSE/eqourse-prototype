@@ -1,13 +1,44 @@
 const Blog = require("../model/blog");
 const { syncCmsSeoPage, removeCmsSeoPage } = require("../utils/cmsSeoPublisher");
 
+// Progressive taxonomy filter: category -> sub_category -> sub_sub_category.
+// Missing levels are valid and simply make the filter broader.
+function buildCategoryFilter({ category, sub_category, sub_sub_category }) {
+  const categoryMatch = {};
+  const subcategoryMatch = {};
+
+  if (category) categoryMatch.category = category;
+  if (sub_category) subcategoryMatch.subcategory = sub_category;
+  if (sub_sub_category) subcategoryMatch.subSubcategories = sub_sub_category;
+
+  if (Object.keys(subcategoryMatch).length > 0) {
+    categoryMatch.subcategories = { $elemMatch: subcategoryMatch };
+  }
+
+  return Object.keys(categoryMatch).length > 0
+    ? { categories: { $elemMatch: categoryMatch } }
+    : {};
+}
+
 /**
  * GET /api/blogs
  * Public — list published blog posts with optional filters (tags, grade, board_course, subject)
  */
 const listPublishedBlogs = async (req, res) => {
   try {
-    const { tags, grade, board_course, subject, q, is_featured, limit = 10, page = 1 } = req.query;
+    const {
+      tags,
+      grade,
+      board_course,
+      subject,
+      category,
+      sub_category,
+      sub_sub_category,
+      q,
+      is_featured,
+      limit = 10,
+      page = 1
+    } = req.query;
 
     const filter = { status: "published" };
 
@@ -23,6 +54,7 @@ const listPublishedBlogs = async (req, res) => {
     if (subject) {
       filter.subject = subject;
     }
+    Object.assign(filter, buildCategoryFilter({ category, sub_category, sub_sub_category }));
     if (is_featured !== undefined) {
       filter.is_featured = is_featured === "true";
     }
@@ -86,12 +118,13 @@ const getPublishedBlogBySlug = async (req, res) => {
  */
 const adminListBlogs = async (req, res) => {
   try {
-    const { status, q, page = 1, limit = 50 } = req.query;
+    const { status, category, sub_category, sub_sub_category, q, page = 1, limit = 50 } = req.query;
 
     const filter = {};
     if (status && status !== "all") {
       filter.status = status;
     }
+    Object.assign(filter, buildCategoryFilter({ category, sub_category, sub_sub_category }));
     if (q) {
       filter.$or = [
         { title: { $regex: q, $options: "i" } },
@@ -151,6 +184,7 @@ const createBlog = async (req, res) => {
       coverImageUrl,
       author,
       tags,
+      categories,
       grade,
       board_course,
       subject,
@@ -182,6 +216,7 @@ const createBlog = async (req, res) => {
       coverImageUrl: coverImageUrl || "",
       author: author || {},
       tags: tags || [],
+      categories: categories || [],
       grade: grade || "",
       board_course: board_course || "",
       subject: subject || "",
@@ -312,6 +347,7 @@ function formatBlog(doc) {
       avatarUrl: doc.author?.avatarUrl || ""
     },
     tags: doc.tags || [],
+    categories: doc.categories || [],
     grade: doc.grade || "",
     board_course: doc.board_course || "",
     subject: doc.subject || "",

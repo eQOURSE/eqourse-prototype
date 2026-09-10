@@ -33,7 +33,10 @@ export default function SampleSubCategories() {
             <Card
               key={sub.slug}
               className="overflow-hidden cursor-pointer group hover:shadow-md hover:-translate-y-0.5 transition-all"
-              onClick={() => navigate(`/admin/samples/${main.id}/${sub.slug}`)}
+              onClick={() => {
+                console.log(`/admin/samples/${main.id}/${sub.slug}`)
+                navigate(`/admin/samples/${main.id}/${sub.slug}`)
+            }}
             >
               <div className="p-5 space-y-3">
                 <div className="flex items-start justify-between gap-2">

@@ -1,4 +1,5 @@
 import ContentServicesLayout from "@/components/content-services/shared/ContentServicesLayout";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import SEOHead from "@/components/ai-data-services/shared/SEOHead";
 import ServiceHero from "@/components/ai-data-services/shared/ServiceHero";
 import FAQSection from "@/components/ai-data-services/shared/FAQSection";
@@ -265,7 +266,10 @@ const SubServicePageTemplate = (props: SubServicePageProps) => {
       />
 
       {props.faqs && props.faqs.length > 0 && (
-        <FAQSection faqs={props.faqs} />
+        <>
+          <RelatedBlogs />
+          <FAQSection faqs={props.faqs} />
+        </>
       )}
 
       {props.relatedPages && props.relatedPages.length > 0 && (

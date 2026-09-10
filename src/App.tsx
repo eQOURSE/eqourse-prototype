@@ -92,7 +92,7 @@ const AdminCaseStudyEditor = lazy(() => import("./admin/pages/CaseStudyEditor"))
 const AdminSampleCategories = lazy(() => import("./admin/pages/SampleCategories"));
 const AdminSampleSubCategories = lazy(() => import("./admin/pages/SampleSubCategories"));
 const AdminSampleTabFiles = lazy(() => import("./admin/pages/SampleTabFiles"));
-const AdminSampleEditor = lazy(() => import("./admin/pages/SampleEditor"));
+const AdminSampleEditor = lazy(() => import("./admin/pages/SampleFileEditor"));
 const AdminCareers = lazy(() => import("./admin/pages/Careers"));
 const AdminCareerEditor = lazy(() => import("./admin/pages/CareerEditor"));
 const AdminCareerApplicants = lazy(() => import("./admin/pages/CareerApplicants"));
@@ -225,8 +225,8 @@ const App = () => (
                 <Route path="sample-categories" element={<AdminSampleCategories />} />
                 <Route path="samples/:mainCategoryId" element={<AdminSampleSubCategories />} />
                 <Route path="samples/:mainCategoryId/:pageSlug" element={<AdminSampleTabFiles />} />
-                <Route path="samples/:categorySlug/:pageSlug/:tabName/new" element={<AdminSampleEditor />} />
-                <Route path="samples/:categorySlug/:pageSlug/:tabName/:sampleId" element={<AdminSampleEditor />} />
+                <Route path="samples/:mainCategoryId/:pageSlug/:tabName/new" element={<AdminSampleEditor />} />
+                <Route path="samples/:mainCategoryId/:pageSlug/:tabName/:sampleId" element={<AdminSampleEditor />} />
                 <Route path="careers" element={<AdminCareers />} />
                 <Route path="careers/new" element={<AdminCareerEditor />} />
                 <Route path="careers/:id" element={<AdminCareerEditor />} />

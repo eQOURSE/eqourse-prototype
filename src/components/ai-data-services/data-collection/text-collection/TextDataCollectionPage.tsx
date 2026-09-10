@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, BadgeCheck, BookOpenText, Braces, BriefcaseBusiness, CheckCircle2,
@@ -158,6 +159,7 @@ const TextDataCollectionPage = () => {
 
     <section className="py-20 bg-muted/30"><div className="container mx-auto px-4"><SectionHeader label="Explore Other Data Modalities" title="Continue Building Your" gradientText="Multimodal Dataset"/><div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-5">{[["Image Data Collection","/ai-data-services/data-collection/image-data-collection","Purpose-built imagery for computer vision."],["Audio & Speech Data Collection","/ai-data-services/data-collection/audio-data-collection","Multilingual speech across devices and environments."],["Text & NLP Annotation","/ai-data-services/annotation-labeling/text-nlp-annotation","Add entities, intent, sentiment and relationships after collection."]].map(([title,href,text])=><Link key={title} to={href} className="group rounded-2xl border border-border/60 bg-card p-6 hover:border-primary/40 hover:shadow-soft transition-all"><h3 className="font-heading text-lg font-bold">{title}</h3><p className="text-sm text-muted-foreground mt-3">{text}</p><ArrowRight className="w-5 h-5 text-primary mt-6 group-hover:translate-x-1 transition-transform"/></Link>)}</div></div></section>
 
+    <RelatedBlogs />
     <FAQSection label="Text Collection FAQs" title="Frequently Asked Questions About Text Data Collection" faqs={faqs}/>
     <ServiceCTA headline="Build Language Data Around the Tasks Your Model Must Perform" subtext="Tell us the language, domain, text type, target volume, contributor expertise and downstream AI use case." ctaText="Start Free Pilot" ctaLink="/free-pilot" secondaryCtaText="Talk to a Data Specialist" secondaryCtaLink="/contact-us"/>
   </AIDataServicesLayout>;

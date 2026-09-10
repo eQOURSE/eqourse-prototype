@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import RelatedBlogs from "@/components/blog/RelatedBlogs";
 import { Link } from "react-router-dom";
 import {
   Activity, ArrowRight, BadgeCheck, Boxes, Camera, Car,
@@ -143,6 +144,7 @@ const VideoDataCollectionPage = () => {
 
     <section className="py-20 bg-muted/30"><div className="container mx-auto px-4"><SectionHeader label="Explore Other Data Modalities" title="Continue Building Your" gradientText="Multimodal Dataset"/><div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-5">{[["Image Data Collection","/ai-data-services/data-collection/image-data-collection","Purpose-built imagery for computer vision."],["Audio & Speech Data Collection","/ai-data-services/data-collection/audio-data-collection","Speech across speakers, devices and environments."],["Text Data Collection","/ai-data-services/data-collection/text-data-collection","Language data for NLP, LLMs and generative AI."]].map(([title,href,text])=><Link key={title} to={href} className="group rounded-2xl border border-border/60 bg-card p-6 hover:border-primary/40 hover:shadow-soft transition-all"><h3 className="font-heading text-lg font-bold">{title}</h3><p className="text-sm text-muted-foreground mt-3">{text}</p><ArrowRight className="w-5 h-5 text-primary mt-6 group-hover:translate-x-1 transition-transform"/></Link>)}</div></div></section>
 
+    <RelatedBlogs />
     <FAQSection label="Video Collection FAQs" title="Frequently Asked Questions About Video Data Collection" faqs={faqs}/>
     <ServiceCTA headline="Capture the Video Scenarios Your Model Needs to Understand" subtext="Tell us the actions, environments, camera viewpoints, devices, target volume and downstream AI application." ctaText="Start Free Pilot" ctaLink="/free-pilot" secondaryCtaText="Talk to a Data Specialist" secondaryCtaLink="/contact-us"/>
   </AIDataServicesLayout>;

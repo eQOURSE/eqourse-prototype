@@ -81,6 +81,23 @@ export const ImageAnnotationTypes = () => (
       <SectionHeader label="Annotation Types" title="Choose the Signal Your" gradientText="Model Actually Needs" subtitle="From fast whole-image labels to pixel-accurate scene maps, every method answers a different model question." />
       <Reveal className="mx-auto mt-12 grid max-w-7xl overflow-hidden rounded-[2rem] border border-[#d9e5e2] bg-white shadow-[0_24px_80px_rgba(15,35,45,.10)] lg:grid-cols-[1.35fr_.65fr]">
         <picture className="min-h-full"><source srcSet="/assets/ai-data/annotation-labeling/image-annotation/image-annotation-types-grid.avif" type="image/avif"/><img src="/assets/ai-data/annotation-labeling/image-annotation/image-annotation-types-grid.webp" alt="Same street scene shown with bounding boxes, rotated boxes, polygons, semantic masks, instance masks and keypoints" width="1200" height="800" loading="lazy" decoding="async" className="h-full min-h-[420px] w-full object-cover"/></picture>
+{/* 
+   <video
+  width={1200}
+  height={800}
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="h-full min-h-[420px] w-full object-cover"
+>
+  <source
+    src="/assets/ai-data/annotation-labeling/image-annotation/Computer_vision_video_demonstration_202609041304.mp4"
+    type="video/mp4"
+  />
+  Your browser does not support the video tag.
+</video> */}
+
         <div className="flex flex-col justify-between bg-[#142238] p-7 text-white md:p-10"><div><span className="font-mono text-xs font-bold uppercase tracking-[.16em] text-[#59e8c9]">One scene · six label geometries</span><h3 className="mt-5 font-heading text-3xl font-bold leading-tight">Match annotation precision to the model decision.</h3><p className="mt-4 text-sm leading-7 text-white/75">Use lightweight labels when location is enough and pixel geometry only when the task truly needs it.</p></div><div className="mt-8 grid grid-cols-2 gap-3">{["Boxes","Rotated boxes","Polygons","Semantic masks","Instances","Keypoints"].map((x,i)=><div key={x} className="border-t border-white/15 pt-3 text-xs font-semibold"><span className="mr-2 font-mono text-[#59e8c9]">0{i+1}</span>{x}</div>)}</div></div>
       </Reveal>
       <div className="mx-auto mt-12 grid max-w-7xl gap-4 md:grid-cols-2 xl:grid-cols-5">
