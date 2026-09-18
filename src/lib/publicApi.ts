@@ -351,3 +351,17 @@ export async function fetchSampleFiles(pageSlug: string, tabName?: string): Prom
     return null;
   }
 }
+
+export async function fetchSampleTabSettings(pageSlug: string): Promise<Record<string, boolean>> {
+  if (!isApiAvailable()) {
+    try {
+      const settings = JSON.parse(localStorage.getItem("eqourse-sample-tab-settings") || "{}");
+      return settings[pageSlug] || {};
+    } catch { return {}; }
+  }
+  try {
+    const res = await fetch(`${getBaseUrl()}/api/samples/tabs/${encodeURIComponent(pageSlug)}`);
+    const data = await safeParse<{ items: { tabName: string; visible: boolean }[] }>(res);
+    return Object.fromEntries((data?.items || []).map(({ tabName, visible }) => [tabName, visible]));
+  } catch { return {}; }
+}

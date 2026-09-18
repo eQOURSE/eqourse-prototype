@@ -539,7 +539,8 @@ const textSampleLinks = [
 const videoSampleLinks = [
   { label: "Articulate Storyline", href: "/articulate-storyline-video-samples" },
   { label: "Pen Tab and PPT", href: "/pen-tab-and-ppt-samples" },
-  { label: "Flash to HTML", href: "/flash-to-htm-samples" },
+  { label: "AI Videos", href: "/ai-videos-samples" },
+  { label: "Audio Samples", href: "/audio-samples" },
   { label: "2D 3D Animation", href: "/2d-3d-video-samples" },
   { label: "Promotional Video", href: "/promotional-video" },
   { label: "Immersive Simulation AR/VR", href: "/immersive-simulation-ar-vr-video" },
@@ -594,7 +595,7 @@ const SamplesMegaMenu = ({ onClose }: { onClose: () => void }) => (
           </div>
           <div className="flex-1">
             <div className="text-[10px] font-bold tracking-widest uppercase text-primary/70">Content Services</div>
-            <div className="text-sm font-extrabold text-primary leading-tight">Video Content Samples</div>
+            <div className="text-sm font-extrabold text-primary leading-tight">Video &amp; Audio Samples</div>
           </div>
           <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
         </Link>
@@ -658,7 +659,7 @@ const MobileSamplesAccordion = ({ onClose }: { onClose: () => void }) => {
   const [expanded, setExpanded] = useState<"text" | "video" | "ai-data" | null>("ai-data");
   const sections = [
     { id: "text" as const, label: "Text Content Samples", Icon: FileText, accent: "text-primary", items: textSampleLinks },
-    { id: "video" as const, label: "Video Content Samples", Icon: PlayCircle, accent: "text-primary", items: videoSampleLinks },
+    { id: "video" as const, label: "Video & Audio Samples", Icon: PlayCircle, accent: "text-primary", items: videoSampleLinks },
     {
       id: "ai-data" as const,
       label: "AI Data Samples",

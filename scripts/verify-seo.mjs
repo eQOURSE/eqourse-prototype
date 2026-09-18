@@ -3,15 +3,17 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const distDir = join(root, "dist");
+const distDir = process.env.SEO_DIST_DIR || join(root, "dist");
 const pageSeoSource = readFileSync(join(root, "src", "seo", "pageSeo.ts"), "utf8");
 const redirectsSource = readFileSync(join(root, "src", "routes", "legacyRedirects.ts"), "utf8");
 const manifestPath = join(distDir, "seo-manifest.json");
 const SITE_URL = "https://www.eqourse.com";
 const requiredLegacyRedirects = new Map([
   ["/contact-us.html", "/contact-us"],
-  ["/avatar-video-samples", "/video-samples"],
-  ["/ai-avatar-video-samples", "/video-samples"],
+  ["/avatar-video-samples", "/ai-videos-samples"],
+  ["/ai-avatar-video-samples", "/ai-videos-samples"],
+  ["/flash-to-htm-samples", "/audio-samples"],
+  ["/flash-to-html-samples", "/audio-samples"],
   ["/blog/detail.php", "/blog"],
   ["/blog/detail", "/blog"],
   ["/blog/understanding-the-value-of-edtech-in-higher-education", "/blog"],

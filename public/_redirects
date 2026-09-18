@@ -12,8 +12,10 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /blogs /blog 301!
 /blogs/career /career 301!
 /custom-elearning-solutions /custom-e-learning-content 301!
-/avatar-video-samples /video-samples 301!
-/ai-avatar-video-samples /video-samples 301!
+/avatar-video-samples /ai-videos-samples 301!
+/ai-avatar-video-samples /ai-videos-samples 301!
+/flash-to-htm-samples /audio-samples 301!
+/flash-to-html-samples /audio-samples 301!
 /blog/understanding-the-value-of-edtech-in-higher-education /blog 301!
 /blogs/key-features-online-assessment-system /digital-assessment-infrastructure 301!
 /blogs/five-key-indicators-adaptive-learning /adaptive-learning 301!
@@ -153,7 +155,8 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /educational-content-development/ /educational-content-development 301!
 /elearning-video-solutions/ /elearning-video-solutions 301!
 /faq/ /faq 301!
-/flash-to-htm-samples/ /flash-to-htm-samples 301!
+/audio-samples/ /audio-samples 301!
+/ai-videos-samples/ /ai-videos-samples 301!
 /free-pilot/ /free-pilot 301!
 /gallery/ /gallery 301!
 /gamified-learning/ /gamified-learning 301!

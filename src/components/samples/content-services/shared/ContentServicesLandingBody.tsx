@@ -26,12 +26,13 @@ const ContentServicesLandingBody = ({ sample }: Props) => {
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
                 What's Inside{" "}
                 <span className="text-gradient">
-                  {isTextLanding ? "Our Text Library" : "Our Video Library"}
+                  {isTextLanding ? "Our Text Library" : "Our Video & Audio Library"}
                 </span>
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Five content pillars that cover every curriculum need from early learning to
-                competitive exams.
+                {isTextLanding
+                  ? "Browse curriculum and assessment content for every stage of learning."
+                  : "Explore video and audio formats made for clear, engaging learning."}
               </p>
             </div>
 
@@ -129,7 +130,7 @@ const ContentServicesLandingBody = ({ sample }: Props) => {
                 Frequently Asked <span className="text-gradient">Questions</span>
               </h2>
               <p className="text-muted-foreground">
-                Everything you need to know about our {isTextLanding ? "text" : "video"} samples.
+                Everything you need to know about our {isTextLanding ? "text" : "video and audio"} samples.
               </p>
             </div>
 

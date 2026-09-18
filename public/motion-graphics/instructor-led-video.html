@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}canvas{display:block;position:absolute;inset:0;width:100%;height:100%}body{background:#0E1638}</style></head><body><canvas id="motionCanvas" width="1000" height="500"></canvas><div hidden></div><script>
+        /**
+         * PPT to Video - Canvas Motion Graphic
+         */
+        const canvas = document.getElementById('motionCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // SLIDE CONTENT CONFIGURATION (See Deliverable 2 for how to edit)
+        const slideData = {
+            title: "Q3 Business Growth Objectives",
+            bullets: [
+                "Expand active user base significantly",
+                "Reduce customer acquisition costs",
+                "Boost retention rate by 15%"
+            ]
+        };
+
+        // Animation Loop Variables
+        const duration = 10000; // 10 seconds per loop
+        let startTime = null;
+
+        // Easing function for smooth pen movement
+        function easeInOutQuad(t) {
+            return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        }
+
+        // Linear interpolation
+        function lerp(start, end, amt) {
+            return (1 - amt) * start + amt * end;
+        }
+
+        function drawPenIcon(x, y) {
+            ctx.save();
+            ctx.translate(x, y);
+
+            // Subtle shadow
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetX = 4;
+            ctx.shadowOffsetY = 4;
+
+            // Pen body
+            ctx.beginPath();
+            ctx.moveTo(0, 0); // Tip
+            ctx.lineTo(8, -12);
+            ctx.lineTo(40, -45);
+            ctx.lineTo(50, -35);
+            ctx.lineTo(18, -3);
+            ctx.closePath();
+            ctx.fillStyle = '#2A2A2A';
+            ctx.fill();
+
+            // Pen tip
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(5, -7);
+            ctx.lineTo(10, -2);
+            ctx.closePath();
+            ctx.fillStyle = '#CCCCCC';
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function drawSlideBackground() {
+            // Dark player background is handled by CSS, we draw a "Slide" in the center
+            const slideWidth = 840;
+            const slideHeight = 380;
+            const slideX = (1000 - slideWidth) / 2;
+            const slideY = (500 - slideHeight) / 2;
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.shadowColor = 'rgba(0,0,0,0.4)';
+            ctx.shadowBlur = 20;
+            ctx.shadowOffsetY = 10;
+            ctx.beginPath();
+            ctx.roundRect(slideX, slideY, slideWidth, slideHeight, 8);
+            ctx.fill();
+
+            // Clear shadow for next draws
+            ctx.shadowColor = 'transparent';
+
+            // Top accent bar of the slide
+            ctx.fillStyle = '#0E1638';
+            ctx.beginPath();
+            ctx.roundRect(slideX, slideY, slideWidth, 12, [8, 8, 0, 0]);
+            ctx.fill();
+
+            return { x: slideX, y: slideY, w: slideWidth, h: slideHeight };
+        }
+
+        function draw(timestamp) {
+            if (!startTime) startTime = timestamp;
+            let elapsed = (timestamp - startTime) % duration;
+            let timeNorm = elapsed / duration; // 0.0 to 1.0
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const slide = drawSlideBackground();
+            const contentStartX = slide.x + 60;
+            let contentY = slide.y + 80;
+
+            // DRAW TITLE
+            ctx.fillStyle = '#1A1A1A';
+            ctx.font = 'bold 32px "Segoe UI", sans-serif';
+            ctx.fillText(slideData.title, contentStartX, contentY);
+
+            // Separator Line
+            ctx.beginPath();
+            ctx.moveTo(contentStartX, contentY + 20);
+            ctx.lineTo(contentStartX + 720, contentY + 20);
+            ctx.strokeStyle = '#E0E0E0';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // BULLET POINTS & ANIMATION LOGIC
+            const bulletSpacing = 65;
+            contentY += 80;
+
+            // Timing thresholds (normalized)
+            // 0.00 - 0.10: Idle
+            // 0.10 - 0.15: Fade in Bullet 1
+            // 0.20 - 0.30: Underline Bullet 1
+            // 0.35 - 0.40: Fade in Bullet 2
+            // 0.45 - 0.55: Checkmark Bullet 2
+            // 0.60 - 0.65: Fade in Bullet 3
+            // 0.70 - 0.80: Circle & Arrow Bullet 3
+            // 0.85 - 1.00: Fade out / Reset
+
+            let penTargetX = 900;
+            let penTargetY = 400; // Default idle position bottom right
+
+            ctx.font = '24px "Segoe UI", sans-serif';
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#F7941D'; // Orange annotation color
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // -- BULLET 1 --
+            if (timeNorm > 0.1) {
+                let alpha = Math.min((timeNorm - 0.1) / 0.05, 1);
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = '#4A4A4A';
+                ctx.fillText("•  " + slideData.bullets[0], contentStartX, contentY);
+                ctx.globalAlpha = 1.0;
+            }
+
+            // Annotation 1: Underline "active user base"
+            if (timeNorm > 0.15) {
+                let underlineProgress = Math.max(0, Math.min((timeNorm - 0.2) / 0.1, 1));
+                let startX = contentStartX + 120;
+                let endX = startX + 190;
+                let y = contentY + 12;
+
+                if (underlineProgress > 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(startX, y);
+                    ctx.lineTo(lerp(startX, endX, underlineProgress), y);
+                    ctx.stroke();
+                }
+
+                // Pen movement logic for B1
+                if (timeNorm >= 0.15 && timeNorm < 0.35) {
+                    let moveProgress = easeInOutQuad(Math.min((timeNorm - 0.15) / 0.05, 1));
+                    penTargetX = lerp(900, startX + (endX - startX) * underlineProgress, moveProgress);
+                    penTargetY = lerp(400, y, moveProgress);
+                }
+            }
+
+            // -- BULLET 2 --
+            contentY += bulletSpacing;
+            if (timeNorm > 0.35) {
+                let alpha = Math.min((timeNorm - 0.35) / 0.05, 1);
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = '#4A4A4A';
+                ctx.fillText("•  " + slideData.bullets[1], contentStartX, contentY);
+                ctx.globalAlpha = 1.0;
+            }
+
+            // Annotation 2: Checkmark
+            if (timeNorm > 0.4) {
+                let checkProgress = Math.max(0, Math.min((timeNorm - 0.45) / 0.1, 1));
+                let chkX = contentStartX - 40;
+                let chkY = contentY - 8;
+
+                // Points of a checkmark
+                let p1 = {x: chkX, y: chkY};
+                let p2 = {x: chkX + 10, y: chkY + 10};
+                let p3 = {x: chkX + 25, y: chkY - 15};
+
+                if (checkProgress > 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    if (checkProgress < 0.5) {
+                        let subP = checkProgress * 2;
+                        ctx.lineTo(lerp(p1.x, p2.x, subP), lerp(p1.y, p2.y, subP));
+                    } else {
+                        ctx.lineTo(p2.x, p2.y);
+                        let subP = (checkProgress - 0.5) * 2;
+                        ctx.lineTo(lerp(p2.x, p3.x, subP), lerp(p2.y, p3.y, subP));
+                    }
+                    ctx.stroke();
+                }
+
+                // Pen movement logic for B2
+                if (timeNorm >= 0.35 && timeNorm < 0.6) {
+                    let moveProgress = easeInOutQuad(Math.min((timeNorm - 0.35) / 0.08, 1));
+                    let currentChkX = checkProgress < 0.5 ? lerp(p1.x, p2.x, checkProgress * 2) : lerp(p2.x, p3.x, (checkProgress - 0.5) * 2);
+                    let currentChkY = checkProgress < 0.5 ? lerp(p1.y, p2.y, checkProgress * 2) : lerp(p2.y, p3.y, (checkProgress - 0.5) * 2);
+
+                    let prevX = contentStartX + 310; // End of previous underline
+                    let prevY = contentY - bulletSpacing + 12;
+                    penTargetX = lerp(prevX, checkProgress > 0 ? currentChkX : p1.x, moveProgress);
+                    penTargetY = lerp(prevY, checkProgress > 0 ? currentChkY : p1.y, moveProgress);
+                }
+            }
+
+            // -- BULLET 3 --
+            contentY += bulletSpacing;
+            if (timeNorm > 0.6) {
+                let alpha = Math.min((timeNorm - 0.6) / 0.05, 1);
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = '#4A4A4A';
+                ctx.fillText("•  " + slideData.bullets[2], contentStartX, contentY);
+                ctx.globalAlpha = 1.0;
+            }
+
+            // Annotation 3: Circle & Arrow around "15%"
+            if (timeNorm > 0.65) {
+                let circProgress = Math.max(0, Math.min((timeNorm - 0.7) / 0.08, 1));
+                let arrowProgress = Math.max(0, Math.min((timeNorm - 0.78) / 0.06, 1));
+
+                let cx = contentStartX + 258;
+                let cy = contentY - 8;
+                let rx = 35;
+                let ry = 20;
+
+                if (circProgress > 0) {
+                    ctx.beginPath();
+                    ctx.ellipse(cx, cy, rx, ry, 0, -Math.PI/2, -Math.PI/2 + (circProgress * Math.PI * 2));
+                    ctx.stroke();
+                }
+
+                let arrStartX = cx + rx;
+                let arrStartY = cy;
+                let arrEndX = arrStartX + 20;
+                let arrEndY = arrStartY - 30;
+
+                if (arrowProgress > 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(arrStartX, arrStartY);
+                    let curArrX = lerp(arrStartX, arrEndX, arrowProgress);
+                    let curArrY = lerp(arrStartY, arrEndY, arrowProgress);
+                    ctx.lineTo(curArrX, curArrY);
+
+                    // Arrowhead
+                    if (arrowProgress > 0.95) {
+                        ctx.lineTo(curArrX - 12, curArrY + 2);
+                        ctx.moveTo(curArrX, curArrY);
+                        ctx.lineTo(curArrX - 2, curArrY + 12);
+                    }
+                    ctx.stroke();
+                }
+
+                // Pen movement logic for B3
+                if (timeNorm >= 0.6 && timeNorm < 0.85) {
+                    let moveProgress = easeInOutQuad(Math.min((timeNorm - 0.6) / 0.08, 1));
+                    let prevX = contentStartX - 15; // End of checkmark
+                    let prevY = contentY - bulletSpacing - 23;
+
+                    let activeX, activeY;
+                    if (circProgress > 0 && circProgress < 1) {
+                        let angle = -Math.PI/2 + (circProgress * Math.PI * 2);
+                        activeX = cx + rx * Math.cos(angle);
+                        activeY = cy + ry * Math.sin(angle);
+                    } else if (arrowProgress > 0) {
+                        activeX = lerp(arrStartX, arrEndX, arrowProgress);
+                        activeY = lerp(arrStartY, arrEndY, arrowProgress);
+                    } else {
+                        activeX = cx; activeY = cy - ry;
+                    }
+
+                    penTargetX = lerp(prevX, activeX, moveProgress);
+                    penTargetY = lerp(prevY, activeY, moveProgress);
+                }
+            }
+
+            // Global Pen Fade & Return logic
+            if (timeNorm >= 0.85) {
+                let returnProgress = easeInOutQuad((timeNorm - 0.85) / 0.1);
+                let startX = contentStartX + 278 + 20; // End of arrow
+                let startY = contentY - 8 - 30;
+                penTargetX = lerp(startX, 900, returnProgress);
+                penTargetY = lerp(startY, 400, returnProgress);
+
+                // Fade out canvas for loop reset
+                ctx.fillStyle = `rgba(14, 22, 56, ${Math.max(0, (timeNorm - 0.9) / 0.1)})`;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            // Draw the Pen
+            drawPenIcon(penTargetX, penTargetY);
+
+            requestAnimationFrame(draw);
+        }
+
+        // Start Animation
+        requestAnimationFrame(draw);
+
+    </script></body></html>

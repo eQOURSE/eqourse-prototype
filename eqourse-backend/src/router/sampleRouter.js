@@ -9,10 +9,11 @@
 
 const express = require("express");
 const router = express.Router();
-const { listCategories, listItemsByCategory, listFilesByPage } = require("../controller/sampleController");
+const { listCategories, listItemsByCategory, listFilesByPage, listTabSettings } = require("../controller/sampleController");
 
 router.get("/", listCategories);
 router.get("/files", listFilesByPage);
+router.get("/tabs/:pageSlug", listTabSettings);
 router.get("/:slug/samples", listItemsByCategory);
 
 module.exports = router;

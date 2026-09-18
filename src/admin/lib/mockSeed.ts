@@ -265,9 +265,9 @@ export const seedSampleCategories = (): SampleCategory[] => [
   },
   {
     id: "cat-flashhtml",
-    name: "Flash to HTML",
-    slug: "flash-to-html-samples",
-    description: "Legacy Flash modules reborn as responsive HTML5 courses.",
+    name: "Audio Samples",
+    slug: "audio-samples",
+    description: "Multilingual, conversational and educational learning audio.",
     thumbnailUrl: "",
     order: 204,
     createdAt: daysAgo(38),

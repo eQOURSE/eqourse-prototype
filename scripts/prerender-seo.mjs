@@ -29,7 +29,7 @@ import remarkGfm from "remark-gfm";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
-const distDir = join(root, "dist");
+const distDir = process.env.SEO_DIST_DIR || join(root, "dist");
 const distIndexPath = join(distDir, "index.html");
 const pageSeoPath = join(root, "src", "seo", "pageSeo.ts");
 const SITE_URL = "https://www.eqourse.com";

@@ -23,7 +23,8 @@ const textSamples: CardItem[] = [
 const videoSamples: CardItem[] = [
   { label: "Articulate Storyline", href: "/articulate-storyline-video-samples", description: "Interactive Storyline courses with branching and variables." },
   { label: "Pen Tab and PPT", href: "/pen-tab-and-ppt-samples", description: "Classroom-style whiteboard and narrated PPT walkthroughs." },
-  { label: "Flash to HTML", href: "/flash-to-html-samples", description: "Legacy Flash modules reborn as responsive HTML5 courses." },
+  { label: "AI Videos", href: "/ai-videos-samples", description: "AI presenter and multilingual avatar video samples." },
+  { label: "Audio Samples", href: "/audio-samples", description: "Multilingual, conversational and educational learning audio." },
   { label: "2D 3D Animation", href: "/2d-3d-video-samples", description: "Animated explainers across science, math, and skills." },
   { label: "Promotional Video", href: "/promotional-video", description: "Brand and product promo videos for Content Services and enterprise." },
   { label: "Immersive Simulation AR/VR", href: "/immersive-simulation-ar-vr-video", description: "AR/VR simulations for immersive learning and training." },
@@ -31,7 +32,7 @@ const videoSamples: CardItem[] = [
 
 const tabs = [
   { id: "text", label: "Text Content Samples", sub: "8 categories", Icon: FileText, accent: "from-primary to-accent", count: 8 },
-  { id: "video", label: "Video Content Samples", sub: "6 formats", Icon: PlayCircle, accent: "from-accent to-primary", count: 6 },
+  { id: "video", label: "Video & Audio Samples", sub: "7 formats", Icon: PlayCircle, accent: "from-accent to-primary", count: 7 },
   { id: "ai-data", label: "AI Data Samples", sub: "6 datasets", Icon: Database, accent: "from-[hsl(220_85%_55%)] to-[hsl(190_85%_55%)]", count: 6, isNew: true },
 ] as const;
 
@@ -95,7 +96,7 @@ const SamplesCategoryTabs = () => {
 
   const headings = {
     text: { h: "Text Content Samples", sub: "K-12, competitive exams, STEM, and localization samples showcasing our writing, editorial and pedagogical craft." },
-    video: { h: "Video Content Samples", sub: "From Articulate Storyline to AI avatar videos and AR/VR simulations - browse what our video production pipeline can deliver." },
+    video: { h: "Video & Audio Samples", sub: "Explore educational video, animations, immersive learning and audio production." },
     "ai-data": { h: "AI Data Annotation & Collection Samples", sub: "Browse sample outputs from our AI data services pipeline across NLP, Computer Vision, Audio, and RLHF. Request a free pilot to evaluate on your data." },
   };
 
