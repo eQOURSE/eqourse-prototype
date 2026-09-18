@@ -48,6 +48,9 @@ jobs:
         run: npm ci
 
       - name: Build frontend
+        env:
+          CMS_SEO_SOURCE_URL: ${{ secrets.CMS_SEO_SOURCE_URL }}
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
         run: npm run build
 
       - name: Package build output
