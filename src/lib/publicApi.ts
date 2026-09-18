@@ -326,7 +326,15 @@ export async function fetchSamplesForPage(pagePath: string): Promise<PreviewFile
     const params = new URLSearchParams({ page_path: pagePath });
     const res = await fetch(`${getBaseUrl()}/api/samples/files?${params.toString()}`);
     const data = await safeParse<{ files: PreviewFile[] }>(res);
-    return data?.files ?? null;
+    const files = data?.files ?? null;
+    if (files) {
+      files.forEach(file => {
+        if (file.thumbnailUrl && file.thumbnailUrl.startsWith('/')) {
+          file.thumbnailUrl = `${getBaseUrl()}${file.thumbnailUrl}`;
+        }
+      });
+    }
+    return files;
   } catch {
     return null;
   }
@@ -346,7 +354,15 @@ export async function fetchSampleFiles(pageSlug: string, tabName?: string): Prom
     }
     const res = await fetch(url);
     const data = await safeParse<{ files: PreviewFile[] }>(res);
-    return data?.files ?? null;
+    const files = data?.files ?? null;
+    if (files) {
+      files.forEach(file => {
+        if (file.thumbnailUrl && file.thumbnailUrl.startsWith('/')) {
+          file.thumbnailUrl = `${getBaseUrl()}${file.thumbnailUrl}`;
+        }
+      });
+    }
+    return files;
   } catch {
     return null;
   }

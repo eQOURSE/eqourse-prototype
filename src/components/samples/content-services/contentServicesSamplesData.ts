@@ -543,8 +543,10 @@ export const contentServicesSamples: ContentServicesSample[] = [
 export const getContentServicesSampleBySlug = (slug: string) =>
   contentServicesSamples.find((s) => s.slug === slug);
 
-export const getContentServicesSampleByPath = (path: string) =>
-  contentServicesSamples.find((s) => s.path === path);
+export const getContentServicesSampleByPath = (path: string) => {
+  const normalizedPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+  return contentServicesSamples.find((s) => s.path === normalizedPath);
+};
 
 export const textSubSamples = contentServicesSamples.filter((s) => s.kind === "text");
 export const videoSubSamples = contentServicesSamples.filter((s) => s.kind === "video");

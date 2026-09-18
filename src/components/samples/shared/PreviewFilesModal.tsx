@@ -19,6 +19,7 @@ export interface PreviewFile {
   fileType: string;
   fileUrl: string;
   isExternal: boolean;
+  thumbnailUrl?: string;
 }
 
 interface Props {
@@ -110,20 +111,52 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
                      <div className="absolute top-0 left-0 right-0 h-1" style={{ backgroundColor: accent, opacity: 0.8 }} />
                   )}
 
-                  <div className="flex items-start justify-between gap-2 mb-3">
-                    <div 
-                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors shadow-sm"
-                      style={{ backgroundColor: `hsl(${accentHsl} / 0.1)`, color: accent, border: `1px solid hsl(${accentHsl} / 0.2)` }}
-                    >
-                      <Icon className="w-4 h-4" />
+                  {/* Thumbnail or icon */}
+                  {file.thumbnailUrl ? (
+                    <div className="w-full aspect-[4/3] rounded-lg overflow-hidden mb-3 bg-muted/30 border border-border/30">
+                      <img
+                        src={file.thumbnailUrl}
+                        alt={file.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback to icon if thumbnail fails to load
+                          (e.target as HTMLImageElement).style.display = 'none';
+                          (e.target as HTMLImageElement).parentElement!.classList.add('flex', 'items-center', 'justify-center');
+                          const iconEl = document.createElement('div');
+                          iconEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 2 6 6v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><polyline points="14 2 14 8 20 8"/></svg>`;
+                          iconEl.style.color = accent;
+                          (e.target as HTMLImageElement).parentElement!.appendChild(iconEl);
+                        }}
+                      />
                     </div>
-                    <div 
-                      className="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded shadow-sm flex-shrink-0"
-                      style={{ backgroundColor: `hsl(${accentHsl} / 0.1)`, color: accent, border: `1px solid hsl(${accentHsl} / 0.2)` }}
-                    >
-                      {file.fileType}
+                  ) : (
+                    <div className="flex items-start justify-between gap-2 mb-3">
+                      <div 
+                        className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors shadow-sm"
+                        style={{ backgroundColor: `hsl(${accentHsl} / 0.1)`, color: accent, border: `1px solid hsl(${accentHsl} / 0.2)` }}
+                      >
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div 
+                        className="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded shadow-sm flex-shrink-0"
+                        style={{ backgroundColor: `hsl(${accentHsl} / 0.1)`, color: accent, border: `1px solid hsl(${accentHsl} / 0.2)` }}
+                      >
+                        {file.fileType}
+                      </div>
                     </div>
-                  </div>
+                  )}
+
+                  {/* File type badge (shown when thumbnail is present) */}
+                  {file.thumbnailUrl && (
+                    <div className="flex justify-end mb-2">
+                      <div 
+                        className="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded shadow-sm"
+                        style={{ backgroundColor: `hsl(${accentHsl} / 0.1)`, color: accent, border: `1px solid hsl(${accentHsl} / 0.2)` }}
+                      >
+                        {file.fileType}
+                      </div>
+                    </div>
+                  )}
                   
                   <div className="flex-1 flex flex-col mb-3">
                     <h4 className="text-sm font-semibold text-foreground group-hover:text-[var(--hover-accent)] transition-colors mb-1.5 line-clamp-2">
