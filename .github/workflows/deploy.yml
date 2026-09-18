@@ -1,0 +1,98 @@
+name: Deploy eQOURSE to Production
+
+on:
+  push:
+    branches:
+      - production
+  workflow_dispatch: {}
+
+jobs:
+  deploy-backend:
+    name: Deploy Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy backend via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            set -e
+            echo "🚀 Deploying eQOURSE Backend..."
+            cd /opt/eqourse-prototype/eqourse-backend
+            git -C /opt/eqourse-prototype fetch origin production
+            git -C /opt/eqourse-prototype reset --hard origin/production
+            npm install --production
+            pm2 restart eqourse --update-env
+            sleep 3
+            pm2 list | grep eqourse | grep -v staging | grep -q "online" || { echo "❌ Backend not online!"; pm2 logs eqourse --lines 20; exit 1; }
+            echo "✅ eQOURSE Backend deployed"
+
+  build-and-deploy-frontend:
+    name: Build & Deploy Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Package build output
+        run: tar -czf dist-output.tar.gz dist/
+
+      - name: Pull latest code on server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            set -e
+            cd /opt/eqourse-prototype
+            git fetch origin production
+            git reset --hard origin/production
+
+      - name: Upload pre-built dist to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: "dist-output.tar.gz"
+          target: "/opt/eqourse-prototype"
+          overwrite: true
+
+      - name: Extract build and verify
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            set -e
+            cd /opt/eqourse-prototype
+            chmod -R u+w dist 2>/dev/null || true
+            rm -rf dist
+            tar -xzf dist-output.tar.gz
+            rm -f dist-output.tar.gz
+            sudo nginx -t && sudo systemctl reload nginx
+            echo "✅ eQOURSE Frontend deployed"
