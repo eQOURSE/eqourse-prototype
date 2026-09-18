@@ -1,0 +1,238 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}canvas{display:block;position:absolute;inset:0;width:100%;height:100%}body{background:#0E1638}.player-container{position:absolute;inset:0;background:linear-gradient(145deg,#111a43,#0a102b)}</style></head><body><div class="player-container"><canvas id="visualizer-canvas"></canvas></div><div hidden></div><script>
+        // Get canvas and context
+        const canvas = document.getElementById('visualizer-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Color palette based on eQourse brand
+        const COLORS = {
+            speaker1: {
+                core: '#f7941d',     // Brand Orange
+                glow: 'rgba(247, 148, 29, 0.6)',
+                wave: 'rgba(247, 148, 29, 0.4)'
+            },
+            speaker2: {
+                core: '#4fd1c5',     // Complementary Teal/Cyan for distinction
+                glow: 'rgba(79, 209, 197, 0.6)',
+                wave: 'rgba(79, 209, 197, 0.4)'
+            },
+            trail: 'rgba(255, 255, 255, 0.15)' // Connection trail
+        };
+
+        // State variables for animation
+        let width, height;
+        let time = 0;
+        let animationFrameId;
+
+        // Dialogue state management
+        const dialogueState = {
+            currentSpeaker: 1, // 1 or 2
+            intensity: 0,      // 0.0 to 1.0 (how loud they are speaking)
+            targetIntensity: 0,
+            pauseTimer: 0,
+            speakingTimer: 0,
+            baseSpeed: 0.05,   // Controls how fast interpolation happens
+            flowTime: 0,
+            waveDirection: 1,  // 1: Left-to-Right (away from Speaker 1), -1: Right-to-Left (away from Speaker 2)
+            targetWaveDirection: 1
+        };
+
+        // Resize handler to keep canvas crisp
+        function resize() {
+            // Get actual dimensions of the container
+            const rect = canvas.parentElement.getBoundingClientRect();
+            // Handle high-DPI displays for sharpness
+            const dpr = window.devicePixelRatio || 1;
+
+            width = rect.width;
+            height = rect.height;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+
+            // Scale context back down so CSS pixels map correctly
+            ctx.scale(dpr, dpr);
+            // Don't restart animation here, just update dimensions
+        }
+        window.addEventListener('resize', resize);
+        resize(); // Initial call
+
+        /**
+         * Simulates a natural conversation rhythm.
+         * Randomizes talking duration, pause duration, and swaps speakers.
+         */
+        function updateDialogueLogic() {
+            // Direction target: wave always flows AWAY from the talking speaker towards the recipient
+            // Speaker 1 (Left) talking -> flows Right (+1)
+            // Speaker 2 (Right) talking -> flows Left (-1)
+            dialogueState.targetWaveDirection = dialogueState.currentSpeaker === 1 ? 1 : -1;
+
+            // Smoothly transition wave flow direction
+            dialogueState.waveDirection += (dialogueState.targetWaveDirection - dialogueState.waveDirection) * 0.05;
+            dialogueState.flowTime += 0.08 * dialogueState.waveDirection;
+
+            if (dialogueState.pauseTimer > 0) {
+                // Currently in a pause between turns
+                dialogueState.pauseTimer--;
+                dialogueState.targetIntensity = 0.1; // Baseline hum
+            } else if (dialogueState.speakingTimer > 0) {
+                // Someone is currently speaking
+                dialogueState.speakingTimer--;
+
+                // Add some random micro-fluctuations to intensity while speaking
+                if (Math.random() > 0.8) {
+                    // Range: 0.4 to 1.0
+                    dialogueState.targetIntensity = 0.4 + Math.random() * 0.6;
+                }
+            } else {
+                // Transition phase: Decide next action
+
+                // 15% chance to have a long pause, otherwise switch speakers
+                if (Math.random() < 0.15) {
+                    dialogueState.pauseTimer = 60 + Math.random() * 120; // 1-3 seconds pause at 60fps
+                } else {
+                    // Switch speaker
+                    dialogueState.currentSpeaker = dialogueState.currentSpeaker === 1 ? 2 : 1;
+                    // Speak for 2-6 seconds
+                    dialogueState.speakingTimer = 120 + Math.random() * 240; // 2-6 seconds at 60fps
+                }
+            }
+
+            // Smoothly interpolate current intensity to target intensity
+            dialogueState.intensity += (dialogueState.targetIntensity - dialogueState.intensity) * dialogueState.baseSpeed;
+        }
+
+        function draw() {
+            // Update the dialogue state (turn-taking logic)
+            updateDialogueLogic();
+
+            // Clear canvas completely to prepare for next frame
+            ctx.clearRect(0, 0, width, height);
+
+            time += 0.05;
+
+            const centerY = height / 2;
+            const leftCenterX = width * 0.25;
+            const rightCenterX = width * 0.75;
+
+            // Determine active color theme based on the current speaker
+            const activeColor = dialogueState.currentSpeaker === 1 ? COLORS.speaker1 : COLORS.speaker2;
+
+            ctx.beginPath();
+            ctx.moveTo(leftCenterX, centerY);
+
+            const wavePoints = 150;
+            const dist = rightCenterX - leftCenterX;
+
+            for(let i = 0; i <= wavePoints; i++) {
+                const t = i / wavePoints;
+                const x = leftCenterX + dist * t;
+
+                // Pinch wave at the ends near the speakers
+                const envelope = Math.sin(t * Math.PI);
+
+                // Frequency and amplitude react to voice intensity
+                const freq = 15 + dialogueState.intensity * 10;
+                const amp = 10 + dialogueState.intensity * 60;
+
+                // Wave phase driven by flowTime so direction propagates away from active speaker
+                const yOffset = Math.sin(t * freq - dialogueState.flowTime) * amp * envelope;
+
+                ctx.lineTo(x, centerY + yOffset);
+            }
+
+            ctx.strokeStyle = activeColor.wave;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Helper function to draw stylized Human Avatar Icon with sound ripples
+            function drawHumanSpeaker(x, y, baseRadius, intensity, mainColor, glowColor, isTalking, speakerName) {
+                ctx.save();
+                ctx.translate(x, y);
+
+                // 1. Audio Soundwave Ripple Rings (emanates outward when speaking)
+                if (intensity > 0.15) {
+                    const ringCount = 3;
+                    for (let r = 1; r <= ringCount; r++) {
+                        const phase = (time * 30 + r * 20) % 60;
+                        const rippleRadius = baseRadius + phase * (0.6 + intensity * 0.4);
+                        const alpha = Math.max(0, (1 - phase / 60) * intensity * 0.7);
+
+                        ctx.beginPath();
+                        ctx.arc(0, 0, rippleRadius, 0, Math.PI * 2);
+                        ctx.strokeStyle = mainColor;
+                        ctx.lineWidth = 2;
+                        ctx.globalAlpha = alpha;
+                        ctx.stroke();
+                    }
+                }
+                ctx.globalAlpha = 1.0;
+
+                // 2. Avatar Background Badge
+                ctx.beginPath();
+                ctx.arc(0, 0, baseRadius, 0, Math.PI * 2);
+                ctx.fillStyle = '#0a102b';
+                ctx.shadowColor = glowColor;
+                ctx.shadowBlur = 15 + (intensity * 25);
+                ctx.fill();
+                ctx.lineWidth = 2.5 + (intensity * 2);
+                ctx.strokeStyle = mainColor;
+                ctx.stroke();
+
+                ctx.shadowBlur = 0; // Clear glow for inner silhouette
+
+                // 3. Human Silhouette (Head + Shoulders)
+                const iconScale = baseRadius * 0.55;
+
+                // Head
+                ctx.beginPath();
+                ctx.arc(0, -iconScale * 0.32, iconScale * 0.35, 0, Math.PI * 2);
+                ctx.fillStyle = mainColor;
+                ctx.fill();
+
+                // Shoulders / Torso
+                ctx.beginPath();
+                ctx.ellipse(0, iconScale * 0.58, iconScale * 0.72, iconScale * 0.42, 0, Math.PI, 0, true);
+                ctx.fillStyle = mainColor;
+                ctx.fill();
+
+                // 4. Speaker Label
+                ctx.font = '600 12px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                ctx.fillText(speakerName, 0, baseRadius + 22);
+
+                // 5. Active Voice Indicator Dot
+                ctx.beginPath();
+                ctx.arc(baseRadius * 0.65, -baseRadius * 0.65, 5 + (intensity * 2), 0, Math.PI * 2);
+                ctx.fillStyle = isTalking ? '#22c55e' : 'rgba(255, 255, 255, 0.3)';
+                if (isTalking) {
+                    ctx.shadowColor = '#22c55e';
+                    ctx.shadowBlur = 10;
+                }
+                ctx.fill();
+
+                ctx.restore();
+            }
+
+            // Draw Speaker 1 (Left Human Icon - Brand Orange)
+            const s1Intensity = dialogueState.currentSpeaker === 1 ? dialogueState.intensity : 0.1;
+            const s1Talking = dialogueState.currentSpeaker === 1 && dialogueState.intensity > 0.2;
+            const s1Radius = 26 + (s1Intensity * 8);
+            drawHumanSpeaker(leftCenterX, centerY, s1Radius, s1Intensity, COLORS.speaker1.core, COLORS.speaker1.glow, s1Talking, 'Speaker 1');
+
+            // Draw Speaker 2 (Right Human Icon - Cyan / Teal)
+            const s2Intensity = dialogueState.currentSpeaker === 2 ? dialogueState.intensity : 0.1;
+            const s2Talking = dialogueState.currentSpeaker === 2 && dialogueState.intensity > 0.2;
+            const s2Radius = 26 + (s2Intensity * 8);
+            drawHumanSpeaker(rightCenterX, centerY, s2Radius, s2Intensity, COLORS.speaker2.core, COLORS.speaker2.glow, s2Talking, 'Speaker 2');
+
+            // Reset shadow to avoid affecting other drawing operations
+            ctx.shadowBlur = 0;
+
+            // Loop the animation
+            animationFrameId = requestAnimationFrame(draw);
+        }
+
+        // Start animation immediately
+        draw();
+    </script></body></html>

@@ -5,11 +5,23 @@ const CONCURRENCY = 12;
 const GSC_CRITICAL_URLS = [
   `${SITE_URL}/blog/scaling-exam-performance-blueprint-aligned-test-prep-content`,
   `${SITE_URL}/kindergarten-to-k5-samples`,
+  `${SITE_URL}/video-samples`,
+  `${SITE_URL}/ai-videos-samples`,
+  `${SITE_URL}/audio-samples`,
 ];
 const GSC_REDIRECTS = new Map([
-  [`${SITE_URL}/avatar-video-samples`, `${SITE_URL}/video-samples`],
-  [`${SITE_URL}/ai-avatar-video-samples`, `${SITE_URL}/video-samples`],
-  [`${SITE_URL}/ai-avatar-video-samples/`, `${SITE_URL}/video-samples`],
+  [`${SITE_URL}/avatar-video-samples`, `${SITE_URL}/ai-videos-samples`],
+  [`${SITE_URL}/ai-avatar-video-samples`, `${SITE_URL}/ai-videos-samples`],
+  [`${SITE_URL}/ai-avatar-video-samples/`, `${SITE_URL}/ai-videos-samples`],
+  [`${SITE_URL}/flash-to-htm-samples`, `${SITE_URL}/audio-samples`],
+  [`${SITE_URL}/flash-to-htm-samples/`, `${SITE_URL}/audio-samples`],
+  [`${SITE_URL}/flash-to-html-samples`, `${SITE_URL}/audio-samples`],
+  [`${SITE_URL}/blog/7-strategies-to-boost-engagement-and-retention-in-content-services`, `${SITE_URL}/blog/7-strategies-boost-learner-engagement-retention-content-services`],
+  [`${SITE_URL}/blogs/dos-and-donts-of-online-learning`, `${SITE_URL}/blog/online-learning-dos-and-donts-for-institutions`],
+  [`${SITE_URL}/teacher_training`, `${SITE_URL}/tutors-and-sme-training`],
+  [`${SITE_URL}/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services`, `${SITE_URL}/blog/emsat-content-solutions-scalable-test-prep-uae`],
+  [`${SITE_URL}/casestudy/on-demand-video-solutions-for-us-content-services-company`, `${SITE_URL}/casestudy/on-demand-video-solutions-us-content-services-company`],
+  [`${SITE_URL}/k12-elearning-services`, `${SITE_URL}/k12-and-higher-education`],
 ]);
 
 const request = (url, init = {}) => fetch(url, {

@@ -386,9 +386,13 @@ export const pageSeo: Record<string, PageSeo> = {
     title: "Eqourse FAQs: Everything You Need to Know",
     description: "Find answers about Content Services, AI Data Services, free pilots, data annotation and project delivery. Visit our FAQ page.",
   },
-  "/flash-to-htm-samples": {
-    title: "Flash to HTML5 Conversion – View Samples | Eqourse",
-    description: "Explore Flash-to-HTML conversion samples featuring modern, responsive and interactive learning content. View our work.",
+  "/audio-samples": {
+    title: "Audio Samples | Multilingual & Educational Audio | eQOURSE",
+    description: "Listen to multilingual, conversational and educational audio samples produced by eQOURSE for learning and training.",
+  },
+  "/ai-videos-samples": {
+    title: "AI Video Samples | AI Presenter & Multilingual Avatars | eQOURSE",
+    description: "Explore AI presenter videos and multilingual AI avatar video samples created by eQOURSE for education and training.",
   },
   "/free-pilot": {
     title: "Free eLearning Pilot – Custom Course Creation | Eqourse",
@@ -635,8 +639,8 @@ export const pageSeo: Record<string, PageSeo> = {
     description: "Explore UPSC and State PSC content samples with exam-aligned questions, explanations and study materials. View our work.",
   },
   "/video-samples": {
-    title: "Course Video Samples – See Our Work | Eqourse",
-    description: "Explore eQOURSE video samples across animation, presentations, AI avatars and immersive learning. View our work today.",
+    title: "Video & Audio Samples for E-learning | eQOURSE",
+    description: "Explore eQOURSE educational video and audio samples across pen tab lessons, narration, animation and immersive learning.",
   },
   "/voice-over-services": {
     title: "Voice Over Services – Professional Quality | Eqourse",

@@ -29,7 +29,7 @@ import remarkGfm from "remark-gfm";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
-const distDir = join(root, "dist");
+const distDir = process.env.SEO_DIST_DIR || join(root, "dist");
 const distIndexPath = join(distDir, "index.html");
 const pageSeoPath = join(root, "src", "seo", "pageSeo.ts");
 const SITE_URL = "https://www.eqourse.com";
@@ -1360,6 +1360,63 @@ function buildDeploymentValidationFallback() {
   return `<main data-seo-prerender="true"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/robotics-training-data-services">Robotics Training Data</a> / <span>Deployment Validation</span></nav><h1>Robot Deployment Validation</h1><p>Structured observation of the robot doing its actual job, in its actual place, over enough cycles to produce operational evidence for your integrator and assessor.</p><section><h2>You Cannot Validate a Robot. You Validate an Application.</h2><p>The application is robot, task, tooling and environment together. Change any one and it needs validating again.</p></section><section id="the-boundary"><h2>What We Do—and What We Do Not Sign</h2><p>eQOURSE is not a notified body, safety certifier or CE-marking consultancy. We do not issue conformity assessments, sign risk assessments or certify a system as safe. We produce the operational evidence; your integrator and assessor produce the safety case.</p></section><section><h2>Where the Standards Stand</h2><p>As of August 2026, ISO 10218-1:2025 and ISO 10218-2:2025 are in force; ISO/TS 15066 is no longer standalone; ISO 25785-1 remains in development. This is orientation, not conformity advice.</p></section><section><h2>What We Validate</h2><ul><li>Task success in situ</li><li>Sustained throughput</li><li>Environmental variation</li><li>Recovery and intervention</li><li>Human-robot interaction</li><li>Endurance and edge cases</li></ul></section><section><h2>Acceptance Criteria Before Anything Runs</h2><p>Success, throughput, intervention, recovery, conditions, duration, cycle counts, stop triggers and failure consequences are agreed before results exist.</p></section><section><h2>Incident and Near-Miss Logging</h2><p>Events are classified against a defined severity scale with timestamps, environmental context, observer agreement and immediate escalation.</p></section><section><h2>How Validation Runs</h2><ol><li>Scope and criteria</li><li>Site familiarisation</li><li>Observer calibration</li><li>Baseline observation</li><li>Structured observation</li><li>Endurance phase</li><li>Evidence pack</li></ol></section><section><h2>Related Robotics Services</h2><p><a href="/robotics-training-data-services/vla-evaluation">VLA Evaluation</a> <a href="/robotics-training-data-services/human-demonstrations">Human Demonstrations</a> <a href="/robotics-training-data-services/multimodal-sensor-data">Multimodal Sensor Data</a> <a href="/robotics-training-data-services/3d-spatial-annotation">3D &amp; Spatial Annotation</a></p></section><section><h2>Deployment Validation FAQs</h2>${faqs.map(([q,a])=>`<details><summary>${escapeHtml(q)}</summary><p>${escapeHtml(a)}</p></details>`).join("")}</section><section><h2>Find Out How It Behaves in Month Two</h2><p><a href="/contact-us?service=deployment-validation">Scope a Validation</a></p></section><script type="application/ld+json">${JSON.stringify(schema).replace(/</g,"\u003c")}</script></main>`;
 }
 
+const gscLandingPageContent = {
+  "/interactive-ebook-creation": {
+    heading: "Interactive eBook Creation Services",
+    sections: [
+      ["Digital textbooks with learner interaction", "We create educational e-books with embedded quizzes, videos, animations and exercises. The aim is to turn static reading material into a learning experience that lets students explore a concept and check their understanding."],
+      ["Formats and curriculum alignment", "Projects can include EPUB3 and PDF deliverables, multimedia-rich textbooks and content aligned to CBSE, ICSE, IB or State Board curricula. Reading-platform compatibility and accessibility requirements are considered during production."],
+      ["Related educational content", "Explore our educational content development, workbook development and 2D and 3D video services for connected learning materials."],
+    ],
+    links: [["/educational-content-development", "Educational Content Development"], ["/workbook-development", "Workbook Development"], ["/2d-3d-videos", "2D and 3D Video Services"]],
+  },
+  "/instructional-design-services": {
+    heading: "Instructional Design Services",
+    sections: [
+      ["Design around learning outcomes", "Our instructional designers begin with the audience, learning needs and measurable objectives. They map content and activities to those objectives before developing storyboards, scripts and assessment approaches."],
+      ["Methods used in the design process", "Projects can apply ADDIE, SAM and Bloom's Taxonomy where appropriate. The work spans analysis, design, development, implementation and evaluation, with review points that connect learning science to practical production."],
+      ["Connected learning solutions", "Instructional design can support instructor-led training, corporate e-learning and other custom learning programmes. Related services provide delivery formats after the learning structure is defined."],
+    ],
+    links: [["/ilt-solutions", "Instructor-Led Training"], ["/corporate-e-learning-solutions", "Corporate E-Learning"], ["/learning-solutions", "Learning Solutions"]],
+  },
+  "/promotional-video": {
+    heading: "Promotional Video Samples",
+    sections: [
+      ["Video formats for education and training", "This sample collection covers brand videos, course trailers and product demonstrations for educational institutions, learning platforms and corporate training teams."],
+      ["What each format communicates", "Brand videos introduce an organisation and its offer. Course trailers show learners what a programme covers, while product demos explain how a platform or learning product works."],
+      ["Review a relevant example", "The available samples illustrate different messages and audiences. Use the sample tabs to compare formats, then request an example aligned to your programme and brand requirements."],
+    ],
+    links: [["/video-samples", "Video and Audio Samples"], ["/elearning-video-solutions", "E-Learning Video Solutions"], ["/contact-us", "Request a Sample"]],
+  },
+  "/translation-services": {
+    heading: "Educational Translation Services",
+    sections: [
+      ["Translation for learning materials", "Native-speaker translators work with curriculum, assessments, e-learning modules and educational documents. The goal is to preserve subject meaning and instructional intent while adapting language for the learner."],
+      ["Content types and language coverage", "Projects may involve K-12 and higher education curricula, tests, quizzes, exam papers, academic documents and digital modules. eQOURSE supports Hindi, English and regional or international languages according to project scope."],
+      ["Localization beyond written text", "Related voice-over and subtitling services can support multilingual learning experiences when a programme includes audio or video alongside translated written content."],
+    ],
+    links: [["/localization-services", "Localization Services"], ["/voice-over-services", "Voice Over Services"], ["/subtitling-services", "Subtitling Services"]],
+  },
+  "/k6-to-k12-samples": {
+    heading: "Grade 6 to 12 Text Samples",
+    sections: [
+      ["Curriculum-aligned secondary content", "Explore examples for mathematics, science and language arts across Grades 6 to 12. The collection is designed to show how subject explanations and activities can support classroom teaching and independent learning."],
+      ["Sample formats to compare", "The tabs present course-book, lesson-plan and workbook examples. Each format has a different teaching role, from introducing a concept to guiding a lesson or giving students structured practice."],
+      ["Request content for your programme", "Curriculum, grade, language and assessment requirements vary by project. Review the available examples and contact eQOURSE for a sample aligned with your learners and delivery format."],
+    ],
+    links: [["/text-samples", "Text Samples"], ["/k12-and-higher-education", "K-12 and Higher Education Content"], ["/contact-us", "Request a Sample"]],
+  },
+  "/k12-and-higher-education": {
+    heading: "K-12 and Higher Education Content",
+    sections: [
+      ["Learning content across grade levels", "eQOURSE develops curriculum-aligned materials for K-12 and higher education programmes. Work can combine subject content, assessments and multimedia to support different teaching and independent-study needs."],
+      ["From curriculum design to practice", "Related services cover curriculum development, lesson planning, workbook creation and educational content production. These pieces can be designed together so explanations, activities and assessments follow a consistent learning path."],
+      ["Explore representative work", "The text-sample library includes grade-specific course-book, lesson-plan and workbook examples. Review the samples to see formats and request content for a particular subject, grade or curriculum."],
+    ],
+    links: [["/k12-curriculum-development-and-design-services", "K-12 Curriculum Development"], ["/k6-to-k12-samples", "Grade 6 to 12 Samples"], ["/text-samples", "Text Samples"]],
+  },
+};
+
 function buildCrawlFallback({ path, title, description, crawlHtml = "", source }) {
   if (path === "/") return buildHomepageFallback();
   if (path === "/ai-data-services/data-collection") return buildDataCollectionFallback();
@@ -1417,6 +1474,19 @@ function buildCrawlFallback({ path, title, description, crawlHtml = "", source }
       <section><h2>Request a Relevant Sample</h2><p>Sample availability varies by grade, subject and curriculum. <a href="/contact-us">Contact eQOURSE</a> for examples aligned with your programme.</p></section>
       <nav aria-label="Related pages"><a href="/k12-and-higher-education">K-12 and Higher Education Content</a> <a href="/text-samples">Text Samples</a> <a href="/content-services">Content Services</a></nav>
     </main>`;
+  }
+  const gscContent = gscLandingPageContent[path];
+  if (gscContent) {
+    const sections = gscContent.sections.map(([sectionHeading, body]) =>
+      `<section><h2>${escapeHtml(sectionHeading)}</h2><p>${escapeHtml(body)}</p></section>`
+    ).join("");
+    const relatedLinks = gscContent.links.map(([href, label]) =>
+      `<a href="${href}">${escapeHtml(label)}</a>`
+    ).join(" ");
+    const parent = path.includes("samples") || path === "/promotional-video"
+      ? ["/samples", "Samples"]
+      : ["/content-services", "Content Services"];
+    return `<main data-seo-prerender="true"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="${parent[0]}">${parent[1]}</a> / <span>${escapeHtml(gscContent.heading)}</span></nav><h1>${escapeHtml(gscContent.heading)}</h1><p>${escapeHtml(description)}</p>${sections}<nav aria-label="Related pages">${relatedLinks}</nav></main>`;
   }
   const sharedLinks = path.startsWith("/ai-data") || path.startsWith("/robotics")
     ? [

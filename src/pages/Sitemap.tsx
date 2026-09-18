@@ -103,7 +103,7 @@ const sitemapData = [
     category: "Content Services Samples",
     links: [
       { name: "Text Content Samples", to: "/text-samples" },
-      { name: "Video Content Samples", to: "/video-samples" },
+      { name: "Video & Audio Samples", to: "/video-samples" },
       { name: "K12 Grade (KG-5)", to: "/kindergarten-to-k5-samples" },
       { name: "K12 Grade (6-12)", to: "/k6-to-k12-samples" },
       { name: "IIT JEE / NEET", to: "/iit-jee-neet-samples" },
@@ -114,7 +114,8 @@ const sitemapData = [
       { name: "Test Prep & Assessments", to: "/test-prep-and-assessments" },
       { name: "Articulate Storyline", to: "/articulate-storyline-video-samples" },
       { name: "Pen Tab and PPT", to: "/pen-tab-and-ppt-samples" },
-      { name: "Flash to HTML", to: "/flash-to-htm-samples" },
+      { name: "AI Videos", to: "/ai-videos-samples" },
+      { name: "Audio Samples", to: "/audio-samples" },
       { name: "2D 3D Animation", to: "/2d-3d-video-samples" },
       { name: "Promotional Video", to: "/promotional-video" },
       { name: "Immersive Simulation AR/VR", to: "/immersive-simulation-ar-vr-video" },

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Download, Eye, FileText, Play, Sparkles, ChevronRight } from "lucide-react";
-import type { ContentServicesSample } from "../content servicesSamplesData";
+import type { ContentServicesSample } from "../contentServicesSamplesData";
 import { PreviewFilesModal, type PreviewFile } from "../../shared/PreviewFilesModal";
-import { fetchSampleFiles } from "@/lib/publicApi";
+import { fetchSampleFiles, fetchSampleTabSettings } from "@/lib/publicApi";
 import {
   CharacterAnimationThumb,
   ThreeDConceptThumb,
@@ -12,8 +12,9 @@ import {
 import { ARVRAnimatedThumbForTab } from "./ARVRAnimatedThumbnails";
 import { ArticulateStorylineThumbForTab } from "./ArticulateStorylineThumbnails";
 import { PenTabPPTThumbForTab } from "./PenTabPPTThumbnails";
-import { FlashToHTMLThumbForTab } from "./FlashToHTMLThumbnails";
 import { PromotionalVideoThumbForTab } from "./PromotionalVideoThumbnails";
+import EducationalAudioGraphic from "./EducationalAudioGraphic";
+import MultilingualOrbitGraphic from "./MultilingualOrbitGraphic";
 
 interface Props {
   sample: ContentServicesSample;
@@ -27,16 +28,38 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
   const [showPreview, setShowPreview] = useState(false);
   const [apiFiles, setApiFiles] = useState<PreviewFile[] | null>(null);
   const [loading, setLoading] = useState(false);
+  const [visibility, setVisibility] = useState<Record<string, boolean>>({});
   
   const accent = `hsl(${sample.accentHsl})`;
   const accentSoft = `hsl(${sample.accentHsl} / 0.12)`;
   const accentBorder = `hsl(${sample.accentHsl} / 0.35)`;
   const isVideo = isVideoKind(sample.kind);
 
-  const activeTabName = sample.tabs[active];
+  const visibleTabs = sample.tabs.filter((tab) => visibility[tab] !== false);
+  const activeTabName = visibleTabs[active] || visibleTabs[0];
+  const originalTabIndex = sample.tabs.indexOf(activeTabName);
+  const motionSource = sample.slug === "pen-tab-and-ppt-samples"
+    ? activeTabName === "Educational Video" ? "/motion-graphics/educational-video.html"
+      : activeTabName === "Instructor Led Video" ? "/motion-graphics/instructor-led-video.html"
+      : activeTabName === "Pen Tab Video" ? "/motion-graphics/educational-video.html?variant=html5" : null
+    : sample.slug === "audio-samples"
+      ? activeTabName === "Conversational Audio" ? "/motion-graphics/conversational-audio.html" : null
+      : null;
+  const hasMotionGraphic = !!motionSource || sample.slug === "audio-samples";
+
+  useEffect(() => {
+    let mounted = true;
+    const refresh = () => fetchSampleTabSettings(sample.slug).then((settings) => {
+      if (mounted) { setVisibility(settings); setActive(0); }
+    });
+    refresh();
+    window.addEventListener("sample-tab-settings-changed", refresh);
+    return () => { mounted = false; window.removeEventListener("sample-tab-settings-changed", refresh); };
+  }, [sample.slug]);
 
   useEffect(() => {
     let activeRequest = true;
+    if (!activeTabName) { setApiFiles([]); return; }
     setLoading(true);
     fetchSampleFiles(sample.slug, activeTabName).then((res) => {
       if (!activeRequest) return;
@@ -51,6 +74,8 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
   // Determine files list: API-first, then static. No fake fallback.
   const currentPreviewFiles = apiFiles && apiFiles.length > 0 ? apiFiles : (sample.previewFiles?.[activeTabName] || []);
 
+
+  if (visibleTabs.length === 0) return null;
 
   return (
     <section id="samples" className="relative py-20 bg-background overflow-hidden">
@@ -81,7 +106,7 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
 
         {/* Tab pills */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {sample.tabs.map((tab, i) => {
+          {visibleTabs.map((tab, i) => {
             const isActive = i === active;
             return (
               <button
@@ -105,7 +130,7 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
         {/* Preview panel */}
         <div
           key={active}
-          className="relative grid lg:grid-cols-5 gap-6 rounded-3xl border overflow-hidden shadow-elevated animate-slide-up"
+          className={`relative grid lg:grid-cols-5 rounded-3xl border overflow-hidden shadow-elevated animate-slide-up ${hasMotionGraphic ? "gap-0" : "gap-6"}`}
           style={{
             background: `linear-gradient(135deg, ${accentSoft}, hsl(var(--card)))`,
             borderColor: accentBorder,
@@ -113,38 +138,42 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
         >
           {/* Left: animated preview */}
           <div
-            className="lg:col-span-3 relative min-h-[360px] flex items-center justify-center p-6 md:p-10"
+            className={`lg:col-span-3 relative overflow-hidden aspect-[2/1] min-h-[260px] lg:aspect-auto lg:min-h-[360px] ${hasMotionGraphic ? "p-0" : "flex items-center justify-center p-6 md:p-10"}`}
             style={{
               background: `linear-gradient(135deg, hsl(${sample.accentHsl} / 0.22), hsl(222 47% 11% / 0.85))`,
             }}
           >
             {/* Scanning beam */}
-            <div
+            {!hasMotionGraphic && <div
               className="absolute top-0 bottom-0 w-1/3 pointer-events-none"
               style={{
                 background: `linear-gradient(90deg, transparent, ${accent}22, transparent)`,
                 animation: "dash-flow 4s linear infinite",
               }}
-            />
+            />}
 
-            {sample.slug === "immersive-simulation-ar-vr-video" ? (
-              <ARVRAnimatedThumbForTab tabIndex={active} accent={accent} />
+            {motionSource ? (
+              <iframe key={motionSource} src={motionSource} title={`${activeTabName} animated sample graphic`} className="absolute inset-0 h-full w-full border-0" sandbox="allow-scripts" loading="eager" />
+            ) : sample.slug === "audio-samples" && activeTabName === "Multilingual Audio" ? (
+              <MultilingualOrbitGraphic />
+            ) : sample.slug === "audio-samples" ? (
+              <EducationalAudioGraphic />
+            ) : sample.slug === "immersive-simulation-ar-vr-video" ? (
+              <ARVRAnimatedThumbForTab tabIndex={originalTabIndex} accent={accent} />
             ) : sample.slug === "2d-3d-video-samples" ? (
-              <AnimatedThumbForTab tabIndex={active} accent={accent} />
+              <AnimatedThumbForTab tabIndex={originalTabIndex} accent={accent} />
             ) : sample.slug === "ai-avatar-video-samples" ? (
-              <AIAvatarVideoThumbForTab tabIndex={active} accent={accent} />
+              <AIAvatarVideoThumbForTab tabIndex={originalTabIndex} accent={accent} />
             ) : sample.slug === "articulate-storyline-video-samples" ? (
-              <ArticulateStorylineThumbForTab tabIndex={active} accent={accent} />
+              <ArticulateStorylineThumbForTab tabIndex={originalTabIndex} accent={accent} />
             ) : sample.slug === "pen-tab-and-ppt-samples" ? (
-              <PenTabPPTThumbForTab tabIndex={active} accent={accent} />
-            ) : sample.slug === "flash-to-html-samples" ? (
-              <FlashToHTMLThumbForTab tabIndex={active} accent={accent} />
+              <PenTabPPTThumbForTab tabIndex={originalTabIndex} accent={accent} />
             ) : sample.slug === "promotional-video" ? (
-              <PromotionalVideoThumbForTab tabIndex={active} accent={accent} />
+              <PromotionalVideoThumbForTab tabIndex={originalTabIndex} accent={accent} />
             ) : isVideo ? (
-              <VideoPreview accent={accent} tab={sample.tabs[active]} />
+              <VideoPreview accent={accent} tab={activeTabName} />
             ) : (
-              <TextSampleThumbForTab sample={sample} tab={sample.tabs[active]} accent={accent} />
+              <TextSampleThumbForTab sample={sample} tab={activeTabName} accent={accent} />
             )}
           </div>
 
@@ -162,17 +191,17 @@ const InteractiveSampleTabs = ({ sample }: Props) => {
                   className="text-[10px] font-bold uppercase tracking-widest"
                   style={{ color: accent }}
                 >
-                  Sample {active + 1} of {sample.tabs.length}
+                  Sample {active + 1} of {visibleTabs.length}
                 </span>
               </div>
 
               <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-3">
-                {sample.tabs[active]}
+                {activeTabName}
               </h3>
 
               <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                {sample.tabContent?.[sample.tabs[active]] ??
-                  `Curated ${sample.tabs[active]} sample from our ${sample.navLabel.toLowerCase()} library - production-ready, curriculum-aligned, and ready to customize for your platform.`}
+                {sample.tabContent?.[activeTabName] ??
+                  `Curated ${activeTabName} sample from our ${sample.navLabel.toLowerCase()} library - production-ready, curriculum-aligned, and ready to customize for your platform.`}
               </p>
 
               <ul className="space-y-2 mb-6">

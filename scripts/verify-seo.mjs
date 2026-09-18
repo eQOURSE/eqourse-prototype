@@ -3,15 +3,23 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const distDir = join(root, "dist");
+const distDir = process.env.SEO_DIST_DIR || join(root, "dist");
 const pageSeoSource = readFileSync(join(root, "src", "seo", "pageSeo.ts"), "utf8");
 const redirectsSource = readFileSync(join(root, "src", "routes", "legacyRedirects.ts"), "utf8");
 const manifestPath = join(distDir, "seo-manifest.json");
 const SITE_URL = "https://www.eqourse.com";
 const requiredLegacyRedirects = new Map([
   ["/contact-us.html", "/contact-us"],
-  ["/avatar-video-samples", "/video-samples"],
-  ["/ai-avatar-video-samples", "/video-samples"],
+  ["/avatar-video-samples", "/ai-videos-samples"],
+  ["/ai-avatar-video-samples", "/ai-videos-samples"],
+  ["/flash-to-htm-samples", "/audio-samples"],
+  ["/flash-to-html-samples", "/audio-samples"],
+  ["/blog/7-strategies-to-boost-engagement-and-retention-in-content-services", "/blog/7-strategies-boost-learner-engagement-retention-content-services"],
+  ["/blogs/dos-and-donts-of-online-learning", "/blog/online-learning-dos-and-donts-for-institutions"],
+  ["/teacher_training", "/tutors-and-sme-training"],
+  ["/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services", "/blog/emsat-content-solutions-scalable-test-prep-uae"],
+  ["/casestudy/on-demand-video-solutions-for-us-content-services-company", "/casestudy/on-demand-video-solutions-us-content-services-company"],
+  ["/k12-elearning-services", "/k12-and-higher-education"],
   ["/blog/detail.php", "/blog"],
   ["/blog/detail", "/blog"],
   ["/blog/understanding-the-value-of-edtech-in-higher-education", "/blog"],
@@ -20,6 +28,12 @@ const requiredLegacyRedirects = new Map([
 const soft404RegressionPaths = [
   "/articulate-storyline-video-samples",
   "/kindergarten-to-k5-samples",
+  "/interactive-ebook-creation",
+  "/instructional-design-services",
+  "/promotional-video",
+  "/translation-services",
+  "/k6-to-k12-samples",
+  "/k12-and-higher-education",
 ];
 
 const entries = [];
@@ -45,6 +59,10 @@ const escapeHtml = (value) => value
   .replace(/"/g, "&quot;");
 
 const failures = [];
+const homeSource = readFileSync(join(root, "src", "pages", "Index.tsx"), "utf8");
+if (/search_term_string|SearchAction/.test(homeSource)) {
+  failures.push("Homepage still emits the unresolved blog search template in structured data");
+}
 const seenTitles = new Map();
 const seenDescriptions = new Map();
 for (const entry of entries) {
@@ -202,8 +220,13 @@ const nginxCanonicalOrigin = existsSync(nginxCanonicalOriginPath)
 const parsedRedirects = [...redirectsSource.matchAll(/"(\/[^\"]*)"\s*:\s*"(\/[^\"]*)"/g)]
   .map((item) => ({ from: item[1], to: item[2] }));
 const parsedRedirectSources = new Set(parsedRedirects.map(({ from }) => from));
+const builtPaths = new Set(entries.map(({ path }) => path));
+const cmsRoutesWereBuilt = entries.some(({ path }) => path.startsWith("/blog/") || path.startsWith("/casestudy/"));
 for (const { from, to } of parsedRedirects) {
   if (parsedRedirectSources.has(to)) failures.push(`redirect chain detected: ${from} -> ${to}`);
+  if (cmsRoutesWereBuilt && /^\/(?:blog|casestudy)\//.test(to) && !builtPaths.has(to)) {
+    failures.push(`redirect target is not a published CMS page: ${from} -> ${to}`);
+  }
 }
 
 for (const entry of entries) {
@@ -217,7 +240,7 @@ for (const entry of entries) {
     failures.push(`${entry.path}: internal links point through redirects: ${[...new Set(redirectingLinks)].join(", ")}`);
   }
 }
-if (!redirectsConfig.includes("/blogs/* /blog/:splat 301!")) failures.push("_redirects is missing the legacy /blogs/ migration");
+if (redirectsConfig.includes("/blogs/* /blog/:splat 301!")) failures.push("_redirects sends unknown retired /blogs/ slugs through a 301 to a 404");
 if (!redirectsConfig.includes("/admin/* /index.html 200")) failures.push("_redirects is missing the admin SPA fallback");
 if (/^\/\* \/index\.html 200!?$/m.test(redirectsConfig)) failures.push("_redirects still soft-200s unknown public routes");
 for (const entry of entries) {
@@ -237,9 +260,10 @@ if (!redirectsConfig.includes("/blog/*/ /blog/:splat 301!")) {
 if (!redirectsConfig.includes("/casestudy/*/ /casestudy/:splat 301!")) {
   failures.push("_redirects is missing dynamic case-study trailing-slash normalization");
 }
-if (!apacheConfig.includes("RewriteRule ^blogs/(.+?)/?$ https://www.eqourse.com/blog/$1 [R=301,L,NE]")) {
-  failures.push(".htaccess is missing the legacy /blogs/ migration");
+if (apacheConfig.includes("RewriteRule ^blogs/(.+?)/?$ https://www.eqourse.com/blog/$1 [R=301,L,NE]")) {
+  failures.push(".htaccess sends unknown retired /blogs/ slugs through a 301 to a 404");
 }
+if (nginxConfig.includes("location ~ ^/blogs/(.+?)/?$")) failures.push("Nginx sends unknown retired /blogs/ slugs through a 301 to a 404");
 if (!apacheConfig.includes("RewriteRule ^(.+?)/+$ https://www.eqourse.com/$1 [R=301,L,NE]")) {
   failures.push(".htaccess is missing trailing-slash normalization");
 }

@@ -132,7 +132,7 @@ const Index = () => {
           `}
         </script>
 
-        {/* WebSite structured data for sitelinks search box */}
+        {/* WebSite identity. The blog has no indexable site-search endpoint. */}
         <script type="application/ld+json">
           {`
             {
@@ -140,12 +140,7 @@ const Index = () => {
               "@type": "WebSite",
               "name": "eQOURSE",
               "url": "https://www.eqourse.com/",
-              "publisher": { "@id": "https://www.eqourse.com/#organization" },
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://www.eqourse.com/blog?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
+              "publisher": { "@id": "https://www.eqourse.com/#organization" }
             }
           `}
         </script>

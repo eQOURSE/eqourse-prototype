@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Plus, Pencil, Trash2, ArrowUp, ArrowDown, FileDown, Upload } from "lucide-react";
+import { ArrowLeft, Plus, Pencil, Trash2, ArrowUp, ArrowDown, FileDown, Upload, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -23,6 +23,7 @@ export default function SampleTabFiles() {
   const [samples, setSamples] = useState<Sample[]>([]);
   const [loading, setLoading] = useState(true);
   const [confirmDelete, setConfirmDelete] = useState<Sample | null>(null);
+  const [visibility, setVisibility] = useState<Record<string, boolean>>({});
 
   if (!match) {
     return (
@@ -48,6 +49,22 @@ export default function SampleTabFiles() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => { refresh(); }, [sub.slug, currentTabName]);
+  useEffect(() => {
+    adminApi.listSampleTabSettings(sub.slug).then((items) =>
+      setVisibility(Object.fromEntries(items.map((item) => [item.tabName, item.visible])))
+    ).catch(() => toast.error("Could not load tab visibility"));
+  }, [sub.slug]);
+
+  const toggleVisibility = async (tab: string) => {
+    const visible = visibility[tab] === false;
+    try {
+      await adminApi.setSampleTabVisibility(sub.slug, tab, visible);
+      setVisibility((current) => ({ ...current, [tab]: visible }));
+      toast.success(visible ? `${tab} is visible on the public page` : `${tab} is hidden from the public page`);
+    } catch {
+      toast.error("Could not update tab visibility");
+    }
+  };
 
   const move = async (sample: Sample, dir: -1 | 1) => {
     const idx = samples.findIndex((s) => s.id === sample.id);
@@ -89,10 +106,11 @@ export default function SampleTabFiles() {
       {/* Tab pills */}
       <div className="flex flex-wrap gap-2 mb-6">
         {sub.tabs.map((tab, i) => (
+          <div key={tab} className="inline-flex items-center rounded-full border border-border bg-card overflow-hidden">
           <button
             key={tab}
             onClick={() => { setActiveTab(i); }}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
+            className={`px-4 py-2 text-sm font-medium transition-all ${
               i === activeTab
                 ? "text-white border-transparent shadow-sm"
                 : "bg-card border-border/60 text-foreground/70 hover:border-foreground/30 hover:text-foreground"
@@ -101,6 +119,11 @@ export default function SampleTabFiles() {
           >
             {tab}
           </button>
+          <button type="button" onClick={() => toggleVisibility(tab)} aria-label={`${visibility[tab] === false ? "Show" : "Hide"} ${tab} on public page`} title={`${visibility[tab] === false ? "Show" : "Hide"} this tab on the public page`} className="px-3 py-2 border-l border-border text-muted-foreground hover:text-foreground">
+            {visibility[tab] === false ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            <span className="sr-only">{visibility[tab] === false ? "Hidden" : "Visible"}</span>
+          </button>
+          </div>
         ))}
       </div>
 

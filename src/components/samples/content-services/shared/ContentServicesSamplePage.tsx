@@ -18,7 +18,7 @@ const ContentServicesSamplePage = () => {
     sample.kind === "text-landing" || sample.kind === "video-landing";
 
   const parentCrumb = sample.kind === "video" || sample.kind === "video-landing"
-    ? { label: "Video Samples", href: "/video-samples" }
+    ? { label: "Video & Audio Samples", href: "/video-samples" }
     : { label: "Text Samples", href: "/text-samples" };
 
   const breadcrumbs = isLanding

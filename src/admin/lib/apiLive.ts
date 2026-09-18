@@ -265,6 +265,15 @@ export const liveApi = {
     return res.items;
   },
 
+  async listSampleTabSettings(pageSlug: string): Promise<{ tabName: string; visible: boolean }[]> {
+    const res = await client.get<{ items: { tabName: string; visible: boolean }[] }>(`/api/admin/sample-tabs/${encodeURIComponent(pageSlug)}`);
+    return res.items;
+  },
+
+  async setSampleTabVisibility(pageSlug: string, tabName: string, visible: boolean) {
+    return client.patch(`/api/admin/sample-tabs/${encodeURIComponent(pageSlug)}/${encodeURIComponent(tabName)}`, { visible });
+  },
+
   async getSample(id: string): Promise<Sample | null> {
     try {
       return await client.get<Sample>(`/api/admin/samples/${id}`);

@@ -20,20 +20,36 @@ export const legacyRedirects: Record<string, string> = {
   "/index.php": "/",
   "/index.html": "/",
   "/contact-us.html": "/contact-us",
+  "/about.html": "/aboutus",
 
   // Legacy primary-navigation and utility routes.
   "/career.html": "/career",
   "/free_pilot_signup": "/free-pilot",
   "/blog-detail.php": "/blog",
+  "/blog-detail": "/blog",
   "/blog/detail.php": "/blog",
   "/blog/detail": "/blog",
   "/blogs": "/blog",
   "/blogs/career": "/career",
   "/custom-elearning-solutions": "/custom-e-learning-content",
-  // GSC reported the old AI-avatar sample URL as a soft 404. Consolidate both
-  // historical variants directly into the substantial video samples hub.
-  "/avatar-video-samples": "/video-samples",
-  "/ai-avatar-video-samples": "/video-samples",
+  // Historical AI-avatar URLs now resolve to the dedicated AI Videos page.
+  "/avatar-video-samples": "/ai-videos-samples",
+  "/ai-avatar-video-samples": "/ai-videos-samples",
+  "/flash-to-htm-samples": "/audio-samples",
+  "/flash-to-html-samples": "/audio-samples",
+
+  // Search Console's 2026-09-17 404 and crawled-but-not-indexed exports.
+  // Each destination is the matching live article, case study or service page.
+  "/blog/7-strategies-to-boost-engagement-and-retention-in-content-services": "/blog/7-strategies-boost-learner-engagement-retention-content-services",
+  "/blogs/dos-and-donts-of-online-learning": "/blog/online-learning-dos-and-donts-for-institutions",
+  "/teacher_training": "/tutors-and-sme-training",
+  "/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services": "/blog/emsat-content-solutions-scalable-test-prep-uae",
+  "/casestudy/on-demand-video-solutions-for-us-content-services-company": "/casestudy/on-demand-video-solutions-us-content-services-company",
+  "/k12-elearning-services": "/k12-and-higher-education",
+  "/blogs/what-are-the-different-roles-of-teachers-in-the-classroom": "/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter",
+  "/blogs/scorm-and-lms-integration-corporate-training-success": "/blog/scorm-and-lms-integration-made-simple",
+  "/blogs/Role-of-SMEs-in-EdTech-and-Multilingual-Learning": "/blog/sourcing-deploying-elite-subject-matter-experts-digital-education",
+  "/blogs/Online-Learning-DOs-and-DONOTs-for-Institutions": "/blog/online-learning-dos-and-donts-for-institutions",
 
   // Old article URLs consolidated into substantial, current service pages.
   // Blog and case-study publishing remains controlled by the admin panel.

@@ -10,6 +10,32 @@
 
 const SampleCategory = require("../model/sampleCategory");
 const SampleItem = require("../model/sampleItem");
+const SampleTabSetting = require("../model/sampleTabSetting");
+
+const listTabSettings = async (req, res) => {
+  try {
+    const settings = await SampleTabSetting.find({ pageSlug: req.params.pageSlug }).select("tabName visible -_id");
+    return res.json({ success: true, data: { items: settings } });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+const updateTabSetting = async (req, res) => {
+  try {
+    if (typeof req.body.visible !== "boolean") {
+      return res.status(400).json({ success: false, message: "visible must be a boolean" });
+    }
+    const setting = await SampleTabSetting.findOneAndUpdate(
+      { pageSlug: req.params.pageSlug, tabName: req.params.tabName },
+      { $set: { visible: req.body.visible } },
+      { upsert: true, new: true, runValidators: true }
+    );
+    return res.json({ success: true, data: { tabName: setting.tabName, visible: setting.visible } });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+};
 
 function normalizePagePath(value = "") {
   const clean = String(value).trim().split(/[?#]/, 1)[0].replace(/^\/+|\/+$/g, "");
@@ -106,6 +132,10 @@ const listFilesByPage = async (req, res) => {
     }
     const filter = page_path ? { pagePaths: normalizePagePath(page_path) } : { pageSlug };
     if (tab) filter.tabName = tab;
+    if (pageSlug && tab) {
+      const setting = await SampleTabSetting.findOne({ pageSlug, tabName: tab });
+      if (setting?.visible === false) return res.json({ success: true, data: { files: [] } });
+    }
     const items = await SampleItem.find(filter).sort({ order: 1 });
     // Return in the PreviewFile shape expected by the frontend modal
     const files = items.map((doc) => ({
@@ -334,7 +364,7 @@ const createItemForPage = async (req, res) => {
 };
 
 module.exports = {
-  listCategories, listItemsByCategory, listFilesByPage,
+  listCategories, listItemsByCategory, listFilesByPage, listTabSettings, updateTabSetting,
   adminListCategories, adminGetCategory, createCategory, updateCategory, deleteCategory,
   adminListItemsByCategory, adminGetItem, createItem, updateItem, deleteItem,
   adminListItemsByPage, createItemForPage

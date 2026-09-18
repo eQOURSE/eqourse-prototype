@@ -351,6 +351,18 @@ export const mockApi = {
         .sort((a, b) => a.order - b.order)
     );
   },
+  async listSampleTabSettings(pageSlug: string): Promise<{ tabName: string; visible: boolean }[]> {
+    const settings = JSON.parse(localStorage.getItem("eqourse-sample-tab-settings") || "{}") as Record<string, Record<string, boolean>>;
+    return delay(Object.entries(settings[pageSlug] || {}).map(([tabName, visible]) => ({ tabName, visible })));
+  },
+  async setSampleTabVisibility(pageSlug: string, tabName: string, visible: boolean) {
+    const key = "eqourse-sample-tab-settings";
+    const settings = JSON.parse(localStorage.getItem(key) || "{}") as Record<string, Record<string, boolean>>;
+    settings[pageSlug] = { ...settings[pageSlug], [tabName]: visible };
+    localStorage.setItem(key, JSON.stringify(settings));
+    window.dispatchEvent(new Event("sample-tab-settings-changed"));
+    return delay({ tabName, visible });
+  },
   async getSample(id: string): Promise<Sample | null> {
     return delay(load(KEYS.samples, seedSamples).find((s) => s.id === id) ?? null);
   },

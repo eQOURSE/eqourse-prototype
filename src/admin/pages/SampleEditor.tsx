@@ -13,6 +13,7 @@ import ImageUpload from "../components/ImageUpload";
 import FileUpload from "../components/FileUpload";
 import ContentPlacementPicker from "../components/ContentPlacementPicker";
 import { adminApi } from "../lib/api";
+import { SAMPLE_HIERARCHY } from "../lib/sampleHierarchy";
 import type { Sample } from "../lib/types";
 import { toast } from "sonner";
 
@@ -24,32 +25,9 @@ interface PageOption {
   tabs: string[];
 }
 
-const SAMPLE_PAGES: PageOption[] = [
-  // Text Content Samples
-  { slug: "kindergarten-to-k5-samples", label: "K12 Grade (KG-5)", tabs: ["Course Book", "Lesson Plan", "Work Book"] },
-  { slug: "k6-to-k12-samples", label: "K12 Grade (6-12)", tabs: ["Course Book", "Lesson Plan", "Work Book"] },
-  { slug: "iit-jee-neet-samples", label: "IIT JEE / NEET", tabs: ["Theory Content", "Question Banks", "Mock Test"] },
-  { slug: "upsc-state-psc-samples", label: "UPSC & State PSC", tabs: ["General Studies", "Current Affairs", "Previous Year Papers"] },
-  { slug: "stem-content-samples", label: "STEM Content", tabs: ["Science", "Technology", "Engineering", "Mathematics"] },
-  { slug: "curriculum-samples", label: "Curriculum Content", tabs: ["CBSE", "ICSE", "IB", "State Board"] },
-  { slug: "translation-and-localization-text-samples", label: "Localization (Text)", tabs: ["Hindi", "Tamil", "Telugu", "Bengali", "Kannada", "Malayalam", "Other Languages"] },
-  { slug: "test-prep-and-assessments", label: "Test Prep & Assessments", tabs: ["TOEIC", "APTIS", "SAT", "IELTS", "ACT", "AP", "TOEFL", "PTE", "CEFR"] },
-  // Video Content Samples
-  { slug: "articulate-storyline-video-samples", label: "Articulate Storyline", tabs: ["Interactive Modules", "Branching Scenarios", "Quizzes & Assessments"] },
-  { slug: "pen-tab-and-ppt-samples", label: "Pen Tab and PPT", tabs: ["Mathematics", "Science", "Language"] },
-  { slug: "ai-avatar-video-samples", label: "AI Videos", tabs: ["AI Presenter Videos", "Multilingual AI Avatar Videos"] },
-  { slug: "flash-to-html-samples", label: "Flash to HTML", tabs: ["Before/After Comparisons", "Interactive HTML5 Modules"] },
-  { slug: "2d-3d-video-samples", label: "2D 3D Animation", tabs: ["2D Character Animation", "3D Concept Videos", "Motion Graphics", "Whiteboard Animation"] },
-  { slug: "promotional-video", label: "Promotional Video", tabs: ["Brand Videos", "Course Trailers", "Product Demos"] },
-  { slug: "immersive-simulation-ar-vr-video", label: "Immersive Simulation AR/VR", tabs: ["AR Overlay Demos", "VR Environment Tours", "360-degree Experiences", "Interactive 3D Models"] },
-  // AI Data Samples
-  { slug: "nlp-annotation", label: "NLP Annotation", tabs: ["Named Entity Recognition (NER)", "Sentiment Analysis", "Intent Classification", "Relation Extraction", "Coreference Resolution"] },
-  { slug: "computer-vision", label: "Computer Vision", tabs: ["Bounding Box Annotation", "Semantic Segmentation", "Instance Segmentation", "Keypoint Detection", "3D Cuboid Annotation"] },
-  { slug: "audio-speech", label: "Audio & Speech", tabs: ["Verbatim Transcription", "Speaker Diarisation", "Phoneme & Prosody Labeling", "Emotion & Tone Detection"] },
-  { slug: "rlhf", label: "RLHF", tabs: ["Preference Ranking", "Response Quality Scoring", "Instruction-Following Evaluation", "Safety & Red-Teaming Labels"] },
-  { slug: "data-collection", label: "Data Collection", tabs: ["Text Collection Samples", "Audio Collection Samples", "Image Collection Samples", "Video Collection Samples"] },
-  { slug: "cleaned-datasets", label: "Cleaned Datasets", tabs: ["Text Deduplication: Before / After", "PII Redaction: Before / After", "Audio Quality Filtering: Before / After", "Gold-Standard Validation Report"] },
-];
+const SAMPLE_PAGES: PageOption[] = SAMPLE_HIERARCHY.flatMap((category) =>
+  category.subCategories.map(({ slug, label, tabs }) => ({ slug, label, tabs }))
+);
 
 const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MP3", "WAV", "Other"];
 

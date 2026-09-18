@@ -72,6 +72,8 @@ router.delete("/sample-categories/:id", sampleCtrl.deleteCategory);
 // ── Samples (within categories) ──────────────────────────────
 router.get("/sample-categories/:categoryId/samples", sampleCtrl.adminListItemsByCategory);
 router.get("/samples/by-page", sampleCtrl.adminListItemsByPage);
+router.get("/sample-tabs/:pageSlug", sampleCtrl.listTabSettings);
+router.patch("/sample-tabs/:pageSlug/:tabName", sampleCtrl.updateTabSetting);
 router.post("/samples", sampleCtrl.createItemForPage);
 router.get("/samples/:id", sampleCtrl.adminGetItem);
 router.post("/sample-categories/:categoryId/samples", sampleCtrl.createItem);
