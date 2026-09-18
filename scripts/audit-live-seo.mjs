@@ -5,11 +5,17 @@ const CONCURRENCY = 12;
 const GSC_CRITICAL_URLS = [
   `${SITE_URL}/blog/scaling-exam-performance-blueprint-aligned-test-prep-content`,
   `${SITE_URL}/kindergarten-to-k5-samples`,
+  `${SITE_URL}/video-samples`,
+  `${SITE_URL}/ai-videos-samples`,
+  `${SITE_URL}/audio-samples`,
 ];
 const GSC_REDIRECTS = new Map([
-  [`${SITE_URL}/avatar-video-samples`, `${SITE_URL}/video-samples`],
-  [`${SITE_URL}/ai-avatar-video-samples`, `${SITE_URL}/video-samples`],
-  [`${SITE_URL}/ai-avatar-video-samples/`, `${SITE_URL}/video-samples`],
+  [`${SITE_URL}/avatar-video-samples`, `${SITE_URL}/ai-videos-samples`],
+  [`${SITE_URL}/ai-avatar-video-samples`, `${SITE_URL}/ai-videos-samples`],
+  [`${SITE_URL}/ai-avatar-video-samples/`, `${SITE_URL}/ai-videos-samples`],
+  [`${SITE_URL}/flash-to-htm-samples`, `${SITE_URL}/audio-samples`],
+  [`${SITE_URL}/flash-to-htm-samples/`, `${SITE_URL}/audio-samples`],
+  [`${SITE_URL}/flash-to-html-samples`, `${SITE_URL}/audio-samples`],
 ]);
 
 const request = (url, init = {}) => fetch(url, {
