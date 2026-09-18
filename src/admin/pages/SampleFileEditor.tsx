@@ -91,6 +91,7 @@ export default function SampleFileEditor() {
   const save = async () => {
     if (!form.title) return toast.error("Title required");
     if (!form.fileUrl) return toast.error("File or URL required");
+    if (!form.thumbnailUrl) return toast.error("Thumbnail required");
 
     setSaving(true);
     try {
