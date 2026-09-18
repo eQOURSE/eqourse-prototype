@@ -4,6 +4,7 @@
 User-agent: Googlebot
 Allow: /
 Disallow: /admin
+Disallow: /*?trk=
 
 User-agent: Bingbot
 Allow: /

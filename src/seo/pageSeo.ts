@@ -76,7 +76,7 @@ export const pageSeo: Record<string, PageSeo> = {
     description: "Explore RLHF data samples for response ranking, evaluation and AI alignment. Review eQOURSE capabilities today.",
   },
   "/ai-data-services": {
-    title: "AI Data Services – Scalable AI Solutions | Eqourse",
+    title: "AI Data Services & Training Data Collection | eQOURSE",
     description: "Scale AI development with expert data collection, annotation, validation and model testing services. Start your free pilot.",
   },
   "/ai-data-services/annotation-labeling": {
@@ -335,7 +335,7 @@ export const pageSeo: Record<string, PageSeo> = {
     description: "Contact eQOURSE for AI data and learning content services. Commercial engagements run through Singapore, with delivery operations in Kota, India.",
   },
   "/content-services": {
-    title: "Content Creation Services | Eqourse",
+    title: "Custom E-Learning Content Services | eQOURSE",
     description: "Create engaging learning experiences with expert content development, assessments, localization and technology solutions.",
   },
   "/corporate-e-learning-solutions": {
