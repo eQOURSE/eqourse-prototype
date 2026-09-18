@@ -25,7 +25,10 @@ if (uniqueSources.size !== redirects.length) {
 const canonicalPaths = new Set(
   [...pageSeoSource.matchAll(/"(\/[^"]*)"\s*:\s*\{/g)].map((item) => item[1]),
 );
-const invalidTargets = redirects.filter(({ to }) => !canonicalPaths.has(to));
+// Published CMS articles and case studies have their own canonical routes,
+// which are generated from the live CMS rather than the static pageSeo map.
+const cmsDetailPath = /^\/(?:blog|casestudy)\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const invalidTargets = redirects.filter(({ to }) => !canonicalPaths.has(to) && !cmsDetailPath.test(to));
 if (invalidTargets.length > 0) {
   throw new Error(`Redirect targets missing from pageSeo: ${invalidTargets.map(({ to }) => to).join(", ")}`);
 }
@@ -48,8 +51,7 @@ const netlify = [
   "# Generated from src/routes/legacyRedirects.ts. Do not edit by hand.",
   "https://eqourse.com/* https://www.eqourse.com/:splat 301!",
   ...redirects.map(({ from, to }) => `${from} ${to} 301!`),
-  "# Preserve matching legacy article slugs while consolidating /blogs/ to /blog/.",
-  "/blogs/* /blog/:splat 301!",
+  "# Known /blogs/ articles redirect above; unknown retired slugs return 404.",
   "# Canonicals, sitemap URLs and internal links use no trailing slash.",
   ...trailingSlashRedirects,
   "/blog/*/ /blog/:splat 301!",
@@ -74,6 +76,12 @@ const escapeRewritePattern = (path) => path
   .replace(/^\//, "")
   .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+const legacyQueryArticles = [
+  { query: "subtitling-in-edtech-transforming-digital-learning", to: "/blog/how-subtitling-is-transforming-learning-content-services" },
+  { query: "why-are-subject-matter-experts-important-in-edtech", to: "/blog/sourcing-deploying-elite-subject-matter-experts-digital-education" },
+];
+const retiredQueryArticle = "Factors-affecting-academic-performance-of-the-students-in-the-classroom";
+
 const apache = [
   "# Generated from src/routes/legacyRedirects.ts. Do not edit by hand.",
   "Options -MultiViews",
@@ -82,12 +90,21 @@ const apache = [
   "RewriteEngine On",
   "",
   "# Legacy URLs redirect directly to the final HTTPS + www canonical URL.",
-  ...redirects.map(({ from, to }) => (
-    `RewriteRule ^${escapeRewritePattern(from)}/?$ https://www.eqourse.com${to} [R=301,L,NE]`
-  )),
+  "# Historical blog-detail query URLs need article-specific handling before the path redirect.",
+  ...legacyQueryArticles.flatMap(({ query, to }) => [
+    `RewriteCond %{QUERY_STRING} ^${query}$ [NC]`,
+    `RewriteRule ^blog-detail(?:[.]php)?/?$ https://www.eqourse.com${to} [R=301,L,NE,QSD]`,
+  ]),
+  `RewriteCond %{QUERY_STRING} ^${retiredQueryArticle}$ [NC]`,
+  "RewriteRule ^blog-detail(?:[.]php)?/?$ - [G,L]",
+  ...redirects.map(({ from, to }) => {
+    const flags = from.startsWith("/blog-detail") || from.startsWith("/blog/detail")
+      ? "R=301,L,NE,QSD"
+      : "R=301,L,NE";
+    return `RewriteRule ^${escapeRewritePattern(from)}/?$ https://www.eqourse.com${to} [${flags}]`;
+  }),
   "",
-  "# Preserve matching legacy article slugs while consolidating /blogs/ to /blog/.",
-  "RewriteRule ^blogs/(.+?)/?$ https://www.eqourse.com/blog/$1 [R=301,L,NE]",
+  "# Known /blogs/ articles redirect above; unknown retired slugs return 404.",
   "",
   "# Canonicals, sitemap URLs and internal links use no trailing slash.",
   "# Run this before host/protocol normalization to avoid a two-hop redirect.",
@@ -133,10 +150,17 @@ const apache = [
   "",
 ].join("\n");
 
-const nginxRedirects = redirects.flatMap(({ from, to }) => [
+const nginxRedirects = redirects.filter(({ from }) => !["/blog-detail.php", "/blog-detail"].includes(from)).flatMap(({ from, to }) => [
   `location = ${from} { return 301 https://www.eqourse.com${to}; }`,
   `location = ${from}/ { return 301 https://www.eqourse.com${to}; }`,
 ]);
+const nginxQueryArticleLocations = ["/blog-detail.php", "/blog-detail"].flatMap((path) => [path, `${path}/`].map((variant) => [
+  `location = ${variant} {`,
+  ...legacyQueryArticles.map(({ query, to }) => `  if ($args ~* "^${query}$") { return 301 https://www.eqourse.com${to}; }`),
+  `  if ($args ~* "^${retiredQueryArticle}$") { return 410; }`,
+  "  return 301 https://www.eqourse.com/blog;",
+  "}",
+].join("\n")));
 
 const nginx = [
   "# Generated from src/routes/legacyRedirects.ts. Do not edit by hand.",
@@ -145,9 +169,9 @@ const nginx = [
   "",
   "# Legacy URLs redirect directly to their final canonical destinations.",
   ...nginxRedirects,
+  ...nginxQueryArticleLocations,
   "",
-  "# Preserve matching legacy article slugs while consolidating /blogs/ to /blog/.",
-  "location ~ ^/blogs/(.+?)/?$ { return 301 https://www.eqourse.com/blog/$1; }",
+  "# Known /blogs/ articles redirect above; unknown retired slugs return 404.",
   "",
   "# Canonicals, sitemap URLs and internal links use no trailing slash.",
   "# This explicit redirect runs before Nginx can apply its directory redirect.",

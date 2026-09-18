@@ -1,4 +1,4 @@
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ContentServicesLayout from "@/components/content-services/shared/ContentServicesLayout";
 import { BreadcrumbSchema } from "@/components/shared/BreadcrumbSchema";
@@ -6,6 +6,7 @@ import ArticleSEOHead from "@/components/shared/ArticleSEOHead";
 import { caseStudiesData, CaseStudy } from "@/components/case-studies/caseStudyData";
 import { fetchCaseStudyBySlug } from "@/lib/publicApi";
 import ArticleContent, { SmartArticleLink } from "@/components/shared/ArticleContent";
+import NotFound from "@/pages/NotFound";
 import {
   Loader2,
   Target,
@@ -124,7 +125,7 @@ const CaseStudyDetail = () => {
 
   // Not found
   if (!study) {
-    return <Navigate to="/casestudy" replace />;
+    return <NotFound />;
   }
 
   // Theme

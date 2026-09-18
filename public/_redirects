@@ -4,9 +4,11 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /index.php / 301!
 /index.html / 301!
 /contact-us.html /contact-us 301!
+/about.html /aboutus 301!
 /career.html /career 301!
 /free_pilot_signup /free-pilot 301!
 /blog-detail.php /blog 301!
+/blog-detail /blog 301!
 /blog/detail.php /blog 301!
 /blog/detail /blog 301!
 /blogs /blog 301!
@@ -16,6 +18,16 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /ai-avatar-video-samples /ai-videos-samples 301!
 /flash-to-htm-samples /audio-samples 301!
 /flash-to-html-samples /audio-samples 301!
+/blog/7-strategies-to-boost-engagement-and-retention-in-content-services /blog/7-strategies-boost-learner-engagement-retention-content-services 301!
+/blogs/dos-and-donts-of-online-learning /blog/online-learning-dos-and-donts-for-institutions 301!
+/teacher_training /tutors-and-sme-training 301!
+/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services /blog/emsat-content-solutions-scalable-test-prep-uae 301!
+/casestudy/on-demand-video-solutions-for-us-content-services-company /casestudy/on-demand-video-solutions-us-content-services-company 301!
+/k12-elearning-services /k12-and-higher-education 301!
+/blogs/what-are-the-different-roles-of-teachers-in-the-classroom /blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter 301!
+/blogs/scorm-and-lms-integration-corporate-training-success /blog/scorm-and-lms-integration-made-simple 301!
+/blogs/Role-of-SMEs-in-EdTech-and-Multilingual-Learning /blog/sourcing-deploying-elite-subject-matter-experts-digital-education 301!
+/blogs/Online-Learning-DOs-and-DONOTs-for-Institutions /blog/online-learning-dos-and-donts-for-institutions 301!
 /blog/understanding-the-value-of-edtech-in-higher-education /blog 301!
 /blogs/key-features-online-assessment-system /digital-assessment-infrastructure 301!
 /blogs/five-key-indicators-adaptive-learning /adaptive-learning 301!
@@ -76,8 +88,7 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /content-services/subject-matter-experts/live-tutors /live-online-tutor 301!
 /content-services/subject-matter-experts/live-online-tutors /live-online-tutor 301!
 /contact /contact-us 301!
-# Preserve matching legacy article slugs while consolidating /blogs/ to /blog/.
-/blogs/* /blog/:splat 301!
+# Known /blogs/ articles redirect above; unknown retired slugs return 404.
 # Canonicals, sitemap URLs and internal links use no trailing slash.
 /2d-3d-video-samples/ /2d-3d-video-samples 301!
 /2d-3d-videos/ /2d-3d-videos 301!

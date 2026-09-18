@@ -5,15 +5,24 @@ DirectorySlash Off
 RewriteEngine On
 
 # Legacy URLs redirect directly to the final HTTPS + www canonical URL.
+# Historical blog-detail query URLs need article-specific handling before the path redirect.
+RewriteCond %{QUERY_STRING} ^subtitling-in-edtech-transforming-digital-learning$ [NC]
+RewriteRule ^blog-detail(?:[.]php)?/?$ https://www.eqourse.com/blog/how-subtitling-is-transforming-learning-content-services [R=301,L,NE,QSD]
+RewriteCond %{QUERY_STRING} ^why-are-subject-matter-experts-important-in-edtech$ [NC]
+RewriteRule ^blog-detail(?:[.]php)?/?$ https://www.eqourse.com/blog/sourcing-deploying-elite-subject-matter-experts-digital-education [R=301,L,NE,QSD]
+RewriteCond %{QUERY_STRING} ^Factors-affecting-academic-performance-of-the-students-in-the-classroom$ [NC]
+RewriteRule ^blog-detail(?:[.]php)?/?$ - [G,L]
 RewriteRule ^index/?$ https://www.eqourse.com/ [R=301,L,NE]
 RewriteRule ^index\.php/?$ https://www.eqourse.com/ [R=301,L,NE]
 RewriteRule ^index\.html/?$ https://www.eqourse.com/ [R=301,L,NE]
 RewriteRule ^contact-us\.html/?$ https://www.eqourse.com/contact-us [R=301,L,NE]
+RewriteRule ^about\.html/?$ https://www.eqourse.com/aboutus [R=301,L,NE]
 RewriteRule ^career\.html/?$ https://www.eqourse.com/career [R=301,L,NE]
 RewriteRule ^free_pilot_signup/?$ https://www.eqourse.com/free-pilot [R=301,L,NE]
-RewriteRule ^blog-detail\.php/?$ https://www.eqourse.com/blog [R=301,L,NE]
-RewriteRule ^blog/detail\.php/?$ https://www.eqourse.com/blog [R=301,L,NE]
-RewriteRule ^blog/detail/?$ https://www.eqourse.com/blog [R=301,L,NE]
+RewriteRule ^blog-detail\.php/?$ https://www.eqourse.com/blog [R=301,L,NE,QSD]
+RewriteRule ^blog-detail/?$ https://www.eqourse.com/blog [R=301,L,NE,QSD]
+RewriteRule ^blog/detail\.php/?$ https://www.eqourse.com/blog [R=301,L,NE,QSD]
+RewriteRule ^blog/detail/?$ https://www.eqourse.com/blog [R=301,L,NE,QSD]
 RewriteRule ^blogs/?$ https://www.eqourse.com/blog [R=301,L,NE]
 RewriteRule ^blogs/career/?$ https://www.eqourse.com/career [R=301,L,NE]
 RewriteRule ^custom-elearning-solutions/?$ https://www.eqourse.com/custom-e-learning-content [R=301,L,NE]
@@ -21,6 +30,16 @@ RewriteRule ^avatar-video-samples/?$ https://www.eqourse.com/ai-videos-samples [
 RewriteRule ^ai-avatar-video-samples/?$ https://www.eqourse.com/ai-videos-samples [R=301,L,NE]
 RewriteRule ^flash-to-htm-samples/?$ https://www.eqourse.com/audio-samples [R=301,L,NE]
 RewriteRule ^flash-to-html-samples/?$ https://www.eqourse.com/audio-samples [R=301,L,NE]
+RewriteRule ^blog/7-strategies-to-boost-engagement-and-retention-in-content-services/?$ https://www.eqourse.com/blog/7-strategies-boost-learner-engagement-retention-content-services [R=301,L,NE]
+RewriteRule ^blogs/dos-and-donts-of-online-learning/?$ https://www.eqourse.com/blog/online-learning-dos-and-donts-for-institutions [R=301,L,NE]
+RewriteRule ^teacher_training/?$ https://www.eqourse.com/tutors-and-sme-training [R=301,L,NE]
+RewriteRule ^blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services/?$ https://www.eqourse.com/blog/emsat-content-solutions-scalable-test-prep-uae [R=301,L,NE]
+RewriteRule ^casestudy/on-demand-video-solutions-for-us-content-services-company/?$ https://www.eqourse.com/casestudy/on-demand-video-solutions-us-content-services-company [R=301,L,NE]
+RewriteRule ^k12-elearning-services/?$ https://www.eqourse.com/k12-and-higher-education [R=301,L,NE]
+RewriteRule ^blogs/what-are-the-different-roles-of-teachers-in-the-classroom/?$ https://www.eqourse.com/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter [R=301,L,NE]
+RewriteRule ^blogs/scorm-and-lms-integration-corporate-training-success/?$ https://www.eqourse.com/blog/scorm-and-lms-integration-made-simple [R=301,L,NE]
+RewriteRule ^blogs/Role-of-SMEs-in-EdTech-and-Multilingual-Learning/?$ https://www.eqourse.com/blog/sourcing-deploying-elite-subject-matter-experts-digital-education [R=301,L,NE]
+RewriteRule ^blogs/Online-Learning-DOs-and-DONOTs-for-Institutions/?$ https://www.eqourse.com/blog/online-learning-dos-and-donts-for-institutions [R=301,L,NE]
 RewriteRule ^blog/understanding-the-value-of-edtech-in-higher-education/?$ https://www.eqourse.com/blog [R=301,L,NE]
 RewriteRule ^blogs/key-features-online-assessment-system/?$ https://www.eqourse.com/digital-assessment-infrastructure [R=301,L,NE]
 RewriteRule ^blogs/five-key-indicators-adaptive-learning/?$ https://www.eqourse.com/adaptive-learning [R=301,L,NE]
@@ -82,8 +101,7 @@ RewriteRule ^content-services/subject-matter-experts/live-tutors/?$ https://www.
 RewriteRule ^content-services/subject-matter-experts/live-online-tutors/?$ https://www.eqourse.com/live-online-tutor [R=301,L,NE]
 RewriteRule ^contact/?$ https://www.eqourse.com/contact-us [R=301,L,NE]
 
-# Preserve matching legacy article slugs while consolidating /blogs/ to /blog/.
-RewriteRule ^blogs/(.+?)/?$ https://www.eqourse.com/blog/$1 [R=301,L,NE]
+# Known /blogs/ articles redirect above; unknown retired slugs return 404.
 
 # Canonicals, sitemap URLs and internal links use no trailing slash.
 # Run this before host/protocol normalization to avoid a two-hop redirect.

@@ -1,4 +1,4 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PageLayout from "@/components/shared/PageLayout";
 import { BreadcrumbSchema } from "@/components/shared/BreadcrumbSchema";
@@ -7,6 +7,7 @@ import { blogsData, BlogPost as BlogPostType } from "@/components/blog/blogData"
 import BlogPostContent from "@/components/blog/BlogPostContent";
 import { fetchBlogBySlug } from "@/lib/publicApi";
 import { Loader2 } from "lucide-react";
+import NotFound from "@/pages/NotFound";
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -66,7 +67,7 @@ const BlogPost = () => {
   }
 
   if (!blog) {
-    return <Navigate to="/" replace />;
+    return <NotFound />;
   }
 
   const seoTitle = blog.seoTitle?.trim() || blog.title;
