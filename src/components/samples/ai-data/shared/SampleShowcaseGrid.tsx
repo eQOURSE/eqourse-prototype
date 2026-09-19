@@ -9,7 +9,7 @@ import { RlhfInteractiveThumbnail } from "./RlhfInteractiveThumbnails";
 import { DataCollectionInteractiveThumbnail } from "./DataCollectionInteractiveThumbnails";
 import { CleanedDatasetsInteractiveThumbnail } from "./CleanedDatasetsInteractiveThumbnails";
 import { ComputerVisionInteractiveThumbnail } from "./ComputerVisionInteractiveThumbnails";
-import { fetchSampleFiles } from "@/lib/publicApi";
+import { fetchSampleFiles, fetchSampleTabSettings } from "@/lib/publicApi";
 
 interface Props {
   showcases: SampleShowcase[];
@@ -28,19 +28,38 @@ const SampleShowcaseGrid = ({
   const [showPreview, setShowPreview] = useState(false);
   const [apiFiles, setApiFiles] = useState<PreviewFile[] | null>(null);
   const [loading, setLoading] = useState(false);
+  const [visibility, setVisibility] = useState<Record<string, boolean>>({});
   const listRef = useRef<HTMLDivElement>(null);
+  const visibleShowcases = showcases.filter((item) => visibility[item.title] !== false);
+
+  useEffect(() => {
+    let mounted = true;
+    const refresh = () => fetchSampleTabSettings(categorySlug).then((settings) => {
+      if (mounted) {
+        setVisibility(settings);
+        setActive(0);
+      }
+    });
+    refresh();
+    window.addEventListener("sample-tab-settings-changed", refresh);
+    return () => {
+      mounted = false;
+      window.removeEventListener("sample-tab-settings-changed", refresh);
+    };
+  }, [categorySlug]);
 
   useEffect(() => {
     if (showPreview) return;
     const t = setInterval(() => {
-      setActive((p) => (p + 1) % showcases.length);
+      if (visibleShowcases.length > 1) setActive((p) => (p + 1) % visibleShowcases.length);
     }, 4200);
     return () => clearInterval(t);
-  }, [showcases.length, showPreview]);
+  }, [visibleShowcases.length, showPreview]);
 
-  const current = showcases[active];
+  const current = visibleShowcases[active];
 
   useEffect(() => {
+    if (!current) return;
     let activeRequest = true;
     setLoading(true);
     fetchSampleFiles(categorySlug, current.title).then((res) => {
@@ -51,21 +70,11 @@ const SampleShowcaseGrid = ({
     return () => {
       activeRequest = false;
     };
-  }, [categorySlug, current.title]);
+  }, [categorySlug, current]);
 
-  // Determine files list: API-first, fallback to static defined list, fallback to dummy
-  let currentPreviewFiles = apiFiles && apiFiles.length > 0 ? apiFiles : (current.previewFiles || []);
-  if (currentPreviewFiles.length === 0) {
-    currentPreviewFiles = Array.from({ length: 25 }).map((_, i) => ({
-      title: `${current.title} - File ${i + 1}`,
-      description: i === 0 
-        ? "A subset of the raw data showcasing format and typical contents."
-        : "Associated metadata and QA report generated during our validation pipeline.",
-      fileType: i % 4 === 0 ? "PDF" : (current.format.split(' ')[0] || "JSON"),
-      fileUrl: "#",
-      isExternal: i % 2 !== 0
-    }));
-  }
+  if (!current) return null;
+
+  const currentPreviewFiles = apiFiles && apiFiles.length > 0 ? apiFiles : (current.previewFiles || []);
 
   return (
     <section className="py-20 md:py-24 relative overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background">
@@ -91,7 +100,7 @@ const SampleShowcaseGrid = ({
         <div className="grid lg:grid-cols-[380px_1fr] gap-6 lg:gap-8 max-w-6xl mx-auto">
           {/* Left: Task list */}
           <div ref={listRef} className="flex flex-col gap-2">
-            {showcases.map((s, i) => {
+            {visibleShowcases.map((s, i) => {
               const isActive = i === active;
               return (
                 <button
@@ -142,7 +151,7 @@ const SampleShowcaseGrid = ({
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
                 <div className="flex-1 min-w-0">
                   <div className="inline-flex items-center gap-1.5 text-[10px] md:text-xs font-bold tracking-widest uppercase text-primary mb-3">
-                    <span className="w-6 h-px bg-primary" /> Sample {active + 1} of {showcases.length}
+                    <span className="w-6 h-px bg-primary" /> Sample {active + 1} of {visibleShowcases.length}
                   </div>
                   <h3 className="font-heading text-2xl md:text-3xl font-extrabold text-foreground mb-2 leading-tight">
                     {current.title}

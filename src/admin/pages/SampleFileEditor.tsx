@@ -204,7 +204,7 @@ export default function SampleFileEditor() {
 
         {/* Thumbnail */}
         <ImageUpload value={form.thumbnailUrl} onChange={(url) => setField("thumbnailUrl", url)}
-          kind="sample-thumbnail" label="Card Thumbnail Image (optional)" />
+          kind="sample-thumbnail" label="Card Thumbnail Image *" />
 
         {/* File upload / external URL */}
         <div className="space-y-4 pt-2 border-t border-border/40">

@@ -4,7 +4,7 @@ const REQUEST_TIMEOUT_MS = 15_000;
 const CONCURRENCY = 12;
 const GSC_CRITICAL_URLS = [
   `${SITE_URL}/blog/scaling-exam-performance-blueprint-aligned-test-prep-content`,
-  `${SITE_URL}/kindergarten-to-k5-samples`,
+  `${SITE_URL}/educational-publishing-content-development-samples`,
   `${SITE_URL}/video-samples`,
   `${SITE_URL}/ai-videos-samples`,
   `${SITE_URL}/audio-samples`,
@@ -16,6 +16,14 @@ const GSC_REDIRECTS = new Map([
   [`${SITE_URL}/flash-to-htm-samples`, `${SITE_URL}/audio-samples`],
   [`${SITE_URL}/flash-to-htm-samples/`, `${SITE_URL}/audio-samples`],
   [`${SITE_URL}/flash-to-html-samples`, `${SITE_URL}/audio-samples`],
+  [`${SITE_URL}/kindergarten-to-k5-samples`, `${SITE_URL}/educational-publishing-content-development-samples`],
+  [`${SITE_URL}/k6-to-k12-samples`, `${SITE_URL}/educational-publishing-content-development-samples`],
+  [`${SITE_URL}/curriculum-samples`, `${SITE_URL}/educational-publishing-content-development-samples`],
+  [`${SITE_URL}/stem-content-samples`, `${SITE_URL}/educational-publishing-content-development-samples`],
+  [`${SITE_URL}/iit-jee-neet-samples`, `${SITE_URL}/national-test-prep-content-samples`],
+  [`${SITE_URL}/upsc-state-psc-samples`, `${SITE_URL}/national-test-prep-content-samples`],
+  [`${SITE_URL}/test-prep-and-assessments`, `${SITE_URL}/international-test-prep-content-samples`],
+  [`${SITE_URL}/translation-and-localization-text-samples`, `${SITE_URL}/localization-services-samples`],
   [`${SITE_URL}/blog/7-strategies-to-boost-engagement-and-retention-in-content-services`, `${SITE_URL}/blog/7-strategies-boost-learner-engagement-retention-content-services`],
   [`${SITE_URL}/blogs/dos-and-donts-of-online-learning`, `${SITE_URL}/blog/online-learning-dos-and-donts-for-institutions`],
   [`${SITE_URL}/teacher_training`, `${SITE_URL}/tutors-and-sme-training`],

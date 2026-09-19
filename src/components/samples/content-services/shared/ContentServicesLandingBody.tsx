@@ -86,33 +86,39 @@ const ContentServicesLandingBody = ({ sample }: Props) => {
                 <Link
                   key={sub.slug}
                   to={sub.path}
-                  className="group relative bg-card border border-border rounded-2xl p-5 hover:shadow-elevated hover:-translate-y-1 transition-all overflow-hidden"
+                  className="group relative bg-card border border-border rounded-2xl hover:shadow-elevated hover:-translate-y-1 transition-all overflow-hidden"
                   style={{ animation: `slide-up 0.5s ease-out ${i * 0.05}s both` }}
                 >
                   <div
                     className="absolute -top-6 -right-6 w-24 h-24 rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity"
                     style={{ backgroundColor: `hsl(${sub.accentHsl})` }}
                   />
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-                    style={{
-                      background: `linear-gradient(135deg, hsl(${sub.accentHsl}), hsl(${sub.accentHsl} / 0.7))`,
-                    }}
-                  >
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="font-heading font-bold text-foreground mb-1.5 group-hover:text-primary transition-colors">
-                    {sub.navLabel}
-                  </h3>
-                  <p className="text-xs text-muted-foreground line-clamp-2 mb-3">
-                    {sub.preHeadline}
-                  </p>
-                  <div
-                    className="flex items-center gap-1 text-xs font-semibold"
-                    style={{ color: `hsl(${sub.accentHsl})` }}
-                  >
-                    View Samples
-                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  {sub.visualImage && (
+                    <img
+                      src={sub.visualImage}
+                      alt={sub.visualImageAlt ?? `${sub.navLabel} sample illustration`}
+                      title={sub.visualImageTitle ?? sub.title}
+                      width="1200"
+                      height="675"
+                      loading="lazy"
+                      className="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  )}
+                  <div className="p-5">
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                      style={{ background: `linear-gradient(135deg, hsl(${sub.accentHsl}), hsl(${sub.accentHsl} / 0.7))` }}
+                    >
+                      <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="font-heading font-bold text-foreground mb-1.5 group-hover:text-primary transition-colors">
+                      {sub.navLabel}
+                    </h3>
+                    <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{sub.preHeadline}</p>
+                    <div className="flex items-center gap-1 text-xs font-semibold" style={{ color: `hsl(${sub.accentHsl})` }}>
+                      View Samples
+                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
                   </div>
                 </Link>
               );
