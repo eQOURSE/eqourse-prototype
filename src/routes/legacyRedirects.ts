@@ -38,6 +38,17 @@ export const legacyRedirects: Record<string, string> = {
   "/flash-to-htm-samples": "/audio-samples",
   "/flash-to-html-samples": "/audio-samples",
 
+  // Retired Text Samples taxonomy. Preserve indexed URLs and backlinks with
+  // permanent redirects to the closest page in the current service structure.
+  "/kindergarten-to-k5-samples": "/educational-publishing-content-development-samples",
+  "/k6-to-k12-samples": "/educational-publishing-content-development-samples",
+  "/curriculum-samples": "/educational-publishing-content-development-samples",
+  "/stem-content-samples": "/educational-publishing-content-development-samples",
+  "/iit-jee-neet-samples": "/national-test-prep-content-samples",
+  "/upsc-state-psc-samples": "/national-test-prep-content-samples",
+  "/test-prep-and-assessments": "/international-test-prep-content-samples",
+  "/translation-and-localization-text-samples": "/localization-services-samples",
+
   // Search Console's 2026-09-17 404 and crawled-but-not-indexed exports.
   // Each destination is the matching live article, case study or service page.
   "/blog/7-strategies-to-boost-engagement-and-retention-in-content-services": "/blog/7-strategies-boost-learner-engagement-retention-content-services",

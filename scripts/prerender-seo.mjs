@@ -1397,14 +1397,61 @@ const gscLandingPageContent = {
     ],
     links: [["/localization-services", "Localization Services"], ["/voice-over-services", "Voice Over Services"], ["/subtitling-services", "Subtitling Services"]],
   },
-  "/k6-to-k12-samples": {
-    heading: "Grade 6 to 12 Text Samples",
+  "/educational-publishing-content-development-samples": {
+    heading: "Educational Publishing Content Development Samples",
     sections: [
-      ["Curriculum-aligned secondary content", "Explore examples for mathematics, science and language arts across Grades 6 to 12. The collection is designed to show how subject explanations and activities can support classroom teaching and independent learning."],
-      ["Sample formats to compare", "The tabs present course-book, lesson-plan and workbook examples. Each format has a different teaching role, from introducing a concept to guiding a lesson or giving students structured practice."],
-      ["Request content for your programme", "Curriculum, grade, language and assessment requirements vary by project. Review the available examples and contact eQOURSE for a sample aligned with your learners and delivery format."],
-    ],
-    links: [["/text-samples", "Text Samples"], ["/k12-and-higher-education", "K-12 and Higher Education Content"], ["/contact-us", "Request a Sample"]],
+      ["Publishing content for major curricula", "Review curriculum-aligned textbook, workbook and digital learning content for CBSE, ICSE, IB, UK, US and international education programmes."],
+      ["What the samples demonstrate", "The collection shows structured explanations, activities, visual learning support and assessment links created for different grade levels, subjects and publishing formats."],
+      ["Request a relevant publishing sample", "Use the curriculum tabs to compare examples, then request a sample tailored to your subject, grade, framework, language and delivery requirements."],
+    ], links: [["/text-samples", "Text Samples"], ["/educational-content-development", "Educational Content Development"], ["/contact-us", "Request a Sample"]],
+  },
+  "/assessment-question-bank-development-samples": {
+    heading: "Assessment and Question Bank Development Samples",
+    sections: [
+      ["Curriculum-aligned assessment design", "Explore questions, assessment blueprints, rubrics and answer keys created for CBSE, ICSE, IB, UK, US and international education systems."],
+      ["Quality and coverage", "Samples demonstrate learning outcome mapping, balanced cognitive demand, unambiguous item writing, accurate solutions and review-ready metadata."],
+      ["Build a custom item bank", "Request examples aligned with your subject, grade, curriculum, test format, difficulty mix and required delivery schema."],
+    ], links: [["/text-samples", "Text Samples"], ["/quiz-question-bank-development", "Question Bank Development"], ["/contact-us", "Request a Sample"]],
+  },
+  "/international-test-prep-content-samples": {
+    heading: "International Test Prep Content Development Samples",
+    sections: [
+      ["Content for global admissions tests", "Review practice questions, study guides, mock tests and worked solutions for SAT, ACT, AP, GMAT, GRE and other international examinations."],
+      ["Exam-pattern accuracy", "Samples reflect test specifications, question styles, difficulty progression, timing expectations and clear answer rationales for independent or instructor-led preparation."],
+      ["Request exam-specific content", "Choose an exam tab to preview available work and request a sample for your target test, learner level and publishing format."],
+    ], links: [["/text-samples", "Text Samples"], ["/test-prep-content", "Test Prep Content Services"], ["/contact-us", "Request a Sample"]],
+  },
+  "/national-test-prep-content-samples": {
+    heading: "National Test Prep Content Services Samples",
+    sections: [
+      ["Preparation for leading Indian exams", "Explore syllabus-aligned theory, question banks, mock tests, current affairs and worked solutions for engineering, medical, civil services, management, law, defence, banking and teaching exams."],
+      ["Coverage across exam families", "Dedicated tabs cover JEE, NEET, CUET, UPSC, State PSC, CAT, GATE, CLAT, NDA, SSC, Banking, RRB, NET, CTET and related tests."],
+      ["Request a targeted sample", "Share the exam, subject, difficulty, question mix and delivery format to receive an example suited to your programme."],
+    ], links: [["/text-samples", "Text Samples"], ["/test-prep-content", "Test Prep Content Services"], ["/contact-us", "Request a Sample"]],
+  },
+  "/academic-content-quality-assurance-samples": {
+    heading: "Academic Content Quality Assurance Samples",
+    sections: [
+      ["Expert academic review", "See how subject specialists validate solutions, verify facts, check curriculum alignment and improve the clarity and consistency of educational content."],
+      ["Quality assurance deliverables", "Samples cover solution review, AI training solutions, academic quality checks and additional editorial or technical validation workflows."],
+      ["Evaluate the review standard", "Select a tab to inspect representative work and request a quality review sample for your subject, content type and acceptance criteria."],
+    ], links: [["/text-samples", "Text Samples"], ["/editorial-services", "Editorial Services"], ["/contact-us", "Request a Sample"]],
+  },
+  "/esl-exam-content-development-samples": {
+    heading: "ESL Exam Content Development Samples",
+    sections: [
+      ["English proficiency exam content", "Review reading, writing, listening and speaking tasks for IELTS, TOEFL, TOEIC, PTE Academic, APTIS and JAE preparation programmes."],
+      ["Four-skill assessment design", "Samples demonstrate authentic prompts, level-appropriate passages, test specifications, scoring guidance, answer rationales and consistent language quality."],
+      ["Request an ESL sample", "Choose an exam tab and request content aligned with the target proficiency level, skill, task type and delivery format."],
+    ], links: [["/text-samples", "Text Samples"], ["/test-prep-content", "Test Prep Content Services"], ["/contact-us", "Request a Sample"]],
+  },
+  "/localization-services-samples": {
+    heading: "Educational Localization Services Samples",
+    sections: [
+      ["Localization for learning content", "Explore worksheets, solutions, answer keys, translated educational text and video translation prepared for Indian and international languages."],
+      ["Academic and cultural accuracy", "Language specialists and subject experts preserve instructional meaning, terminology, layout, learner suitability and cultural context throughout localization."],
+      ["Request a localized sample", "Select a content type and share the source language, target language, subject, audience and required output format."],
+    ], links: [["/text-samples", "Text Samples"], ["/localization-services", "Localization Services"], ["/contact-us", "Request a Sample"]],
   },
   "/k12-and-higher-education": {
     heading: "K-12 and Higher Education Content",
@@ -1413,7 +1460,7 @@ const gscLandingPageContent = {
       ["From curriculum design to practice", "Related services cover curriculum development, lesson planning, workbook creation and educational content production. These pieces can be designed together so explanations, activities and assessments follow a consistent learning path."],
       ["Explore representative work", "The text-sample library includes grade-specific course-book, lesson-plan and workbook examples. Review the samples to see formats and request content for a particular subject, grade or curriculum."],
     ],
-    links: [["/k12-curriculum-development-and-design-services", "K-12 Curriculum Development"], ["/k6-to-k12-samples", "Grade 6 to 12 Samples"], ["/text-samples", "Text Samples"]],
+    links: [["/k12-curriculum-development-and-design-services", "K-12 Curriculum Development"], ["/educational-publishing-content-development-samples", "Educational Publishing Samples"], ["/text-samples", "Text Samples"]],
   },
 };
 
@@ -1462,17 +1509,6 @@ function buildCrawlFallback({ path, title, description, crawlHtml = "", source }
       <section><h2>What You Can Evaluate</h2><ul><li>Branching choices and scenario logic</li><li>Drag-and-drop, quiz and assessment interactions</li><li>Visual hierarchy, instructional flow and learner feedback</li><li>Responsive behaviour across desktop and mobile screens</li></ul></section>
       <section><h2>Request a Relevant Sample</h2><p>Available previews vary by subject, audience and confidentiality requirements. <a href="/contact-us">Contact eQOURSE</a> for a sample aligned with your learning programme.</p></section>
       <nav aria-label="Related pages"><a href="/articulate-storyline-services">Articulate Storyline Services</a> <a href="/video-samples">Video Samples</a> <a href="/content-services">Content Services</a></nav>
-    </main>`;
-  }
-  if (path === "/kindergarten-to-k5-samples") {
-    return `<main data-seo-prerender="true">
-      <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/samples">Samples</a> / <a href="/text-samples">Text Samples</a> / <span>Kindergarten to Grade 5</span></nav>
-      <h1>Kindergarten to Grade 5 Content Samples</h1>
-      <p>${escapeHtml(description)}</p>
-      <section><h2>Foundational Learning Content Examples</h2><p>Explore curriculum-aligned course book, lesson plan and workbook examples designed for early and primary learners across mathematics, science, language arts and environmental studies.</p></section>
-      <section><h2>What You Can Evaluate</h2><ul><li>Age-appropriate language and visual scaffolding</li><li>Clear learning objectives and lesson progression</li><li>Practice activities, formative checks and assessments</li><li>Adaptability for curricula, languages and delivery formats</li></ul></section>
-      <section><h2>Request a Relevant Sample</h2><p>Sample availability varies by grade, subject and curriculum. <a href="/contact-us">Contact eQOURSE</a> for examples aligned with your programme.</p></section>
-      <nav aria-label="Related pages"><a href="/k12-and-higher-education">K-12 and Higher Education Content</a> <a href="/text-samples">Text Samples</a> <a href="/content-services">Content Services</a></nav>
     </main>`;
   }
   const gscContent = gscLandingPageContent[path];

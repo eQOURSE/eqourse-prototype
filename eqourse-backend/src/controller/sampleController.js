@@ -267,6 +267,7 @@ const createItem = async (req, res) => {
     const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
             pageSlug, tabName, fileType, isExternal, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
+    if (!thumbnailUrl) return res.status(400).json({ success: false, message: "Thumbnail is required" });
     const existing = await SampleItem.find({ categoryId: req.params.categoryId });
     const item = await SampleItem.create({
       categoryId: req.params.categoryId, title,
@@ -286,6 +287,9 @@ const createItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   try {
+    if (Object.prototype.hasOwnProperty.call(req.body, "thumbnailUrl") && !req.body.thumbnailUrl) {
+      return res.status(400).json({ success: false, message: "Thumbnail is required" });
+    }
     if (Object.prototype.hasOwnProperty.call(req.body, "pagePaths")) {
       req.body.pagePaths = normalizePagePaths(req.body.pagePaths);
     }
@@ -327,6 +331,7 @@ const createItemForPage = async (req, res) => {
     const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
             pageSlug, tabName, fileType, isExternal, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
+    if (!thumbnailUrl) return res.status(400).json({ success: false, message: "Thumbnail is required" });
     if (!pageSlug) return res.status(400).json({ success: false, message: "pageSlug is required" });
     
     // Auto-generate a dummy categoryId since we are flat (required by model)
