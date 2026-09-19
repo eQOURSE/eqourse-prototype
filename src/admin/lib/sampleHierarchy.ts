@@ -14,6 +14,7 @@ import {
   BookOpen,
   GraduationCap,
   FlaskConical,
+  Globe2,
   Landmark,
   Atom,
   BookOpenCheck,
