@@ -28,7 +28,10 @@ const GSC_REDIRECTS = new Map([
   [`${SITE_URL}/blogs/dos-and-donts-of-online-learning`, `${SITE_URL}/blog/online-learning-dos-and-donts-for-institutions`],
   [`${SITE_URL}/teacher_training`, `${SITE_URL}/tutors-and-sme-training`],
   [`${SITE_URL}/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services`, `${SITE_URL}/blog/emsat-content-solutions-scalable-test-prep-uae`],
+  [`${SITE_URL}/casestudy/multilingual-pen-tab-videos-and-worksheets-in-6-languages`, `${SITE_URL}/casestudy/multilingual-pen-tab-videos-worksheets-6-languages`],
   [`${SITE_URL}/casestudy/on-demand-video-solutions-for-us-content-services-company`, `${SITE_URL}/casestudy/on-demand-video-solutions-us-content-services-company`],
+  [`${SITE_URL}/blogs/the-science-behind-assessment-development`, `${SITE_URL}/assessment-development-services`],
+  [`${SITE_URL}/blogs/Key-Factors-Shaping-Student-Outcomes-|-eQOURSE`, `${SITE_URL}/blog/designing-outcomes-driven-education-custom-e-learning-content`],
   [`${SITE_URL}/k12-elearning-services`, `${SITE_URL}/k12-and-higher-education`],
 ]);
 

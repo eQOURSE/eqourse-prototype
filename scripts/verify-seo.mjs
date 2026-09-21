@@ -6,6 +6,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const distDir = process.env.SEO_DIST_DIR || join(root, "dist");
 const pageSeoSource = readFileSync(join(root, "src", "seo", "pageSeo.ts"), "utf8");
 const redirectsSource = readFileSync(join(root, "src", "routes", "legacyRedirects.ts"), "utf8");
+const fallbackBlogSource = readFileSync(join(root, "src", "components", "blog", "blogData.ts"), "utf8");
 const manifestPath = join(distDir, "seo-manifest.json");
 const SITE_URL = "https://www.eqourse.com";
 const requiredLegacyRedirects = new Map([
@@ -26,11 +27,15 @@ const requiredLegacyRedirects = new Map([
   ["/blogs/dos-and-donts-of-online-learning", "/blog/online-learning-dos-and-donts-for-institutions"],
   ["/teacher_training", "/tutors-and-sme-training"],
   ["/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services", "/blog/emsat-content-solutions-scalable-test-prep-uae"],
+  ["/casestudy/multilingual-pen-tab-videos-and-worksheets-in-6-languages", "/casestudy/multilingual-pen-tab-videos-worksheets-6-languages"],
   ["/casestudy/on-demand-video-solutions-for-us-content-services-company", "/casestudy/on-demand-video-solutions-us-content-services-company"],
   ["/k12-elearning-services", "/k12-and-higher-education"],
   ["/blog/detail.php", "/blog"],
   ["/blog/detail", "/blog"],
   ["/blog/understanding-the-value-of-edtech-in-higher-education", "/blog"],
+  ["/blogs/the-science-behind-assessment-development", "/assessment-development-services"],
+  ["/blogs/Key-Factors-Shaping-Student-Outcomes-|-eQOURSE", "/blog/designing-outcomes-driven-education-custom-e-learning-content"],
+  ["/blogs/Key-Factors-Shaping-Student-Outcomes-%7C-eQOURSE", "/blog/designing-outcomes-driven-education-custom-e-learning-content"],
   ["/content-services/custom-elearning-content/quiz-question-bank", "/quiz-question-bank-development"],
 ]);
 const soft404RegressionPaths = [
@@ -72,6 +77,12 @@ const escapeHtml = (value) => value
   .replace(/"/g, "&quot;");
 
 const failures = [];
+const fallbackBlogSlugs = [...fallbackBlogSource.matchAll(/"slug"\s*:\s*"([^"]+)"/g)].map((item) => item[1]);
+for (const slug of fallbackBlogSlugs) {
+  if (!/^\/blog\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    failures.push(`static blog fallback contains a malformed or non-canonical slug: ${slug}`);
+  }
+}
 const homeSource = readFileSync(join(root, "src", "pages", "Index.tsx"), "utf8");
 if (/search_term_string|SearchAction/.test(homeSource)) {
   failures.push("Homepage still emits the unresolved blog search template in structured data");

@@ -55,12 +55,16 @@ export const legacyRedirects: Record<string, string> = {
   "/blogs/dos-and-donts-of-online-learning": "/blog/online-learning-dos-and-donts-for-institutions",
   "/teacher_training": "/tutors-and-sme-training",
   "/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services": "/blog/emsat-content-solutions-scalable-test-prep-uae",
+  "/casestudy/multilingual-pen-tab-videos-and-worksheets-in-6-languages": "/casestudy/multilingual-pen-tab-videos-worksheets-6-languages",
   "/casestudy/on-demand-video-solutions-for-us-content-services-company": "/casestudy/on-demand-video-solutions-us-content-services-company",
   "/k12-elearning-services": "/k12-and-higher-education",
   "/blogs/what-are-the-different-roles-of-teachers-in-the-classroom": "/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter",
   "/blogs/scorm-and-lms-integration-corporate-training-success": "/blog/scorm-and-lms-integration-made-simple",
   "/blogs/Role-of-SMEs-in-EdTech-and-Multilingual-Learning": "/blog/sourcing-deploying-elite-subject-matter-experts-digital-education",
   "/blogs/Online-Learning-DOs-and-DONOTs-for-Institutions": "/blog/online-learning-dos-and-donts-for-institutions",
+  "/blogs/the-science-behind-assessment-development": "/assessment-development-services",
+  "/blogs/Key-Factors-Shaping-Student-Outcomes-|-eQOURSE": "/blog/designing-outcomes-driven-education-custom-e-learning-content",
+  "/blogs/Key-Factors-Shaping-Student-Outcomes-%7C-eQOURSE": "/blog/designing-outcomes-driven-education-custom-e-learning-content",
 
   // Old article URLs consolidated into substantial, current service pages.
   // Blog and case-study publishing remains controlled by the admin panel.
