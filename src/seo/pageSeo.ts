@@ -76,7 +76,7 @@ export const pageSeo: Record<string, PageSeo> = {
     description: "Explore RLHF data samples for response ranking, evaluation and AI alignment. Review eQOURSE capabilities today.",
   },
   "/ai-data-services": {
-    title: "AI Data Services – Scalable AI Solutions | Eqourse",
+    title: "AI Data Services & Training Data Collection | eQOURSE",
     description: "Scale AI development with expert data collection, annotation, validation and model testing services. Start your free pilot.",
   },
   "/ai-data-services/annotation-labeling": {
@@ -335,16 +335,40 @@ export const pageSeo: Record<string, PageSeo> = {
     description: "Contact eQOURSE for AI data and learning content services. Commercial engagements run through Singapore, with delivery operations in Kota, India.",
   },
   "/content-services": {
-    title: "Content Creation Services | Eqourse",
+    title: "Custom E-Learning Content Services | eQOURSE",
     description: "Create engaging learning experiences with expert content development, assessments, localization and technology solutions.",
   },
   "/corporate-e-learning-solutions": {
     title: "Corporate E-Learning Solutions – Custom Training | Eqourse",
     description: "Build engaging corporate e-learning for onboarding, compliance and workforce development. Explore eQOURSE solutions.",
   },
-  "/curriculum-samples": {
-    title: "Curriculum Samples – Explore Course Designs | Eqourse",
-    description: "Explore curriculum samples featuring structured learning paths, lessons and assessments. Review eQOURSE expertise today.",
+  "/educational-publishing-content-development-samples": {
+    title: "Educational Publishing Content Development Samples | eQOURSE",
+    description: "Explore educational publishing samples for CBSE, ICSE, IB, UK, US and international curricula, including textbooks, workbooks and digital content.",
+  },
+  "/assessment-question-bank-development-samples": {
+    title: "Assessment & Question Bank Development Samples | eQOURSE",
+    description: "Explore assessment and question bank samples for CBSE, ICSE, IB, UK, US and international curricula, including items, rubrics and answer keys.",
+  },
+  "/international-test-prep-content-samples": {
+    title: "International Test Prep Content Samples | eQOURSE",
+    description: "Explore international test prep content samples for SAT, ACT, AP, GMAT and GRE, including practice questions, mock tests and worked solutions.",
+  },
+  "/national-test-prep-content-samples": {
+    title: "National Test Prep Content Samples | eQOURSE",
+    description: "Explore national test prep samples for JEE, NEET, CUET, UPSC, CAT, GATE, CLAT, NDA, SSC, Banking, RRB, NET and CTET.",
+  },
+  "/academic-content-quality-assurance-samples": {
+    title: "Academic Content Quality Assurance Samples | eQOURSE",
+    description: "Explore academic content quality assurance samples covering solution validation, AI training solutions, academic review and accuracy checks.",
+  },
+  "/esl-exam-content-development-samples": {
+    title: "ESL Exam Content Development Samples | eQOURSE",
+    description: "Explore ESL exam content samples for IELTS, TOEFL, TOEIC, PTE Academic, APTIS and JAE across all four language skills.",
+  },
+  "/localization-services-samples": {
+    title: "Educational Localization Services Samples | eQOURSE",
+    description: "Explore educational localization samples for worksheets, solutions, answer keys, translation and video translation across languages.",
   },
   "/custom-e-learning-content": {
     title: "Custom E-Learning Content – Tailored Solutions | Eqourse",
@@ -406,10 +430,6 @@ export const pageSeo: Record<string, PageSeo> = {
     title: "Gamified Learning Solutions – Boost Engagement | Eqourse",
     description: "Boost learner motivation with gamified learning experiences featuring challenges, rewards and feedback. Explore eQOURSE.",
   },
-  "/iit-jee-neet-samples": {
-    title: "IIT JEE & NEET Samples – Free Study Material | Eqourse",
-    description: "Explore IIT-JEE and NEET content samples with exam-focused questions, solutions and learning resources. View our work.",
-  },
   "/ilt-solutions": {
     title: "ILT Solutions – Scalable Corporate Training | EQourse",
     description: "Create effective instructor-led training materials, facilitator guides and learner resources. Explore eQOURSE ILT solutions.",
@@ -441,14 +461,6 @@ export const pageSeo: Record<string, PageSeo> = {
   "/k12-curriculum-development-and-design-services": {
     title: "K-12 Curriculum Design & Development | EQourse",
     description: "Build standards-aligned K–12 curricula with expert instructional design, assessments and learning resources. Explore eQOURSE.",
-  },
-  "/k6-to-k12-samples": {
-    title: "K-6 to K-12 eLearning Samples – Interactive | Eqourse",
-    description: "Explore Grade 6–12 content samples across subjects, curricula and assessment formats. Review eQOURSE quality today.",
-  },
-  "/kindergarten-to-k5-samples": {
-    title: "Explore Kindergarten to K5 Curriculum Samples | Eqourse",
-    description: "Explore engaging Kindergarten to Grade 5 content samples, including lessons, activities and assessments. View our work.",
   },
   "/learning-readiness": {
     title: "Learning Readiness – Prepare Your Workforce | eQourse",
@@ -538,10 +550,6 @@ export const pageSeo: Record<string, PageSeo> = {
     title: "Standards Compliance – Online Training | Eqourse",
     description: "Align digital content with accessibility standards through expert reviews and remediation. Explore eQOURSE services.",
   },
-  "/stem-content-samples": {
-    title: "STEM Content Samples – Custom eLearning | Eqourse",
-    description: "Explore STEM content samples featuring lessons, activities and assessments across science, technology and maths.",
-  },
   "/stem-curriculum-services": {
     title: "STEM Curriculum Services – Custom K-12 | Eqourse",
     description: "Create engaging STEM curricula with hands-on activities, assessments and real-world learning. Explore eQOURSE services.",
@@ -561,10 +569,6 @@ export const pageSeo: Record<string, PageSeo> = {
   "/technology-solutions": {
     title: "Technology Solutions & IT Services | Eqourse",
     description: "Deliver digital learning with LMS course builds, white-label platforms and technology solutions. Explore eQOURSE services.",
-  },
-  "/test-prep-and-assessments": {
-    title: "Test Prep & Assessments – Ace Your Exams | EQourse",
-    description: "Explore test prep and assessment samples with exam-aligned questions, solutions and practice materials. View our work.",
   },
   "/test-prep-content": {
     title: "Test Prep Content – Custom Solutions | Eqourse",
@@ -614,10 +618,6 @@ export const pageSeo: Record<string, PageSeo> = {
     title: "Online Training Modules – Interactive E-Learning | Eqourse",
     description: "Create focused training modules with engaging content, activities and assessments. Explore eQOURSE development services.",
   },
-  "/translation-and-localization-text-samples": {
-    title: "Translation & Localization Text Samples | Eqourse",
-    description: "Explore translation and localization samples across educational and professional content. Review eQOURSE quality today.",
-  },
   "/translation-services": {
     title: "Professional Translation Services | Eqourse",
     description: "Translate educational, technical and business content accurately for global audiences. Explore eQOURSE services today.",
@@ -633,10 +633,6 @@ export const pageSeo: Record<string, PageSeo> = {
   "/tutrain": {
     title: "TuTrain – AI Corporate Training Platform | Eqourse",
     description: "Discover Tutrain online tutoring solutions from eQOURSE. Explore personalized learning support and help students succeed.",
-  },
-  "/upsc-state-psc-samples": {
-    title: "UPSC & State PSC Samples – Free Notes | Eqourse",
-    description: "Explore UPSC and State PSC content samples with exam-aligned questions, explanations and study materials. View our work.",
   },
   "/video-samples": {
     title: "Video & Audio Samples for E-learning | eQOURSE",

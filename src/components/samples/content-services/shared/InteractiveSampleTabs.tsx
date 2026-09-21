@@ -415,73 +415,22 @@ const AIAvatarVideoThumbForTab = ({ tabIndex, accent }: { tabIndex: number; acce
   );
 };
 
-const TEXT_THUMBNAILS: Record<string, Record<string, string>> = {
-  "curriculum-samples": {
-    "CBSE": "/assets/samples/text-content/Carriuclam/CBSE.webp",
-    "ICSE": "/assets/samples/text-content/Carriuclam/ICSE.webp",
-    "IB": "/assets/samples/text-content/Carriuclam/IB.webp",
-    "State Board": "/assets/samples/text-content/Carriuclam/State Board.webp",
-  },
-  "iit-jee-neet-samples": {
-    "Theory Content": "/assets/samples/text-content/JEE_NEET/Theory Content.webp",
-    "Question Banks": "/assets/samples/text-content/JEE_NEET/Question Bank.webp",
-    "Mock Test": "/assets/samples/text-content/JEE_NEET/Mock Test.webp",
-  },
-  "kindergarten-to-k5-samples": {
-    "Course Book": "/assets/samples/text-content/KG-5/Course book.webp",
-    "Lesson Plan": "/assets/samples/text-content/KG-5/Lesson plan.webp",
-    "Work Book": "/assets/samples/text-content/KG-5/Workbook.webp",
-  },
-  "k6-to-k12-samples": {
-    "Course Book": "/assets/samples/text-content/KG-5/Course book.webp",
-    "Lesson Plan": "/assets/samples/text-content/KG-5/Lesson plan.webp",
-    "Work Book": "/assets/samples/text-content/KG-5/Workbook.webp",
-  },
-  "translation-and-localization-text-samples": {
-    "Hindi": "/assets/samples/text-content/Localization/Hindi.webp",
-    "Tamil": "/assets/samples/text-content/Localization/Tamil.webp",
-    "Telugu": "/assets/samples/text-content/Localization/Telgu.webp",
-    "Bengali": "/assets/samples/text-content/Localization/Bengali.webp",
-    "Kannada": "/assets/samples/text-content/Localization/Kannada.webp",
-    "Malayalam": "/assets/samples/text-content/Localization/Malyalam.webp",
-    "Other Languages": "/assets/samples/text-content/Localization/Other Languages.png",
-  },
-  "stem-content-samples": {
-    "Science": "/assets/samples/text-content/STEM/Science.webp",
-    "Technology": "/assets/samples/text-content/STEM/Technology.webp",
-    "Engineering": "/assets/samples/text-content/STEM/Engennering.webp",
-    "Mathematics": "/assets/samples/text-content/STEM/Mathmatics.webp",
-  },
-  "test-prep-and-assessments": {
-    "TOEIC": "/assets/samples/text-content/Test Prep/TOEIC.webp",
-    "APTIS": "/assets/samples/text-content/Test Prep/APTIS.webp",
-    "SAT": "/assets/samples/text-content/Test Prep/SAT.webp",
-    "IELTS": "/assets/samples/text-content/Test Prep/IELTS.webp",
-    "ACT": "/assets/samples/text-content/Test Prep/ACT.webp",
-    "AP": "/assets/samples/text-content/Test Prep/AP.webp",
-    "TOEFL": "/assets/samples/text-content/Test Prep/TOEFL.webp",
-    "PTE": "/assets/samples/text-content/Test Prep/PTE.webp",
-    "CEFR": "/assets/samples/text-content/Test Prep/CEFR.webp",
-  },
-  "upsc-state-psc-samples": {
-    "General Studies": "/assets/samples/text-content/UPSC_State Board/Genral Studies.png",
-    "Current Affairs": "/assets/samples/text-content/UPSC_State Board/Current Affairs.png",
-    "Previous Year Papers": "/assets/samples/text-content/UPSC_State Board/PYQ.webp",
-  },
-};
-
 const TextSampleThumbForTab = ({ sample, tab, accent }: { sample: ContentServicesSample; tab: string; accent: string }) => {
-  const thumbUrl = TEXT_THUMBNAILS[sample.slug]?.[tab];
-  
-  if (thumbUrl) {
+  if (sample.visualImage) {
     return (
-      <div className="relative w-full max-w-[85%] aspect-[16/10] md:aspect-video rounded-xl overflow-hidden shadow-2xl animate-slide-up border border-white/20 bg-white">
+      <div className="relative w-full max-w-[92%] aspect-video rounded-2xl overflow-hidden shadow-2xl animate-slide-up border border-white/20 bg-white">
         <img 
-          src={thumbUrl} 
-          alt={`${tab} text sample document for ${sample.navLabel} - eQOURSE`}
-          title={`${tab} Sample - ${sample.navLabel}`}
+          src={sample.visualImage}
+          alt={sample.visualImageAlt ?? `${sample.navLabel} sample illustration`}
+          title={`${tab} | ${sample.visualImageTitle ?? sample.title}`}
+          width="1200"
+          height="675"
           className="w-full h-full object-cover transition-transform hover:scale-105 duration-700"
         />
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/55 to-transparent px-5 pb-5 pt-14 text-white">
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/70">{sample.navLabel}</p>
+          <p className="mt-1 font-heading text-lg font-bold">{tab}</p>
+        </div>
       </div>
     );
   }

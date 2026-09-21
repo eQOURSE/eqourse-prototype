@@ -2,38 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText, PlayCircle, Database } from "lucide-react";
 import { aiDataSamples } from "./ai-data/shared/aiDataSamplesData";
-
-interface CardItem {
-  label: string;
-  href: string;
-  description: string;
-}
-
-const textSamples: CardItem[] = [
-  { label: "K12 Grade (KG-5)", href: "/kindergarten-to-k5-samples", description: "Age-appropriate content for early learners with interactive activities." },
-  { label: "K12 Grade (6-12)", href: "/k6-to-k12-samples", description: "Rich curriculum content aligned to national standards and frameworks." },
-  { label: "IIT JEE / NEET", href: "/iit-jee-neet-samples", description: "Competitive exam prep content with solved problems and conceptual depth." },
-  { label: "UPSC & State PSC", href: "/upsc-state-psc-samples", description: "Civil-services exam material across polity, economy, and current affairs." },
-  { label: "STEM Content", href: "/stem-content-samples", description: "Concept-first STEM modules with simulations and worked examples." },
-  { label: "Curriculum Content", href: "/curriculum-samples", description: "NCERT-aligned CBSE curriculum samples with assessments." },
-  { label: "Localization", href: "/translation-and-localization-text-samples", description: "Text translated and culturally adapted across 30+ languages." },
-  { label: "Test Prep & Assessments", href: "/test-prep-and-assessments", description: "Item-banked assessments and diagnostic test samples." },
-];
-
-const videoSamples: CardItem[] = [
-  { label: "Articulate Storyline", href: "/articulate-storyline-video-samples", description: "Interactive Storyline courses with branching and variables." },
-  { label: "Pen Tab and PPT", href: "/pen-tab-and-ppt-samples", description: "Classroom-style whiteboard and narrated PPT walkthroughs." },
-  { label: "AI Videos", href: "/ai-videos-samples", description: "AI presenter and multilingual avatar video samples." },
-  { label: "Audio Samples", href: "/audio-samples", description: "Multilingual, conversational and educational learning audio." },
-  { label: "2D 3D Animation", href: "/2d-3d-video-samples", description: "Animated explainers across science, math, and skills." },
-  { label: "Promotional Video", href: "/promotional-video", description: "Brand and product promo videos for Content Services and enterprise." },
-  { label: "Immersive Simulation AR/VR", href: "/immersive-simulation-ar-vr-video", description: "AR/VR simulations for immersive learning and training." },
-];
+import { textSubSamples, videoSubSamples } from "./content-services/contentServicesSamplesData";
 
 const tabs = [
-  { id: "text", label: "Text Content Samples", sub: "8 categories", Icon: FileText, accent: "from-primary to-accent", count: 8 },
+  { id: "text", label: "Text Content Samples", sub: "7 categories", Icon: FileText, accent: "from-primary to-accent", count: 7 },
   { id: "video", label: "Video & Audio Samples", sub: "7 formats", Icon: PlayCircle, accent: "from-accent to-primary", count: 7 },
-  { id: "ai-data", label: "AI Data Samples", sub: "6 datasets", Icon: Database, accent: "from-[hsl(220_85%_55%)] to-[hsl(190_85%_55%)]", count: 6, isNew: true },
+  { id: "ai-data", label: "AI Data Samples", sub: "7 datasets", Icon: Database, accent: "from-[hsl(220_85%_55%)] to-[hsl(190_85%_55%)]", count: 7, isNew: true },
 ] as const;
 
 const SamplesCategoryTabs = () => {
@@ -69,23 +43,26 @@ const SamplesCategoryTabs = () => {
       });
     }
 
-    const items = active === "text" ? textSamples : videoSamples;
+    const items = active === "text" ? textSubSamples : videoSubSamples;
     const IconC = active === "text" ? FileText : PlayCircle;
 
     return items.map((item, i) => (
       <Link
-        key={item.label}
-        to={item.href}
+        key={item.slug}
+        to={item.path}
         className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card hover:border-primary/40 transition-all hover:-translate-y-1.5 hover:shadow-elevated"
         style={{ animation: `slideUp 0.6s ease-out ${i * 0.06}s both` }}
       >
-        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-primary" />
+        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-primary z-10" />
+        {item.visualImage && (
+          <img src={item.visualImage} alt={item.visualImageAlt ?? `${item.navLabel} sample illustration`} title={item.visualImageTitle ?? item.title} width="1200" height="675" loading="lazy" className="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+        )}
         <div className="p-6 flex flex-col h-full">
           <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-gradient-primary transition-all">
             <IconC className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
           </div>
-          <h3 className="font-heading text-lg font-bold text-foreground mb-2 leading-tight">{item.label}</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{item.description}</p>
+          <h3 className="font-heading text-lg font-bold text-foreground mb-2 leading-tight">{item.navLabel}</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{item.preHeadline}</p>
           <span className="text-sm font-bold text-primary inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
             View samples <ArrowRight className="w-4 h-4" />
           </span>
@@ -95,7 +72,7 @@ const SamplesCategoryTabs = () => {
   };
 
   const headings = {
-    text: { h: "Text Content Samples", sub: "K-12, competitive exams, STEM, and localization samples showcasing our writing, editorial and pedagogical craft." },
+    text: { h: "Text Content Samples", sub: "Explore educational publishing, assessment, test prep, academic quality assurance, ESL and localization samples." },
     video: { h: "Video & Audio Samples", sub: "Explore educational video, animations, immersive learning and audio production." },
     "ai-data": { h: "AI Data Annotation & Collection Samples", sub: "Browse sample outputs from our AI data services pipeline across NLP, Computer Vision, Audio, and RLHF. Request a free pilot to evaluate on your data." },
   };

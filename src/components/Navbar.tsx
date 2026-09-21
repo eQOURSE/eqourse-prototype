@@ -526,14 +526,13 @@ const MobileAIDataServicesAccordion = ({ onClose }: { onClose: () => void }) => 
 };
 
 const textSampleLinks = [
-  { label: "K12 Grade (KG-5)", href: "/kindergarten-to-k5-samples" },
-  { label: "K12 Grade (6-12)", href: "/k6-to-k12-samples" },
-  { label: "IIT JEE / NEET", href: "/iit-jee-neet-samples" },
-  { label: "UPSC & State PSC", href: "/upsc-state-psc-samples" },
-  { label: "STEM Content", href: "/stem-content-samples" },
-  { label: "Curriculum Content", href: "/curriculum-samples" },
-  { label: "Localization", href: "/translation-and-localization-text-samples" },
-  { label: "Test Prep & Assessments", href: "/test-prep-and-assessments" },
+  { label: "Educational Publishing", href: "/educational-publishing-content-development-samples" },
+  { label: "Assessment & Question Banks", href: "/assessment-question-bank-development-samples" },
+  { label: "International Test Prep", href: "/international-test-prep-content-samples" },
+  { label: "National Test Prep", href: "/national-test-prep-content-samples" },
+  { label: "Academic Quality Assurance", href: "/academic-content-quality-assurance-samples" },
+  { label: "ESL Exam Content", href: "/esl-exam-content-development-samples" },
+  { label: "Localization Services", href: "/localization-services-samples" },
 ];
 
 const videoSampleLinks = [

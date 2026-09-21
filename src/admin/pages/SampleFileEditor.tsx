@@ -91,6 +91,7 @@ export default function SampleFileEditor() {
   const save = async () => {
     if (!form.title) return toast.error("Title required");
     if (!form.fileUrl) return toast.error("File or URL required");
+    if (!form.thumbnailUrl) return toast.error("Thumbnail required");
 
     setSaving(true);
     try {
@@ -203,7 +204,7 @@ export default function SampleFileEditor() {
 
         {/* Thumbnail */}
         <ImageUpload value={form.thumbnailUrl} onChange={(url) => setField("thumbnailUrl", url)}
-          kind="sample-thumbnail" label="Card Thumbnail Image (optional)" />
+          kind="sample-thumbnail" label="Card Thumbnail Image *" />
 
         {/* File upload / external URL */}
         <div className="space-y-4 pt-2 border-t border-border/40">
