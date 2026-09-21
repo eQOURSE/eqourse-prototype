@@ -25,7 +25,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 1,
     "title": "EmSAT Content Solutions: Scalable Test Prep for UAE Content Services",
-    "slug": "/blog/emsat-content-solutions-scalable-test-prep-for-uae-content services",
+    "slug": "/blog/emsat-content-solutions-scalable-test-prep-uae",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -44,7 +44,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 2,
     "title": "Innovative Education Tools for K12 & Higher Ed Success",
-    "slug": "/blog/innovative-education-tools-for-k12-higher-ed-success",
+    "slug": "/blog/innovative-education-tools-k12-higher-ed-success",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -63,7 +63,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 3,
     "title": "6 Signs Your Learning Solutions Need a Gamified Upgrade",
-    "slug": "/blog/6-signs-your-learning-solutions-need-a-gamified-upgrade",
+    "slug": "/blog/6-signs-learning-solutions-need-gamified-upgrade",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -82,7 +82,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 4,
     "title": "eQOURSE Launches in Singapore | Scaling Content Services Across Asia",
-    "slug": "/blog/eqourse-launches-in-singapore-scaling-content services-across-asia",
+    "slug": "/blog/eqourse-launches-singapore-scaling-content-services-across-asia",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -101,7 +101,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 5,
     "title": "Top 6 Features in an Online Assessment System",
-    "slug": "/blog/top-6-features-in-an-online-assessment-system",
+    "slug": "/blog/top-6-features-in-an-online-assessment-systemtop-6-features-in-an-online-assessment-system",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -120,7 +120,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 6,
     "title": "How Subtitling Is Transforming Content Services Learning",
-    "slug": "/blog/how-subtitling-is-transforming-content services-learning",
+    "slug": "/blog/how-subtitling-is-transforming-learning-content-services",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -196,7 +196,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 10,
     "title": "Is Your Content Services platform Ready for AI Integration?",
-    "slug": "/blog/is-your-content services-platform-ready-for-ai-integration",
+    "slug": "/blog/is-your-content-services-platform-ready-for-ai-integration",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -215,7 +215,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 11,
     "title": "7 Strategies to Boost Engagement and Retention in Content Services",
-    "slug": "/blog/7-strategies-to-boost-engagement-and-retention-in-content services",
+    "slug": "/blog/7-strategies-boost-learner-engagement-retention-content-services",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -234,7 +234,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 12,
     "title": "6 Steps to Expand Your Content Services platform Globally",
-    "slug": "/blog/6-steps-to-expand-your-content services-platform-globally",
+    "slug": "/blog/6-steps-expand-content-services-platform-globally",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -253,7 +253,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 13,
     "title": "5 Signs Your Content Services platform Needs Adaptive Learning",
-    "slug": "/blog/5-signs-your-content services-platform-needs-adaptive-learning",
+    "slug": "/blog/5-signs-your-content-services-platform-needs-adaptive-learning",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -272,7 +272,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 14,
     "title": "Online Learning DOs and DONOTs for Institutions",
-    "slug": "/blog/online-learning-dos-and-donots-for-institutions",
+    "slug": "/blog/online-learning-dos-and-donts-for-institutions",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -291,7 +291,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 15,
     "title": "Key Roles Teachers Play in the Classroom",
-    "slug": "/blog/key-roles-teachers-play-in-the-classroom",
+    "slug": "/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -310,7 +310,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 16,
     "title": "Understanding the Role of Content Services in Higher Education",
-    "slug": "/blog/understanding-the-role-of-content services-in-higher-education",
+    "slug": "/blog/understanding-the-role-of-content-services-in-higher-education",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
@@ -329,7 +329,7 @@ export const blogsData: BlogPost[] = [
   {
     "id": 17,
     "title": "Bridge Course Success: Reviving Education Across 14 Districts",
-    "slug": "/blog/bridge-course-success-reviving-education-across-14-districts",
+    "slug": "/blog/bridge-course-for-students-learning-recovery",
     "category": "Content Services",
     "date": "April 2026",
     "author": "eQOURSE",
