@@ -101,6 +101,34 @@ jobs:
             rm -rf dist
             tar -xzf dist-output.tar.gz
             rm -f dist-output.tar.gz
+            echo "🔎 Verifying generated Nginx redirect rules are loaded..."
+            sudo nginx -T 2>&1 | grep -F "location = /casestudy/multilingual-pen-tab-videos-and-worksheets-in-6-languages" >/dev/null || {
+              echo "❌ /opt/eqourse-prototype/deploy/nginx/eqourse-route-handling.conf is not included by the production Nginx server block"
+              exit 1
+            }
+            sudo nginx -t
+            sudo systemctl reload nginx
+
+            check_redirect() {
+              source_url="$1"
+              expected_url="$2"
+              actual="$(curl --silent --show-error --output /dev/null --write-out '%{http_code} %{redirect_url}' "$source_url")"
+              if [ "$actual" != "301 $expected_url" ]; then
+                echo "❌ Redirect check failed: $source_url returned '$actual'; expected '301 $expected_url'"
+                exit 1
+              fi
+              echo "✅ $source_url -> $expected_url"
+            }
+
+            check_redirect \
+              "https://www.eqourse.com/casestudy/multilingual-pen-tab-videos-and-worksheets-in-6-languages" \
+              "https://www.eqourse.com/casestudy/multilingual-pen-tab-videos-worksheets-6-languages"
+            check_redirect \
+              "https://www.eqourse.com/blogs/the-science-behind-assessment-development" \
+              "https://www.eqourse.com/assessment-development-services"
+            check_redirect \
+              "https://www.eqourse.com/blogs/Key-Factors-Shaping-Student-Outcomes-%7C-eQOURSE" \
+              "https://www.eqourse.com/blog/designing-outcomes-driven-education-custom-e-learning-content"
             echo "✅ eQOURSE Frontend deployed"
 
   create-backup-tag:
