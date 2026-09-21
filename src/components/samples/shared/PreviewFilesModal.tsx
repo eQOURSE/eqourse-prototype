@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
-import {
-  FileText,
-  FileVideo,
-  FileArchive,
-  FileJson,
-  FileMusic,
-  FileCode,
-  Download,
-  ExternalLink,
-  FileImage,
-  Database
-} from "lucide-react";
+import { Eye, ExternalLink, Info, type LucideIcon } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { SampleViewer } from "./SampleViewer";
+import { resolveSampleFormat, sampleIconFor } from "./sampleFormats";
 
 export interface PreviewFile {
   title: string;
   description: string;
+  /**
+   * Display badge only. Admins can set this to any string via the "Custom…"
+   * option in SampleFileEditor, so it is not safe for renderer dispatch.
+   */
   fileType: string;
+  /** Authoritative media type from upload. Empty for legacy rows and external links. */
+  mimeType?: string;
   fileUrl: string;
   isExternal: boolean;
 }
@@ -29,45 +26,37 @@ interface Props {
   accentHsl: string;
 }
 
-const getFileIcon = (fileType: string) => {
-  const type = fileType.toLowerCase();
-  if (['pdf', 'doc', 'docx', 'txt', 'rtf'].includes(type)) return FileText;
-  if (['mp4', 'avi', 'mov', 'mkv', 'webm', 'scorm'].includes(type)) return FileVideo;
-  if (['json', 'jsonl', 'csv'].includes(type)) return FileJson;
-  if (['wav', 'mp3', 'rttm', 'textgrid'].includes(type)) return FileMusic;
-  if (['zip', 'tar', 'gz'].includes(type)) return FileArchive;
-  if (['png', 'jpg', 'jpeg', 'svg', 'kitti', 'coco json'].includes(type)) return FileImage;
-  if (['xml', 'conll'].includes(type)) return FileCode;
-  return Database;
+/**
+ * Card affordance text. `isViewable` comes from the resolved format rather than
+ * the `fileType` badge, so a card promises a preview only when one exists.
+ */
+const getCardAction = (file: PreviewFile): { label: string; icon: LucideIcon } => {
+  const format = resolveSampleFormat(file);
+  if (format.kind === "external") return { label: "Open link", icon: ExternalLink };
+  if (format.isViewable) return { label: "View sample", icon: Eye };
+  return { label: "Details", icon: Info };
 };
 
 export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewerFile, setViewerFile] = useState<PreviewFile | null>(null);
   const accent = `hsl(${accentHsl})`;
   const itemsPerPage = 10;
   
   useEffect(() => {
     if (isOpen) {
       setCurrentPage(1);
+    } else {
+      setViewerFile(null);
     }
   }, [isOpen]);
 
   const totalPages = Math.ceil(files.length / itemsPerPage);
   const paginatedFiles = files.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-  const handleFileClick = (file: PreviewFile) => {
-    if (file.isExternal) {
-      window.open(file.fileUrl, '_blank');
-    } else {
-      // Simulate download for local files
-      const a = document.createElement('a');
-      a.href = file.fileUrl;
-      a.download = file.title;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  };
+  // Samples are view-only. Selecting a card opens the inline viewer; it must
+  // never build an <a download>, which is what this component used to do.
+  const handleFileClick = (file: PreviewFile) => setViewerFile(file);
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -85,7 +74,8 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
             <span style={{ color: accent }}>Preview Samples:</span> {tabName}
           </DialogTitle>
           <DialogDescription className="text-muted-foreground mt-1">
-            Explore related sample files and documents for this category. Click to view or download.
+            Explore related sample files and documents for this category. Select any card to preview
+            it — samples are view-only and not available for download.
           </DialogDescription>
         </DialogHeader>
 
@@ -96,8 +86,9 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
             </div>
           ) : (
             paginatedFiles.map((file, idx) => {
-              const Icon = getFileIcon(file.fileType);
-              
+              const Icon = sampleIconFor(resolveSampleFormat(file));
+              const action = getCardAction(file);
+
               return (
                 <button
                   key={idx}
@@ -137,13 +128,9 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
 
                   <div className="mt-auto pt-3 border-t border-border/40 flex items-center justify-between text-muted-foreground group-hover:text-foreground transition-colors">
                     <span className="text-[10px] font-medium uppercase tracking-wider">
-                      {file.isExternal ? 'Open link' : 'Download file'}
+                      {action.label}
                     </span>
-                    {file.isExternal ? (
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    ) : (
-                      <Download className="w-3.5 h-3.5" />
-                    )}
+                    <action.icon className="w-3.5 h-3.5" />
                   </div>
                 </button>
               );
@@ -176,6 +163,12 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
           </div>
         )}
       </DialogContent>
+
+      {/*
+        Rendered inside this Dialog's tree so the grid stays mounted (and its
+        pagination state intact) while a single sample is being previewed.
+      */}
+      <SampleViewer file={viewerFile} onClose={() => setViewerFile(null)} accentHsl={accentHsl} />
     </Dialog>
   );
 };

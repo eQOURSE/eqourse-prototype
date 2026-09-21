@@ -12,6 +12,7 @@
     "test": "node --test"
   },
   "dependencies": {
+    "aws4fetch": "1.0.20",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

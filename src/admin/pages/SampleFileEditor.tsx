@@ -13,6 +13,7 @@ import ImageUpload from "../components/ImageUpload";
 import FileUpload from "../components/FileUpload";
 import { adminApi } from "../lib/api";
 import { getSubCategory } from "../lib/sampleHierarchy";
+import { SAMPLE_FILE_ACCEPT, SAMPLE_FILE_ACCEPT_HINT } from "../lib/sampleUploadPolicy";
 import type { Sample } from "../lib/types";
 import { toast } from "sonner";
 
@@ -35,6 +36,7 @@ export default function SampleFileEditor() {
     fileUrl: "",
     fileSize: undefined as number | undefined,
     fileType: "PDF",
+    mimeType: "",
     isExternal: false,
     tabName: tabFromUrl,
     pageSlug: pageSlug ?? "",
@@ -60,6 +62,7 @@ export default function SampleFileEditor() {
         fileUrl: s.fileUrl,
         fileSize: s.fileSize,
         fileType: s.fileType ?? "PDF",
+        mimeType: s.mimeType ?? "",
         isExternal: s.isExternal ?? false,
         tabName: s.tabName ?? "",
         pageSlug: s.pageSlug ?? pageSlug ?? "",
@@ -103,6 +106,7 @@ export default function SampleFileEditor() {
           fileUrl: form.fileUrl,
           fileSize: form.fileSize,
           fileType: form.fileType,
+          mimeType: form.mimeType,
           isExternal: form.isExternal,
           tabName: form.tabName,
           pageSlug: form.pageSlug,
@@ -117,6 +121,7 @@ export default function SampleFileEditor() {
           fileUrl: form.fileUrl,
           fileSize: form.fileSize,
           fileType: form.fileType,
+          mimeType: form.mimeType,
           isExternal: form.isExternal,
         });
         toast.success("Saved");
@@ -216,7 +221,10 @@ export default function SampleFileEditor() {
               checked={form.isExternal}
               onCheckedChange={(checked) => {
                 setField("isExternal", checked);
-                if (checked) setField("fileSize", undefined);
+                if (checked) {
+                  setField("fileSize", undefined);
+                  setField("mimeType", "");
+                }
               }}
             />
           </div>
@@ -237,10 +245,12 @@ export default function SampleFileEditor() {
                 if (!f) {
                   setField("fileUrl", "");
                   setField("fileSize", undefined);
+                  setField("mimeType", "");
                   setFileMeta(null);
                 } else {
                   setField("fileUrl", f.url);
                   setField("fileSize", f.size);
+                  setField("mimeType", f.mimeType);
                   setFileMeta({ originalName: f.originalName });
                   const detected = detectFileType(f.originalName);
                   if (detected !== "Other") {
@@ -251,7 +261,8 @@ export default function SampleFileEditor() {
               }}
               kind="sample-file"
               label="Sample file *"
-              accept="*/*"
+              accept={SAMPLE_FILE_ACCEPT}
+              hint={SAMPLE_FILE_ACCEPT_HINT}
             />
           )}
         </div>

@@ -76,6 +76,7 @@ function formatItem(doc) {
     pageSlug: doc.pageSlug || "",
     tabName: doc.tabName || "",
     fileType: doc.fileType || "",
+    mimeType: doc.mimeType || "",
     isExternal: doc.isExternal || false,
     pagePaths: doc.pagePaths || [],
     createdAt: doc.createdAt.toISOString(),
@@ -144,6 +145,9 @@ const listFilesByPage = async (req, res) => {
       description: doc.description || "",
       thumbnailUrl: doc.thumbnailUrl || "",
       fileType: doc.fileType || "",
+      // The public viewer dispatches on mimeType, falling back to the URL
+      // extension when this is empty (legacy records and external links).
+      mimeType: doc.mimeType || "",
       fileUrl: doc.fileUrl || "",
       isExternal: doc.isExternal || false,
     }));
@@ -265,7 +269,7 @@ const adminGetItem = async (req, res) => {
 const createItem = async (req, res) => {
   try {
     const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
-            pageSlug, tabName, fileType, isExternal, pagePaths } = req.body;
+            pageSlug, tabName, fileType, mimeType, isExternal, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
     const existing = await SampleItem.find({ categoryId: req.params.categoryId });
     const item = await SampleItem.create({
@@ -274,7 +278,8 @@ const createItem = async (req, res) => {
       thumbnailUrl: thumbnailUrl || "", fileUrl: fileUrl || "",
       fileSize: fileSize || undefined, order: order ?? existing.length + 1,
       pageSlug: pageSlug || "", tabName: tabName || "",
-      fileType: fileType || "", isExternal: isExternal || false,
+      fileType: fileType || "", mimeType: mimeType || "",
+      isExternal: isExternal || false,
       pagePaths: normalizePagePaths(pagePaths),
     });
     return res.status(201).json({ success: true, data: formatItem(item) });
@@ -325,7 +330,7 @@ const adminListItemsByPage = async (req, res) => {
 const createItemForPage = async (req, res) => {
   try {
     const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
-            pageSlug, tabName, fileType, isExternal, pagePaths } = req.body;
+            pageSlug, tabName, fileType, mimeType, isExternal, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
     if (!pageSlug) return res.status(400).json({ success: false, message: "pageSlug is required" });
     
@@ -354,6 +359,7 @@ const createItemForPage = async (req, res) => {
       pageSlug: pageSlug || "", 
       tabName: tabName || "",
       fileType: fileType || "", 
+      mimeType: mimeType || "",
       isExternal: isExternal || false,
       pagePaths: normalizePagePaths(pagePaths),
     });

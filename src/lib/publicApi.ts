@@ -315,7 +315,10 @@ export interface PreviewFile {
   title: string;
   description: string;
   thumbnailUrl?: string;
+  /** Display badge only (admin free-text). Never dispatch rendering on this. */
   fileType: string;
+  /** Authoritative media type from upload. Empty for legacy rows and external links. */
+  mimeType?: string;
   fileUrl: string;
   isExternal: boolean;
 }

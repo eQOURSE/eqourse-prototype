@@ -16,9 +16,16 @@ const sampleItemSchema = new mongoose.Schema(
     pageSlug: { type: String, trim: true, default: "", index: true },
     // Which tab within that page (e.g. "Course Book", "Lesson Plan")
     tabName: { type: String, trim: true, default: "" },
-    // File extension badge shown in the preview modal (e.g. "PDF", "DOCX", "MP4", "ZIP")
+    // File extension badge shown in the preview modal (e.g. "PDF", "DOCX", "MP4", "ZIP").
+    // Presentational only — admins can type any value via the "Custom…" option, so this
+    // must never be used to decide how a file is rendered. Use mimeType for that.
     fileType: { type: String, trim: true, default: "" },
-    // Whether this is an external link or a downloadable file
+    // Authoritative IANA media type reported by multer at upload time
+    // (e.g. "application/pdf", "video/mp4"). Drives viewer dispatch.
+    // Empty for legacy records and external links; the viewer falls back to the
+    // file extension in that case.
+    mimeType: { type: String, trim: true, default: "" },
+    // Whether this is an external link or a locally uploaded file
     isExternal: { type: Boolean, default: false },
     // Service pages where this sample is promoted above the FAQ section.
     pagePaths: { type: [String], default: [], index: true },

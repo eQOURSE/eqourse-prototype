@@ -10,12 +10,15 @@ export default function FileUpload({
   kind,
   label = "File",
   accept = ".pdf,.doc,.docx,.xls,.xlsx,.zip",
+  hint,
 }: {
   value?: { url: string; originalName: string; size?: number };
-  onChange: (file: { url: string; originalName: string; size: number } | null) => void;
+  onChange: (file: { url: string; originalName: string; size: number; mimeType: string } | null) => void;
   kind: string;
   label?: string;
   accept?: string;
+  /** Explains the accepted formats to the admin. */
+  hint?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
@@ -28,7 +31,14 @@ export default function FileUpload({
     setBusy(true);
     try {
       const res = await adminApi.uploadFile(file, kind);
-      onChange({ url: res.url, originalName: res.originalName, size: res.size });
+      // mimeType is what the public viewer dispatches on. Prefer the server's
+      // value, but fall back to the browser's for the mock/offline admin mode.
+      onChange({
+        url: res.url,
+        originalName: res.originalName,
+        size: res.size,
+        mimeType: res.mimeType || file.type || "",
+      });
     } catch {
       toast.error("Upload failed");
     } finally {
@@ -39,6 +49,7 @@ export default function FileUpload({
   return (
     <div>
       <div className="text-sm font-medium mb-2">{label}</div>
+      {hint && <p className="text-xs text-muted-foreground mb-2">{hint}</p>}
       <input
         ref={inputRef}
         type="file"

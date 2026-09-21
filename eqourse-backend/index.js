@@ -25,6 +25,7 @@ const adminRouter = require("./src/router/adminRouter");
 // Upload directory for static file serving
 const { UPLOAD_DIR } = require("./src/controller/uploadController");
 const { isPrivateUploadRequest, removeUploadedFiles } = require("./src/utils/privateUploads");
+const { setUploadHeaders } = require("./src/utils/uploadServing");
 
 const app = express();
 
@@ -45,8 +46,14 @@ const blockPrivateUploads = (req, res, next) => {
   if (isPrivateUploadRequest(req.path)) return res.status(404).end();
   return next();
 };
-app.use("/api/uploads", blockPrivateUploads, express.static(UPLOAD_DIR));
-app.use("/uploads", blockPrivateUploads, express.static(UPLOAD_DIR));
+// Uploaded filenames are unique and never reused, so responses are immutable and
+// safe to cache at the CDN edge. setHeaders also sandboxes uploaded HTML/SVG and
+// forces inline rendering to keep samples view-only — see utils/uploadServing.js.
+const uploadStatic = express.static(UPLOAD_DIR, {
+  setHeaders: (res, filePath) => setUploadHeaders(res, filePath),
+});
+app.use("/api/uploads", blockPrivateUploads, uploadStatic);
+app.use("/uploads", blockPrivateUploads, uploadStatic);
 
 // ── Public Routes ────────────────────────────────────────────────────────────
 app.use("/api/contact", contactRouter);       // POST /api/contact (public submit)

@@ -100,6 +100,7 @@ RewriteRule ^content-services/subject-matter-experts/training-certification/?$ h
 RewriteRule ^content-services/subject-matter-experts/live-tutors/?$ https://www.eqourse.com/live-online-tutor [R=301,L,NE]
 RewriteRule ^content-services/subject-matter-experts/live-online-tutors/?$ https://www.eqourse.com/live-online-tutor [R=301,L,NE]
 RewriteRule ^contact/?$ https://www.eqourse.com/contact-us [R=301,L,NE]
+RewriteRule ^case-studies/?$ https://www.eqourse.com/casestudy [R=301,L,NE]
 
 # Known /blogs/ articles redirect above; unknown retired slugs return 404.
 

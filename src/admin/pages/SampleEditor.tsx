@@ -12,6 +12,7 @@ import PageHeader from "../components/PageHeader";
 import ImageUpload from "../components/ImageUpload";
 import FileUpload from "../components/FileUpload";
 import ContentPlacementPicker from "../components/ContentPlacementPicker";
+import { SAMPLE_FILE_ACCEPT, SAMPLE_FILE_ACCEPT_HINT } from "../lib/sampleUploadPolicy";
 import { adminApi } from "../lib/api";
 import { SAMPLE_HIERARCHY } from "../lib/sampleHierarchy";
 import type { Sample } from "../lib/types";
@@ -41,6 +42,7 @@ const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "category
   pageSlug: "",
   tabName: "",
   fileType: "PDF",
+  mimeType: "",
   isExternal: false,
   pagePaths: [],
 };
@@ -78,6 +80,7 @@ export default function SampleEditor() {
         pageSlug: s.pageSlug ?? "",
         tabName: s.tabName ?? "",
         fileType: s.fileType ?? "PDF",
+        mimeType: s.mimeType ?? "",
         isExternal: s.isExternal ?? false,
         pagePaths: s.pagePaths ?? [],
       });
@@ -279,6 +282,7 @@ export default function SampleEditor() {
                 setField("isExternal", checked);
                 if (checked) {
                   setField("fileSize", undefined);
+                  setField("mimeType", "");
                 }
               }}
             />
@@ -300,10 +304,12 @@ export default function SampleEditor() {
                 if (!f) {
                   setField("fileUrl", "");
                   setField("fileSize", undefined);
+                  setField("mimeType", "");
                   setFileMeta(null);
                 } else {
                   setField("fileUrl", f.url);
                   setField("fileSize", f.size);
+                  setField("mimeType", f.mimeType);
                   setFileMeta({ originalName: f.originalName });
                   // Auto detect file type
                   const detected = detectFileType(f.originalName);
@@ -315,7 +321,8 @@ export default function SampleEditor() {
               }}
               kind="sample-file"
               label="Sample file *"
-              accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.json,.txt,.zip,.png,.jpg,.mp4,.mov,.webm,.wav,.mp3,.scorm"
+              accept={SAMPLE_FILE_ACCEPT}
+              hint={SAMPLE_FILE_ACCEPT_HINT}
             />
           )}
         </div>

@@ -133,6 +133,8 @@ export interface Sample {
   pageSlug?: string;
   tabName?: string;
   fileType?: string;
+  /** Authoritative media type from upload; drives the public viewer. */
+  mimeType?: string;
   isExternal?: boolean;
   pagePaths?: string[];
   createdAt: string;
