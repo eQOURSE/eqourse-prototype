@@ -143,7 +143,4 @@ export const legacyRedirects: Record<string, string> = {
 
   // ── Contact page: route was previously commented out, leaving /contact dead ──
   "/contact": "/contact-us",
-
-  // ── Case studies overview page ──
-  "/case-studies": "/casestudy",
 };
