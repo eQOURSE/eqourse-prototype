@@ -101,13 +101,33 @@ jobs:
             rm -rf dist
             tar -xzf dist-output.tar.gz
             rm -f dist-output.tar.gz
+            NGINX_CONFIG=/etc/nginx/conf.d/eqourse.conf
+            NGINX_ROUTES=/opt/eqourse-prototype/deploy/nginx/eqourse-route-handling.conf
+            NGINX_BACKUP="$(mktemp)"
+            sudo cp -a "$NGINX_CONFIG" "$NGINX_BACKUP"
+
+            restore_nginx_config() {
+              sudo cp -a "$NGINX_BACKUP" "$NGINX_CONFIG"
+              sudo nginx -t
+              rm -f "$NGINX_BACKUP"
+            }
+
+            if ! sudo "$(command -v node)" scripts/install-nginx-route-include.mjs "$NGINX_CONFIG" "$NGINX_ROUTES"; then
+              restore_nginx_config
+              exit 1
+            fi
+            if ! sudo nginx -t; then
+              restore_nginx_config
+              exit 1
+            fi
             echo "🔎 Verifying generated Nginx redirect rules are loaded..."
             sudo nginx -T 2>&1 | grep -F "location = /casestudy/multilingual-pen-tab-videos-and-worksheets-in-6-languages" >/dev/null || {
               echo "❌ /opt/eqourse-prototype/deploy/nginx/eqourse-route-handling.conf is not included by the production Nginx server block"
+              restore_nginx_config
               exit 1
             }
-            sudo nginx -t
             sudo systemctl reload nginx
+            rm -f "$NGINX_BACKUP"
 
             check_redirect() {
               source_url="$1"
