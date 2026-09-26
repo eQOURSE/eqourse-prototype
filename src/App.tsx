@@ -77,6 +77,10 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const TuTrain = lazy(() => import("./pages/TuTrain.tsx"));
 const Sitemap = lazy(() => import("./pages/Sitemap.tsx"));
 const Gallery = lazy(() => import("./pages/Gallery.tsx"));
+const Events = lazy(() => import("./pages/Events.tsx"));
+const EventDetail = lazy(() => import("./pages/EventDetail.tsx"));
+const EventBrochure = lazy(() => import("./pages/EventBrochure.tsx"));
+const EventVideo = lazy(() => import("./pages/EventVideo.tsx"));
 const ChatWidget = lazy(() => import("./components/chatbot/ChatWidget"));
 
 const AdminLayout = lazy(() => import("./admin/components/AdminLayout"));
@@ -131,6 +135,10 @@ const App = () => (
               <Route path="/privacy_policy" element={<PrivacyPolicy />} />
               <Route path="/tutrain" element={<TuTrain />} />
               <Route path="/sitemap" element={<Sitemap />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/events/:slug" element={<EventDetail />} />
+              <Route path="/events/:slug/brochure" element={<EventBrochure />} />
+              <Route path="/events/:slug/video" element={<EventVideo />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/samples" element={<Samples />} />
