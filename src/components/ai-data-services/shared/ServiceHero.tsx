@@ -223,16 +223,28 @@ const ServiceHero = ({
           <div className="relative min-w-0 animate-slide-up-delayed">
             <div className={`relative rounded-3xl overflow-hidden shadow-elevated border ${isLight ? "border-white/80 bg-white/55" : "border-white/10 bg-gradient-to-br from-primary/20 via-foreground/30 to-accent/20"}`}>
               {videoSrc ? (
-                /* Responsive 16:9 YouTube embed — SEO: title attr used by Google for video indexing */
                 <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-                  <iframe
-                    className="absolute inset-0 w-full h-full border-0"
-                    src={videoSrc}
-                    title={imageAlt || "eQOURSE — Content Service and AI Data Services"}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    loading="lazy"
-                  />
+                  {videoSrc.includes('.mp4') ? (
+                    <video
+                      className="absolute inset-0 w-full h-full border-0 object-cover"
+                      src={videoSrc}
+                      title={imageAlt || "eQOURSE — Content Service and AI Data Services"}
+                      controls
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <iframe
+                      className="absolute inset-0 w-full h-full border-0"
+                      src={videoSrc}
+                      title={imageAlt || "eQOURSE — Content Service and AI Data Services"}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  )}
                 </div>
               ) : imageSrc ? (
                 /* Fill the hero box completely - no side gaps regardless of source ratio */

@@ -124,7 +124,7 @@ const HeroSection = () => {
           poster={heroVideoPoster}
           aria-hidden="true"
         >
-          <source src="/hero-bg-3d-optimized.mp4" type="video/mp4" />
+          <source src="https://cdn.eqourse.com/assets/hero-bg-3d-optimized.mp4" type="video/mp4" />
         </video>
         {/* Layered overlays for readability */}
         <div
