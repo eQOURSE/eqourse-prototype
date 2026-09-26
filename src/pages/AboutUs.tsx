@@ -98,7 +98,7 @@ const AboutUs = () => {
         subtext="Global AI data and learning content solutions, commercially led from Singapore and delivered from India."
         ctaText="Explore Services"
         ctaLink="#who-we-are"
-        videoSrc="https://www.youtube.com/embed/ar_kilRmBLs?rel=0&modestbranding=1"
+        videoSrc="https://cdn.eqourse.com/assets/aboutus.mp4"
         imageAlt="eQOURSE team working collaboratively on AI data and content services — Content Service and AI Data Company India Singapore"
         rotatingBadges={[
           { icon: Globe, title: "Global Reach", subtitle: "200+ clients worldwide", color: "hsl(190 85% 68%)" },

@@ -19,13 +19,14 @@ const AboutSection = () => {
           <div className="relative">
             <div className="rounded-2xl overflow-hidden shadow-elevated relative aspect-video bg-black">
               {showVideo ? (
-                <iframe
+                <video
                   id="about-video-player"
-                  className="absolute inset-0 w-full h-full border-0"
-                  src="https://www.youtube-nocookie.com/embed/BglRq9Qu0RE?autoplay=1&enablejsapi=1&rel=0"
+                  className="absolute inset-0 w-full h-full border-0 object-cover"
+                  src="https://cdn.eqourse.com/assets/homepage.mp4"
                   title="eQOURSE - Global AI Data and Learning Content Solutions Partner"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
+                  controls
+                  autoPlay
+                  playsInline
                 />
               ) : (
                 <button
