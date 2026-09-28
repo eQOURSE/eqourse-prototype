@@ -109,7 +109,7 @@ jobs:
             restore_nginx_config() {
               sudo cp -a "$NGINX_BACKUP" "$NGINX_CONFIG"
               sudo nginx -t
-              rm -f "$NGINX_BACKUP"
+              sudo rm -f "$NGINX_BACKUP"
             }
 
             if ! sudo "$(command -v node)" scripts/install-nginx-route-include.mjs "$NGINX_CONFIG" "$NGINX_ROUTES"; then
@@ -127,7 +127,7 @@ jobs:
               exit 1
             }
             sudo systemctl reload nginx
-            rm -f "$NGINX_BACKUP"
+            sudo rm -f "$NGINX_BACKUP"
 
             check_redirect() {
               source_url="$1"
