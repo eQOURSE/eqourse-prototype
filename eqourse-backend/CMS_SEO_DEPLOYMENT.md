@@ -7,15 +7,15 @@ source: the SEO title and SEO description stored with the CMS entry.
 ## Production configuration
 
 Set `FRONTEND_DIST_DIR` to the live frontend document root that Nginx actually
-serves. It must not point at the project build copy. In the current eQOURSE
-deployment, the build is created in `/opt/eqourse-prototype/dist` and copied to
-`/var/www/eqourse/dist`; the latter is the required publisher target.
+serves. The confirmed production document root is
+`/opt/eqourse-prototype/dist`. Published HTML and sitemap updates must target
+that directory.
 
 Recommended production values:
 
 ```dotenv
 PUBLIC_SITE_URL=https://www.eqourse.com
-FRONTEND_DIST_DIR=/var/www/eqourse/dist
+FRONTEND_DIST_DIR=/opt/eqourse-prototype/dist
 ```
 
 After copying a new frontend build, restore write ownership before restarting
@@ -23,11 +23,11 @@ PM2. The backend process runs as `deployer` and must be able to create article
 directories and replace `sitemap.xml` atomically:
 
 ```bash
-sudo chown -R deployer:deployer /var/www/eqourse/dist
+sudo chown -R deployer:deployer /opt/eqourse-prototype/dist
 ```
 
 If `FRONTEND_DIST_DIR` is accidentally omitted, Linux production now detects
-`/var/www/eqourse/dist` when that live directory exists. An explicit value is
+`/opt/eqourse-prototype/dist` when that live directory exists. An explicit value is
 still recommended. A write failure is logged, but it does not stop the public
 API: careers, blogs, case studies, samples and admin data remain available while
 the SEO publishing permission is repaired.

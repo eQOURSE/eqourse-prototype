@@ -30,6 +30,13 @@ router.post("/login", loginAdmin);
 // All routes below require JWT auth
 // ═══════════════════════════════════════════════════════════════
 router.use(verifyToken);
+const eventMediaCtrl = require("../controller/eventMediaController");
+router.get("/event-media/config", eventMediaCtrl.config);
+router.post("/event-media/upload", eventMediaCtrl.sign);
+router.post("/event-media/file", eventMediaCtrl.uploadFile);
+router.post("/event-media", eventMediaCtrl.create);
+router.get("/events/:eventSlug/media", eventMediaCtrl.adminList);
+router.patch("/event-media/:id", eventMediaCtrl.update);
 
 // ── Analytics ────────────────────────────────────────────────
 router.get("/analytics/summary", analyticsCtrl.getAnalyticsSummary);

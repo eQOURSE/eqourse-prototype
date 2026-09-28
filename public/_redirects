@@ -1,5 +1,8 @@
 # Generated from src/routes/legacyRedirects.ts. Do not edit by hand.
 https://eqourse.com/* https://www.eqourse.com/:splat 301!
+/events/business-tour-2026 /events 301!
+/events/business-tour-2026/brochure /events/brochure 301!
+/events/business-tour-2026/video /events/presentation 301!
 /index / 301!
 /index.php / 301!
 /index.html / 301!
@@ -103,6 +106,11 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /case-studies /casestudy 301!
 # Known /blogs/ articles redirect above; unknown retired slugs return 404.
 # Canonicals, sitemap URLs and internal links use no trailing slash.
+/events/china-tour-2026/ /events/china-tour-2026 301!
+/events/japan-tour-2026/ /events/japan-tour-2026 301!
+/events/south-korea-tour-2026/ /events/south-korea-tour-2026 301!
+/events/singapore-tour-2026/ /events/singapore-tour-2026 301!
+/events/brochure/ /events/brochure 301!
 /2d-3d-video-samples/ /2d-3d-video-samples 301!
 /2d-3d-videos/ /2d-3d-videos 301!
 /aboutus/ /aboutus 301!

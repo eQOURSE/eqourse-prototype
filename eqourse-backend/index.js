@@ -5,6 +5,7 @@ const path = require("path");
 require("dotenv").config();
 const logger = require("./src/utils/logger");
 const Blog = require("./src/model/blog");
+const EventMedia = require("./src/model/eventMedia");
 const CaseStudy = require("./src/model/caseStudy");
 const { syncCmsSeoPage, getCmsSeoTarget } = require("./src/utils/cmsSeoPublisher");
 
@@ -51,6 +52,7 @@ app.use("/uploads", blockPrivateUploads, express.static(UPLOAD_DIR));
 // ── Public Routes ────────────────────────────────────────────────────────────
 app.use("/api/contact", contactRouter);       // POST /api/contact (public submit)
 app.use("/api/free-pilot", pilotRouter);       // POST /api/free-pilot (public submit)
+app.use("/api/events", require("./src/router/eventRouter"));
 app.use("/api/blogs", blogRouter);             // GET /api/blogs, GET /api/blogs/:slug
 app.use("/api/case-studies", caseStudyRouter); // GET /api/case-studies, GET /api/case-studies/:slug
 app.use("/api/sample-categories", sampleRouter); // GET /api/sample-categories
@@ -98,9 +100,10 @@ const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/eqourse";
 
 async function reconcilePublishedCmsSeo() {
   logger.info(`CMS SEO live document root: ${getCmsSeoTarget()}`);
-  const [blogs, caseStudies] = await Promise.all([
+  const [blogs, caseStudies, eventPhotos] = await Promise.all([
     Blog.find({ status: "published" }).lean(),
     CaseStudy.find({ status: "published" }).lean(),
+    EventMedia.find({ status: "published" }).lean(),
   ]);
 
   for (const blog of blogs) {
@@ -111,6 +114,7 @@ async function reconcilePublishedCmsSeo() {
   }
 
   logger.info(`CMS SEO reconciled: ${blogs.length} blog(s), ${caseStudies.length} case study/case studies`);
+  for (const photo of eventPhotos) await syncCmsSeoPage("event-photo", photo);
 }
 
 mongoose

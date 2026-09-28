@@ -95,3 +95,10 @@ test("slug validation prevents writes outside the intended article directory", a
     /invalid slug/,
   );
 });
+
+test('country photo publication and unpublication own their nested SEO route', async (t) => {
+ const dist=await createDist();t.after(()=>fs.rm(dist,{recursive:true,force:true}));
+ const photo={eventSlug:'japan-tour-2026',slug:'team-meeting-123',title:'Tokyo meeting',description:'Our team discussing multilingual data.',imageAlt:'Team meeting in Tokyo',imageTitle:'Tokyo meeting',imageUrl:'https://cdn.eqourse.com/events/japan-tour-2026/gallery/photo.jpg',status:'published',seo:{title:'Tokyo meeting | eQOURSE',description:'Our team discussing multilingual data.',ogImageUrl:'https://cdn.eqourse.com/events/japan-tour-2026/gallery/photo.jpg'}};
+ await syncCmsSeoPage('event-photo',photo);const output=path.join(dist,'events',photo.eventSlug,'highlights',photo.slug,'index.html');const html=await fs.readFile(output,'utf8');assert.match(html,/ImageObject/);assert.match(html,/alt="Team meeting in Tokyo"/);assert.equal(count(html,/<title\b/gi),1);assert.match(await fs.readFile(path.join(dist,'sitemap.xml'),'utf8'),/japan-tour-2026\/highlights\/team-meeting-123/);
+ photo.status='draft';await syncCmsSeoPage('event-photo',photo);await assert.rejects(fs.access(output));assert.doesNotMatch(await fs.readFile(path.join(dist,'sitemap.xml'),'utf8'),/team-meeting-123/);
+});

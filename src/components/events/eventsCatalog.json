@@ -1,0 +1,134 @@
+[
+  {
+    "slug": "china-tour-2026",
+    "title": "China Business Tour 2026",
+    "subtitle": "AI • Manufacturing • Technology",
+    "date": "",
+    "dateLabel": "2026 · Dates to be announced",
+    "city": "Cities to be announced",
+    "country": "China",
+    "countryCode": "CN",
+    "location": "China",
+    "venue": "Venue to be announced",
+    "category": "Business Tour",
+    "coordinates": [
+      116.4,
+      39.9
+    ],
+    "description": "Connect with eQOURSE during our planned China business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    "body": "Our planned China tour brings conversations about AI data and learning closer to organisations in the region. Meet the eQOURSE team to discuss your project requirements, quality standards and delivery needs. Dates, meeting locations and the final itinerary will be announced here.",
+    "coverImage": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Destination photography of China; planned business tour location",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": true,
+    "status": "upcoming",
+    "officialUrl": null
+  },
+  {
+    "slug": "japan-tour-2026",
+    "title": "Japan Business Tour 2026",
+    "subtitle": "AI • Robotics • Technology",
+    "date": "",
+    "dateLabel": "2026 · Dates to be announced",
+    "city": "Tokyo",
+    "country": "Japan",
+    "countryCode": "JP",
+    "location": "Tokyo, Japan",
+    "venue": "Venue to be announced",
+    "category": "Business Tour",
+    "coordinates": [
+      139.69,
+      35.68
+    ],
+    "description": "Connect with eQOURSE during our planned Japan business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    "body": "Our planned Japan tour brings conversations about AI data and learning closer to organisations in the region. Meet the eQOURSE team to discuss your project requirements, quality standards and delivery needs. Dates, meeting locations and the final itinerary will be announced here.",
+    "coverImage": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Destination photography of Japan; planned business tour location",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": true,
+    "status": "upcoming",
+    "officialUrl": null
+  },
+  {
+    "slug": "south-korea-tour-2026",
+    "title": "South Korea Business Tour 2026",
+    "subtitle": "AI • Data • EdTech",
+    "date": "",
+    "dateLabel": "2026 · Dates to be announced",
+    "city": "Seoul",
+    "country": "South Korea",
+    "countryCode": "KR",
+    "location": "Seoul, South Korea",
+    "venue": "Venue to be announced",
+    "category": "Business Tour",
+    "coordinates": [
+      126.98,
+      37.57
+    ],
+    "description": "Connect with eQOURSE during our planned South Korea business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    "body": "Our planned South Korea tour brings conversations about AI data and learning closer to organisations in the region. Meet the eQOURSE team to discuss your project requirements, quality standards and delivery needs. Dates, meeting locations and the final itinerary will be announced here.",
+    "coverImage": "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Destination photography of South Korea; planned business tour location",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": true,
+    "status": "upcoming",
+    "officialUrl": null
+  },
+  {
+    "slug": "singapore-tour-2026",
+    "title": "Singapore Business Tour 2026",
+    "subtitle": "AI • Enterprise Technology • Education",
+    "date": "",
+    "dateLabel": "2026 · Dates to be announced",
+    "city": "Singapore",
+    "country": "Singapore",
+    "countryCode": "SG",
+    "location": "Singapore",
+    "venue": "Venue to be announced",
+    "category": "Business Tour",
+    "coordinates": [
+      103.82,
+      1.35
+    ],
+    "description": "Connect with eQOURSE during our planned Singapore business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    "body": "Our planned Singapore tour brings conversations about AI data and learning closer to organisations in the region. Meet the eQOURSE team to discuss your project requirements, quality standards and delivery needs. Dates, meeting locations and the final itinerary will be announced here.",
+    "coverImage": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Destination photography of Singapore; planned business tour location",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": true,
+    "status": "upcoming",
+    "officialUrl": null
+  }
+]

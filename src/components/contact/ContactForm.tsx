@@ -1,3 +1,4 @@
+import { getEventBySlug } from "@/components/events/eventsData";
 import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,8 @@ import { cn } from "@/lib/utils";
 
 const ContactForm = () => {
   const [searchParams] = useSearchParams();
+  const isEventReferral = searchParams.get("interest") === "events";
+  const referredEvent = getEventBySlug(searchParams.get("event") || "");
   const isRoboticsReferral = searchParams.get("service") === "robotics-training-data";
   const formStartTracked = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -263,7 +266,7 @@ const ContactForm = () => {
           <select
             id="interest"
             required
-            defaultValue={isRoboticsReferral ? "Robotics / Physical AI Data" : ""}
+            defaultValue={isEventReferral ? "Event Meeting" : isRoboticsReferral ? "Robotics / Physical AI Data" : ""}
             className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow cursor-pointer"
           >
             <option value="" disabled>Select Service Category</option>
@@ -290,6 +293,7 @@ const ContactForm = () => {
               <option value="Model Testing">Real-World Model Testing (TuTrain Platform)</option>
             </optgroup>
             <optgroup label="--- Other ---">
+              <option value="Event Meeting">Event / Business Tour Meeting</option>
               <option value="Partnership">Partnership / Reseller Inquiry</option>
               <option value="Careers">Careers / Job Inquiry</option>
               <option value="General">General Inquiry</option>
@@ -331,6 +335,7 @@ const ContactForm = () => {
         <label htmlFor="message" className="text-sm font-medium text-foreground">Tell Us About Your Project <span className="text-xs text-muted-foreground">(Optional)</span></label>
         <textarea
           id="message"
+          defaultValue={isEventReferral ? `I would like to meet eQOURSE${referredEvent ? ` during the ${referredEvent.title}` : " at an upcoming event"}. My preferred dates and project interests are: ` : ""}
           rows={5}
           maxLength={2000}
           placeholder="Describe your project requirements, timeline, volume, languages needed, and any specific details..."

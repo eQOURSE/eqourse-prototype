@@ -77,6 +77,8 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const TuTrain = lazy(() => import("./pages/TuTrain.tsx"));
 const Sitemap = lazy(() => import("./pages/Sitemap.tsx"));
 const Gallery = lazy(() => import("./pages/Gallery.tsx"));
+const AdminEventMedia = lazy(() => import("./admin/pages/EventMedia.tsx"));
+const EventHighlight = lazy(() => import("./pages/EventHighlight.tsx"));
 const Events = lazy(() => import("./pages/Events.tsx"));
 const EventDetail = lazy(() => import("./pages/EventDetail.tsx"));
 const EventBrochure = lazy(() => import("./pages/EventBrochure.tsx"));
@@ -136,6 +138,9 @@ const App = () => (
               <Route path="/tutrain" element={<TuTrain />} />
               <Route path="/sitemap" element={<Sitemap />} />
               <Route path="/events" element={<Events />} />
+              <Route path="/events/brochure" element={<EventBrochure />} />
+              <Route path="/events/presentation" element={<EventVideo />} />
+              <Route path="/events/:slug/highlights/:imageSlug" element={<EventHighlight />} />
               <Route path="/events/:slug" element={<EventDetail />} />
               <Route path="/events/:slug/brochure" element={<EventBrochure />} />
               <Route path="/events/:slug/video" element={<EventVideo />} />
@@ -226,6 +231,7 @@ const App = () => (
                 <Route index element={<AdminDashboard />} />
                 <Route path="contact-queries" element={<AdminContactQueries />} />
                 <Route path="pilot-queries" element={<AdminPilotQueries />} />
+                <Route path="events" element={<AdminEventMedia />} />
                 <Route path="blogs" element={<AdminBlogs />} />
                 <Route path="blogs/new" element={<AdminBlogEditor />} />
                 <Route path="blogs/:id" element={<AdminBlogEditor />} />

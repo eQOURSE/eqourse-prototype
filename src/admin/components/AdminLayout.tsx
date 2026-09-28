@@ -26,6 +26,7 @@ const navItems = [
   { to: "/admin/careers", label: "Careers", icon: Briefcase },
   { to: "/admin/talent-pool", label: "Talent Pool", icon: UserRoundSearch },
   { to: "/admin/vendors", label: "Vendors", icon: Building2 },
+  { to: "/admin/events", label: "Event Photos", icon: BookOpen },
   { to: "/admin/blogs", label: "Blogs", icon: FileText },
   { to: "/admin/case-studies", label: "Case Studies", icon: BookOpen },
   { to: "/admin/sample-categories", label: "Samples", icon: FolderTree },

@@ -1464,7 +1464,22 @@ const gscLandingPageContent = {
   },
 };
 
+
+function buildEventsFallback(path) {
+  const catalog = JSON.parse(readFileSync(join(root, 'src/components/events/eventsCatalog.json'), 'utf8'));
+  const esc = escapeHtml;
+  const link = (e) => '<a href="/events/' + e.slug + '">' + esc(e.title) + '</a>';
+  const resource = (e) => '<section><h2>Brochure &amp; Presentation</h2><p><a href="/events/brochure">Open brochure</a> <a href="' + e.brochure.url + '">Download Business Tour 2026 Brochure PDF</a> <a href="/events/presentation">Open Presentation</a></p><p>Presentation video is in development. Coming soon.</p></section>';
+  if (path === '/events/brochure') return '<main data-seo-prerender="true"><h1>eQOURSE Company &amp; Business Tour Brochure</h1><p>Explore our AI data, multilingual, learning and content services.</p>' + resource(catalog[0]) + '<a href="/events">Explore country tours</a></main>';
+  const detail = catalog.find(e => path === '/events/' + e.slug);
+  if (detail) return '<main data-seo-prerender="true"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/events">Events</a> / ' + esc(detail.title) + '</nav><h1>' + esc(detail.title) + '</h1><p>' + esc(detail.dateLabel) + ' · ' + esc(detail.location) + ' · ' + esc(detail.venue) + '</p><p>' + esc(detail.description) + '</p><h2>About the Event</h2><p>' + esc(detail.body) + '</p><h2>Why eQOURSE Is Attending</h2><p>Connecting with AI teams, education organisations, publishers and technology partners to discuss reliable training data, multilingual expertise and scalable learning and content delivery.</p><h2>What We’re Exploring</h2><ul><li>AI Data Collection</li><li>Data Annotation &amp; Labelling</li><li>LLM SFT, RLHF &amp; Human Feedback</li><li>Speech &amp; Multilingual Data</li><li>Computer Vision &amp; Spatial Data</li><li>Learning &amp; Content Solutions</li></ul><h2>Meet eQOURSE at the Event</h2><p><a href="/contact-us?interest=events&amp;event=' + detail.slug + '">Schedule a Meeting</a></p>' + resource(detail) + '<h2>Explore Our Other Destinations</h2>' + catalog.filter(e => e.slug !== detail.slug).map(link).join(' ') + '</main>';
+  const dataSource = readFileSync(join(root, 'src/components/events/eventsData.ts'), 'utf8');
+  const faqs = [...dataSource.matchAll(/\['([^']+)', '([^']+)'\]/g)];
+  return '<main data-seo-prerender="true"><h1>eQOURSE Events, Conferences &amp; Global Business Tours</h1><p>Meet eQOURSE at leading AI, technology, education and innovation events around the world. Discover where our team is connecting with global organisations.</p><p><a href="#upcoming">Explore Upcoming Events</a> <a href="/contact-us?interest=events">Meet Our Team</a></p>' + resource(catalog[0]) + '<section id="upcoming"><h2>Upcoming Events &amp; Business Tours</h2><p>Discover where eQOURSE will be next. Meet our team to discuss AI data services, learning solutions, multilingual data and scalable content operations.</p>' + catalog.map(e => '<article><h3>' + link(e) + '</h3><p>' + esc(e.dateLabel) + ' · ' + esc(e.location) + ' · ' + esc(e.venue) + '</p><p>Business Tour · AI &amp; Technology · EdTech</p><p>' + esc(e.description) + '</p><p>eQOURSE Focus: AI Data Services, Multilingual Data, Learning Solutions, Content Services</p></article>').join('') + '</section><h2>Connecting Across Global AI &amp; Education Markets</h2><p>China, Tokyo in Japan, Seoul in South Korea and Singapore are our planned 2026 destinations.</p><h2>What We Bring to Global Events</h2><p><a href="/ai-data-services">AI Data Services</a> <a href="/ai-data-services/annotation-labeling">LLM &amp; Human Feedback</a> <a href="/ai-data-services/data-collection">Multilingual Data</a> <a href="/robotics-training-data-services/3d-spatial-annotation">Computer Vision &amp; Spatial Data</a> <a href="/learning-solutions">Learning Solutions</a> <a href="/smes">Expert Workforce</a></p><h2>Past Events &amp; Global Engagements</h2><p>Tour highlights will be added after each engagement.</p><h2>eQOURSE Around the World</h2><p><a href="/gallery">Explore our team, working spaces and business engagements.</a></p><h2>Let’s Talk About Your Next AI or Learning Project</h2><p>1,000+ Verified Experts · 1M+ AI Training Prompts · Up to 4,000 Learning Resources / Day · Global Delivery Capabilities</p><h2>Frequently Asked Questions</h2>' + faqs.map(m => '<details><summary>' + esc(m[1]) + '</summary><p>' + esc(m[2]) + '</p></details>').join('') + '<h2>Meet eQOURSE at an Upcoming Event</h2><p><a href="/contact-us?interest=events">Schedule a Meeting</a></p><script type="application/ld+json">' + JSON.stringify({'@context':'https://schema.org','@type':'CollectionPage',name:'eQOURSE Events, Conferences & Global Business Tours',url:SITE_URL+'/events',mainEntity:{'@type':'ItemList',itemListElement:catalog.map((e,i)=>({'@type':'ListItem',position:i+1,name:e.title,url:SITE_URL+'/events/'+e.slug}))}}).replace(/</g,'\\u003c') + '</script></main>';
+}
+
 function buildCrawlFallback({ path, title, description, crawlHtml = "", source }) {
+  if (path === "/events" || /^\/events\/[^/]+$/.test(path)) return buildEventsFallback(path);
   if (path === "/") return buildHomepageFallback();
   if (path === "/ai-data-services/data-collection") return buildDataCollectionFallback();
   if (path === "/ai-data-services/data-collection/image-data-collection") return buildImageDataCollectionFallback();
@@ -1664,9 +1679,10 @@ async function fetchCmsItems(resource) {
 }
 
 async function loadCmsSeoEntries() {
-  const [blogs, caseStudies] = await Promise.all([
+  const [blogs, caseStudies, ...photoGroups] = await Promise.all([
     fetchCmsItems("blogs"),
     fetchCmsItems("case-studies"),
+    ...["china", "japan", "south-korea", "singapore"].map(country => fetchCmsItems(`events/${country}-tour-2026/media`)),
   ]);
 
   const blogEntries = blogs
@@ -1703,7 +1719,13 @@ async function loadCmsSeoEntries() {
       )).join(""),
     }));
 
-  return [...blogEntries, ...caseStudyEntries].filter(
+  const photoEntries = photoGroups.flat().filter(photo => photo.slug && photo.eventSlug).map(photo => ({
+    path: `/events/${photo.eventSlug}/highlights/${photo.slug}`,
+    title: photo.seo?.title || photo.title, description: photo.seo?.description || photo.description,
+    image: photo.imageUrl, lastmod: photo.updatedAt || photo.publishedAt, source: 'event-photo',
+    crawlHtml: `<figure><img src="${escapeHtml(photo.imageUrl)}" alt="${escapeHtml(photo.imageAlt)}" title="${escapeHtml(photo.imageTitle)}"/><figcaption>${escapeHtml(photo.description)}</figcaption></figure><script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'ImageObject',name:photo.title,description:photo.description,contentUrl:photo.imageUrl}).replace(/</g,'\\u003c')}</script>`,
+  }));
+  return [...blogEntries, ...caseStudyEntries, ...photoEntries].filter(
     (entry) => entry.title?.trim() && entry.description?.trim(),
   );
 }
@@ -1758,6 +1780,15 @@ async function main() {
     JSON.stringify(entries.map(({ crawlHtml, ...entry }) => entry), null, 2),
     "utf-8",
   );
+
+  const presentationPath = join(distDir, 'events/presentation/index.html');
+  mkdirSync(dirname(presentationPath), { recursive: true });
+  const presentation = buildHead(template, {
+    path: '/events/presentation', title: 'eQOURSE Company Presentation',
+    description: 'The eQOURSE company presentation video is in development. Explore our brochure and country tours.',
+    crawlHtml: '<h2>Presentation in development</h2><p>Our video is coming soon.</p><a href="/events/brochure">Open Brochure</a>',
+  }).replace('index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1', 'noindex,follow');
+  writeFileSync(presentationPath, presentation, 'utf8');
 
   const sitemap = [
     '<?xml version="1.0" encoding="UTF-8"?>',

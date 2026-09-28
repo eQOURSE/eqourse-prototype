@@ -31,10 +31,9 @@ function getFrontendDistDir() {
     return path.resolve(process.env.FRONTEND_DIST_DIR);
   }
 
-  // The production deployment builds in /opt and then copies the public files
-  // to Nginx's document root. Writing back into /opt/dist succeeds but changes
-  // nothing on the live site. Prefer the known live root when it exists so a
-  // missing environment variable cannot silently publish to the wrong copy.
+  // The confirmed live Nginx document root is /opt/eqourse-prototype/dist.
+  // Prefer an explicit setting, then detect that live root; keep the previous
+  // /var/www root as a fallback for installations using the older layout.
   const liveCandidates = [
     process.env.FRONTEND_LIVE_DIST_DIR,
     process.platform !== "win32" ? "/opt/eqourse-prototype/dist" : undefined,
@@ -91,6 +90,10 @@ function stripManagedMetadata(html) {
 }
 
 function buildCrawlHtml(type, article, canonical, title, description, image) {
+  if (type === "event-photo") {
+    const schema = { "@context": "https://schema.org", "@type": "ImageObject", name: article.title, description: article.description, caption: article.imageAlt, contentUrl: image, url: canonical, width: article.width, height: article.height, datePublished: article.publishedAt, creator: { "@type": "Organization", name: "eQOURSE" } };
+    return { schema, root: `<main data-seo-prerender="true"><nav><a href="/events">Events</a> / <a href="/events/${normalizeSlug(article.eventSlug)}">Country Tour</a></nav><h1>${escapeHtml(article.title)}</h1><figure><img src="${escapeHtml(image)}" alt="${escapeHtml(article.imageAlt)}" title="${escapeHtml(article.imageTitle)}" /><figcaption>${escapeHtml(article.description)}</figcaption></figure></main>` };
+  }
   const publishedAt = article.publishedAt || article.createdAt;
   const updatedAt = article.updatedAt || publishedAt;
   const articleType = type === "blog" ? "BlogPosting" : "Article";
@@ -159,9 +162,9 @@ async function writeSitemapEntry(distDir, canonical, lastmod, removeOnly = false
 }
 
 async function publishNow(type, article) {
-  if (!['blog', 'case-study'].includes(type)) throw new Error(`Unsupported CMS SEO type: ${type}`);
+  if (!['blog', 'case-study', 'event-photo'].includes(type)) throw new Error(`Unsupported CMS SEO type: ${type}`);
   const slug = normalizeSlug(article.slug);
-  const routeBase = type === "blog" ? "blog" : "casestudy";
+  const routeBase = type === "event-photo" ? `events/${normalizeSlug(article.eventSlug)}/highlights` : type === "blog" ? "blog" : "casestudy";
   const canonical = `${SITE_URL}/${routeBase}/${slug}`;
   const title = String(article.seo?.title || article.title || "").trim();
   const description = String(article.seo?.description || article.excerpt || article.summary || article.challenge || "").trim();
@@ -199,10 +202,10 @@ async function publishNow(type, article) {
   return { path: path.join(outputDir, "index.html"), canonical };
 }
 
-async function removeNow(type, slug) {
-  if (!['blog', 'case-study'].includes(type)) throw new Error(`Unsupported CMS SEO type: ${type}`);
+async function removeNow(type, slug, eventSlug) {
+  if (!['blog', 'case-study', 'event-photo'].includes(type)) throw new Error(`Unsupported CMS SEO type: ${type}`);
   const safeSlug = normalizeSlug(slug);
-  const routeBase = type === "blog" ? "blog" : "casestudy";
+  const routeBase = type === "event-photo" ? `events/${normalizeSlug(eventSlug)}/highlights` : type === "blog" ? "blog" : "casestudy";
   const distDir = getFrontendDistDir();
   const outputDir = path.resolve(distDir, routeBase, safeSlug);
   const expectedParent = path.resolve(distDir, routeBase);
@@ -218,7 +221,7 @@ function queue(operation) {
 }
 
 function syncCmsSeoPage(type, article) {
-  return queue(() => article.status === "published" ? publishNow(type, article) : removeNow(type, article.slug));
+  return queue(() => article.status === "published" ? publishNow(type, article) : removeNow(type, article.slug, article.eventSlug));
 }
 
 function removeCmsSeoPage(type, slug) {

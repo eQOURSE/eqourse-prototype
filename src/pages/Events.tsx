@@ -1,181 +1,48 @@
-import { useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import {
-  Calendar,
-  MapPin,
-  FileText,
-  PlayCircle,
-  ArrowRight,
-  Sparkles,
-} from "lucide-react";
-import PageLayout from "@/components/shared/PageLayout";
-import { pageSeo } from "@/seo/pageSeo";
-import { events, type EventData } from "@/components/events/eventsData";
-
-const PAGE_SEO = pageSeo["/events"];
-
-const statusBadge: Record<EventData["status"], { label: string; className: string }> = {
-  upcoming: { label: "Upcoming", className: "bg-blue-500/10 text-blue-600 border-blue-500/20" },
-  ongoing: { label: "Live Now", className: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" },
-  completed: { label: "Completed", className: "bg-muted text-muted-foreground border-border" },
-};
-
-const EventCard = ({ event }: { event: EventData }) => {
-  const badge = statusBadge[event.status];
-  return (
-    <Link
-      to={`/events/${event.slug}`}
-      id={`event-card-${event.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1"
-    >
-      {/* Cover Image */}
-      <div className="relative aspect-[16/9] overflow-hidden bg-muted">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
-        <img
-          src={event.coverImage}
-          alt={event.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.style.display = "none";
-            target.parentElement!.classList.add("flex", "items-center", "justify-center");
-            const fallback = document.createElement("div");
-            fallback.className = "text-6xl font-bold text-primary/20";
-            fallback.textContent = event.title.charAt(0);
-            target.parentElement!.appendChild(fallback);
-          }}
-        />
-        <div className="absolute top-4 left-4 z-20">
-          <span className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full border ${badge.className}`}>
-            {event.status === "ongoing" && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />}
-            {badge.label}
-          </span>
-        </div>
-        <div className="absolute bottom-4 left-4 right-4 z-20">
-          <h2 className="text-xl font-bold text-white drop-shadow-lg">{event.title}</h2>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-col flex-1 p-5 gap-3">
-        <p className="text-sm text-muted-foreground font-medium">{event.subtitle}</p>
-
-        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-          <span className="inline-flex items-center gap-1.5">
-            <Calendar className="w-4 h-4 text-primary" />
-            {event.dateLabel}
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-primary" />
-            {event.location}
-          </span>
-        </div>
-
-        <p className="text-sm text-muted-foreground line-clamp-3 flex-1">
-          {event.description}
-        </p>
-
-        {/* Asset indicators */}
-        <div className="flex items-center gap-3 pt-2 border-t border-border/50">
-          {event.brochure && (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary">
-              <FileText className="w-3.5 h-3.5" />
-              Brochure
-            </span>
-          )}
-          {event.video && (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary">
-              <PlayCircle className="w-3.5 h-3.5" />
-              Video
-            </span>
-          )}
-          <span className="ml-auto inline-flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
-            View Details
-            <ArrowRight className="w-3.5 h-3.5" />
-          </span>
-        </div>
-      </div>
-    </Link>
-  );
-};
-
-const Events = () => {
-  const [filter, setFilter] = useState<"all" | EventData["status"]>("all");
-  const filteredEvents = filter === "all" ? events : events.filter((e) => e.status === filter);
-
-  return (
-    <PageLayout breadcrumbs={[{ label: "Events" }]}>
-      <Helmet>
-        <title>{PAGE_SEO?.title ?? "Events | eQOURSE"}</title>
-        <meta name="description" content={PAGE_SEO?.description ?? "Explore eQOURSE events, business tours, and presentations."} />
-        <link rel="canonical" href="https://www.eqourse.com/events" />
-        <meta property="og:title" content={PAGE_SEO?.title ?? "Events | eQOURSE"} />
-        <meta property="og:description" content={PAGE_SEO?.description ?? "Explore eQOURSE events, business tours, and presentations."} />
-        <meta property="og:url" content="https://www.eqourse.com/events" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-background py-20 lg:py-28">
-        <div className="absolute inset-0 bg-gradient-primary opacity-[0.03] z-0" />
-        <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="container relative z-10 px-4 mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-sm font-medium border rounded-full border-primary/20 text-primary bg-primary/5 animate-fade-in-up">
-            <Sparkles className="w-4 h-4" />
-            Business Tours & Presentations
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 animate-fade-in-up">
-            eQOURSE <span className="text-primary">Events</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground animate-fade-in-up">
-            Explore our business tours, presentations, brochures, and videos. Download resources or watch presentations directly from any device.
-          </p>
-        </div>
-      </section>
-
-      {/* Filter Tabs */}
-      <section className="bg-background border-b border-border/50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center gap-2 py-4 overflow-x-auto">
-            {(["all", "upcoming", "ongoing", "completed"] as const).map((status) => (
-              <button
-                key={status}
-                onClick={() => setFilter(status)}
-                className={`px-4 py-2 text-sm font-medium rounded-full border transition-all whitespace-nowrap ${
-                  filter === status
-                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                    : "bg-card text-muted-foreground border-border hover:border-primary/30 hover:text-foreground"
-                }`}
-              >
-                {status === "all" ? "All Events" : status.charAt(0).toUpperCase() + status.slice(1)}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Events Grid */}
-      <section className="bg-muted/30 py-16 lg:py-24">
-        <div className="container mx-auto px-4">
-          {filteredEvents.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-lg text-muted-foreground">No events found for the selected filter.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredEvents.map((event) => (
-                <EventCard key={event.slug} event={event} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-    </PageLayout>
-  );
-};
-
-export default Events;
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, CalendarDays, MapPin, Building2, Globe2, Database, BrainCircuit, Languages, Scan, BookOpen, Users, Plus } from 'lucide-react';
+import PageLayout from '@/components/shared/PageLayout';
+import SEOHead from '@/components/ai-data-services/shared/SEOHead';
+import { Helmet } from 'react-helmet-async';
+import { events, countryTours, eventServices, eventFaqs, type EventData } from '@/components/events/eventsData';
+import GlobalEventsMap from '@/components/events/GlobalEventsMap';
+import EventResources from '@/components/events/EventResources';
+import './events.css';
+const icons = [Database, BrainCircuit, Languages, Scan, BookOpen, Users];
+const meet = '/contact-us?interest=events';
+function TourCard({ event, index }: {
+    event: EventData;
+    index: number;
+}) {
+    return <article className="events-tour-card" id={`event-card-${event.slug}`}>
+    <Link to={`/events/${event.slug}`} className="tour-image-link" aria-label={`View ${event.title} details`}><img src={event.coverImage} alt={event.imageAlt} loading="lazy" width="1200" height="800"/><span className="tour-badge">PLANNED / 2026</span><span className="tour-number">0{index + 1}</span><span className="tour-image-title">{event.country}</span><span className="tour-image-arrow"><ArrowUpRight /></span></Link>
+    <div className="tour-content"><p className="events-eyebrow">{event.category} · AI & Technology · EdTech</p><h3><Link to={`/events/${event.slug}`}>{event.title}</Link></h3><div className="tour-meta"><span><CalendarDays size={16}/>{event.dateLabel}</span><span><MapPin size={16}/>{event.location}</span><span><Building2 size={16}/>{event.venue}</span></div><p>{event.description}</p><div className="tour-focus"><strong>eQOURSE Focus</strong><span>AI Data Services · Multilingual Data<br />Learning Solutions · Content Services</span></div><div className="tour-actions"><Link to={`/events/${event.slug}`} className="events-text-link">View Event Details <ArrowUpRight size={17}/></Link><Link to={`${meet}&event=${event.slug}`} className="tour-meet">Meet eQOURSE</Link></div></div>
+  </article>;
+}
+export default function Events() {
+    const reduced = useReducedMotion();
+    const [filter, setFilter] = useState('All destinations');
+    const shown = filter === 'All destinations' ? countryTours : countryTours.filter(e => e.country === filter);
+    const past = events.filter(e => e.status === 'completed');
+    const reveal = { initial: { opacity: reduced ? 1 : 0, y: 0 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: .08 }, transition: { duration: .55 } };
+    return <PageLayout breadcrumbs={[{ label: 'Events' }]}><main className="events-page">
+    <SEOHead title="AI, EdTech & Technology Events | eQOURSE" description="Explore upcoming eQOURSE events, AI conferences, EdTech exhibitions and global business tours. Meet our team and discover our AI data and learning solutions." canonical="https://www.eqourse.com/events" ogImage={countryTours[3].ogImage}/>
+    <Helmet><script type="application/ld+json">{JSON.stringify({ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'eQOURSE Events, Conferences & Global Business Tours', url: 'https://www.eqourse.com/events', mainEntity: { '@type': 'ItemList', itemListElement: events.map((e, i) => ({ '@type': 'ListItem', position: i + 1, url: `https://www.eqourse.com/events/${e.slug}`, name: e.title })) } })}</script><script type="application/ld+json">{JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.eqourse.com/' }, { '@type': 'ListItem', position: 2, name: 'Events', item: 'https://www.eqourse.com/events' }] })}</script></Helmet>
+    <section className="events-hero">
+      <img className="events-hero-photo" src={countryTours[3].coverImage} alt="Singapore skyline, a destination on eQOURSE’s planned global business tour" width="1200" height="800" {...{ fetchpriority: "high" }}/>
+      <div className="events-hero-shade"/><div className="hero-coordinate-grid" aria-hidden="true"/>
+      <div className="events-shell hero-inner"><motion.div initial={{ opacity: 0, y: reduced ? 0 : 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : .7 }} className="hero-copy"><p className="events-eyebrow"><span className="events-live-dot"/> GLOBAL CONNECTIONS / 2026</p><h1><span>eQOURSE Events,</span> Conferences & <br /><em>Global Business Tours</em></h1><p className="hero-description">Meet eQOURSE at leading AI, technology, education and innovation events around the world. Discover where our team is connecting with global organisations.</p><div className="events-cta-row"><Link to="/events/brochure" className="events-button">Open Brochure <ArrowUpRight size={18}/></Link><Link to="/events/presentation" className="events-button events-button-ghost">Open Presentation <ArrowRight size={18}/></Link><a href="#upcoming" className="hero-tour-link">Explore Upcoming Events ↗</a></div></motion.div><div className="hero-orbit" aria-hidden="true"><div className="orbit-ring ring-one"/><div className="orbit-ring ring-two"/><div className="orbit-ring ring-three"/><Globe2 /><span className="orbit-dot dot-one"/><span className="orbit-dot dot-two"/><span className="orbit-label">IDEAS WITHOUT BORDERS</span></div><div className="hero-bottom"><span>LOCAL CONVERSATIONS. GLOBAL POSSIBILITIES.</span><span>CHINA / JAPAN / SOUTH KOREA / SINGAPORE</span></div></div>
+    </section>
+    <nav className="events-section-nav" aria-label="Events page sections"><div className="events-shell"><a href="#upcoming">Upcoming tours</a><a href="#destinations">Global destinations</a><a href="#resources">Resources</a><a href="#gallery">Our world</a><a href="#event-faq">FAQs</a><Link to={meet}>Let’s meet <ArrowUpRight size={15}/></Link></div></nav>
+    <section className="events-resources-section events-section" id="resources"><div className="events-shell"><motion.div {...reveal}><div className="events-section-heading"><div><p className="events-eyebrow">READY TO SHARE / READY TO PRESENT</p><h2>Brochure & Presentation</h2></div><p>Access eQOURSE materials from our conferences, business tours and industry engagements.</p></div><EventResources /></motion.div></div></section>
+    <section className="events-section events-shell" id="upcoming"><motion.div {...reveal}><div className="events-section-heading"><div><p className="events-eyebrow">01 / THE NEXT CHAPTER</p><h2>Upcoming Events &<br /><span>Business Tours</span></h2></div><p>Discover where eQOURSE will be next. Meet our team to discuss AI data services, learning solutions, multilingual data and scalable content operations.</p></div><div className="events-filters" aria-label="Filter tours by destination">{['All destinations', ...countryTours.map(e => e.country)].map(f => <button key={f} aria-pressed={filter === f} className={filter === f ? 'active' : ''} onClick={() => setFilter(f)}>{f}</button>)}</div><div className="events-tours-grid">{shown.map(e => <TourCard key={e.slug} event={e} index={countryTours.indexOf(e)}/>)}</div></motion.div></section>
+    <section className="events-global events-section" id="destinations"><div className="events-shell"><motion.div {...reveal}><div className="events-section-heading"><div><p className="events-eyebrow">02 / A WORLD OF OPPORTUNITY</p><h2>Connecting Across Global<br /><span>AI & Education Markets</span></h2></div><p>Connecting with organisations across key global markets looking for scalable AI data and learning solutions. Explore our planned destinations.</p></div><GlobalEventsMap /></motion.div></div></section>
+    <section className="events-section events-shell"><motion.div {...reveal}><div className="events-section-heading"><div><p className="events-eyebrow">03 / THE CONVERSATIONS THAT MATTER</p><h2>What We Bring<br /><span>to Global Events</span></h2></div><p>From the first dataset to the next learning experience. Bring your challenge; we’ll bring the expertise.</p></div><div className="events-services">{eventServices.map((s, i) => { const Icon = icons[i]; return <Link key={s.title} to={s.href} className="events-service"><Icon size={27}/><span className="service-index">0{i + 1}</span><h3>{s.title}</h3><p>{s.description}</p><span className="events-text-link">Explore service <ArrowUpRight size={17}/></span></Link>; })}</div></motion.div></section>
+    <section className="events-section events-shell events-past"><p className="events-eyebrow">05 / OUR JOURNEY SO FAR</p><h2>Past Events & Global Engagements</h2>{past.length ? <div className="events-tours-grid">{past.map((e, i) => <TourCard key={e.slug} event={e} index={i}/>)}</div> : <div className="events-past-note"><Globe2 size={30}/><div><h3>Every connection becomes part of our story.</h3><p>Tour highlights will be added here after each engagement. In the meantime, get to know the people behind eQOURSE.</p></div><Link to="/gallery" className="events-text-link">Explore our gallery <ArrowUpRight size={18}/></Link></div>}</section>
+    <section className="events-gallery-section" id="gallery"><div className="events-shell"><div className="events-section-heading"><div><p className="events-eyebrow">06 / PEOPLE. IDEAS. CONNECTIONS.</p><h2>eQOURSE Around the World</h2></div><Link to="/gallery" className="events-text-link">See the full gallery <ArrowUpRight size={18}/></Link></div><p className="events-gallery-intro">A look inside our team, working spaces and business engagements.</p><div className="events-gallery">{[22, 23, 24, 10, 17, 16].map((n, i) => <Link to="/gallery" key={n} className={`gallery-frame gallery-frame-${i}`}><img src={`/assets/about/gallery/${n}.webp`} alt={['eQOURSE team during an international technology visit', 'eQOURSE team at a collaborative business meeting', 'eQOURSE team at an innovation centre', 'eQOURSE office and team gallery', 'eQOURSE team at an industry networking engagement', 'eQOURSE partner meeting'][i]} loading="lazy" width="800" height="600"/><span>{['New perspectives', 'Shared ambition', 'Human expertise', 'Our everyday', 'Building connections', 'Growing together'][i]}<ArrowUpRight size={18}/></span></Link>)}</div></div></section>
+    <section className="events-section events-shell events-proof"><motion.div {...reveal}><p className="events-eyebrow">07 / YOUR NEXT PROJECT STARTS WITH A CONVERSATION</p><h2>Let’s Talk About Your Next<br /><span>AI or Learning Project</span></h2><p>Whether you’re building AI models, scaling multilingual datasets or developing digital learning programmes, meet our team to explore how our global expert network and delivery capabilities can support your project.</p><div className="events-proof-grid">{[['1,000+', 'Verified Experts'], ['1M+', 'AI Training Prompts'], ['Up to 4,000', 'Learning Resources / Day'], ['Global', 'Delivery Capabilities']].map(([v, l]) => <div key={l}><strong>{v}</strong><span>{l}</span></div>)}</div><div className="events-cta-row"><Link to={meet} className="events-button">Meet Our Team <ArrowUpRight size={18}/></Link><Link to="/contact-us" className="events-text-link">Contact eQOURSE <ArrowRight size={18}/></Link></div></motion.div></section>
+    <section className="events-faq-section events-section" id="event-faq"><div className="events-shell events-faq-layout"><div><p className="events-eyebrow">08 / GOOD TO KNOW</p><h2>Frequently<br />Asked Questions</h2><p>Planning to connect with us?<br />Start here.</p></div><div>{eventFaqs.map(([q, a]) => <details key={q}><summary>{q}<Plus size={20}/></summary><p>{a}</p></details>)}</div></div></section>
+    <section className="events-final"><div className="events-shell"><p className="events-eyebrow">THE NEXT CONNECTION COULD CHANGE EVERYTHING.</p><h2>Meet eQOURSE at<br />an Upcoming Event.</h2><p>Looking to discuss AI data, multilingual datasets, learning solutions or scalable content operations? Connect with our team before the event and schedule a conversation.</p><div className="events-cta-row"><a href="#upcoming" className="events-button events-button-light">View Upcoming Events <ArrowUpRight size={18}/></a><Link to={meet} className="events-button events-button-ghost">Schedule a Meeting <ArrowRight size={18}/></Link></div></div></section>
+  </main></PageLayout>;
+}

@@ -19,6 +19,30 @@ export interface PageSeo {
 }
 
 export const pageSeo: Record<string, PageSeo> = {
+  "/events/china-tour-2026": {
+    title: "China Business Tour 2026 | eQOURSE Events",
+    description: "Connect with eQOURSE during our planned China business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/japan-tour-2026": {
+    title: "Japan Business Tour 2026 | eQOURSE Events",
+    description: "Connect with eQOURSE during our planned Japan business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/south-korea-tour-2026": {
+    title: "South Korea Business Tour 2026 | eQOURSE Events",
+    description: "Connect with eQOURSE during our planned South Korea business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    image: "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/singapore-tour-2026": {
+    title: "Singapore Business Tour 2026 | eQOURSE Events",
+    description: "Connect with eQOURSE during our planned Singapore business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/brochure": {
+    title: "eQOURSE Company & Business Tour Brochure",
+    description: "Open and download the eQOURSE brochure for AI data services, multilingual expertise, learning solutions and global business tours.",
+  },
   "/": {
     title: "AI Data Services & Content Services Company | eQOURSE",
     description: "eQOURSE provides AI data services for data collection, annotation, cleaning, validation, model testing and robotics, plus scalable content services for global teams.",
@@ -407,8 +431,8 @@ export const pageSeo: Record<string, PageSeo> = {
     description: "Create engaging e-learning videos with animation, expert narration and instructional design. Explore eQOURSE video solutions.",
   },
   "/events": {
-    title: "Events & Business Tours | eQOURSE",
-    description: "Explore eQOURSE business tours, presentations, brochures and videos across Asia. Download resources and watch presentations directly.",
+    title: "AI, EdTech & Technology Events | eQOURSE",
+    description: "Explore upcoming eQOURSE events, AI conferences, EdTech exhibitions and global business tours. Meet our team and discover our AI data and learning solutions.",
   },
   "/faq": {
     title: "Eqourse FAQs: Everything You Need to Know",

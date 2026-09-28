@@ -1,3 +1,4 @@
+import { events } from "@/components/events/eventsData";
 import PageLayout from "@/components/shared/PageLayout";
 import { BreadcrumbSchema } from "@/components/shared/BreadcrumbSchema";
 import { Helmet } from "react-helmet-async";
@@ -11,6 +12,7 @@ import { pageSeo } from "@/seo/pageSeo";
 const PAGE_SEO = pageSeo["/sitemap"];
 
 const sitemapData = [
+  { category: "Events & Business Tours", links: [{ name: "Events Overview", to: "/events" }, ...events.map(event => ({ name: event.title, to: `/events/${event.slug}` }))] },
   {
     category: "Company & Resources",
     links: [
