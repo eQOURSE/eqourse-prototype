@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import heroVideoPoster from "@/assets/hero-video-poster.webp";
 
+const HERO_VIDEO_URL = "https://cdn.eqourse.com/assets/hero-bg-3d-optimized.mp4";
+
 const slides = [
   {
     badge: "AI Data Services",
@@ -88,6 +90,8 @@ const LinkedInIcon = () => (
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
 
   const goTo = useCallback(
     (idx: number) => {
@@ -104,6 +108,16 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, [current, goTo]);
 
+  useEffect(() => {
+    if (videoReady || videoFailed) return;
+
+    const timeout = window.setTimeout(() => {
+      setVideoFailed(true);
+    }, 6000);
+
+    return () => window.clearTimeout(timeout);
+  }, [videoReady, videoFailed]);
+
   const slide = slides[current];
   const Icon = slide.icon;
 
@@ -114,18 +128,32 @@ const HeroSection = () => {
     >
       {/* Background video */}
       <div className="absolute inset-0 z-0">
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={heroVideoPoster}
+        <img
+          src={heroVideoPoster}
+          alt=""
           aria-hidden="true"
-        >
-          <source src="/hero-bg-3d-optimized.mp4" type="video/mp4" />
-        </video>
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        {!videoFailed && (
+          <video
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+              videoReady ? "opacity-100" : "opacity-0"
+            }`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroVideoPoster}
+            aria-hidden="true"
+            onCanPlay={() => setVideoReady(true)}
+            onLoadedData={() => setVideoReady(true)}
+            onError={() => setVideoFailed(true)}
+          >
+            <source src={HERO_VIDEO_URL} type="video/mp4" />
+          </video>
+        )}
         {/* Layered overlays for readability */}
         <div
           className="absolute inset-0"

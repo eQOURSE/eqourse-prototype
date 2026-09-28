@@ -406,6 +406,10 @@ export const pageSeo: Record<string, PageSeo> = {
     title: "Custom eLearning Video Solutions | Eqourse",
     description: "Create engaging e-learning videos with animation, expert narration and instructional design. Explore eQOURSE video solutions.",
   },
+  "/events": {
+    title: "Events & Business Tours | eQOURSE",
+    description: "Explore eQOURSE business tours, presentations, brochures and videos across Asia. Download resources and watch presentations directly.",
+  },
   "/faq": {
     title: "Eqourse FAQs: Everything You Need to Know",
     description: "Find answers about Content Services, AI Data Services, free pilots, data annotation and project delivery. Visit our FAQ page.",

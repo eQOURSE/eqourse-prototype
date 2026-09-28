@@ -4,7 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="MjTY0z_vy1o8rvymS01fYJCNWIwjMiVXiWajOBHVYaI" />
-    <link rel="preload" as="video" href="/hero-bg-3d-optimized.mp4" type="video/mp4" fetchpriority="high" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #0f1223;
+      }
+
+      /* Hide the crawlable fallback until React replaces it. */
+      #root > main[data-seo-prerender="true"] {
+        visibility: hidden;
+      }
+    </style>
 
     <!--
       Primary SEO — fallbacks only, for the initial paint and for crawlers that
