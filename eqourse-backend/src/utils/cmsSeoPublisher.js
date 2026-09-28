@@ -37,6 +37,7 @@ function getFrontendDistDir() {
   // missing environment variable cannot silently publish to the wrong copy.
   const liveCandidates = [
     process.env.FRONTEND_LIVE_DIST_DIR,
+    process.platform !== "win32" ? "/opt/eqourse-prototype/dist" : undefined,
     process.platform !== "win32" ? "/var/www/eqourse/dist" : undefined,
   ].filter(Boolean).map((candidate) => path.resolve(candidate));
 
