@@ -77,6 +77,7 @@ function formatItem(doc) {
     tabName: doc.tabName || "",
     fileType: doc.fileType || "",
     isExternal: doc.isExternal || false,
+    allowDownload: doc.allowDownload || false,
     pagePaths: doc.pagePaths || [],
     createdAt: doc.createdAt.toISOString(),
     updatedAt: doc.updatedAt.toISOString(),
@@ -146,6 +147,7 @@ const listFilesByPage = async (req, res) => {
       fileType: doc.fileType || "",
       fileUrl: doc.fileUrl || "",
       isExternal: doc.isExternal || false,
+      allowDownload: doc.allowDownload || false,
     }));
     return res.json({ success: true, data: { files } });
   } catch (err) {
@@ -265,7 +267,7 @@ const adminGetItem = async (req, res) => {
 const createItem = async (req, res) => {
   try {
     const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
-            pageSlug, tabName, fileType, isExternal, pagePaths } = req.body;
+            pageSlug, tabName, fileType, isExternal, allowDownload, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
     if (!thumbnailUrl) return res.status(400).json({ success: false, message: "Thumbnail is required" });
     const existing = await SampleItem.find({ categoryId: req.params.categoryId });
@@ -276,6 +278,7 @@ const createItem = async (req, res) => {
       fileSize: fileSize || undefined, order: order ?? existing.length + 1,
       pageSlug: pageSlug || "", tabName: tabName || "",
       fileType: fileType || "", isExternal: isExternal || false,
+      allowDownload: allowDownload === true,
       pagePaths: normalizePagePaths(pagePaths),
     });
     return res.status(201).json({ success: true, data: formatItem(item) });
@@ -329,7 +332,7 @@ const adminListItemsByPage = async (req, res) => {
 const createItemForPage = async (req, res) => {
   try {
     const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
-            pageSlug, tabName, fileType, isExternal, pagePaths } = req.body;
+            pageSlug, tabName, fileType, isExternal, allowDownload, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
     if (!thumbnailUrl) return res.status(400).json({ success: false, message: "Thumbnail is required" });
     if (!pageSlug) return res.status(400).json({ success: false, message: "pageSlug is required" });
@@ -360,6 +363,7 @@ const createItemForPage = async (req, res) => {
       tabName: tabName || "",
       fileType: fileType || "", 
       isExternal: isExternal || false,
+      allowDownload: allowDownload === true,
       pagePaths: normalizePagePaths(pagePaths),
     });
     return res.status(201).json({ success: true, data: formatItem(item) });

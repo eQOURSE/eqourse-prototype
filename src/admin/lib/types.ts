@@ -134,6 +134,7 @@ export interface Sample {
   tabName?: string;
   fileType?: string;
   isExternal?: boolean;
+  allowDownload?: boolean;
   pagePaths?: string[];
   createdAt: string;
   updatedAt: string;
