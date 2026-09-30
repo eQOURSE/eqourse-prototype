@@ -25,9 +25,9 @@ const extensionOf = (url: string) => {
 };
 
 const typeCandidates = (file: PreviewFile) => [
-  file.mimeType,
-  file.fileType,
   extensionOf(file.fileUrl),
+  file.fileType,
+  file.mimeType,
   extensionOf(file.thumbnailUrl || ""),
 ]
   .filter(Boolean)
@@ -42,7 +42,7 @@ const normalizedType = (file: PreviewFile) => {
     "pdf", "application/pdf", "doc", "docx", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "xls", "xlsx", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     "json", "jsonl", "ndjson", "csv", "tsv", "text/csv", "text",
-    "txt", "text/plain", "xml", "sitemap", "application/xml", "text/xml", "html", "htm", "text/html", "md", "markdown",
+    "txt", "text/plain", "xml", "sitemap", "application/xml", "text/xml", "html", "html5", "htm", "text/html", "md", "markdown",
   ].includes(value) || value.startsWith("image/") || value.startsWith("audio/") || value.startsWith("video/"));
   return known || candidates[0] || "";
 };
@@ -81,7 +81,7 @@ const isVideoType = (type: string) => matches(type, [
 ]);
 
 const isPdfType = (type: string) => matches(type, ["pdf", "application/pdf"]);
-const isHtmlType = (type: string) => matches(type, ["html", "htm", "text/html"]);
+const isHtmlType = (type: string) => matches(type, ["html", "html5", "htm", "text/html"]);
 const isWordType = (type: string) => matches(type, [
   "doc",
   "docx",
