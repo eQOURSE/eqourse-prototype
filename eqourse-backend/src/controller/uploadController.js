@@ -36,6 +36,7 @@ const fileFilter = (req, file, cb) => {
     "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     "text/csv", "text/plain", "application/json",
     "text/markdown", "text/x-markdown", "application/markdown",
+    "application/xml", "text/xml",
     // Archives
     "application/zip", "application/x-zip-compressed", "multipart/x-zip",
     // Video
@@ -43,7 +44,9 @@ const fileFilter = (req, file, cb) => {
     // Audio
     "audio/mpeg", "audio/wav", "audio/ogg", "audio/mp3",
   ];
-  if (allowedMimes.includes(file.mimetype) || file.mimetype.startsWith("video/") || file.mimetype.startsWith("audio/")) {
+  const extensionAllowed = [".md", ".markdown", ".txt", ".log", ".xml", ".sitemap"]
+    .includes(path.extname(file.originalname).toLowerCase());
+  if (allowedMimes.includes(file.mimetype) || extensionAllowed || file.mimetype.startsWith("video/") || file.mimetype.startsWith("audio/")) {
     cb(null, true);
   } else {
     cb(new Error(`File type ${file.mimetype} is not allowed`), false);

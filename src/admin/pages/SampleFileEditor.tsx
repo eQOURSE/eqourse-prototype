@@ -16,7 +16,7 @@ import { getSubCategory } from "../lib/sampleHierarchy";
 import type { Sample } from "../lib/types";
 import { toast } from "sonner";
 
-const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "MP3", "WAV", "PNG", "JPG", "SCORM", "Other"];
+const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "PNG", "JPG", "SCORM", "Other"];
 
 export default function SampleFileEditor() {
   const { mainCategoryId, pageSlug, tabName, sampleId } = useParams();
@@ -82,6 +82,8 @@ export default function SampleFileEditor() {
     if (["JSON", "JSONL"].includes(ext)) return "JSON";
     if (["CSV"].includes(ext)) return "CSV";
     if (["MD", "MARKDOWN"].includes(ext)) return "MD";
+    if (["TXT", "LOG"].includes(ext)) return "TXT";
+    if (["XML", "SITEMAP"].includes(ext)) return "XML";
     if (["MP3"].includes(ext)) return "MP3";
     if (["WAV", "OGG"].includes(ext)) return "WAV";
     if (["PNG"].includes(ext)) return "PNG";
