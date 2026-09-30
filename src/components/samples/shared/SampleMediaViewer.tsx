@@ -2,12 +2,12 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Download, ExternalLink, FileWarning, Loader2 } from "lucide-react";
 import type { PreviewFile } from "@/lib/publicApi";
 import * as pdfjsLib from "pdfjs-dist";
-import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import PdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?worker";
 import mammoth from "mammoth";
 import * as XLSX from "xlsx";
 import DOMPurify from "dompurify";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
+pdfjsLib.GlobalWorkerOptions.workerPort = new PdfWorker();
 
 interface SampleMediaViewerProps {
   file: PreviewFile;
