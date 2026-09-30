@@ -17,9 +17,25 @@ const extensionOf = (url: string) => {
   }
 };
 
+const typeCandidates = (file: PreviewFile) => [
+  file.mimeType,
+  file.fileType,
+  extensionOf(file.fileUrl),
+  extensionOf(file.thumbnailUrl || ""),
+]
+  .filter(Boolean)
+  .map((value) => value!.trim().toLowerCase().replace(/^\./, ""));
+
 const normalizedType = (file: PreviewFile) => {
-  const value = (file.mimeType || file.fileType || "").trim().toLowerCase().replace(/^\./, "");
-  return value || extensionOf(file.fileUrl);
+  const candidates = typeCandidates(file);
+  const known = candidates.find((value) => [
+    "image", "jpg", "jpeg", "png", "gif", "webp", "svg", "avif", "bmp", "ico", "tif", "tiff",
+    "audio", "mp3", "wav", "ogg", "oga", "m4a", "aac", "flac", "opus", "aiff", "wma",
+    "video", "mp4", "webm", "mov", "m4v", "ogv", "avi", "mkv", "mpeg", "mpg", "3gp", "wmv",
+    "pdf", "application/pdf", "json", "jsonl", "ndjson", "csv", "tsv", "text/csv", "text",
+    "txt", "text/plain", "xml", "application/xml", "html", "htm", "text/html", "md", "markdown",
+  ].includes(value) || value.startsWith("image/") || value.startsWith("audio/") || value.startsWith("video/"));
+  return known || candidates[0] || "";
 };
 
 const matches = (value: string, types: string[]) =>
@@ -40,6 +56,8 @@ const isTextType = (type: string) => matches(type, [
 const isJsonType = (type: string) => matches(type, [
   "json", "jsonl", "ndjson", "application/json", "application/ld+json",
 ]);
+
+const isCsvType = (type: string) => matches(type, ["csv", "tsv", "text/csv", "text/tab-separated-values"]);
 
 const isImageType = (type: string) => matches(type, [
   "image", "jpg", "jpeg", "png", "gif", "webp", "svg", "avif", "bmp", "ico", "tif", "tiff",
@@ -136,10 +154,67 @@ export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
   if (isTextType(type)) {
     if (loading) return <div className="flex items-center gap-2 text-sm text-muted-foreground"><Loader2 className="h-4 w-4 animate-spin" />Loading preview…</div>;
     if (error) return <PreviewFallback message={error} url={url} />;
+    if (isCsvType(type)) {
+      return <CsvPreview value={textPreview || ""} />;
+    }
     return <pre onContextMenu={(event) => event.preventDefault()} className="max-h-[62vh] w-full overflow-auto rounded-lg bg-slate-950 p-4 text-left text-xs leading-5 text-slate-100 select-none">{textPreview}</pre>;
   }
 
   return <PreviewFallback message="This format is not supported for inline preview." url={url} />;
+}
+
+function parseDelimited(value: string, delimiter: string) {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let quoted = false;
+
+  for (let index = 0; index < value.length; index += 1) {
+    const character = value[index];
+    const next = value[index + 1];
+    if (character === '"' && quoted && next === '"') { cell += '"'; index += 1; continue; }
+    if (character === '"') { quoted = !quoted; continue; }
+    if (character === delimiter && !quoted) { row.push(cell); cell = ""; continue; }
+    if ((character === "\n" || character === "\r") && !quoted) {
+      if (character === "\r" && next === "\n") index += 1;
+      row.push(cell); cell = "";
+      if (row.some((item) => item.trim())) rows.push(row);
+      row = [];
+      continue;
+    }
+    cell += character;
+  }
+  if (cell || row.length) { row.push(cell); if (row.some((item) => item.trim())) rows.push(row); }
+  return rows;
+}
+
+function CsvPreview({ value }: { value: string }) {
+  const delimiter = value.split(/\r?\n/, 1)[0]?.includes("\t") ? "\t" : ",";
+  const rows = parseDelimited(value, delimiter);
+  const headers = rows[0] || [];
+  const body = rows.slice(1);
+
+  return (
+    <div onContextMenu={(event) => event.preventDefault()} className="max-h-[62vh] w-full overflow-auto rounded-lg border bg-white text-left text-xs text-slate-800 select-none">
+      <table className="min-w-full border-collapse">
+        <thead className="sticky top-0 z-10 bg-slate-100 text-left font-semibold text-slate-700">
+          <tr>
+            <th className="border-b border-r px-3 py-2 text-center text-slate-400">#</th>
+            {headers.map((header, index) => <th key={index} className="border-b border-r px-3 py-2 whitespace-nowrap">{header || `Column ${index + 1}`}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {body.map((row, rowIndex) => (
+            <tr key={rowIndex} className="even:bg-slate-50 hover:bg-primary/5">
+              <td className="border-b border-r px-3 py-2 text-center text-slate-400">{rowIndex + 1}</td>
+              {headers.map((_, columnIndex) => <td key={columnIndex} className="border-b border-r px-3 py-2 whitespace-nowrap">{row[columnIndex] || ""}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {!rows.length && <p className="p-6 text-center text-muted-foreground">No tabular data available.</p>}
+    </div>
+  );
 }
 
 function PreviewFallback({ message, url }: { message: string; url: string }) {
