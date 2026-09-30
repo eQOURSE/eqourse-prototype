@@ -11,6 +11,7 @@ import {
   FileImage,
   Database,
   ArrowLeft,
+  Eye,
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import SampleMediaViewer from "./SampleMediaViewer";
@@ -23,6 +24,7 @@ export interface PreviewFile {
   isExternal: boolean;
   thumbnailUrl?: string;
   mimeType?: string;
+  allowDownload?: boolean;
 }
 
 interface Props {
@@ -192,12 +194,14 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
 
                   <div className="mt-auto pt-3 border-t border-border/40 flex items-center justify-between text-muted-foreground group-hover:text-foreground transition-colors">
                     <span className="text-[10px] font-medium uppercase tracking-wider">
-                      {file.isExternal ? 'Open preview' : 'Preview file'}
+                      {file.isExternal ? 'Open preview' : file.allowDownload ? 'Preview & download' : 'Preview file'}
                     </span>
                     {file.isExternal ? (
                       <ExternalLink className="w-3.5 h-3.5" />
-                    ) : (
+                    ) : file.allowDownload ? (
                       <Download className="w-3.5 h-3.5" />
+                    ) : (
+                      <Eye className="w-3.5 h-3.5" />
                     )}
                   </div>
                 </button>

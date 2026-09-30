@@ -319,6 +319,7 @@ export interface PreviewFile {
   mimeType?: string;
   fileUrl: string;
   isExternal: boolean;
+  allowDownload?: boolean;
 }
 
 export async function fetchSamplesForPage(pagePath: string): Promise<PreviewFile[] | null> {
