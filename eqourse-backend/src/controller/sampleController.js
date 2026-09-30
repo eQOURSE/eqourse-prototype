@@ -71,6 +71,7 @@ function formatItem(doc) {
     description: doc.description || undefined,
     thumbnailUrl: doc.thumbnailUrl || "",
     fileUrl: doc.fileUrl || "",
+    mimeType: doc.mimeType || "",
     fileSize: doc.fileSize || undefined,
     order: doc.order,
     pageSlug: doc.pageSlug || "",
@@ -146,6 +147,7 @@ const listFilesByPage = async (req, res) => {
       thumbnailUrl: doc.thumbnailUrl || "",
       fileType: doc.fileType || "",
       fileUrl: doc.fileUrl || "",
+      mimeType: doc.mimeType || "",
       isExternal: doc.isExternal || false,
       allowDownload: doc.allowDownload || false,
     }));
@@ -266,7 +268,7 @@ const adminGetItem = async (req, res) => {
 
 const createItem = async (req, res) => {
   try {
-    const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
+    const { title, type, description, thumbnailUrl, fileUrl, fileSize, mimeType, order,
             pageSlug, tabName, fileType, isExternal, allowDownload, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
     if (!thumbnailUrl) return res.status(400).json({ success: false, message: "Thumbnail is required" });
@@ -276,6 +278,7 @@ const createItem = async (req, res) => {
       type: type || "", description: description || "",
       thumbnailUrl: thumbnailUrl || "", fileUrl: fileUrl || "",
       fileSize: fileSize || undefined, order: order ?? existing.length + 1,
+      mimeType: mimeType || "",
       pageSlug: pageSlug || "", tabName: tabName || "",
       fileType: fileType || "", isExternal: isExternal || false,
       allowDownload: allowDownload === true,
@@ -331,7 +334,7 @@ const adminListItemsByPage = async (req, res) => {
 
 const createItemForPage = async (req, res) => {
   try {
-    const { title, type, description, thumbnailUrl, fileUrl, fileSize, order,
+    const { title, type, description, thumbnailUrl, fileUrl, fileSize, mimeType, order,
             pageSlug, tabName, fileType, isExternal, allowDownload, pagePaths } = req.body;
     if (!title) return res.status(400).json({ success: false, message: "Title is required" });
     if (!thumbnailUrl) return res.status(400).json({ success: false, message: "Thumbnail is required" });
@@ -358,6 +361,7 @@ const createItemForPage = async (req, res) => {
       thumbnailUrl: thumbnailUrl || "", 
       fileUrl: fileUrl || "",
       fileSize: fileSize || undefined, 
+      mimeType: mimeType || "",
       order: order ?? existing.length + 1,
       pageSlug: pageSlug || "", 
       tabName: tabName || "",

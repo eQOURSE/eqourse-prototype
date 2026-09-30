@@ -33,6 +33,7 @@ export default function SampleFileEditor() {
     description: "",
     thumbnailUrl: "",
     fileUrl: "",
+    mimeType: "",
     fileSize: undefined as number | undefined,
     fileType: "PDF",
     isExternal: false,
@@ -41,7 +42,7 @@ export default function SampleFileEditor() {
     pageSlug: pageSlug ?? "",
   });
   const [customFileType, setCustomFileType] = useState(false);
-  const [fileMeta, setFileMeta] = useState<{ originalName: string } | null>(null);
+  const [fileMeta, setFileMeta] = useState<{ originalName: string; mimeType?: string } | null>(null);
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(isNew);
 
@@ -111,6 +112,7 @@ export default function SampleFileEditor() {
           thumbnailUrl: form.thumbnailUrl,
           fileUrl: form.fileUrl,
           fileSize: form.fileSize,
+          mimeType: form.mimeType,
           fileType: form.fileType,
           isExternal: form.isExternal,
           allowDownload: form.allowDownload,
@@ -126,6 +128,7 @@ export default function SampleFileEditor() {
           thumbnailUrl: form.thumbnailUrl,
           fileUrl: form.fileUrl,
           fileSize: form.fileSize,
+          mimeType: form.mimeType,
           fileType: form.fileType,
           isExternal: form.isExternal,
           allowDownload: form.allowDownload,
@@ -252,6 +255,7 @@ export default function SampleFileEditor() {
                 } else {
                   setField("fileUrl", f.url);
                   setField("fileSize", f.size);
+                  setField("mimeType", f.mimeType || "");
                   setFileMeta({ originalName: f.originalName });
                   const detected = detectFileType(f.originalName);
                   if (detected !== "Other") {

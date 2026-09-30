@@ -128,6 +128,7 @@ export interface Sample {
   description?: string;
   thumbnailUrl: string;
   fileUrl: string;
+  mimeType?: string;
   fileSize?: number;
   order: number;
   pageSlug?: string;
