@@ -8,6 +8,7 @@ const sampleItemSchema = new mongoose.Schema(
     description: { type: String, default: "" },
     thumbnailUrl: { type: String, default: "" },
     fileUrl: { type: String, default: "" },
+    mimeType: { type: String, trim: true, default: "" },
     fileSize: { type: Number },
     order: { type: Number, default: 0 },
 
@@ -20,6 +21,7 @@ const sampleItemSchema = new mongoose.Schema(
     fileType: { type: String, trim: true, default: "" },
     // Whether this is an external link or a downloadable file
     isExternal: { type: Boolean, default: false },
+    allowDownload: { type: Boolean, default: false },
     // Service pages where this sample is promoted above the FAQ section.
     pagePaths: { type: [String], default: [], index: true },
   },

@@ -9,9 +9,12 @@ import {
   Download,
   ExternalLink,
   FileImage,
-  Database
+  Database,
+  ArrowLeft,
+  Eye,
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import SampleMediaViewer from "./SampleMediaViewer";
 
 export interface PreviewFile {
   title: string;
@@ -20,6 +23,8 @@ export interface PreviewFile {
   fileUrl: string;
   isExternal: boolean;
   thumbnailUrl?: string;
+  mimeType?: string;
+  allowDownload?: boolean;
 }
 
 interface Props {
@@ -32,7 +37,7 @@ interface Props {
 
 const getFileIcon = (fileType: string) => {
   const type = fileType.toLowerCase();
-  if (['pdf', 'doc', 'docx', 'txt', 'rtf'].includes(type)) return FileText;
+  if (['pdf', 'doc', 'docx', 'txt', 'rtf', 'xls', 'xlsx'].includes(type)) return FileText;
   if (['mp4', 'avi', 'mov', 'mkv', 'webm', 'scorm'].includes(type)) return FileVideo;
   if (['json', 'jsonl', 'csv'].includes(type)) return FileJson;
   if (['wav', 'mp3', 'rttm', 'textgrid'].includes(type)) return FileMusic;
@@ -44,30 +49,30 @@ const getFileIcon = (fileType: string) => {
 
 export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedFile, setSelectedFile] = useState<PreviewFile | null>(null);
   const accent = `hsl(${accentHsl})`;
   const itemsPerPage = 10;
   
   useEffect(() => {
     if (isOpen) {
       setCurrentPage(1);
+      setSelectedFile(null);
     }
   }, [isOpen]);
 
   const totalPages = Math.ceil(files.length / itemsPerPage);
   const paginatedFiles = files.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
+  const selectedIndex = selectedFile ? files.findIndex((file) => file === selectedFile) : -1;
+  const previousFile = selectedIndex > 0 ? files[selectedIndex - 1] : null;
+  const nextFile = selectedIndex >= 0 && selectedIndex < files.length - 1 ? files[selectedIndex + 1] : null;
+
   const handleFileClick = (file: PreviewFile) => {
     if (file.isExternal) {
-      window.open(file.fileUrl, '_blank');
-    } else {
-      // Simulate download for local files
-      const a = document.createElement('a');
-      a.href = file.fileUrl;
-      a.download = file.title;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      window.open(file.fileUrl, "_blank", "noopener,noreferrer");
+      return;
     }
+    setSelectedFile(file);
   };
 
   return (
@@ -83,13 +88,32 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
         
         <DialogHeader className="p-6 border-b border-border/40 relative bg-background/50 backdrop-blur-md">
           <DialogTitle className="text-2xl font-heading text-foreground flex items-center gap-2">
-            <span style={{ color: accent }}>Preview Samples:</span> {tabName}
+            {selectedFile && (
+              <button type="button" onClick={() => setSelectedFile(null)} className="mr-1 rounded-md p-1 hover:bg-muted" aria-label="Back to sample files">
+                <ArrowLeft className="h-5 w-5" />
+              </button>
+            )}
+            <span style={{ color: accent }}>{selectedFile ? "Preview:" : "Preview Samples:"}</span> {selectedFile?.title ?? tabName}
           </DialogTitle>
           <DialogDescription className="text-muted-foreground mt-1">
-            Explore related sample files and documents for this category. Click to view or download.
+            {selectedFile ? selectedFile.description || "Sample preview" : "Explore related sample files and documents for this category. Click to preview."}
           </DialogDescription>
         </DialogHeader>
 
+        {selectedFile ? (
+          <div className="relative z-10 flex flex-1 flex-col gap-4 overflow-y-auto p-5">
+            <div className="flex min-h-[320px] flex-1 items-center justify-center rounded-xl border border-border/50 bg-background/70 p-3">
+              <SampleMediaViewer file={selectedFile} />
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/40 pt-3">
+              <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{selectedFile.fileType || "Sample"}</span>
+              <div className="flex flex-wrap gap-2">
+                <button type="button" disabled={!previousFile} onClick={() => previousFile && setSelectedFile(previousFile)} className="rounded-md border px-3 py-1.5 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40">Previous</button>
+                <button type="button" disabled={!nextFile} onClick={() => nextFile && setSelectedFile(nextFile)} className="rounded-md border px-3 py-1.5 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40">Next</button>
+              </div>
+            </div>
+          </div>
+        ) : (
         <div className="flex-1 overflow-y-auto p-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 relative z-10 content-start">
           {files.length === 0 ? (
             <div className="col-span-full text-center py-10 text-muted-foreground">
@@ -170,12 +194,14 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
 
                   <div className="mt-auto pt-3 border-t border-border/40 flex items-center justify-between text-muted-foreground group-hover:text-foreground transition-colors">
                     <span className="text-[10px] font-medium uppercase tracking-wider">
-                      {file.isExternal ? 'Open link' : 'Download file'}
+                      {file.isExternal ? 'Open preview' : file.allowDownload ? 'Preview & download' : 'Preview file'}
                     </span>
                     {file.isExternal ? (
                       <ExternalLink className="w-3.5 h-3.5" />
-                    ) : (
+                    ) : file.allowDownload ? (
                       <Download className="w-3.5 h-3.5" />
+                    ) : (
+                      <Eye className="w-3.5 h-3.5" />
                     )}
                   </div>
                 </button>
@@ -183,9 +209,10 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
             })
           )}
         </div>
+        )}
 
         {/* Pagination Footer */}
-        {files.length > 0 && (
+        {!selectedFile && files.length > 0 && (
           <div className="p-4 border-t border-border/40 flex items-center justify-between bg-background/50 backdrop-blur-md relative z-20">
             <div className="text-xs text-muted-foreground font-medium">
               Showing {Math.min((currentPage - 1) * itemsPerPage + 1, files.length)} to {Math.min(currentPage * itemsPerPage, files.length)} of {files.length} files

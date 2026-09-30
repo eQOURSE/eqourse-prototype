@@ -29,7 +29,7 @@ const SAMPLE_PAGES: PageOption[] = SAMPLE_HIERARCHY.flatMap((category) =>
   category.subCategories.map(({ slug, label, tabs }) => ({ slug, label, tabs }))
 );
 
-const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MP3", "WAV", "Other"];
+const FILE_TYPES = ["PDF", "DOC", "DOCX", "XLS", "XLSX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "Other"];
 
 const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "categoryId"> = {
   title: "",
@@ -37,11 +37,13 @@ const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "category
   description: "",
   thumbnailUrl: "",
   fileUrl: "",
+  mimeType: "",
   fileSize: undefined,
   pageSlug: "",
   tabName: "",
   fileType: "PDF",
   isExternal: false,
+  allowDownload: false,
   pagePaths: [],
 };
 
@@ -56,7 +58,7 @@ export default function SampleEditor() {
   }));
   const [customType, setCustomType] = useState(false);
   const [customFileType, setCustomFileType] = useState(false);
-  const [fileMeta, setFileMeta] = useState<{ originalName: string } | null>(null);
+  const [fileMeta, setFileMeta] = useState<{ originalName: string; mimeType?: string } | null>(null);
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(isNew);
 
@@ -79,6 +81,7 @@ export default function SampleEditor() {
         tabName: s.tabName ?? "",
         fileType: s.fileType ?? "PDF",
         isExternal: s.isExternal ?? false,
+        allowDownload: s.allowDownload ?? false,
         pagePaths: s.pagePaths ?? [],
       });
       if (!TYPES.includes(s.type)) setCustomType(true);
@@ -95,10 +98,16 @@ export default function SampleEditor() {
     const ext = fileName.split(".").pop()?.toUpperCase() || "";
     if (["PDF"].includes(ext)) return "PDF";
     if (["DOC", "DOCX"].includes(ext)) return "DOCX";
+    if (["XLS", "XLSX"].includes(ext)) return ext;
     if (["ZIP", "TAR", "GZ", "SCORM"].includes(ext)) return "ZIP";
     if (["MP4", "AVI", "MOV", "WEBM"].includes(ext)) return "MP4";
     if (["JSON", "JSONL"].includes(ext)) return "JSON";
     if (["CSV"].includes(ext)) return "CSV";
+    if (["TSV"].includes(ext)) return "TSV";
+    if (["HTML", "HTM"].includes(ext)) return "HTML5";
+    if (["MD", "MARKDOWN"].includes(ext)) return "MD";
+    if (["TXT", "LOG"].includes(ext)) return "TXT";
+    if (["XML", "SITEMAP"].includes(ext)) return "XML";
     if (["MP3", "WAV", "OGG"].includes(ext)) return ext;
     return "Other";
   };
@@ -304,6 +313,7 @@ export default function SampleEditor() {
                 } else {
                   setField("fileUrl", f.url);
                   setField("fileSize", f.size);
+                  setField("mimeType", f.mimeType || "");
                   setFileMeta({ originalName: f.originalName });
                   // Auto detect file type
                   const detected = detectFileType(f.originalName);
@@ -315,9 +325,17 @@ export default function SampleEditor() {
               }}
               kind="sample-file"
               label="Sample file *"
-              accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.json,.txt,.zip,.png,.jpg,.mp4,.mov,.webm,.wav,.mp3,.scorm"
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.json,.jsonl,.txt,.log,.xml,.sitemap,.md,.markdown,.html,.htm,.zip,.png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.wav,.mp3,.ogg,.m4a,.scorm"
             />
           )}
+
+          <div className="flex items-center justify-between border-t border-border/40 pt-4">
+            <div>
+              <Label className="font-semibold">Allow Download</Label>
+              <p className="text-xs text-muted-foreground">Enable download only for this sample.</p>
+            </div>
+            <Switch checked={form.allowDownload} onCheckedChange={(checked) => setField("allowDownload", checked)} />
+          </div>
         </div>
       </Card>
     </div>

@@ -12,7 +12,7 @@ export default function FileUpload({
   accept = ".pdf,.doc,.docx,.xls,.xlsx,.zip",
 }: {
   value?: { url: string; originalName: string; size?: number };
-  onChange: (file: { url: string; originalName: string; size: number } | null) => void;
+  onChange: (file: { url: string; originalName: string; size: number; mimeType?: string } | null) => void;
   kind: string;
   label?: string;
   accept?: string;
@@ -28,7 +28,7 @@ export default function FileUpload({
     setBusy(true);
     try {
       const res = await adminApi.uploadFile(file, kind);
-      onChange({ url: res.url, originalName: res.originalName, size: res.size });
+      onChange({ url: res.url, originalName: res.originalName, size: res.size, mimeType: res.mimeType });
     } catch {
       toast.error("Upload failed");
     } finally {

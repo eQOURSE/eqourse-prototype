@@ -128,12 +128,14 @@ export interface Sample {
   description?: string;
   thumbnailUrl: string;
   fileUrl: string;
+  mimeType?: string;
   fileSize?: number;
   order: number;
   pageSlug?: string;
   tabName?: string;
   fileType?: string;
   isExternal?: boolean;
+  allowDownload?: boolean;
   pagePaths?: string[];
   createdAt: string;
   updatedAt: string;

@@ -16,7 +16,7 @@ import { getSubCategory } from "../lib/sampleHierarchy";
 import type { Sample } from "../lib/types";
 import { toast } from "sonner";
 
-const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MP3", "WAV", "PNG", "JPG", "SCORM", "Other"];
+const FILE_TYPES = ["PDF", "DOC", "DOCX", "XLS", "XLSX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "PNG", "JPG", "SCORM", "Other"];
 
 export default function SampleFileEditor() {
   const { mainCategoryId, pageSlug, tabName, sampleId } = useParams();
@@ -33,14 +33,16 @@ export default function SampleFileEditor() {
     description: "",
     thumbnailUrl: "",
     fileUrl: "",
+    mimeType: "",
     fileSize: undefined as number | undefined,
     fileType: "PDF",
     isExternal: false,
+    allowDownload: false,
     tabName: tabFromUrl,
     pageSlug: pageSlug ?? "",
   });
   const [customFileType, setCustomFileType] = useState(false);
-  const [fileMeta, setFileMeta] = useState<{ originalName: string } | null>(null);
+  const [fileMeta, setFileMeta] = useState<{ originalName: string; mimeType?: string } | null>(null);
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(isNew);
 
@@ -61,6 +63,7 @@ export default function SampleFileEditor() {
         fileSize: s.fileSize,
         fileType: s.fileType ?? "PDF",
         isExternal: s.isExternal ?? false,
+        allowDownload: s.allowDownload ?? false,
         tabName: s.tabName ?? "",
         pageSlug: s.pageSlug ?? pageSlug ?? "",
       });
@@ -77,10 +80,16 @@ export default function SampleFileEditor() {
     const ext = fileName.split(".").pop()?.toUpperCase() || "";
     if (["PDF"].includes(ext)) return "PDF";
     if (["DOC", "DOCX"].includes(ext)) return "DOCX";
+    if (["XLS", "XLSX"].includes(ext)) return ext;
     if (["ZIP", "TAR", "GZ", "RAR", "7Z"].includes(ext)) return "ZIP";
     if (["MP4", "AVI", "MOV", "WEBM", "MKV"].includes(ext)) return "MP4";
     if (["JSON", "JSONL"].includes(ext)) return "JSON";
     if (["CSV"].includes(ext)) return "CSV";
+    if (["TSV"].includes(ext)) return "TSV";
+    if (["HTML", "HTM"].includes(ext)) return "HTML5";
+    if (["MD", "MARKDOWN"].includes(ext)) return "MD";
+    if (["TXT", "LOG"].includes(ext)) return "TXT";
+    if (["XML", "SITEMAP"].includes(ext)) return "XML";
     if (["MP3"].includes(ext)) return "MP3";
     if (["WAV", "OGG"].includes(ext)) return "WAV";
     if (["PNG"].includes(ext)) return "PNG";
@@ -103,8 +112,10 @@ export default function SampleFileEditor() {
           thumbnailUrl: form.thumbnailUrl,
           fileUrl: form.fileUrl,
           fileSize: form.fileSize,
+          mimeType: form.mimeType,
           fileType: form.fileType,
           isExternal: form.isExternal,
+          allowDownload: form.allowDownload,
           tabName: form.tabName,
           pageSlug: form.pageSlug,
         });
@@ -117,8 +128,10 @@ export default function SampleFileEditor() {
           thumbnailUrl: form.thumbnailUrl,
           fileUrl: form.fileUrl,
           fileSize: form.fileSize,
+          mimeType: form.mimeType,
           fileType: form.fileType,
           isExternal: form.isExternal,
+          allowDownload: form.allowDownload,
         });
         toast.success("Saved");
       }
@@ -242,6 +255,7 @@ export default function SampleFileEditor() {
                 } else {
                   setField("fileUrl", f.url);
                   setField("fileSize", f.size);
+                  setField("mimeType", f.mimeType || "");
                   setFileMeta({ originalName: f.originalName });
                   const detected = detectFileType(f.originalName);
                   if (detected !== "Other") {
@@ -255,6 +269,14 @@ export default function SampleFileEditor() {
               accept="*/*"
             />
           )}
+
+          <div className="flex items-center justify-between border-t border-border/40 pt-4">
+            <div>
+              <Label className="font-semibold">Allow Download</Label>
+              <p className="text-xs text-muted-foreground">Enable download only for this sample.</p>
+            </div>
+            <Switch checked={form.allowDownload} onCheckedChange={(checked) => setField("allowDownload", checked)} />
+          </div>
         </div>
       </Card>
     </div>
