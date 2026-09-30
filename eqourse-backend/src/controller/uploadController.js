@@ -35,6 +35,7 @@ const fileFilter = (req, file, cb) => {
     "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     "text/csv", "text/plain", "application/json",
+    "text/markdown", "text/x-markdown", "application/markdown",
     // Archives
     "application/zip", "application/x-zip-compressed", "multipart/x-zip",
     // Video
