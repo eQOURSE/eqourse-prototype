@@ -42,6 +42,7 @@ const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "category
   tabName: "",
   fileType: "PDF",
   isExternal: false,
+  allowDownload: false,
   pagePaths: [],
 };
 
@@ -79,6 +80,7 @@ export default function SampleEditor() {
         tabName: s.tabName ?? "",
         fileType: s.fileType ?? "PDF",
         isExternal: s.isExternal ?? false,
+        allowDownload: s.allowDownload ?? false,
         pagePaths: s.pagePaths ?? [],
       });
       if (!TYPES.includes(s.type)) setCustomType(true);
@@ -321,6 +323,14 @@ export default function SampleEditor() {
               accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.json,.jsonl,.txt,.log,.xml,.sitemap,.md,.markdown,.zip,.png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.wav,.mp3,.ogg,.m4a,.scorm"
             />
           )}
+
+          <div className="flex items-center justify-between border-t border-border/40 pt-4">
+            <div>
+              <Label className="font-semibold">Allow Download</Label>
+              <p className="text-xs text-muted-foreground">Enable download only for this sample.</p>
+            </div>
+            <Switch checked={form.allowDownload} onCheckedChange={(checked) => setField("allowDownload", checked)} />
+          </div>
         </div>
       </Card>
     </div>

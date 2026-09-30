@@ -36,6 +36,7 @@ export default function SampleFileEditor() {
     fileSize: undefined as number | undefined,
     fileType: "PDF",
     isExternal: false,
+    allowDownload: false,
     tabName: tabFromUrl,
     pageSlug: pageSlug ?? "",
   });
@@ -61,6 +62,7 @@ export default function SampleFileEditor() {
         fileSize: s.fileSize,
         fileType: s.fileType ?? "PDF",
         isExternal: s.isExternal ?? false,
+        allowDownload: s.allowDownload ?? false,
         tabName: s.tabName ?? "",
         pageSlug: s.pageSlug ?? pageSlug ?? "",
       });
@@ -108,6 +110,7 @@ export default function SampleFileEditor() {
           fileSize: form.fileSize,
           fileType: form.fileType,
           isExternal: form.isExternal,
+          allowDownload: form.allowDownload,
           tabName: form.tabName,
           pageSlug: form.pageSlug,
         });
@@ -122,6 +125,7 @@ export default function SampleFileEditor() {
           fileSize: form.fileSize,
           fileType: form.fileType,
           isExternal: form.isExternal,
+          allowDownload: form.allowDownload,
         });
         toast.success("Saved");
       }
@@ -258,6 +262,14 @@ export default function SampleFileEditor() {
               accept="*/*"
             />
           )}
+
+          <div className="flex items-center justify-between border-t border-border/40 pt-4">
+            <div>
+              <Label className="font-semibold">Allow Download</Label>
+              <p className="text-xs text-muted-foreground">Enable download only for this sample.</p>
+            </div>
+            <Switch checked={form.allowDownload} onCheckedChange={(checked) => setField("allowDownload", checked)} />
+          </div>
         </div>
       </Card>
     </div>
