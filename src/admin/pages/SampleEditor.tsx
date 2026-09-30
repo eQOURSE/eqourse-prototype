@@ -37,6 +37,7 @@ const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "category
   description: "",
   thumbnailUrl: "",
   fileUrl: "",
+  mimeType: "",
   fileSize: undefined,
   pageSlug: "",
   tabName: "",
@@ -57,7 +58,7 @@ export default function SampleEditor() {
   }));
   const [customType, setCustomType] = useState(false);
   const [customFileType, setCustomFileType] = useState(false);
-  const [fileMeta, setFileMeta] = useState<{ originalName: string } | null>(null);
+  const [fileMeta, setFileMeta] = useState<{ originalName: string; mimeType?: string } | null>(null);
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(isNew);
 
@@ -312,6 +313,7 @@ export default function SampleEditor() {
                 } else {
                   setField("fileUrl", f.url);
                   setField("fileSize", f.size);
+                  setField("mimeType", f.mimeType || "");
                   setFileMeta({ originalName: f.originalName });
                   // Auto detect file type
                   const detected = detectFileType(f.originalName);
