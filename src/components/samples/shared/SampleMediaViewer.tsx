@@ -3,6 +3,9 @@ import { Download, ExternalLink, FileWarning, Loader2 } from "lucide-react";
 import type { PreviewFile } from "@/lib/publicApi";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import mammoth from "mammoth";
+import * as XLSX from "xlsx";
+import DOMPurify from "dompurify";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
@@ -36,7 +39,9 @@ const normalizedType = (file: PreviewFile) => {
     "image", "jpg", "jpeg", "png", "gif", "webp", "svg", "avif", "bmp", "ico", "tif", "tiff",
     "audio", "mp3", "wav", "ogg", "oga", "m4a", "aac", "flac", "opus", "aiff", "wma",
     "video", "mp4", "webm", "mov", "m4v", "ogv", "avi", "mkv", "mpeg", "mpg", "3gp", "wmv",
-    "pdf", "application/pdf", "json", "jsonl", "ndjson", "csv", "tsv", "text/csv", "text",
+    "pdf", "application/pdf", "doc", "docx", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "xls", "xlsx", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "json", "jsonl", "ndjson", "csv", "tsv", "text/csv", "text",
     "txt", "text/plain", "xml", "sitemap", "application/xml", "text/xml", "html", "htm", "text/html", "md", "markdown",
   ].includes(value) || value.startsWith("image/") || value.startsWith("audio/") || value.startsWith("video/"));
   return known || candidates[0] || "";
@@ -77,6 +82,18 @@ const isVideoType = (type: string) => matches(type, [
 
 const isPdfType = (type: string) => matches(type, ["pdf", "application/pdf"]);
 const isHtmlType = (type: string) => matches(type, ["html", "htm", "text/html"]);
+const isWordType = (type: string) => matches(type, [
+  "doc",
+  "docx",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+]);
+const isSpreadsheetType = (type: string) => matches(type, [
+  "xls",
+  "xlsx",
+  "application/vnd.ms-excel",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+]);
 
 const formatJson = (source: string, type: string) => {
   if (type === "jsonl" || type === "ndjson") {
@@ -145,6 +162,23 @@ export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
 
   if (isVideoType(type)) {
     return <MediaWithDownload file={file} url={url}><video className="max-h-[62vh] w-full rounded-lg bg-black" controls controlsList={file.allowDownload ? undefined : "nodownload"} disablePictureInPicture={!file.allowDownload} playsInline preload="metadata" src={url} onContextMenu={(event) => event.preventDefault()}>Your browser cannot play this video format.</video></MediaWithDownload>;
+  }
+
+  if (isWordType(type)) {
+    if (matches(type, ["doc", "application/msword"])) {
+      return (
+        <PreviewFallback
+          message="Legacy .doc files cannot be rendered in the browser. Please upload a .docx copy for preview."
+          url={url}
+          allowDownload={file.allowDownload === true}
+        />
+      );
+    }
+    return <DocxPreview file={file} url={url} />;
+  }
+
+  if (isSpreadsheetType(type)) {
+    return <SpreadsheetPreview file={file} url={url} />;
   }
 
   if (isPdfType(type)) {
@@ -245,6 +279,88 @@ function PreviewFallback({ message, url, allowDownload }: { message: string; url
       </div>
     </div>
   );
+}
+
+function DocxPreview({ file, url }: { file: PreviewFile; url: string }) {
+  const [html, setHtml] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setHtml("");
+    setError("");
+    void fetch(url, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Unable to load document (${response.status})`);
+        return response.arrayBuffer();
+      })
+      .then((arrayBuffer) => mammoth.convertToHtml({ arrayBuffer }))
+      .then((result) => setHtml(DOMPurify.sanitize(result.value, { USE_PROFILES: { html: true } })))
+      .catch((reason: unknown) => {
+        if ((reason as Error)?.name !== "AbortError") setError(reason instanceof Error ? reason.message : "Unable to render this document.");
+      });
+    return () => controller.abort();
+  }, [url]);
+
+  if (error) return <PreviewFallback message={error} url={url} allowDownload={file.allowDownload === true} />;
+  if (!html) return <LoadingPreview />;
+  return (
+    <MediaWithDownload file={file} url={url}>
+      <article className="prose prose-sm max-h-[62vh] w-full max-w-none overflow-auto rounded-lg bg-white p-6 text-left" dangerouslySetInnerHTML={{ __html: html }} />
+    </MediaWithDownload>
+  );
+}
+
+function SpreadsheetPreview({ file, url }: { file: PreviewFile; url: string }) {
+  const [workbook, setWorkbook] = useState<XLSX.WorkBook | null>(null);
+  const [sheetName, setSheetName] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setWorkbook(null);
+    setError("");
+    void fetch(url, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Unable to load spreadsheet (${response.status})`);
+        return response.arrayBuffer();
+      })
+      .then((arrayBuffer) => {
+        const nextWorkbook = XLSX.read(arrayBuffer, { type: "array" });
+        setWorkbook(nextWorkbook);
+        setSheetName(nextWorkbook.SheetNames[0] ?? "");
+      })
+      .catch((reason: unknown) => {
+        if ((reason as Error)?.name !== "AbortError") setError(reason instanceof Error ? reason.message : "Unable to render this spreadsheet.");
+      });
+    return () => controller.abort();
+  }, [url]);
+
+  if (error) return <PreviewFallback message={error} url={url} allowDownload={file.allowDownload === true} />;
+  if (!workbook || !sheetName) return <LoadingPreview />;
+  const rows = XLSX.utils.sheet_to_json<unknown[]>(workbook.Sheets[sheetName], { header: 1, defval: "" });
+  return (
+    <MediaWithDownload file={file} url={url}>
+      <div className="w-full overflow-hidden rounded-lg bg-white text-left">
+        {workbook.SheetNames.length > 1 && (
+          <div className="border-b bg-slate-50 p-2">
+            <select className="rounded border px-2 py-1 text-sm" value={sheetName} onChange={(event) => setSheetName(event.target.value)}>
+              {workbook.SheetNames.map((name) => <option key={name} value={name}>{name}</option>)}
+            </select>
+          </div>
+        )}
+        <div className="max-h-[62vh] overflow-auto">
+          <table className="min-w-full border-collapse text-sm"><tbody>
+            {rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex} className="whitespace-pre-wrap border px-3 py-2 align-top">{String(cell ?? "")}</td>)}</tr>)}
+          </tbody></table>
+        </div>
+      </div>
+    </MediaWithDownload>
+  );
+}
+
+function LoadingPreview() {
+  return <div className="flex h-40 items-center justify-center"><Loader2 className="h-6 w-6 animate-spin" /></div>;
 }
 
 function PdfJsViewer({ file, url }: { file: PreviewFile; url: string }) {
