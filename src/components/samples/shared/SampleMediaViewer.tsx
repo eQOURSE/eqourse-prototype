@@ -373,21 +373,43 @@ function PdfJsViewer({ file, url }: { file: PreviewFile; url: string }) {
 
   useEffect(() => {
     let active = true;
+    const controller = new AbortController();
+    let loadedDocument: Awaited<ReturnType<typeof pdfjsLib.getDocument>>["promise"] extends Promise<infer T> ? T : never;
     setLoading(true);
     setError(null);
     setPage(1);
     documentRef.current = null;
 
-    pdfjsLib.getDocument(url).promise
+    fetch(url, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error(`PDF request failed (${response.status})`);
+        return response.arrayBuffer();
+      })
+      .then((buffer) => {
+        const bytes = new Uint8Array(buffer);
+        if (bytes.length < 5 || String.fromCharCode(...bytes.slice(0, 5)) !== "%PDF-") {
+          throw new Error("The response is not a valid PDF file.");
+        }
+        return pdfjsLib.getDocument({ data: bytes }).promise;
+      })
       .then((document) => {
         if (!active) return;
+        loadedDocument = document;
         documentRef.current = document;
         setTotalPages(document.numPages);
       })
-      .catch(() => active && setError("The PDF could not be loaded."))
+      .catch((reason: unknown) => {
+        if (active && (reason as Error)?.name !== "AbortError") {
+          setError(reason instanceof Error ? reason.message : "The PDF could not be loaded.");
+        }
+      })
       .finally(() => active && setLoading(false));
 
-    return () => { active = false; };
+    return () => {
+      active = false;
+      controller.abort();
+      void loadedDocument?.destroy();
+    };
   }, [url]);
 
   useEffect(() => {
