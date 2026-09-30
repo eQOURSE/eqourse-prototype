@@ -37,7 +37,7 @@ interface Props {
 
 const getFileIcon = (fileType: string) => {
   const type = fileType.toLowerCase();
-  if (['pdf', 'doc', 'docx', 'txt', 'rtf'].includes(type)) return FileText;
+  if (['pdf', 'doc', 'docx', 'txt', 'rtf', 'xls', 'xlsx'].includes(type)) return FileText;
   if (['mp4', 'avi', 'mov', 'mkv', 'webm', 'scorm'].includes(type)) return FileVideo;
   if (['json', 'jsonl', 'csv'].includes(type)) return FileJson;
   if (['wav', 'mp3', 'rttm', 'textgrid'].includes(type)) return FileMusic;
