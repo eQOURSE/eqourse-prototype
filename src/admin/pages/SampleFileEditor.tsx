@@ -84,6 +84,8 @@ export default function SampleFileEditor() {
     if (["MP4", "AVI", "MOV", "WEBM", "MKV"].includes(ext)) return "MP4";
     if (["JSON", "JSONL"].includes(ext)) return "JSON";
     if (["CSV"].includes(ext)) return "CSV";
+    if (["TSV"].includes(ext)) return "TSV";
+    if (["HTML", "HTM"].includes(ext)) return "HTML5";
     if (["MD", "MARKDOWN"].includes(ext)) return "MD";
     if (["TXT", "LOG"].includes(ext)) return "TXT";
     if (["XML", "SITEMAP"].includes(ext)) return "XML";

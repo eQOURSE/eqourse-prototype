@@ -34,7 +34,8 @@ const fileFilter = (req, file, cb) => {
     "application/pdf",
     "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "text/csv", "text/plain", "application/json",
+    "text/csv", "text/tab-separated-values", "text/plain", "application/json",
+    "text/html", "application/xhtml+xml",
     "text/markdown", "text/x-markdown", "application/markdown",
     "application/xml", "text/xml",
     // Archives
@@ -44,7 +45,7 @@ const fileFilter = (req, file, cb) => {
     // Audio
     "audio/mpeg", "audio/wav", "audio/ogg", "audio/mp3",
   ];
-  const extensionAllowed = [".md", ".markdown", ".txt", ".log", ".xml", ".sitemap"]
+  const extensionAllowed = [".md", ".markdown", ".txt", ".log", ".xml", ".sitemap", ".tsv", ".html", ".htm"]
     .includes(path.extname(file.originalname).toLowerCase());
   if (allowedMimes.includes(file.mimetype) || extensionAllowed || file.mimetype.startsWith("video/") || file.mimetype.startsWith("audio/")) {
     cb(null, true);
