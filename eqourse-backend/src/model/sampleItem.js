@@ -8,6 +8,7 @@ const sampleItemSchema = new mongoose.Schema(
     description: { type: String, default: "" },
     thumbnailUrl: { type: String, default: "" },
     fileUrl: { type: String, default: "" },
+    mimeType: { type: String, trim: true, default: "" },
     fileSize: { type: Number },
     order: { type: Number, default: 0 },
 
