@@ -29,7 +29,7 @@ const SAMPLE_PAGES: PageOption[] = SAMPLE_HIERARCHY.flatMap((category) =>
   category.subCategories.map(({ slug, label, tabs }) => ({ slug, label, tabs }))
 );
 
-const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "Other"];
+const FILE_TYPES = ["PDF", "DOC", "DOCX", "XLS", "XLSX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "Other"];
 
 const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "categoryId"> = {
   title: "",
@@ -97,10 +97,13 @@ export default function SampleEditor() {
     const ext = fileName.split(".").pop()?.toUpperCase() || "";
     if (["PDF"].includes(ext)) return "PDF";
     if (["DOC", "DOCX"].includes(ext)) return "DOCX";
+    if (["XLS", "XLSX"].includes(ext)) return ext;
     if (["ZIP", "TAR", "GZ", "SCORM"].includes(ext)) return "ZIP";
     if (["MP4", "AVI", "MOV", "WEBM"].includes(ext)) return "MP4";
     if (["JSON", "JSONL"].includes(ext)) return "JSON";
     if (["CSV"].includes(ext)) return "CSV";
+    if (["TSV"].includes(ext)) return "TSV";
+    if (["HTML", "HTM"].includes(ext)) return "HTML5";
     if (["MD", "MARKDOWN"].includes(ext)) return "MD";
     if (["TXT", "LOG"].includes(ext)) return "TXT";
     if (["XML", "SITEMAP"].includes(ext)) return "XML";
@@ -320,7 +323,7 @@ export default function SampleEditor() {
               }}
               kind="sample-file"
               label="Sample file *"
-              accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.json,.jsonl,.txt,.log,.xml,.sitemap,.md,.markdown,.zip,.png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.wav,.mp3,.ogg,.m4a,.scorm"
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.json,.jsonl,.txt,.log,.xml,.sitemap,.md,.markdown,.html,.htm,.zip,.png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.wav,.mp3,.ogg,.m4a,.scorm"
             />
           )}
 
