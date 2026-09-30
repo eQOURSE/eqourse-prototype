@@ -65,6 +65,14 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
   const previousFile = selectedIndex > 0 ? files[selectedIndex - 1] : null;
   const nextFile = selectedIndex >= 0 && selectedIndex < files.length - 1 ? files[selectedIndex + 1] : null;
 
+  const handleFileClick = (file: PreviewFile) => {
+    if (file.isExternal) {
+      window.open(file.fileUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    setSelectedFile(file);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-w-[90vw] lg:max-w-[850px] w-full aspect-square max-h-[90vh] bg-card border-border/60 shadow-2xl overflow-hidden flex flex-col p-0">
@@ -116,7 +124,7 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
               return (
                 <button
                   key={idx}
-                  onClick={() => setSelectedFile(file)}
+                  onClick={() => handleFileClick(file)}
                   className="w-full text-left group bg-background/60 hover:bg-muted/30 border border-border/50 hover:border-border rounded-xl p-3.5 flex flex-col transition-all hover:shadow-md relative overflow-hidden h-full"
                   style={{ '--hover-accent': accent } as React.CSSProperties}
                 >
