@@ -316,6 +316,7 @@ export interface PreviewFile {
   description: string;
   thumbnailUrl?: string;
   fileType: string;
+  mimeType?: string;
   fileUrl: string;
   isExternal: boolean;
 }
