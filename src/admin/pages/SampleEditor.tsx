@@ -29,7 +29,7 @@ const SAMPLE_PAGES: PageOption[] = SAMPLE_HIERARCHY.flatMap((category) =>
   category.subCategories.map(({ slug, label, tabs }) => ({ slug, label, tabs }))
 );
 
-const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MP3", "WAV", "Other"];
+const FILE_TYPES = ["PDF", "DOCX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "Other"];
 
 const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "categoryId"> = {
   title: "",
@@ -99,6 +99,9 @@ export default function SampleEditor() {
     if (["MP4", "AVI", "MOV", "WEBM"].includes(ext)) return "MP4";
     if (["JSON", "JSONL"].includes(ext)) return "JSON";
     if (["CSV"].includes(ext)) return "CSV";
+    if (["MD", "MARKDOWN"].includes(ext)) return "MD";
+    if (["TXT", "LOG"].includes(ext)) return "TXT";
+    if (["XML", "SITEMAP"].includes(ext)) return "XML";
     if (["MP3", "WAV", "OGG"].includes(ext)) return ext;
     return "Other";
   };
@@ -315,7 +318,7 @@ export default function SampleEditor() {
               }}
               kind="sample-file"
               label="Sample file *"
-              accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.json,.txt,.zip,.png,.jpg,.mp4,.mov,.webm,.wav,.mp3,.scorm"
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.json,.jsonl,.txt,.log,.xml,.sitemap,.md,.markdown,.zip,.png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.wav,.mp3,.ogg,.m4a,.scorm"
             />
           )}
         </div>
