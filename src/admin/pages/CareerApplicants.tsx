@@ -28,6 +28,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
+import AttachmentPreview from "../components/AttachmentPreview";
 
 const STATUS_CONFIG: Record<ApplicationStatus, { label: string; bg: string; text: string; icon: LucideIcon }> = {
   applied: { label: "Applied", bg: "bg-blue-100", text: "text-blue-700", icon: Clock },
@@ -457,17 +458,10 @@ export default function AdminCareerApplicants() {
                       <span className="text-muted-foreground text-xs font-medium uppercase tracking-wider">Documents</span>
                       
                       {app.resumeFile ? (
-                        <button
-                          type="button"
-                          onClick={async () => {
-                            try { await adminApi.downloadApplicationResume(app.id, app.resumeFile?.originalName || "resume"); }
-                            catch (cause) { toast.error(cause instanceof Error ? cause.message : "Failed to download resume"); }
-                          }}
-                          className="flex w-full items-center justify-between p-2 rounded-lg border border-border bg-secondary/50 hover:bg-secondary transition-colors text-sm"
-                        >
-                          <span className="truncate font-medium">{app.resumeFile.originalName}</span>
-                          <Download className="w-4 h-4 text-muted-foreground shrink-0 ml-2" />
-                        </button>
+                        <AttachmentPreview
+                          attachment={app.resumeFile}
+                          previewPath={`/api/admin/applications/${app.id}/resume`}
+                        />
                       ) : app.resumeDriveLink ? (
                         <a 
                           href={app.resumeDriveLink} 
