@@ -120,7 +120,7 @@ export default function ContactQueries() {
   };
 
   return (
-    <div className="p-8">
+    <div className="min-w-0 p-4 sm:p-6 lg:p-8">
       <PageHeader
         title="Contact Queries"
         description="All submissions from the public contact form."
@@ -134,7 +134,7 @@ export default function ContactQueries() {
 
       {/* Filters */}
       <Card className="p-4 mb-4 flex flex-wrap gap-3 items-center">
-        <div className="relative flex-1 min-w-[240px]">
+        <div className="relative min-w-0 flex-1 sm:min-w-[240px]">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search name, email, subject, company…"
@@ -161,8 +161,9 @@ export default function ContactQueries() {
       </Card>
 
       {/* Table */}
-      <Card className="overflow-hidden">
-        <Table>
+      <Card className="min-w-0 max-w-full overflow-hidden">
+        <div className="w-full max-w-full overflow-x-auto">
+        <Table className="min-w-[760px]">
           <TableHeader>
             <TableRow>
               <TableHead>Date</TableHead>
@@ -195,9 +196,9 @@ export default function ContactQueries() {
                     {new Date(q.createdAt).toLocaleDateString()}
                   </TableCell>
                   <TableCell className="font-medium">{q.name}</TableCell>
-                  <TableCell className="text-sm">{q.email}</TableCell>
-                  <TableCell className="text-sm max-w-[260px] truncate">{q.subject}</TableCell>
-                  <TableCell className="text-sm">{q.company ?? "-"}</TableCell>
+                  <TableCell className="max-w-[220px] truncate text-sm">{q.email}</TableCell>
+                  <TableCell className="max-w-[260px] truncate text-sm">{q.subject}</TableCell>
+                  <TableCell className="max-w-[180px] truncate text-sm">{q.company ?? "-"}</TableCell>
                   <TableCell>
                     {q.attachment ? (
                       <AttachmentPreview attachment={q.attachment} compact />
@@ -223,6 +224,7 @@ export default function ContactQueries() {
             )}
           </TableBody>
         </Table>
+        </div>
       </Card>
 
       {/* Detail drawer */}
