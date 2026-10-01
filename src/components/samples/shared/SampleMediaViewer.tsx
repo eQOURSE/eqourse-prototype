@@ -186,7 +186,13 @@ export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
   }
 
   if (isHtmlType(type)) {
-    return <MediaWithDownload file={file} url={url}><iframe title={file.title} src={url} sandbox="allow-scripts allow-forms allow-modals allow-popups allow-presentation" allow="autoplay; fullscreen; xr-spatial-tracking; web-share" allowFullScreen onContextMenu={(event) => event.preventDefault()} className="h-[62vh] w-full rounded-lg border bg-white" /></MediaWithDownload>;
+    const externalOrigin = (() => {
+      try { return new URL(url, window.location.href).origin; }
+      catch { return ""; }
+    })();
+    const crossOriginHostedHtml = file.isExternal && externalOrigin && externalOrigin !== window.location.origin;
+    const sandbox = `allow-scripts allow-forms allow-modals allow-popups allow-presentation${crossOriginHostedHtml ? " allow-same-origin" : ""}`;
+    return <MediaWithDownload file={file} url={url}><iframe title={file.title} src={url} sandbox={sandbox} allow="autoplay; fullscreen; xr-spatial-tracking; web-share" allowFullScreen onContextMenu={(event) => event.preventDefault()} className="h-[62vh] w-full rounded-lg border bg-white" /></MediaWithDownload>;
   }
 
   if (isTextType(type)) {
