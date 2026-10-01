@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { BrainCircuit, ChevronLeft, ChevronRight, Download, Loader2, Mail, MapPin, Save, Search, UserRoundSearch } from "lucide-react";
+import { BrainCircuit, ChevronLeft, ChevronRight, Loader2, Mail, MapPin, Save, Search, UserRoundSearch } from "lucide-react";
 import { adminApi } from "../lib/api";
 import type { ApplicationStatus, TalentProfile } from "../lib/types";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import AttachmentPreview from "../components/AttachmentPreview";
 
 const statuses: ApplicationStatus[] = ["applied", "shortlisted", "rejected", "hired"];
 
@@ -61,10 +62,6 @@ export default function TalentPool() {
 
 function TalentCard({ record, onUpdate }: { record: TalentProfile; onUpdate: (record: TalentProfile, patch: { status?: ApplicationStatus; internalNotes?: string }) => void }) {
   const [notes, setNotes] = useState(record.internalNotes);
-  const downloadResume = async () => {
-    try { await adminApi.downloadTalentResume(record.id, record.resumeFile?.originalName || "resume"); }
-    catch (cause) { toast.error(cause instanceof Error ? cause.message : "Could not download resume"); }
-  };
   return <article className="rounded-xl border bg-card p-5 shadow-sm">
     <div className="flex flex-col justify-between gap-5 lg:flex-row">
       <div className="min-w-0 flex-1"><div className="flex flex-wrap items-center gap-3"><h2 className="text-lg font-bold">{record.fullName}</h2><span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold capitalize text-primary">{record.status}</span><span className="font-mono text-xs text-muted-foreground">{record.receiptId}</span></div>
@@ -72,7 +69,7 @@ function TalentCard({ record, onUpdate }: { record: TalentProfile; onUpdate: (re
         <dl className="mt-5 grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-3"><Info label="Preferred roles" value={record.preferredRoles.join(", ")} /><Info label="Current role" value={record.currentRole} /><Info label="Experience" value={record.experience} /><Info label="Qualification" value={record.qualification} /><Info label="Skills" value={record.skills.join(", ")} /><Info label="Candidate note" value={record.message} /></dl>
       </div>
       <div className="w-full space-y-3 border-t pt-4 lg:w-72 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
-        {record.resumeFile && <button type="button" onClick={downloadResume} className="flex w-full items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium hover:bg-muted"><Download className="h-4 w-4" />{record.resumeFile.originalName || "Resume"}</button>}
+        {record.resumeFile && <AttachmentPreview attachment={record.resumeFile} previewPath={`/api/admin/talent-pool/${record.id}/resume`} />}
         <select value={record.status} onChange={(event) => onUpdate(record, { status: event.target.value as ApplicationStatus })} className="w-full rounded-lg border bg-background px-3 py-2 text-sm">{statuses.map((value) => <option key={value}>{value}</option>)}</select>
         <textarea value={notes} onChange={(event) => setNotes(event.target.value)} className="min-h-24 w-full resize-y rounded-lg border bg-background p-3 text-sm" placeholder="Private HR remark" />
         <Button variant="outline" className="w-full" onClick={() => onUpdate(record, { internalNotes: notes })}><Save className="mr-2 h-4 w-4" />Save remark</Button>

@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const { UPLOAD_DIR } = require("../utils/uploadStorage");
 
 const {
   getActiveJobOpenings,
@@ -15,7 +16,6 @@ const {
 } = require("../controller/workforceController");
 
 // ─── Multer config for resume uploads ────────────────────────────────────
-const UPLOAD_DIR = path.join(__dirname, "../../uploads");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const folder = file.fieldname === "resume"

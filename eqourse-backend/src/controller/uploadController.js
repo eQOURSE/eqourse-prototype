@@ -1,10 +1,10 @@
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const { UPLOAD_DIR } = require("../utils/uploadStorage");
+const { toPublicAssetUrl } = require("../utils/publicAssetUrl");
 
 // ─── Storage config ─────────────────────────────────────────
-const UPLOAD_DIR = path.join(__dirname, "../../uploads");
-
 // Ensure uploads directory exists
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
@@ -84,7 +84,7 @@ const uploadFile = (req, res) => {
 
     // Build the public URL — the frontend will use this to display the file
     const actualKind = path.basename(req.file.destination);
-    const fileUrl = `/api/uploads/${actualKind}/${req.file.filename}`;
+    const fileUrl = toPublicAssetUrl(`/api/uploads/${actualKind}/${req.file.filename}`);
 
     return res.json({
       success: true,

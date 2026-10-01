@@ -1,5 +1,6 @@
 const Blog = require("../model/blog");
 const { syncCmsSeoPage, removeCmsSeoPage } = require("../utils/cmsSeoPublisher");
+const { toPublicAssetUrl } = require("../utils/publicAssetUrl");
 
 // Progressive taxonomy filter: category -> sub_category -> sub_sub_category.
 // Missing levels are valid and simply make the filter broader.
@@ -384,7 +385,7 @@ function formatBlog(doc) {
     excerpt: doc.excerpt || "",
     body: doc.body,
     bodyFormat: doc.bodyFormat,
-    coverImageUrl: doc.coverImageUrl || "",
+    coverImageUrl: toPublicAssetUrl(doc.coverImageUrl || ""),
     author: {
       name: doc.author?.name || "eQOURSE Team",
       avatarUrl: doc.author?.avatarUrl || ""
@@ -398,7 +399,7 @@ function formatBlog(doc) {
     seo: {
       title: doc.seo?.title || "",
       description: doc.seo?.description || "",
-      ogImageUrl: doc.seo?.ogImageUrl || "",
+      ogImageUrl: toPublicAssetUrl(doc.seo?.ogImageUrl || ""),
       coverImageAlt: doc.seo?.coverImageAlt || `${doc.title} — eQOURSE blog cover image`,
       coverImageTitle: doc.seo?.coverImageTitle || doc.title
     },

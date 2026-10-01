@@ -1,6 +1,7 @@
 const PilotQuery = require("../model/pilot");
 const { sendPilotNotification } = require("../utils/emailNotifier");
 const logger = require("../utils/logger");
+const { queuePilotSync } = require("../utils/pilotGoogleSheetSync");
 
 /**
  * POST /api/pilot
@@ -59,6 +60,12 @@ const submitPilotQuery = async (req, res) => {
     });
 
     await query.save();
+
+    // Sync only newly submitted pilot queries. Updates/deletes do not trigger
+    // a sheet write, and the sync remains asynchronous to MongoDB persistence.
+    queuePilotSync(query).catch((err) =>
+      logger.error(`Pilot Google Sheet sync failed for ${query._id}: ${err.message}`)
+    );
 
     // Fire-and-forget email notification — never blocks the response
     sendPilotNotification(query).catch((err) =>
