@@ -8,6 +8,8 @@ const Blog = require("./src/model/blog");
 const EventMedia = require("./src/model/eventMedia");
 const CaseStudy = require("./src/model/caseStudy");
 const { syncCmsSeoPage, getCmsSeoTarget } = require("./src/utils/cmsSeoPublisher");
+const { startPilotQuerySheetSync } = require("./src/utils/pilotGoogleSheetSync");
+const { startContactQuerySheetSync } = require("./src/utils/contactGoogleSheetSync");
 
 
 // ── Routers ──────────────────────────────────────────────────────────────────
@@ -130,6 +132,10 @@ mongoose
     reconcilePublishedCmsSeo().catch((error) => {
       logger.error(`CMS SEO reconciliation failed: ${error.message}`);
     });
+
+    // MongoDB is authoritative; this worker only maintains the reporting copy.
+    startPilotQuerySheetSync();
+    startContactQuerySheetSync();
   })
   .catch((err) => {
     logger.error(`❌ MongoDB connection failed: ${err.message}`);
