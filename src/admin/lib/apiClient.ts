@@ -202,6 +202,16 @@ export async function downloadFile(path: string, fallbackFilename: string): Prom
   URL.revokeObjectURL(objectUrl);
 }
 
+/** Fetch an authenticated private file as a temporary browser object URL. */
+export async function fetchFileBlobUrl(path: string): Promise<string> {
+  const res = await fetch(`${getBaseUrl()}${path}`, {
+    method: "GET",
+    headers: buildHeaders(),
+  });
+  if (!res.ok) await parseResponse<never>(res);
+  return URL.createObjectURL(await res.blob());
+}
+
 /**
  * Upload a file via multipart/form-data.
  * Does NOT set Content-Type header (browser sets it with boundary).

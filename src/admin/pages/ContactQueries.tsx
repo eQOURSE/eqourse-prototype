@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Download, Search, FileDown, Trash2, Eye } from "lucide-react";
+import { Download, Search, Trash2, Eye } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -41,7 +41,8 @@ import PageHeader from "../components/PageHeader";
 import { QueryStatusBadge } from "../components/StatusBadge";
 import { adminApi } from "../lib/api";
 import type { ContactQuery, QueryStatus } from "../lib/types";
-import { exportToCSV, downloadAttachment } from "../lib/excel";
+import { exportToCSV } from "../lib/excel";
+import AttachmentPreview from "../components/AttachmentPreview";
 import { toast } from "sonner";
 
 export default function ContactQueries() {
@@ -199,17 +200,7 @@ export default function ContactQueries() {
                   <TableCell className="text-sm">{q.company ?? "-"}</TableCell>
                   <TableCell>
                     {q.attachment ? (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          downloadAttachment(q.attachment!.url, q.attachment!.originalName);
-                        }}
-                      >
-                        <FileDown className="w-3.5 h-3.5 mr-1" />
-                        {q.attachment.originalName.slice(0, 18)}
-                      </Button>
+                      <AttachmentPreview attachment={q.attachment} compact />
                     ) : (
                       <span className="text-muted-foreground text-sm">-</span>
                     )}
@@ -264,17 +255,12 @@ export default function ContactQueries() {
                 {selected.attachment && (
                   <div>
                     <Label>Attachment</Label>
-                    <Button
-                      variant="outline"
-                      className="w-full mt-1 justify-start"
-                      onClick={() =>
-                        downloadAttachment(selected.attachment!.url, selected.attachment!.originalName)
-                      }
-                    >
-                      <FileDown className="w-4 h-4 mr-2" />
-                      {selected.attachment.originalName} (
-                      {(selected.attachment.size / 1024).toFixed(0)} KB)
-                    </Button>
+                    <div className="mt-1">
+                      <AttachmentPreview attachment={selected.attachment} />
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {(selected.attachment.size / 1024).toFixed(0)} KB · Click to preview or download
+                      </p>
+                    </div>
                   </div>
                 )}
 
