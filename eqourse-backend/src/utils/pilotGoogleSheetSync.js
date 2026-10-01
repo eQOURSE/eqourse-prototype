@@ -27,11 +27,14 @@ const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const API_BASE = "https://sheets.googleapis.com/v4/spreadsheets";
 const MAX_RETRIES = 3;
 const RETRY_BASE_MS = 500;
+const DEFAULT_SYNC_DELAY_MS = 1500;
 
 let accessTokenCache = null;
 let changeStream = null;
 let reconnectTimer = null;
 let stopping = false;
+let syncQueue = Promise.resolve();
+let lastSyncFinishedAt = 0;
 
 function getConfig() {
   return {
@@ -198,6 +201,19 @@ async function syncPilotQuery(query) {
   return { synced: true, duplicate: false };
 }
 
+function enqueuePilotSync(query) {
+  const delayMs = Math.max(1000, Number(process.env.GOOGLE_SHEET_SYNC_DELAY_MS) || DEFAULT_SYNC_DELAY_MS);
+  const task = syncQueue.then(async () => {
+    const waitMs = delayMs - (Date.now() - lastSyncFinishedAt);
+    if (lastSyncFinishedAt && waitMs > 0) await new Promise((resolve) => setTimeout(resolve, waitMs));
+    const result = await syncPilotQuery(query);
+    lastSyncFinishedAt = Date.now();
+    return result;
+  });
+  syncQueue = task.catch(() => undefined);
+  return task;
+}
+
 async function backfillPilotQueries({ batchSize = 100 } = {}) {
   if (!isConfigured()) return { synced: 0, failed: 0, skipped: true };
   let synced = 0;
@@ -210,7 +226,7 @@ async function backfillPilotQueries({ batchSize = 100 } = {}) {
     if (!queries.length) break;
     for (const query of queries) {
       try {
-        const result = await syncPilotQuery(query);
+        const result = await enqueuePilotSync(query);
         if (result.synced && !result.duplicate) synced += 1;
       } catch (error) {
         failed += 1;
@@ -228,7 +244,7 @@ function scheduleChangeStreamReconnect() {
   if (stopping || reconnectTimer) return;
   reconnectTimer = setTimeout(() => {
     reconnectTimer = null;
-    openChangeStream();
+    if (process.env.GOOGLE_SHEET_CHANGE_STREAM_ENABLED === "true") openChangeStream();
   }, 5000);
 }
 
@@ -237,7 +253,7 @@ function openChangeStream() {
   try {
     changeStream = PilotQuery.watch([{ $match: { operationType: "insert" } }], { fullDocument: "default" });
     changeStream.on("change", (change) => {
-      syncPilotQuery(change.fullDocument).catch((error) => {
+      enqueuePilotSync(change.fullDocument).catch((error) => {
         logger.error(`Pilot Google Sheet change-stream sync failed for ${change.documentKey?._id}: ${error.message}`);
       });
     });
@@ -265,7 +281,11 @@ async function startPilotQuerySheetSync() {
   try {
     await ensurePilotHeaders();
     openChangeStream();
-    await backfillPilotQueries();
+    if (process.env.GOOGLE_SHEET_BACKFILL_ON_STARTUP === "true") {
+      await backfillPilotQueries();
+    } else {
+      logger.info("Pilot Google Sheet startup backfill disabled; sync will run only for new inserts");
+    }
   } catch (error) {
     logger.error(`Pilot Google Sheet sync startup failed: ${error.message}`);
   }
@@ -283,6 +303,7 @@ module.exports = {
   mapPilotQueryToSheetRow,
   ensurePilotHeaders,
   syncPilotQuery,
+  queuePilotSync: enqueuePilotSync,
   backfillPilotQueries,
   startPilotQuerySheetSync,
   stopPilotQuerySheetSync,

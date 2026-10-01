@@ -1,6 +1,7 @@
 const ContactQuery = require("../model/contact_us_queries");
 const { sendContactNotification } = require("../utils/emailNotifier");
 const logger = require("../utils/logger");
+const { queueContactSync } = require("../utils/contactGoogleSheetSync");
 
 /**
  * POST /api/contact
@@ -42,6 +43,12 @@ const submitContactQuery = async (req, res) => {
     });
 
     await query.save();
+
+    // Sync only newly submitted contact queries; admin updates do not append
+    // another row to the reporting sheet.
+    queueContactSync(query).catch((err) =>
+      logger.error(`Contact Google Sheet sync failed for ${query._id}: ${err.message}`)
+    );
 
     // Fire-and-forget email notification — never blocks the response
     sendContactNotification(query).catch((err) =>
