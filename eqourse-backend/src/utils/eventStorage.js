@@ -1,12 +1,14 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const { allowedTypes } = require('./eventMediaFields');
+const { allowedTypes, countryEvent } = require('./eventMediaFields');
 function configuration() {
   return {configured:!!process.env.EVENT_MEDIA_DISK_ROOT,missing:process.env.EVENT_MEDIA_DISK_ROOT?[]:['EVENT_MEDIA_DISK_ROOT'],transport:'origin',cdnBaseUrl:process.env.EVENT_CDN_BASE_URL||'https://cdn.eqourse.com'};
 }
 function diskPath(key) {
   if(!configuration().configured)throw Object.assign(new Error('Set EVENT_MEDIA_DISK_ROOT to the existing Utho directory served by the CDN.'),{status:503});
-  if(!/^events\/(?:china|japan|south-korea|singapore)-tour-2026\/gallery\/[a-z0-9-]+\.(jpg|png|webp|avif)$/.test(key))throw Object.assign(new Error('Invalid event image path.'),{status:400});
+  const match=/^events\/([^/]+)\/gallery\/[a-z0-9-]+\.(jpg|png|webp|avif)$/.exec(key);
+  if(!match)throw Object.assign(new Error('Invalid event image path.'),{status:400});
+  countryEvent(match[1]);
   const root=path.resolve(process.env.EVENT_MEDIA_DISK_ROOT);const target=path.resolve(root,key);
   if(!target.startsWith(root+path.sep))throw Object.assign(new Error('Invalid storage path.'),{status:400});
   return target;

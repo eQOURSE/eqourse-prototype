@@ -33,6 +33,39 @@
     "officialUrl": null
   },
   {
+    "slug": "taiwan-tour-2026",
+    "title": "Taiwan Business Tour 2026",
+    "subtitle": "AI • Technology • Education",
+    "date": "",
+    "dateLabel": "2026 · Dates to be confirmed",
+    "city": "Details to be confirmed",
+    "country": "Taiwan",
+    "countryCode": "TW",
+    "location": "Taiwan",
+    "venue": "Venue details to be added",
+    "category": "Business Tour",
+    "coordinates": [
+      121.56,
+      25.03
+    ],
+    "description": "Explore eQOURSE’s planned Taiwan business tour in 2026 and connect with our team about AI data, multilingual services and learning solutions.",
+    "body": "Taiwan is part of our planned 2026 global engagement programme. We will add verified dates, cities, venues and meeting opportunities here as they are confirmed. In the meantime, explore our services or contact our team to discuss a potential conversation.",
+    "coverImage": "https://images.unsplash.com/photo-1552913854-49a97afdd90a?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1552913854-49a97afdd90a?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Taipei 101 and the Taipei skyline in Taiwan, destination photo for the planned eQOURSE Taiwan Business Tour 2026",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": false,
+    "status": "upcoming",
+    "officialUrl": null
+  },
+  {
     "slug": "japan-tour-2026",
     "title": "Japan Business Tour 2026",
     "subtitle": "AI • Robotics • Technology",
@@ -129,6 +162,171 @@
     "extras": [],
     "isFeatured": true,
     "status": "upcoming",
+    "officialUrl": null
+  },
+  {
+    "slug": "singapore-tour-2024",
+    "title": "Singapore Business Tour 2024",
+    "subtitle": "Technology • Education • Global Partnerships",
+    "date": "",
+    "dateLabel": "2024 · Exact dates to be added",
+    "city": "Singapore",
+    "country": "Singapore",
+    "countryCode": "SG",
+    "location": "Singapore",
+    "venue": "Venue details to be added",
+    "category": "Business Tour",
+    "coordinates": [
+      103.82,
+      1.35
+    ],
+    "description": "Explore the Singapore Business Tour 2024 archive and discover eQOURSE’s work across AI data, multilingual content and learning solutions.",
+    "body": "This page archives the Singapore Business Tour 2024. Verified itinerary details and event photographs can be added through the event gallery as they become available. Explore our services and other Singapore engagements below.",
+    "coverImage": "https://images.unsplash.com/photo-1489462276963-958e0cbc0477?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1489462276963-958e0cbc0477?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Supertree Grove at Gardens by the Bay in Singapore, destination photo for the eQOURSE Singapore Business Tour 2024 archive",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": false,
+    "status": "completed",
+    "officialUrl": null
+  },
+  {
+    "slug": "china-tour-2024",
+    "title": "China Business Tour 2024",
+    "subtitle": "AI • Manufacturing • Technology",
+    "date": "",
+    "dateLabel": "2024 · Exact dates to be added",
+    "city": "Details to be confirmed",
+    "country": "China",
+    "countryCode": "CN",
+    "location": "China",
+    "venue": "Venue details to be added",
+    "category": "Business Tour",
+    "coordinates": [
+      116.4,
+      39.9
+    ],
+    "description": "Explore the China Business Tour 2024 archive and learn how eQOURSE connects AI data, technology and learning capabilities across global markets.",
+    "body": "This page archives the China Business Tour 2024. Verified itinerary details and authentic event photographs can be added through the event gallery. Discover related China tours and eQOURSE services below.",
+    "coverImage": "https://images.unsplash.com/photo-1509265226434-5f4ddbdb2f7a?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1509265226434-5f4ddbdb2f7a?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "The Forbidden City in Beijing, destination photo for the eQOURSE China Business Tour 2024 archive",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": false,
+    "status": "completed",
+    "officialUrl": null
+  },
+  {
+    "slug": "china-tour-july-2026",
+    "title": "China Business Tour — July 2026",
+    "subtitle": "AI • Manufacturing • Technology",
+    "date": "",
+    "dateLabel": "July 2026 · Exact dates to be added",
+    "city": "Details to be confirmed",
+    "country": "China",
+    "countryCode": "CN",
+    "location": "China",
+    "venue": "Venue details to be added",
+    "category": "Business Tour",
+    "coordinates": [
+      116.4,
+      39.9
+    ],
+    "description": "Explore the July 2026 China Business Tour archive, with eQOURSE event photos and information about our AI data and learning solutions.",
+    "body": "This page is dedicated to the July 2026 China Business Tour. The exact itinerary and authentic event photographs can be added when verified. Visit the gallery for published highlights and explore the other China tour page for future engagement updates.",
+    "coverImage": "https://images.unsplash.com/photo-1629826041135-611b7218a9bd?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1629826041135-611b7218a9bd?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Shanghai Pudong skyline in China, destination photo for the eQOURSE China Business Tour July 2026 archive",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": false,
+    "status": "completed",
+    "officialUrl": null
+  },
+  {
+    "slug": "ksa-tour-2024",
+    "title": "Saudi Arabia Business Tour 2024",
+    "subtitle": "AI • Education • Enterprise Technology",
+    "date": "",
+    "dateLabel": "2024 · Exact dates to be added",
+    "city": "Details to be confirmed",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "location": "Saudi Arabia",
+    "venue": "Venue details to be added",
+    "category": "Business Tour",
+    "coordinates": [
+      46.68,
+      24.71
+    ],
+    "description": "Explore the Saudi Arabia (KSA) Business Tour 2024 archive and eQOURSE’s AI data, education and multilingual service capabilities.",
+    "body": "This page archives the 2024 Saudi Arabia business tour. Verified cities, venues, itinerary details and event photographs can be added here when available. Browse related global engagements and eQOURSE services below.",
+    "coverImage": "https://images.unsplash.com/photo-1694018359679-49465b4c0d61?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1694018359679-49465b4c0d61?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Kingdom Centre tower at sunset in Riyadh, Saudi Arabia, destination photo for the eQOURSE KSA Business Tour 2024 archive",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": false,
+    "status": "completed",
+    "officialUrl": null
+  },
+  {
+    "slug": "uae-tour-2024",
+    "title": "UAE Business Tour 2024",
+    "subtitle": "AI • Business • Education",
+    "date": "",
+    "dateLabel": "2024 · Exact dates to be added",
+    "city": "Details to be confirmed",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "location": "United Arab Emirates",
+    "venue": "Venue details to be added",
+    "category": "Business Tour",
+    "coordinates": [
+      55.27,
+      25.2
+    ],
+    "description": "Explore the UAE Business Tour 2024 archive and discover eQOURSE’s AI data, education and multilingual content capabilities.",
+    "body": "This page archives the 2024 UAE business tour. Verified city and venue details, itinerary information and authentic photos can be added when available. Explore eQOURSE services and related tours below.",
+    "coverImage": "https://images.unsplash.com/photo-1634007626524-f47fa37810a7?auto=format&fit=crop&w=1200&q=80",
+    "ogImage": "https://images.unsplash.com/photo-1634007626524-f47fa37810a7?auto=format&fit=crop&w=1200&q=80",
+    "imageAlt": "Burj Khalifa above the illuminated Dubai skyline in the United Arab Emirates, destination photo for the eQOURSE UAE Business Tour 2024 archive",
+    "brochure": {
+      "url": "https://cdn.eqourse.com/events/business-tour-2026/eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "filename": "eQOURSE-Business-Tour-2026-Brochure.pdf",
+      "mimeType": "application/pdf",
+      "label": "Business Tour 2026 Brochure"
+    },
+    "video": null,
+    "extras": [],
+    "isFeatured": false,
+    "status": "completed",
     "officialUrl": null
   }
 ]

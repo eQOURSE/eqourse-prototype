@@ -39,6 +39,36 @@ export const pageSeo: Record<string, PageSeo> = {
     description: "Connect with eQOURSE during our planned Singapore business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
     image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
   },
+  "/events/taiwan-tour-2026": {
+    title: "Taiwan Business Tour 2026 | eQOURSE Events",
+    description: "Explore eQOURSE’s planned Taiwan business tour in 2026 and connect with our team about AI data, multilingual services and learning solutions.",
+    image: "https://images.unsplash.com/photo-1552913854-49a97afdd90a?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/singapore-tour-2024": {
+    title: "Singapore Business Tour 2024 | eQOURSE Global Journey",
+    description: "Explore eQOURSE's Singapore Business Tour 2024, featuring business engagements, industry discussions and connections across AI, technology, education and digital solutions.",
+    image: "https://images.unsplash.com/photo-1489462276963-958e0cbc0477?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/china-tour-2024": {
+    title: "China Business Tour 2024 | eQOURSE Global Journey",
+    description: "Explore eQOURSE's China Business Tour 2024 and discover our business engagements, industry discussions and growing connections across China's technology and education ecosystem.",
+    image: "https://images.unsplash.com/photo-1509265226434-5f4ddbdb2f7a?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/china-tour-july-2026": {
+    title: "China Business Tour July 2026 | eQOURSE Global Journey",
+    description: "Explore eQOURSE's China Business Tour in July 2026, featuring business engagements, industry discussions and connections across AI, technology, education and digital solutions.",
+    image: "https://images.unsplash.com/photo-1629826041135-611b7218a9bd?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/ksa-tour-2024": {
+    title: "Saudi Arabia Business Tour 2024 | eQOURSE Global Journey",
+    description: "Explore eQOURSE's Saudi Arabia Business Tour 2024, featuring business engagements and connections across AI, technology, education and digital solutions.",
+    image: "https://images.unsplash.com/photo-1694018359679-49465b4c0d61?auto=format&fit=crop&w=1200&q=80",
+  },
+  "/events/uae-tour-2024": {
+    title: "UAE Business Tour 2024 | eQOURSE Global Journey",
+    description: "Explore eQOURSE's UAE Business Tour 2024, featuring business engagements, industry discussions and connections across AI, technology, education and digital solutions.",
+    image: "https://images.unsplash.com/photo-1634007626524-f47fa37810a7?auto=format&fit=crop&w=1200&q=80",
+  },
   "/events/brochure": {
     title: "eQOURSE Company & Business Tour Brochure",
     description: "Open and download the eQOURSE brochure for AI data services, multilingual expertise, learning solutions and global business tours.",

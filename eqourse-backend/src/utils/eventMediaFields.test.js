@@ -1,6 +1,6 @@
 const test=require('node:test');const assert=require('node:assert/strict');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
-const {fields,objectKey,MAX_BYTES}=require('./eventMediaFields');
+const {fields,objectKey,catalog,MAX_BYTES}=require('./eventMediaFields');
 const {configuration,diskPath,verifyObject,cdnUrl}=require('./eventStorage');
 test('metadata derives accessible plain text and bounded SEO',()=>{
  const photo=fields({eventSlug:'japan-tour-2026',title:'<b>Tokyo Team Meeting</b>',description:'Discussing multilingual AI data and education projects with our business partners in Tokyo.',status:'published'});
@@ -16,3 +16,10 @@ test('storage accepts only bounded country paths and real matching image signatu
  }finally{if(old===undefined)delete process.env.EVENT_MEDIA_DISK_ROOT;else process.env.EVENT_MEDIA_DISK_ROOT=old;await fs.rm(root,{recursive:true,force:true});}
 });
 test('configuration names missing origin without exposing secrets',()=>{const old=process.env.EVENT_MEDIA_DISK_ROOT;delete process.env.EVENT_MEDIA_DISK_ROOT;try{assert.equal(configuration().configured,false);assert.deepEqual(configuration().missing,['EVENT_MEDIA_DISK_ROOT']);}finally{if(old!==undefined)process.env.EVENT_MEDIA_DISK_ROOT=old;}});
+test('all published tour pages have distinct admin upload targets and SEO labels',async()=>{
+ const frontend=JSON.parse(await fs.readFile(path.join(__dirname,'../../../src/components/events/eventsCatalog.json'),'utf8'));
+ assert.deepEqual(catalog.map(e=>e.slug),frontend.map(e=>e.slug));
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'eqourse-tour-paths-'));const old=process.env.EVENT_MEDIA_DISK_ROOT;process.env.EVENT_MEDIA_DISK_ROOT=root;
+ try{for(const event of catalog){const key=objectKey(event.slug,'Team engagement','image/webp');assert.ok(diskPath(key).startsWith(root+path.sep));const seo=fields({eventSlug:event.slug,title:'Team engagement',description:'A verified photo from this event tour.'});assert.match(seo.imageAlt,new RegExp(event.label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));}}
+ finally{if(old===undefined)delete process.env.EVENT_MEDIA_DISK_ROOT;else process.env.EVENT_MEDIA_DISK_ROOT=old;await fs.rm(root,{recursive:true,force:true});}
+});

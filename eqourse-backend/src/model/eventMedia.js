@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const schema = new mongoose.Schema({
-  eventSlug: { type: String, required: true, enum: ['china-tour-2026','japan-tour-2026','south-korea-tour-2026','singapore-tour-2026'], index: true },
+  eventSlug: { type: String, required: true, enum: require('../utils/eventMediaFields').catalog.map(event => event.slug), index: true },
   slug: { type: String, required: true }, title: { type: String, required: true, maxlength: 140 },
   description: { type: String, required: true, maxlength: 3000 },
   imageUrl: { type: String, required: true }, objectKey: { type: String, required: true, unique: true },
