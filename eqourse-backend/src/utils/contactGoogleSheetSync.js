@@ -10,10 +10,13 @@ const CONTACT_HEADERS = [
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const API_BASE = "https://sheets.googleapis.com/v4/spreadsheets";
 const MAX_RETRIES = 3;
+const DEFAULT_SYNC_DELAY_MS = 1500;
 let tokenCache = null;
 let stream = null;
 let reconnectTimer = null;
 let stopping = false;
+let syncQueue = Promise.resolve();
+let lastSyncFinishedAt = 0;
 
 function config() {
   return {
@@ -141,6 +144,19 @@ async function syncContactQuery(query) {
   return { synced: true, duplicate: false };
 }
 
+function enqueueContactSync(query) {
+  const delayMs = Math.max(1000, Number(process.env.GOOGLE_SHEET_SYNC_DELAY_MS) || DEFAULT_SYNC_DELAY_MS);
+  const task = syncQueue.then(async () => {
+    const waitMs = delayMs - (Date.now() - lastSyncFinishedAt);
+    if (lastSyncFinishedAt && waitMs > 0) await new Promise((resolve) => setTimeout(resolve, waitMs));
+    const result = await syncContactQuery(query);
+    lastSyncFinishedAt = Date.now();
+    return result;
+  });
+  syncQueue = task.catch(() => undefined);
+  return task;
+}
+
 async function backfillContactQueries({ batchSize = 100 } = {}) {
   if (!configured()) return { synced: 0, failed: 0, skipped: true };
   let lastId = null; let synced = 0; let failed = 0;
@@ -150,7 +166,7 @@ async function backfillContactQueries({ batchSize = 100 } = {}) {
     if (!queries.length) break;
     for (const query of queries) {
       try {
-        const result = await syncContactQuery(query);
+        const result = await enqueueContactSync(query);
         if (result.synced && !result.duplicate) synced += 1;
       } catch (error) {
         failed += 1;
@@ -172,7 +188,7 @@ function openStream() {
   if (stopping || stream || !configured()) return;
   try {
     stream = ContactQuery.watch([{ $match: { operationType: "insert" } }], { fullDocument: "default" });
-    stream.on("change", (change) => syncContactQuery(change.fullDocument).catch((error) =>
+    stream.on("change", (change) => enqueueContactSync(change.fullDocument).catch((error) =>
       logger.error(`Contact Google Sheet change-stream sync failed for ${change.documentKey?._id}: ${error.message}`)));
     stream.on("error", (error) => { logger.error(`Contact Google Sheet change stream error: ${error.message}`); stream = null; reconnect(); });
     stream.on("close", () => { stream = null; reconnect(); });
@@ -190,8 +206,12 @@ async function startContactQuerySheetSync() {
   }
   try {
     await ensureContactHeaders();
-    openStream();
-    await backfillContactQueries();
+    if (process.env.GOOGLE_SHEET_CHANGE_STREAM_ENABLED === "true") openStream();
+    if (process.env.GOOGLE_SHEET_BACKFILL_ON_STARTUP === "true") {
+      await backfillContactQueries();
+    } else {
+      logger.info("Contact Google Sheet startup backfill disabled; sync will run only for new inserts");
+    }
   } catch (error) {
     logger.error(`Contact Google Sheet sync startup failed: ${error.message}`);
   }
@@ -209,6 +229,7 @@ module.exports = {
   mapContactQueryToSheetRow,
   ensureContactHeaders,
   syncContactQuery,
+  queueContactSync: enqueueContactSync,
   backfillContactQueries,
   startContactQuerySheetSync,
   stopContactQuerySheetSync,
