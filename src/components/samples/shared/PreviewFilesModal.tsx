@@ -47,6 +47,19 @@ const getFileIcon = (fileType: string) => {
   return Database;
 };
 
+const isHostedHtmlFile = (file: PreviewFile) => {
+  const declaredType = (file.fileType || "").trim().toLowerCase();
+  const mimeType = (file.mimeType || "").trim().toLowerCase();
+  if (["html", "html5", "htm", "text/html", "application/xhtml+xml"].includes(declaredType) || mimeType === "text/html" || mimeType === "application/xhtml+xml") {
+    return true;
+  }
+  try {
+    return ["html", "htm"].includes(new URL(file.fileUrl, window.location.href).pathname.split(".").pop()?.toLowerCase() || "");
+  } catch {
+    return /\.(html?|xhtml)(?:[?#]|$)/i.test(file.fileUrl);
+  }
+};
+
 export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedFile, setSelectedFile] = useState<PreviewFile | null>(null);
@@ -68,7 +81,7 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
   const nextFile = selectedIndex >= 0 && selectedIndex < files.length - 1 ? files[selectedIndex + 1] : null;
 
   const handleFileClick = (file: PreviewFile) => {
-    if (file.isExternal) {
+    if (file.isExternal && !isHostedHtmlFile(file)) {
       window.open(file.fileUrl, "_blank", "noopener,noreferrer");
       return;
     }
