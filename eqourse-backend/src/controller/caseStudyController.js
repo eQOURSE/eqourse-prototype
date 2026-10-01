@@ -1,5 +1,6 @@
 const CaseStudy = require("../model/caseStudy");
 const { syncCmsSeoPage, removeCmsSeoPage } = require("../utils/cmsSeoPublisher");
+const { toPublicAssetUrl } = require("../utils/publicAssetUrl");
 
 function normalizePagePath(value = "") {
   const clean = String(value).trim().split(/[?#]/, 1)[0].replace(/^\/+|\/+$/g, "");
@@ -19,7 +20,7 @@ function formatCaseStudy(doc) {
     slug: doc.slug,
     client: doc.client,
     industry: doc.industry,
-    heroImageUrl: doc.heroImageUrl || "",
+    heroImageUrl: toPublicAssetUrl(doc.heroImageUrl || ""),
     summary: doc.summary || "",
     challenge: doc.challenge || "",
     solution: doc.solution || "",
@@ -32,7 +33,7 @@ function formatCaseStudy(doc) {
     seo: {
       title: doc.seo?.title || "",
       description: doc.seo?.description || "",
-      ogImageUrl: doc.seo?.ogImageUrl || "",
+      ogImageUrl: toPublicAssetUrl(doc.seo?.ogImageUrl || ""),
       heroImageAlt: doc.seo?.heroImageAlt || `${doc.title} — ${doc.industry} case study by eQOURSE`,
       heroImageTitle: doc.seo?.heroImageTitle || doc.title,
     },
