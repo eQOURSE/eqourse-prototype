@@ -14,18 +14,33 @@ function extensionOf(name: string, mimeType: string) {
   return mimeType.split("/").pop()?.toLowerCase() || "file";
 }
 
+function previewMimeType(extension: string, declaredMimeType: string) {
+  if (declaredMimeType && declaredMimeType !== "application/octet-stream") return declaredMimeType;
+  const byExtension: Record<string, string> = {
+    wav: "audio/wav",
+    mp3: "audio/mpeg",
+    ogg: "audio/ogg",
+    oga: "audio/ogg",
+    m4a: "audio/mp4",
+    xls: "application/vnd.ms-excel",
+    xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  };
+  return byExtension[extension] || declaredMimeType;
+}
+
 export default function AttachmentPreview({ attachment, compact = false, previewPath }: { attachment: Attachment; compact?: boolean; previewPath?: string }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [resolvedUrl, setResolvedUrl] = useState(attachment.url);
   const fileType = extensionOf(attachment.originalName, attachment.mimeType);
+  const resolvedMimeType = previewMimeType(fileType, attachment.mimeType);
   const securePath = previewPath && import.meta.env.VITE_API_BASE_URL ? previewPath : undefined;
   const previewFile: PreviewFile = {
     title: attachment.originalName,
     description: "Lead attachment preview",
     fileType,
     fileUrl: resolvedUrl,
-    mimeType: attachment.mimeType,
+    mimeType: resolvedMimeType,
     isExternal: false,
     allowDownload: true,
   };
@@ -41,7 +56,7 @@ export default function AttachmentPreview({ attachment, compact = false, preview
     }
     setLoading(true);
     try {
-      setResolvedUrl(await fetchFileBlobUrl(securePath));
+      setResolvedUrl(await fetchFileBlobUrl(securePath, resolvedMimeType));
       setOpen(true);
     } catch (cause) {
       toast.error(cause instanceof Error ? cause.message : "Could not load this document");
