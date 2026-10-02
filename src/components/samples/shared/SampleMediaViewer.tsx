@@ -113,6 +113,7 @@ const formatJson = (source: string, type: string) => {
 };
 
 export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
+  console.log(file)
   const url = resolveUrl(file.fileUrl);
   const type = normalizedType(file);
   const [text, setText] = useState<string | null>(null);
