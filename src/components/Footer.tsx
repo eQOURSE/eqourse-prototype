@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 /* ── Quick Links: key top-level pages for crawlability ── */
 const quickLinks = [
   { label: "Company Brochure", to: "/events/brochure" },
+  { label: "Presentation Video", to: "/events/presentation" },
   { label: "Events & Business Tours", to: "/events" },
   { label: "About Us", to: "/aboutus" },
   { label: "Case Studies", to: "/casestudy" },

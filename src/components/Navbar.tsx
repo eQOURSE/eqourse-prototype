@@ -53,8 +53,8 @@ const aiDataSubLinks: SubLink[] = [
 ];
 
 const aboutUsSubLinks: SubLink[] = [
-  { label: "Events & Business Tours", to: "/events", image: "/assets/about/gallery/22.webp", imageAlt: "eQOURSE global business engagements", description: "Meet eQOURSE at AI, education and technology events across global markets." },
   { label: "Who We Are", to: "/aboutus", image: "/assets/about/Who we are (A).webp", imageAlt: "eQOURSE team working collaboratively on AI data and content services", description: "Learn about our mission, vision and dynamic content services team." },
+  { label: "Events & Business Tours", to: "/events", image: "/assets/about/gallery/22.webp", imageAlt: "eQOURSE global business engagements", description: "Meet eQOURSE at AI, education and technology events across global markets." },
   { label: "Gallery", to: "/gallery", image: "/assets/about/gallery/10.webp", imageAlt: "eQOURSE Office Tours & Events Gallery", description: "Explore our office tours, business meetings, and industry events." },
   { label: "Testimonials", to: "/clients-testimonials", image: "/assets/about/Testiominal.webp", imageAlt: "Satisfied eQOURSE global clients and partners", description: "Hear what our global clients say about our services." },
   { label: "Careers", to: "/career", image: "/assets/about/Carrer.webp", imageAlt: "Careers at eQOURSE - Professionals collaborating on education and AI solutions", description: "Join our growing team and shape the future of AI & Content Services." },
