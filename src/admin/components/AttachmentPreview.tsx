@@ -45,7 +45,7 @@ export default function AttachmentPreview({ attachment, compact = false, preview
         type="button"
         variant={compact ? "ghost" : "outline"}
         size={compact ? "sm" : "default"}
-        className={compact ? "max-w-[220px] justify-start" : "w-full justify-start"}
+        className={compact ? "max-w-full min-w-0 justify-start" : "w-full justify-start"}
         title={`Preview ${attachment.originalName}`}
         onClick={openPreview}
       >

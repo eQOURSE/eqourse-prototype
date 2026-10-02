@@ -162,18 +162,17 @@ export default function ContactQueries() {
 
       {/* Table */}
       <Card className="min-w-0 max-w-full overflow-hidden">
-        <div className="w-full max-w-full overflow-x-auto">
-        <Table className="min-w-[760px]">
+        <Table className="w-full table-fixed text-xs sm:text-sm">
           <TableHeader>
             <TableRow>
-              <TableHead>Date</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Subject</TableHead>
-              <TableHead>Company</TableHead>
-              <TableHead>Attachment</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="w-24"></TableHead>
+              <TableHead className="w-[10%] px-2 sm:px-3">Date</TableHead>
+              <TableHead className="w-[13%] px-2 sm:px-3">Name</TableHead>
+              <TableHead className="w-[18%] px-2 sm:px-3">Email</TableHead>
+              <TableHead className="w-[18%] px-2 sm:px-3">Subject</TableHead>
+              <TableHead className="w-[11%] px-2 sm:px-3">Company</TableHead>
+              <TableHead className="w-[15%] px-2 sm:px-3">Attachment</TableHead>
+              <TableHead className="w-[8%] px-2 sm:px-3">Status</TableHead>
+              <TableHead className="w-[7%] px-2 sm:px-3"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -192,25 +191,25 @@ export default function ContactQueries() {
             ) : (
               filtered.map((q) => (
                 <TableRow key={q.id} className="hover:bg-muted/40">
-                  <TableCell className="text-sm whitespace-nowrap">
+                  <TableCell className="px-2 py-3 align-top text-xs whitespace-nowrap sm:px-3 sm:text-sm">
                     {new Date(q.createdAt).toLocaleDateString()}
                   </TableCell>
-                  <TableCell className="font-medium">{q.name}</TableCell>
-                  <TableCell className="max-w-[220px] truncate text-sm">{q.email}</TableCell>
-                  <TableCell className="max-w-[260px] truncate text-sm">{q.subject}</TableCell>
-                  <TableCell className="max-w-[180px] truncate text-sm">{q.company ?? "-"}</TableCell>
-                  <TableCell>
+                  <TableCell className="truncate px-2 py-3 align-top font-medium sm:px-3" title={q.name}>{q.name}</TableCell>
+                  <TableCell className="truncate px-2 py-3 align-top text-muted-foreground sm:px-3" title={q.email}>{q.email}</TableCell>
+                  <TableCell className="truncate px-2 py-3 align-top sm:px-3" title={q.subject}>{q.subject}</TableCell>
+                  <TableCell className="truncate px-2 py-3 align-top sm:px-3" title={q.company ?? "-"}>{q.company ?? "-"}</TableCell>
+                  <TableCell className="min-w-0 px-2 py-3 align-top sm:px-3">
                     {q.attachment ? (
                       <AttachmentPreview attachment={q.attachment} compact />
                     ) : (
                       <span className="text-muted-foreground text-sm">-</span>
                     )}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="px-2 py-3 align-top sm:px-3">
                     <QueryStatusBadge status={q.status} />
                   </TableCell>
-                  <TableCell>
-                    <div className="flex gap-1">
+                  <TableCell className="px-1 py-3 align-top sm:px-2">
+                    <div className="flex justify-end gap-0 sm:gap-1">
                       <Button size="sm" variant="ghost" onClick={() => setSelected(q)}>
                         <Eye className="w-4 h-4" />
                       </Button>
@@ -224,7 +223,6 @@ export default function ContactQueries() {
             )}
           </TableBody>
         </Table>
-        </div>
       </Card>
 
       {/* Detail drawer */}
