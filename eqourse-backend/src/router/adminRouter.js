@@ -65,6 +65,7 @@ router.delete("/contact-queries/:id", contactCtrl.deleteContactQuery);
 
 // ── Pilot Queries ────────────────────────────────────────────
 router.get("/pilot-queries", pilotCtrl.getAllPilotQueries);
+router.get("/pilot-queries/:id/attachment", pilotCtrl.adminDownloadPilotAttachment);
 router.get("/pilot-queries/:id", pilotCtrl.getPilotQuery);
 router.patch("/pilot-queries/:id", pilotCtrl.updatePilotQuery);
 router.delete("/pilot-queries/:id", pilotCtrl.deletePilotQuery);

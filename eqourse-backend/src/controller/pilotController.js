@@ -2,6 +2,7 @@ const PilotQuery = require("../model/pilot");
 const { sendPilotNotification } = require("../utils/emailNotifier");
 const logger = require("../utils/logger");
 const { queuePilotSync } = require("../utils/pilotGoogleSheetSync");
+const { sendStoredAttachment } = require("../utils/privateUploads");
 
 /**
  * POST /api/pilot
@@ -192,6 +193,25 @@ const deletePilotQuery = async (req, res) => {
   }
 };
 
+/**
+ * GET /api/admin/pilot-queries/:id/attachment
+ * Admin — stream the stored pilot attachment through the authenticated API.
+ */
+const adminDownloadPilotAttachment = async (req, res) => {
+  try {
+    const query = await PilotQuery.findById(req.params.id).lean();
+    if (!query?.attachment) {
+      return res.status(404).json({ success: false, message: "Attachment not found." });
+    }
+    // `general` covers older submissions (and uploads made before the
+    // multipart field-order fix), while new submissions use `pilot-queries`.
+    return sendStoredAttachment(res, query.attachment, new Set(["general", "pilot", "pilot-queries"]));
+  } catch (error) {
+    console.error("Error downloading pilot attachment:", error);
+    return res.status(500).json({ success: false, message: "Could not download attachment." });
+  }
+};
+
 // ─── Helper: shape DB doc → frontend-compatible object ───────────────────────
 function formatQuery(doc) {
   return {
@@ -221,4 +241,5 @@ module.exports = {
   getPilotQuery,
   updatePilotQuery,
   deletePilotQuery,
+  adminDownloadPilotAttachment,
 };
