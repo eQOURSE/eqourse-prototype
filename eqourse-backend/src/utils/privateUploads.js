@@ -1,7 +1,7 @@
 const fs = require("fs/promises");
 const path = require("path");
 const { UPLOAD_DIR } = require("./uploadStorage");
-const PRIVATE_UPLOAD_FOLDERS = new Set(["resumes", "vendor-registration", "vendor-tax"]);
+const PRIVATE_UPLOAD_FOLDERS = new Set(["pilot", "resumes", "vendor-registration", "vendor-tax"]);
 
 function uploadFolderFromRequest(requestPath) {
   try {
