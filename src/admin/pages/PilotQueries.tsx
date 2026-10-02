@@ -151,18 +151,18 @@ export default function PilotQueries() {
         </div>
       </Card>
 
-      <Card className="overflow-hidden">
-        <Table>
+      <Card className="min-w-0 max-w-full overflow-hidden">
+        <Table className="w-full table-fixed text-xs sm:text-sm">
           <TableHeader>
             <TableRow>
-              <TableHead>Date</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Company</TableHead>
-              <TableHead>Service</TableHead>
-              <TableHead>Timeline</TableHead>
-              <TableHead>Attachment</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="w-24"></TableHead>
+              <TableHead className="w-[10%] px-2 sm:px-3">Date</TableHead>
+              <TableHead className="w-[15%] px-2 sm:px-3">Name</TableHead>
+              <TableHead className="w-[14%] px-2 sm:px-3">Company</TableHead>
+              <TableHead className="w-[15%] px-2 sm:px-3">Service</TableHead>
+              <TableHead className="w-[11%] px-2 sm:px-3">Timeline</TableHead>
+              <TableHead className="w-[16%] px-2 sm:px-3">Attachment</TableHead>
+              <TableHead className="w-[9%] px-2 sm:px-3">Status</TableHead>
+              <TableHead className="w-[10%] px-2 sm:px-3"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -173,15 +173,15 @@ export default function PilotQueries() {
             ) : (
               filtered.map((q) => (
                 <TableRow key={q.id} className="hover:bg-muted/40">
-                  <TableCell className="text-sm whitespace-nowrap">{new Date(q.createdAt).toLocaleDateString()}</TableCell>
-                  <TableCell className="font-medium">
-                    <div>{q.name}</div>
-                    <div className="text-xs text-muted-foreground">{q.email}</div>
+                  <TableCell className="px-2 py-3 align-top text-xs whitespace-nowrap sm:px-3 sm:text-sm">{new Date(q.createdAt).toLocaleDateString()}</TableCell>
+                  <TableCell className="min-w-0 px-2 py-3 align-top sm:px-3">
+                    <div className="truncate font-medium" title={q.name}>{q.name}</div>
+                    <div className="truncate text-xs text-muted-foreground" title={q.email}>{q.email}</div>
                   </TableCell>
-                  <TableCell className="text-sm">{q.company}</TableCell>
-                  <TableCell className="text-sm">{interestLabel[q.serviceInterest]}</TableCell>
-                  <TableCell className="text-sm">{q.timeline ?? "-"}</TableCell>
-                  <TableCell>
+                  <TableCell className="truncate px-2 py-3 align-top sm:px-3" title={q.company}>{q.company}</TableCell>
+                  <TableCell className="truncate px-2 py-3 align-top sm:px-3" title={interestLabel[q.serviceInterest]}>{interestLabel[q.serviceInterest]}</TableCell>
+                  <TableCell className="truncate px-2 py-3 align-top sm:px-3" title={q.timeline ?? "-"}>{q.timeline ?? "-"}</TableCell>
+                  <TableCell className="min-w-0 px-2 py-3 align-top sm:px-3">
                     {q.attachment ? (
                       <AttachmentPreview
                         attachment={q.attachment}
@@ -190,9 +190,9 @@ export default function PilotQueries() {
                       />
                     ) : <span className="text-muted-foreground text-sm">-</span>}
                   </TableCell>
-                  <TableCell><QueryStatusBadge status={q.status} /></TableCell>
-                  <TableCell>
-                    <div className="flex gap-1">
+                  <TableCell className="px-2 py-3 align-top sm:px-3"><QueryStatusBadge status={q.status} /></TableCell>
+                  <TableCell className="px-1 py-3 align-top sm:px-2">
+                    <div className="flex justify-end gap-0 sm:gap-1">
                       <Button size="sm" variant="ghost" onClick={() => setSelected(q)}><Eye className="w-4 h-4" /></Button>
                       <Button size="sm" variant="ghost" onClick={() => setConfirmDelete(q)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
                     </div>
