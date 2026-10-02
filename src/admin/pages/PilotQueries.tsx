@@ -183,7 +183,11 @@ export default function PilotQueries() {
                   <TableCell className="text-sm">{q.timeline ?? "-"}</TableCell>
                   <TableCell>
                     {q.attachment ? (
-                      <AttachmentPreview attachment={q.attachment} compact />
+                      <AttachmentPreview
+                        attachment={q.attachment}
+                        previewPath={`/api/admin/pilot-queries/${q.id}/attachment`}
+                        compact
+                      />
                     ) : <span className="text-muted-foreground text-sm">-</span>}
                   </TableCell>
                   <TableCell><QueryStatusBadge status={q.status} /></TableCell>
@@ -225,7 +229,10 @@ export default function PilotQueries() {
                   <div>
                     <Label>Attachment</Label>
                     <div className="mt-1">
-                      <AttachmentPreview attachment={selected.attachment} />
+                      <AttachmentPreview
+                        attachment={selected.attachment}
+                        previewPath={`/api/admin/pilot-queries/${selected.id}/attachment`}
+                      />
                       <p className="mt-1 text-xs text-muted-foreground">
                         {(selected.attachment.size / 1024).toFixed(0)} KB · Click to preview or download
                       </p>
