@@ -286,10 +286,11 @@ export async function submitFreePilotForm(data: FreePilotFormData): Promise<{ ok
       }
     });
 
-    // Append file if it exists
+    // Set the upload folder before the file field so Multer can read it when
+    // choosing the destination directory.
     if (data.file) {
-      formData.append("file", data.file);
       formData.append("kind", "pilot-queries"); // optional, for uploadDir categorization
+      formData.append("file", data.file);
     }
 
     const res = await fetch(`${getBaseUrl()}/api/free-pilot`, {

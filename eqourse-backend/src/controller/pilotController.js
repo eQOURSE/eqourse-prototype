@@ -203,7 +203,9 @@ const adminDownloadPilotAttachment = async (req, res) => {
     if (!query?.attachment) {
       return res.status(404).json({ success: false, message: "Attachment not found." });
     }
-    return sendStoredAttachment(res, query.attachment, new Set(["pilot", "pilot-queries"]));
+    // `general` covers older submissions (and uploads made before the
+    // multipart field-order fix), while new submissions use `pilot-queries`.
+    return sendStoredAttachment(res, query.attachment, new Set(["general", "pilot", "pilot-queries"]));
   } catch (error) {
     console.error("Error downloading pilot attachment:", error);
     return res.status(500).json({ success: false, message: "Could not download attachment." });
