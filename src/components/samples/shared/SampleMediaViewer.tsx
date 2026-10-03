@@ -105,7 +105,7 @@ const isSpreadsheetType = (type: string) => matches(type, [
 ]);
 
 const formatJson = (source: string, type: string) => {
-  if (type === "jsonl" || type === "ndjson") {
+  if (matches(type, ["jsonl", "ndjson"])) {
     return source
       .split(/\r?\n/)
       .map((line) => line.trim())
