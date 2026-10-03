@@ -33,7 +33,7 @@ const distDir = process.env.SEO_DIST_DIR || join(root, "dist");
 const distIndexPath = join(distDir, "index.html");
 const pageSeoPath = join(root, "src", "seo", "pageSeo.ts");
 const SITE_URL = "https://www.eqourse.com";
-const OG_IMAGE = `${SITE_URL}/assets/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/assets/og-image.webp`;
 const configuredApiBase = process.env.CMS_SEO_SOURCE_URL || process.env.VITE_API_BASE_URL || SITE_URL;
 const CMS_API_BASE = configuredApiBase.startsWith("http")
   ? configuredApiBase.replace(/\/+$/, "")
