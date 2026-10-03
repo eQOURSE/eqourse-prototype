@@ -50,7 +50,8 @@ const OurBrandsSection = () => {
             className="group relative glass rounded-2xl p-8 lg:p-10 border border-border/50 hover:border-primary/50 transition-all duration-300 shadow-card hover:shadow-elevated flex flex-col h-full"
           >
             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/10">
-              <GraduationCap className="w-7 h-7 text-primary" />
+              {/* <GraduationCap className="w-7 h-7 text-primary" /> */}
+              <img src="https://media.licdn.com/dms/image/v2/D560BAQEqYn6v_ecxbA/company-logo_200_200/B56ZfF3ah2HoAI-/0/1751371330198/tutrain_logo?e=2147483647&v=beta&t=F1W7vo0IA0dQKPqyeWfpSXLJhNgGsgNun9zx_lDgBns" alt="tutrain" />
             </div>
             
             <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors font-heading">
@@ -80,7 +81,8 @@ const OurBrandsSection = () => {
             className="group relative glass rounded-2xl p-8 lg:p-10 border border-border/50 hover:border-primary/50 transition-all duration-300 shadow-card hover:shadow-elevated flex flex-col h-full"
           >
             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/10">
-              <Users className="w-7 h-7 text-primary" />
+              {/* <Users className="w-7 h-7 text-primary" /> */}
+              <img src="https://plus.eqourse.com/favicon.ico" alt="tutrain"/>
             </div>
             
             <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors font-heading">

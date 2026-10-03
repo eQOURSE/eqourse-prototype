@@ -29,8 +29,8 @@ export default function FileUpload({
     try {
       const res = await adminApi.uploadFile(file, kind);
       onChange({ url: res.url, originalName: res.originalName, size: res.size, mimeType: res.mimeType });
-    } catch {
-      toast.error("Upload failed");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Upload failed");
     } finally {
       setBusy(false);
     }

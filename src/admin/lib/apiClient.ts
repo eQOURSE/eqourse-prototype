@@ -203,13 +203,20 @@ export async function downloadFile(path: string, fallbackFilename: string): Prom
 }
 
 /** Fetch an authenticated private file as a temporary browser object URL. */
-export async function fetchFileBlobUrl(path: string): Promise<string> {
+export async function fetchFileBlobUrl(path: string, mimeType?: string): Promise<string> {
   const res = await fetch(`${getBaseUrl()}${path}`, {
     method: "GET",
     headers: buildHeaders(),
   });
   if (!res.ok) await parseResponse<never>(res);
-  return URL.createObjectURL(await res.blob());
+  const blob = await res.blob();
+  if (!mimeType || blob.type === mimeType) return URL.createObjectURL(blob);
+
+  // Some older private uploads are served as application/octet-stream. Keep
+  // the bytes intact, but restore the type from the attachment metadata so
+  // browsers can select the WAV decoder and the spreadsheet renderer can
+  // identify the workbook reliably.
+  return URL.createObjectURL(new Blob([await blob.arrayBuffer()], { type: mimeType }));
 }
 
 /**

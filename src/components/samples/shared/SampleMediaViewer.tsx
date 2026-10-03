@@ -33,15 +33,24 @@ const typeCandidates = (file: PreviewFile) => [
   .filter(Boolean)
   .map((value) => value!.trim().toLowerCase().replace(/^\./, ""));
 
+const canonicalType = (value: string) => ({
+  "audio/x-wav": "wav",
+  "audio/wave": "wav",
+  "audio/vnd.wave": "wav",
+  "audio/x-m4a": "m4a",
+  "application/vnd.ms-excel": "xls",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "xlsx",
+}[value] || value);
+
 const normalizedType = (file: PreviewFile) => {
-  const candidates = typeCandidates(file);
+  const candidates = typeCandidates(file).map(canonicalType);
   const known = candidates.find((value) => [
     "image", "jpg", "jpeg", "png", "gif", "webp", "svg", "avif", "bmp", "ico", "tif", "tiff",
     "audio", "mp3", "wav", "ogg", "oga", "m4a", "aac", "flac", "opus", "aiff", "wma",
     "video", "mp4", "webm", "mov", "m4v", "ogv", "avi", "mkv", "mpeg", "mpg", "3gp", "wmv",
     "pdf", "application/pdf", "doc", "docx", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "xls", "xlsx", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "json", "jsonl", "ndjson", "csv", "tsv", "text/csv", "text",
+    "json", "jsonl", "ndjson", "csv", "tsv", "conll", "text/csv", "text",
     "txt", "text/plain", "xml", "sitemap", "application/xml", "text/xml", "html", "html5", "htm", "text/html", "md", "markdown",
   ].includes(value) || value.startsWith("image/") || value.startsWith("audio/") || value.startsWith("video/"));
   return known || candidates[0] || "";
@@ -51,14 +60,35 @@ const matches = (value: string, types: string[]) =>
   types.some((type) => value === type || value.startsWith(`${type}/`));
 
 const resolveUrl = (url: string) => {
-  if (/^(https?:|blob:|data:)/i.test(url)) return url;
   const base = (import.meta.env.VITE_API_BASE_URL as string) || "";
+  const apiBase = base.replace(/\/+$/, "");
+
+  const toApiUploadPath = (pathname: string) => {
+    if (pathname.startsWith("/api/uploads/")) return pathname;
+    if (pathname.startsWith("/uploads/")) return `/api${pathname}`;
+    return null;
+  };
+
+  if (base) {
+    try {
+      const parsed = new URL(url, window.location.href);
+      // Uploads are written by the API server. If the CDN has not yet
+      // reloaded its Nginx config, preview them through the API origin.
+      const apiPath = toApiUploadPath(parsed.pathname);
+      if (apiPath && (parsed.hostname === "cdn.eqourse.com" || !/^https?:/i.test(url))) {
+        return `${apiBase}${apiPath}${parsed.search}`;
+      }
+    } catch {
+      // Fall through to the original URL for malformed or relative values.
+    }
+  }
+  if (/^(https?:|blob:|data:)/i.test(url)) return url;
   return `${base}${url}`;
 };
 
 const isTextType = (type: string) => matches(type, [
   "text", "txt", "text/plain", "csv", "tsv", "xml", "sitemap", "html", "htm", "md",
-  "markdown", "log", "srt", "vtt", "rtf", "yaml", "yml", "json", "jsonl",
+  "markdown", "log", "srt", "vtt", "rtf", "yaml", "yml", "json", "jsonl", "conll",
   "ndjson", "application/json", "application/ld+json", "application/xml",
 ]);
 
@@ -96,7 +126,7 @@ const isSpreadsheetType = (type: string) => matches(type, [
 ]);
 
 const formatJson = (source: string, type: string) => {
-  if (type === "jsonl" || type === "ndjson") {
+  if (matches(type, ["jsonl", "ndjson"])) {
     return source
       .split(/\r?\n/)
       .map((line) => line.trim())
@@ -133,7 +163,7 @@ export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
     setError(null);
     setText(null);
 
-    fetch(url, { signal: controller.signal })
+    fetch(url, { signal: controller.signal, cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error(`Preview request failed (${response.status})`);
         const length = Number(response.headers.get("content-length") || 0);
