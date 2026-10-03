@@ -50,7 +50,7 @@ const normalizedType = (file: PreviewFile) => {
     "video", "mp4", "webm", "mov", "m4v", "ogv", "avi", "mkv", "mpeg", "mpg", "3gp", "wmv",
     "pdf", "application/pdf", "doc", "docx", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "xls", "xlsx", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "json", "jsonl", "ndjson", "csv", "tsv", "text/csv", "text",
+    "json", "jsonl", "ndjson", "csv", "tsv", "conll", "text/csv", "text",
     "txt", "text/plain", "xml", "sitemap", "application/xml", "text/xml", "html", "html5", "htm", "text/html", "md", "markdown",
   ].includes(value) || value.startsWith("image/") || value.startsWith("audio/") || value.startsWith("video/"));
   return known || candidates[0] || "";
@@ -88,7 +88,7 @@ const resolveUrl = (url: string) => {
 
 const isTextType = (type: string) => matches(type, [
   "text", "txt", "text/plain", "csv", "tsv", "xml", "sitemap", "html", "htm", "md",
-  "markdown", "log", "srt", "vtt", "rtf", "yaml", "yml", "json", "jsonl",
+  "markdown", "log", "srt", "vtt", "rtf", "yaml", "yml", "json", "jsonl", "conll",
   "ndjson", "application/json", "application/ld+json", "application/xml",
 ]);
 
