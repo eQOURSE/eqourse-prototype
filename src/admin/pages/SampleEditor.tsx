@@ -29,7 +29,7 @@ const SAMPLE_PAGES: PageOption[] = SAMPLE_HIERARCHY.flatMap((category) =>
   category.subCategories.map(({ slug, label, tabs }) => ({ slug, label, tabs }))
 );
 
-const FILE_TYPES = ["PDF", "DOC", "DOCX", "XLS", "XLSX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "Other"];
+const FILE_TYPES = ["PDF", "DOC", "DOCX", "XLS", "XLSX", "ZIP", "MP4", "HTML5", "JSON", "JSONL", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "GIF", "PNG", "JPG", "WEBP", "Other"];
 
 const empty: Omit<Sample, "id" | "createdAt" | "updatedAt" | "order" | "categoryId"> = {
   title: "",
@@ -101,7 +101,8 @@ export default function SampleEditor() {
     if (["XLS", "XLSX"].includes(ext)) return ext;
     if (["ZIP", "TAR", "GZ", "SCORM"].includes(ext)) return "ZIP";
     if (["MP4", "AVI", "MOV", "WEBM"].includes(ext)) return "MP4";
-    if (["JSON", "JSONL"].includes(ext)) return "JSON";
+    if (ext === "JSONL" || ext === "NDJSON") return "JSONL";
+    if (ext === "JSON") return "JSON";
     if (["CSV"].includes(ext)) return "CSV";
     if (["TSV"].includes(ext)) return "TSV";
     if (["HTML", "HTM"].includes(ext)) return "HTML5";
@@ -109,6 +110,7 @@ export default function SampleEditor() {
     if (["TXT", "LOG"].includes(ext)) return "TXT";
     if (["XML", "SITEMAP"].includes(ext)) return "XML";
     if (["MP3", "WAV", "OGG"].includes(ext)) return ext;
+    if (["GIF", "PNG", "JPG", "JPEG", "WEBP"].includes(ext)) return ext === "JPEG" ? "JPG" : ext;
     return "Other";
   };
 

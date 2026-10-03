@@ -42,7 +42,7 @@ const getFileIcon = (fileType: string) => {
   if (['json', 'jsonl', 'csv'].includes(type)) return FileJson;
   if (['wav', 'mp3', 'rttm', 'textgrid'].includes(type)) return FileMusic;
   if (['zip', 'tar', 'gz'].includes(type)) return FileArchive;
-  if (['png', 'jpg', 'jpeg', 'svg', 'kitti', 'coco json'].includes(type)) return FileImage;
+  if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg', 'kitti', 'coco json'].includes(type)) return FileImage;
   if (['xml', 'conll'].includes(type)) return FileCode;
   return Database;
 };
@@ -58,6 +58,16 @@ const isHostedHtmlFile = (file: PreviewFile) => {
   } catch {
     return /\.(html?|xhtml)(?:[?#]|$)/i.test(file.fileUrl);
   }
+};
+
+const isInlinePreviewable = (file: PreviewFile) => {
+  const type = (file.fileType || file.mimeType || "").trim().toLowerCase();
+  return [
+    "image", "jpg", "jpeg", "png", "gif", "webp", "avif", "svg", "bmp", "ico",
+    "audio", "mp3", "wav", "ogg", "oga", "m4a",
+    "video", "mp4", "webm", "mov", "m4v", "ogv",
+    "pdf", "json", "jsonl", "ndjson", "csv", "tsv", "txt", "text", "xml", "md", "markdown",
+  ].some((candidate) => type === candidate || type.startsWith(`${candidate}/`));
 };
 
 export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }: Props) => {
@@ -81,7 +91,7 @@ export const PreviewFilesModal = ({ isOpen, onClose, files, tabName, accentHsl }
   const nextFile = selectedIndex >= 0 && selectedIndex < files.length - 1 ? files[selectedIndex + 1] : null;
 
   const handleFileClick = (file: PreviewFile) => {
-    if (file.isExternal && !isHostedHtmlFile(file)) {
+    if (file.isExternal && !isHostedHtmlFile(file) && !isInlinePreviewable(file)) {
       window.open(file.fileUrl, "_blank", "noopener,noreferrer");
       return;
     }
