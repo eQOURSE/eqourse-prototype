@@ -33,8 +33,17 @@ const typeCandidates = (file: PreviewFile) => [
   .filter(Boolean)
   .map((value) => value!.trim().toLowerCase().replace(/^\./, ""));
 
+const canonicalType = (value: string) => ({
+  "audio/x-wav": "wav",
+  "audio/wave": "wav",
+  "audio/vnd.wave": "wav",
+  "audio/x-m4a": "m4a",
+  "application/vnd.ms-excel": "xls",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "xlsx",
+}[value] || value);
+
 const normalizedType = (file: PreviewFile) => {
-  const candidates = typeCandidates(file);
+  const candidates = typeCandidates(file).map(canonicalType);
   const known = candidates.find((value) => [
     "image", "jpg", "jpeg", "png", "gif", "webp", "svg", "avif", "bmp", "ico", "tif", "tiff",
     "audio", "mp3", "wav", "ogg", "oga", "m4a", "aac", "flac", "opus", "aiff", "wma",
@@ -96,7 +105,7 @@ const isSpreadsheetType = (type: string) => matches(type, [
 ]);
 
 const formatJson = (source: string, type: string) => {
-  if (type === "jsonl" || type === "ndjson") {
+  if (matches(type, ["jsonl", "ndjson"])) {
     return source
       .split(/\r?\n/)
       .map((line) => line.trim())

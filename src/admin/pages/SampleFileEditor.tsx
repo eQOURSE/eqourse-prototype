@@ -16,7 +16,7 @@ import { getSubCategory } from "../lib/sampleHierarchy";
 import type { Sample } from "../lib/types";
 import { toast } from "sonner";
 
-const FILE_TYPES = ["PDF", "DOC", "DOCX", "XLS", "XLSX", "ZIP", "MP4", "HTML5", "JSON", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "PNG", "JPG", "SCORM", "Other"];
+const FILE_TYPES = ["PDF", "DOC", "DOCX", "XLS", "XLSX", "ZIP", "MP4", "HTML5", "JSON", "JSONL", "CSV", "MD", "TXT", "XML", "MP3", "WAV", "GIF", "PNG", "JPG", "WEBP", "SCORM", "Other"];
 
 export default function SampleFileEditor() {
   const { mainCategoryId, pageSlug, tabName, sampleId } = useParams();
@@ -83,7 +83,8 @@ export default function SampleFileEditor() {
     if (["XLS", "XLSX"].includes(ext)) return ext;
     if (["ZIP", "TAR", "GZ", "RAR", "7Z"].includes(ext)) return "ZIP";
     if (["MP4", "AVI", "MOV", "WEBM", "MKV"].includes(ext)) return "MP4";
-    if (["JSON", "JSONL"].includes(ext)) return "JSON";
+    if (ext === "JSONL" || ext === "NDJSON") return "JSONL";
+    if (ext === "JSON") return "JSON";
     if (["CSV"].includes(ext)) return "CSV";
     if (["TSV"].includes(ext)) return "TSV";
     if (["HTML", "HTM"].includes(ext)) return "HTML5";
@@ -94,6 +95,7 @@ export default function SampleFileEditor() {
     if (["WAV", "OGG"].includes(ext)) return "WAV";
     if (["PNG"].includes(ext)) return "PNG";
     if (["JPG", "JPEG"].includes(ext)) return "JPG";
+    if (["GIF", "PNG", "WEBP"].includes(ext)) return ext;
     return "Other";
   };
 
