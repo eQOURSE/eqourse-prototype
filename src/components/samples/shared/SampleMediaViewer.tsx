@@ -60,8 +60,20 @@ const matches = (value: string, types: string[]) =>
   types.some((type) => value === type || value.startsWith(`${type}/`));
 
 const resolveUrl = (url: string) => {
-  if (/^(https?:|blob:|data:)/i.test(url)) return url;
   const base = (import.meta.env.VITE_API_BASE_URL as string) || "";
+  if (/^https?:/i.test(url) && base) {
+    try {
+      const parsed = new URL(url);
+      // Uploads are written by the API server. If the CDN has not yet
+      // reloaded its Nginx config, preview them through the API origin.
+      if (parsed.pathname.startsWith("/uploads/") && parsed.hostname === "cdn.eqourse.com") {
+        return `${base.replace(/\/+$/, "")}/api${parsed.pathname}${parsed.search}`;
+      }
+    } catch {
+      // Fall through to the original URL for malformed or relative values.
+    }
+  }
+  if (/^(https?:|blob:|data:)/i.test(url)) return url;
   return `${base}${url}`;
 };
 
