@@ -61,13 +61,22 @@ const matches = (value: string, types: string[]) =>
 
 const resolveUrl = (url: string) => {
   const base = (import.meta.env.VITE_API_BASE_URL as string) || "";
-  if (/^https?:/i.test(url) && base) {
+  const apiBase = base.replace(/\/+$/, "");
+
+  const toApiUploadPath = (pathname: string) => {
+    if (pathname.startsWith("/api/uploads/")) return pathname;
+    if (pathname.startsWith("/uploads/")) return `/api${pathname}`;
+    return null;
+  };
+
+  if (base) {
     try {
-      const parsed = new URL(url);
+      const parsed = new URL(url, window.location.href);
       // Uploads are written by the API server. If the CDN has not yet
       // reloaded its Nginx config, preview them through the API origin.
-      if (parsed.pathname.startsWith("/uploads/") && parsed.hostname === "cdn.eqourse.com") {
-        return `${base.replace(/\/+$/, "")}/api${parsed.pathname}${parsed.search}`;
+      const apiPath = toApiUploadPath(parsed.pathname);
+      if (apiPath && (parsed.hostname === "cdn.eqourse.com" || !/^https?:/i.test(url))) {
+        return `${apiBase}${apiPath}${parsed.search}`;
       }
     } catch {
       // Fall through to the original URL for malformed or relative values.
@@ -154,7 +163,7 @@ export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
     setError(null);
     setText(null);
 
-    fetch(url, { signal: controller.signal })
+    fetch(url, { signal: controller.signal, cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error(`Preview request failed (${response.status})`);
         const length = Number(response.headers.get("content-length") || 0);
