@@ -163,7 +163,7 @@ export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
     setError(null);
     setText(null);
 
-    fetch(url, { signal: controller.signal })
+    fetch(url, { signal: controller.signal, cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error(`Preview request failed (${response.status})`);
         const length = Number(response.headers.get("content-length") || 0);
