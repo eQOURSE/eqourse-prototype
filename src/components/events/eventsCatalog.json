@@ -26,7 +26,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": true,
     "status": "upcoming",
@@ -59,7 +64,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": false,
     "status": "upcoming",
@@ -92,7 +102,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": true,
     "status": "upcoming",
@@ -125,7 +140,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": true,
     "status": "upcoming",
@@ -158,7 +178,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": true,
     "status": "upcoming",
@@ -191,7 +216,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": false,
     "status": "completed",
@@ -224,7 +254,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": false,
     "status": "completed",
@@ -257,7 +292,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": false,
     "status": "completed",
@@ -290,7 +330,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": false,
     "status": "completed",
@@ -323,7 +368,12 @@
       "mimeType": "application/pdf",
       "label": "Business Tour 2026 Brochure"
     },
-    "video": null,
+    "video": { 
+      "url": "https://cdn.eqourse.com/presentations/presentation-video-final.mp4",
+      "filename": "about.mp4",
+      "mimeType": "video/mp4",
+      "label": "video"
+    },
     "extras": [],
     "isFeatured": false,
     "status": "completed",
