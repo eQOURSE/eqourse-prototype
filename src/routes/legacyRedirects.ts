@@ -15,6 +15,7 @@
  * Used by the app router, development server, and generated hosting rules.
  */
 export const legacyRedirects: Record<string, string> = {
+  "/events/china-tour-202": "/events/china-tour-2026",
   "/events/business-tour-2026": "/events",
   "/events/business-tour-2026/brochure": "/events/brochure",
   "/events/business-tour-2026/video": "/events/presentation",

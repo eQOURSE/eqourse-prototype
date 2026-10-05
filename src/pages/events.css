@@ -1781,12 +1781,61 @@
 .tour-story-final .events-button-ghost {
   border-color: #ffffff60;
 }
+.upcoming-chapters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.upcoming-chapter { border-top: 2px solid var(--event-blue); background: #f5f8fc; }
+.upcoming-tour-photo { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #e4ebf5; }
+.upcoming-tour-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+a:hover > .upcoming-tour-photo img { transform: scale(1.035); }
+.upcoming-tour-photo > span { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 12px 9px; background: linear-gradient(transparent, #061832d9); color: #fff; font-size: 11px; line-height: 1.4; }
+.upcoming-chapter-current { display: flex; flex-direction: column; justify-content: center; gap: 12px; aspect-ratio: 16 / 10; padding: 25px; color: #fff; background: linear-gradient(135deg, #123778, #071b3a); }
+.upcoming-chapter-current span { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; }
+.upcoming-chapter-current strong { font-size: clamp(42px, 5vw, 70px); line-height: 1; }
+.upcoming-chapters-single { grid-template-columns: minmax(0, 850px); }
+.upcoming-chapters-single .upcoming-chapter { display: grid; grid-template-columns: minmax(220px, 32%) minmax(0, 1fr); }
+.upcoming-chapters-single .upcoming-chapter-current { aspect-ratio: auto; height: 100%; min-height: 270px; }
+.upcoming-chapter-copy { padding: 24px; }
+.upcoming-chapter-copy .tour-story-index { margin-bottom: 10px; }
+.upcoming-chapter-copy h3 { font-size: 22px; margin-bottom: 18px; }
+.upcoming-chapter-copy ul { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 7px; color: var(--event-muted); font-size: 13px; }
+.upcoming-chapter-copy li::before { content: '↗'; color: var(--event-blue); margin-right: 8px; }
+.upcoming-current-label { color: var(--event-blue); font-size: 12px; font-weight: 650; text-transform: uppercase; letter-spacing: .1em; }
+.upcoming-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.upcoming-info-grid h2, .upcoming-meet h2 { margin: 10px 0 18px; }
+.upcoming-info-grid p, .upcoming-meet p { color: var(--event-muted); max-width: 680px; margin-bottom: 24px; }
+.upcoming-info-grid dl { margin: 0; border-top: 1px solid #dbe3ef; }
+.upcoming-info-grid dl div { display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid #dbe3ef; font-size: 14px; }
+.upcoming-info-grid dt { color: var(--event-muted); }
+.upcoming-info-grid dd { margin: 0; font-weight: 600; }
+.upcoming-discussion { color: var(--event-blue) !important; font-size: 13px; line-height: 1.8; }
+.upcoming-related { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 22px; }
+.upcoming-related-link { color: var(--event-ink); display: flex; flex-direction: column; gap: 10px; }
+.upcoming-related-link > span:nth-child(2) { color: var(--event-blue); font-size: 11px; font-weight: 650; letter-spacing: .1em; }
+.upcoming-related-link strong { font-size: 18px; line-height: 1.3; }
+.upcoming-related-link .events-text-link { margin-top: auto; }
+.upcoming-all-events { margin-top: 30px; }
 .tour-story-section,
 .tour-story-timeline-section,
 .tour-story-global-section {
   scroll-margin-top: 130px;
 }
 @media (max-width: 900px) {
+  .upcoming-chapter:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .upcoming-chapter:last-child:nth-child(odd) .upcoming-tour-photo,
+  .upcoming-chapter:last-child:nth-child(odd) .upcoming-chapter-current {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .upcoming-chapters-single .upcoming-chapter:last-child:nth-child(odd) {
+    grid-template-columns: minmax(220px, 32%) minmax(0, 1fr);
+  }
   .tour-story-points-four,
   .tour-story-services {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1807,6 +1856,14 @@
   }
 }
 @media (max-width: 640px) {
+  .upcoming-info-grid { grid-template-columns: 1fr; gap: 28px; }
+  .upcoming-chapters, .upcoming-related { grid-template-columns: 1fr; }
+  .upcoming-chapter:last-child:nth-child(odd) { display: block; grid-column: auto; }
+  .upcoming-chapter:last-child:nth-child(odd) .upcoming-tour-photo,
+  .upcoming-chapter:last-child:nth-child(odd) .upcoming-chapter-current { height: auto; aspect-ratio: 16 / 10; }
+  .upcoming-chapters-single .upcoming-chapter:last-child:nth-child(odd) .upcoming-chapter-current { height: 180px; min-height: 0; aspect-ratio: auto; }
+  .event-country-gallery .events-gallery { grid-template-columns: 1fr; }
+  .event-country-gallery .gallery-frame { height: auto; aspect-ratio: 16 / 10; }
   .tour-story-hero .hero-inner {
     padding-top: 42px;
   }
