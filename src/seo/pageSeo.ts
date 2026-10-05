@@ -20,13 +20,13 @@ export interface PageSeo {
 
 export const pageSeo: Record<string, PageSeo> = {
   "/events/china-tour-2026": {
-    title: "China Business Tour 2026 | eQOURSE Events",
-    description: "Connect with eQOURSE during our planned China business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    title: "China Business Tour 2026 | Meet eQOURSE in China",
+    description: "Connect with eQOURSE during our China Business Tour 2026. Explore our China journey and collaboration across AI data, multilingual solutions, human feedback and learning content.",
     image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
   },
   "/events/japan-tour-2026": {
-    title: "Japan Business Tour 2026 | eQOURSE Events",
-    description: "Connect with eQOURSE during our planned Japan business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    title: "Japan Business Tour 2026 | Meet eQOURSE in Tokyo",
+    description: "Connect with eQOURSE during our Japan Business Tour 2026 in Tokyo and explore opportunities across AI data, multilingual solutions, human feedback and learning content.",
     image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
   },
   "/events/south-korea-tour-2026": {
@@ -35,13 +35,13 @@ export const pageSeo: Record<string, PageSeo> = {
     image: "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=1200&q=80",
   },
   "/events/singapore-tour-2026": {
-    title: "Singapore Business Tour 2026 | eQOURSE Events",
-    description: "Connect with eQOURSE during our planned Singapore business tour to explore multilingual AI data, human feedback, learning solutions and scalable content operations.",
+    title: "Singapore Business Tour 2026 | Meet eQOURSE in Singapore",
+    description: "Connect with eQOURSE during our Singapore Business Tour 2026 and explore opportunities across AI data, multilingual solutions, human feedback, learning content and scalable global delivery.",
     image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
   },
   "/events/taiwan-tour-2026": {
-    title: "Taiwan Business Tour 2026 | eQOURSE Events",
-    description: "Explore eQOURSE’s planned Taiwan business tour in 2026 and connect with our team about AI data, multilingual services and learning solutions.",
+    title: "Taiwan Business Tour 2026 | Meet eQOURSE in Taiwan",
+    description: "Connect with eQOURSE during our Taiwan Business Tour 2026 and explore collaboration opportunities across AI data, multilingual solutions, human feedback, technology and learning content.",
     image: "https://images.unsplash.com/photo-1552913854-49a97afdd90a?auto=format&fit=crop&w=1200&q=80",
   },
   "/events/singapore-tour-2024": {

@@ -1,5 +1,6 @@
 # Generated from src/routes/legacyRedirects.ts. Do not edit by hand.
 https://eqourse.com/* https://www.eqourse.com/:splat 301!
+/events/china-tour-202 /events/china-tour-2026 301!
 /events/business-tour-2026 /events 301!
 /events/business-tour-2026/brochure /events/brochure 301!
 /events/business-tour-2026/video /events/presentation 301!
