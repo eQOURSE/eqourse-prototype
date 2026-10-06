@@ -4,19 +4,9 @@ import { Link } from 'react-router-dom';
 import { fetchEventPhotos, type EventPhoto } from '@/admin/lib/eventMediaApi';
 import type { EventData } from './eventsData';
 import { getEventBySlug } from './eventsData';
-import type { TourPoint } from './pastTourContent';
 import type { UpcomingTourContent } from './upcomingTourContent';
 import EventResources from './EventResources';
 import CountryEventGallery from './CountryEventGallery';
-
-function Points({ items }: { items: TourPoint[] }) {
-  return <div className="tour-story-points tour-story-services">{items.map((item, index) =>
-    <article className="tour-story-point" key={item.title}>
-      <span className="tour-story-index">0{index + 1}</span>
-      <h3>{item.title}</h3><p>{item.description}</p>
-      {item.href && <Link to={item.href}>Explore service <ArrowUpRight size={16}/></Link>}
-    </article>)}</div>;
-}
 
 function TourImage({ tour, albumOnly = false, preferredPhoto }: { tour: EventData; albumOnly?: boolean; preferredPhoto?: (photo: EventPhoto) => boolean }) {
   const archived = tour.status === 'completed';
@@ -36,17 +26,21 @@ function TourImage({ tour, albumOnly = false, preferredPhoto }: { tour: EventDat
 
 export default function UpcomingTourStory({ event, story, meeting }: { event: EventData; story: UpcomingTourContent; meeting: string }) {
   const isChina2026 = event.slug === 'china-tour-2026';
-  const { data: chinaPhotos = [] } = useQuery({
+  const { data: tourPhotos = [] } = useQuery({
     queryKey: ['event-photos', event.slug],
     queryFn: () => fetchEventPhotos(event.slug),
-    enabled: isChina2026,
+    enabled: true,
     staleTime: 30_000,
+    refetchInterval: 30_000,
     retry: false,
   });
-  const hasChinaHighlights = chinaPhotos.length > 0;
-  const sectionNumbers = isChina2026
-    ? { info: '03', highlights: '04', resources: hasChinaHighlights ? '05' : '04', global: hasChinaHighlights ? '06' : '05', final: hasChinaHighlights ? '07' : '06' }
-    : { info: '06', highlights: '08', resources: '09', global: '10', final: '11' };
+  const hasTourHighlights = tourPhotos.length > 0;
+  const sectionNumbers = {
+    highlights: '02',
+    resources: hasTourHighlights ? '03' : '02',
+    global: hasTourHighlights ? '04' : '03',
+    final: hasTourHighlights ? '05' : '04',
+  };
   const related = story.relatedSlugs.map(getEventBySlug).filter((tour): tour is EventData => Boolean(tour));
   return <>
     <section id="journey" className="events-section tour-story-section upcoming-journey"><div className="events-shell">
@@ -70,28 +64,7 @@ export default function UpcomingTourStory({ event, story, meeting }: { event: Ev
       })}</div>
     </div></section>
 
-    <section className="events-section tour-story-section tour-story-soft"><div className="events-shell">
-      <div className="tour-story-heading"><p className="events-eyebrow">02 / ABOUT THE TOUR</p><h2>About the {event.title}</h2><p>{story.about}</p></div>
-      <Points items={[
-        { title: 'Face-to-Face Engagement', description: 'Connecting directly with organisations and industry professionals.' },
-        { title: 'Project Discussions', description: 'Understanding project requirements, quality expectations and delivery needs.' },
-        { title: 'Global Collaboration', description: 'Exploring where specialist expertise and scalable delivery can support international projects.' },
-      ]}/>
-    </div></section>
-
-    {!isChina2026 && <section className="events-section tour-story-section"><div className="events-shell"><div className="tour-story-heading"><p className="events-eyebrow">03 / WHY WE ARE VISITING</p><h2>{story.why.heading}</h2><p>{story.why.copy}</p></div><Points items={story.why.points}/></div></section>}
-
-    {!isChina2026 && <section className="events-section tour-story-section tour-story-soft"><div className="events-shell"><div className="tour-story-heading"><p className="events-eyebrow">04 / WHAT WE ARE EXPLORING</p><h2>Areas of Collaboration</h2><p>Explore the eQOURSE services behind our business conversations.</p></div><Points items={story.services}/></div></section>}
-
-    {!isChina2026 && <section className="events-section tour-story-section"><div className="events-shell"><div className="tour-story-heading"><p className="events-eyebrow">05 / WHO WE WOULD LIKE TO MEET</p><h2>Who We’re Looking to Connect With</h2><p>We welcome conversations with organisations looking for specialist expertise, high-quality data and scalable international delivery.</p></div><Points items={story.audience}/></div></section>}
-
-    <section className="events-section tour-story-section tour-story-soft"><div className="events-shell upcoming-info-grid"><div><p className="events-eyebrow">{sectionNumbers.info} / TOUR INFORMATION</p><h2>{event.title}</h2><p>Tour dates, meeting locations and final itinerary details will be updated as they are confirmed.</p><Link to={meeting} className="events-button">Schedule a Meeting <ArrowUpRight size={18}/></Link></div><dl>
-      <div><dt>Location</dt><dd>{event.location}</dd></div><div><dt>Year</dt><dd>2026</dd></div><div><dt>Dates</dt><dd>{event.date || 'To Be Announced'}</dd></div><div><dt>Venue</dt><dd>{event.venue}</dd></div><div><dt>Status</dt><dd>{event.status === 'ongoing' ? 'Ongoing' : 'Planned'}</dd></div>
-    </dl></div></section>
-
-    {!isChina2026 && <section className="events-section tour-story-section"><div className="events-shell upcoming-meet"><p className="events-eyebrow">07 / MEET EQOURSE</p><h2>Meet Our Team During the {event.title}</h2><p>{story.meet}</p><p className="upcoming-discussion">{story.discussion.join(' · ')}</p><Link to={meeting} className="events-button">Schedule a Meeting <ArrowUpRight size={18}/></Link></div></section>}
-
-    <CountryEventGallery event={event} eyebrow={`${sectionNumbers.highlights} / TOUR HIGHLIGHTS`} heading={`${event.title} Photos & Stories`} intro="Photos published by our team during the tour appear here, with individual stories, captions and search metadata." hideWhenEmpty={isChina2026}/>
+    <CountryEventGallery event={event} eyebrow={`${sectionNumbers.highlights} / TOUR HIGHLIGHTS`} heading={`${event.title} Photos & Stories`} intro="Photos published by our team during the tour appear here, with individual stories, captions and search metadata." hideWhenEmpty/>
 
     <section className="events-section events-resources-section"><div className="events-shell"><div className="events-section-heading"><div><p className="events-eyebrow">{sectionNumbers.resources} / BROCHURE & PRESENTATION</p><h2>Explore eQOURSE Before We Meet</h2></div><p>Learn about our AI data, learning content and global delivery capabilities.</p></div><EventResources event={event}/></div></section>
 
