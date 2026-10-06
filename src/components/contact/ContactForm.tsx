@@ -17,6 +17,7 @@ import { submitContactForm } from "@/lib/publicApi";
 import { trackRoboticsEvent } from "@/lib/roboticsAnalytics";
 import { countryDialCodes, countryFlag } from "@/data/countryDialCodes";
 import { cn } from "@/lib/utils";
+import { buildEventMeetingMessage, eventMeetingIntro } from "./eventMeetingMessage";
 
 const ContactForm = () => {
   const [searchParams] = useSearchParams();
@@ -31,6 +32,8 @@ const ContactForm = () => {
   const [selectedCountryIso, setSelectedCountryIso] = useState("IN");
   const [useCustomDialCode, setUseCustomDialCode] = useState(false);
   const [customDialCode, setCustomDialCode] = useState("");
+  const [meetingOption1, setMeetingOption1] = useState("");
+  const [meetingOption2, setMeetingOption2] = useState("");
 
   const selectedCountry = countryDialCodes.find((country) => country.iso2 === selectedCountryIso);
   const phoneCode = useCustomDialCode ? `+${customDialCode}` : selectedCountry?.dialCode ?? "+91";
@@ -60,7 +63,9 @@ const ContactForm = () => {
       company: get("company"),
       designation: get("designation"),
       subject: get("interest"),
-      message: get("message"),
+      message: isEventReferral
+        ? buildEventMeetingMessage(get("message"), [meetingOption1, meetingOption2], referredEvent?.location)
+        : get("message"),
       source: get("source"),
       preferredDate: get("date"),
       preferredTime: get("time"),
@@ -302,7 +307,20 @@ const ContactForm = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {isEventReferral ? <div className="space-y-2">
+        <p className="text-sm font-medium text-foreground">Preferred meeting times <span className="text-xs text-muted-foreground">(Optional)</span></p>
+        <p className="text-xs text-muted-foreground">Choose up to two options{referredEvent ? ` in ${referredEvent.location} local time` : ' and tell us the time zone in your message'}. They will be included in your message to our team.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="space-y-1.5">
+            <label htmlFor="meetingOption1" className="text-sm font-medium text-foreground">Meeting option 1</label>
+            <input id="meetingOption1" type="datetime-local" value={meetingOption1} onChange={(event) => setMeetingOption1(event.target.value)} className="w-full min-w-0 px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow text-foreground" />
+          </div>
+          <div className="space-y-1.5">
+            <label htmlFor="meetingOption2" className="text-sm font-medium text-foreground">Meeting option 2</label>
+            <input id="meetingOption2" type="datetime-local" value={meetingOption2} onChange={(event) => setMeetingOption2(event.target.value)} className="w-full min-w-0 px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow text-foreground" />
+          </div>
+        </div>
+      </div> : <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="space-y-1.5 rounded-lg">
           <label htmlFor="date" className="text-sm font-medium text-foreground">Preferred Date for Call <span className="text-xs text-muted-foreground">(Optional)</span></label>
           <input
@@ -329,13 +347,13 @@ const ContactForm = () => {
             })}
           </select>
         </div>
-      </div>
+      </div>}
 
       <div className="space-y-1.5 rounded-lg">
         <label htmlFor="message" className="text-sm font-medium text-foreground">Tell Us About Your Project <span className="text-xs text-muted-foreground">(Optional)</span></label>
         <textarea
           id="message"
-          defaultValue={isEventReferral ? `I would like to meet eQOURSE${referredEvent ? ` during the ${referredEvent.title}` : " at an upcoming event"}. My preferred dates and project interests are: ` : ""}
+          defaultValue={isEventReferral ? eventMeetingIntro(referredEvent?.title) : ""}
           rows={5}
           maxLength={2000}
           placeholder="Describe your project requirements, timeline, volume, languages needed, and any specific details..."

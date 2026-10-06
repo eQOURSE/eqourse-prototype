@@ -31,7 +31,7 @@ import {
 import GlobalEventsMap from "@/components/events/GlobalEventsMap";
 import "./events.css";
 const icons = [Database, BrainCircuit, Languages, Scan, BookOpen, Users];
-const meet = "/contact-us?interest=events";
+const meet = "/contact-us?interest=events#contact-form";
 function TourCard({ event, index }: { event: EventData; index: number }) {
   return (
     <article className="events-tour-card" id={`event-card-${event.slug}`}>
