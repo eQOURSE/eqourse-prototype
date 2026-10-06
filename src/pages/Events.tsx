@@ -223,7 +223,7 @@ export default function Events() {
                 </a>
               </div>
             </motion.div>
-            <div className="hero-orbit" aria-hidden="true">
+            {/* <div className="hero-orbit" aria-hidden="true">
               <div className="orbit-ring ring-one" />
               <div className="orbit-ring ring-two" />
               <div className="orbit-ring ring-three" />
@@ -231,7 +231,7 @@ export default function Events() {
               <span className="orbit-dot dot-one" />
               <span className="orbit-dot dot-two" />
               <span className="orbit-label">IDEAS WITHOUT BORDERS</span>
-            </div>
+            </div> */}
             <div className="hero-bottom">
               <span>LOCAL CONVERSATIONS. GLOBAL POSSIBILITIES.</span>
               <span>CHINA / TAIWAN / JAPAN / SOUTH KOREA / SINGAPORE</span>
