@@ -23,7 +23,6 @@ import {
   events,
   upcomingTours,
   eventYear,
-  getEventBySlug,
   eventServices,
   eventFaqs,
   type EventData,
@@ -31,7 +30,8 @@ import {
 import GlobalEventsMap from "@/components/events/GlobalEventsMap";
 import "./events.css";
 const icons = [Database, BrainCircuit, Languages, Scan, BookOpen, Users];
-const meet = "/contact-us?interest=events";
+const meet = "/contact-us?interest=events#contact-form";
+const eventsHeroImage = "/assets/events/global-connections-hero.webp";
 function TourCard({ event, index }: { event: EventData; index: number }) {
   return (
     <article className="events-tour-card" id={`event-card-${event.slug}`}>
@@ -123,7 +123,6 @@ export default function Events() {
       ? upcomingTours
       : upcomingTours.filter((e) => e.country === filter);
   const past = events.filter((e) => e.status === "completed");
-  const heroEvent = getEventBySlug("singapore-tour-2026")!;
   const reveal = {
     initial: { opacity: reduced ? 1 : 0, y: 0 },
     whileInView: { opacity: 1, y: 0 },
@@ -137,7 +136,7 @@ export default function Events() {
           title="AI, EdTech & Technology Events | eQOURSE"
           description="Explore upcoming eQOURSE events, AI conferences, EdTech exhibitions and global business tours. Meet our team and discover our AI data and learning solutions."
           canonical="https://www.eqourse.com/events"
-          ogImage={heroEvent.ogImage}
+          ogImage={`https://www.eqourse.com${eventsHeroImage}`}
         />
         <Helmet>
           <script type="application/ld+json">
@@ -178,13 +177,13 @@ export default function Events() {
             })}
           </script>
         </Helmet>
-        <section className="events-hero">
+        <section className="events-hero events-index-hero">
           <img
             className="events-hero-photo"
-            src={heroEvent.coverImage}
-            alt="Singapore skyline, a destination on eQOURSE’s planned global business tour"
-            width="1200"
-            height="800"
+            src={eventsHeroImage}
+            alt="International technology event with professionals connecting beneath a globe installation"
+            width="2048"
+            height="768"
             {...{ fetchpriority: "high" }}
           />
           <div className="events-hero-shade" />
@@ -223,15 +222,6 @@ export default function Events() {
                 </a>
               </div>
             </motion.div>
-            <div className="hero-orbit" aria-hidden="true">
-              <div className="orbit-ring ring-one" />
-              <div className="orbit-ring ring-two" />
-              <div className="orbit-ring ring-three" />
-              <Globe2 />
-              <span className="orbit-dot dot-one" />
-              <span className="orbit-dot dot-two" />
-              <span className="orbit-label">IDEAS WITHOUT BORDERS</span>
-            </div>
             <div className="hero-bottom">
               <span>LOCAL CONVERSATIONS. GLOBAL POSSIBILITIES.</span>
               <span>CHINA / TAIWAN / JAPAN / SOUTH KOREA / SINGAPORE</span>
