@@ -22,7 +22,7 @@ export const pageSeo: Record<string, PageSeo> = {
   "/events/china-tour-2026": {
     title: "China Business Tour 2026 | Meet eQOURSE in China",
     description: "Connect with eQOURSE during our China Business Tour 2026. Explore our China journey and collaboration across AI data, multilingual solutions, human feedback and learning content.",
-    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1718027808460-7069cf0ca9ae?auto=format&fit=crop&w=1200&q=85",
   },
   "/events/japan-tour-2026": {
     title: "Japan Business Tour 2026 | Meet eQOURSE in Tokyo",
@@ -463,6 +463,7 @@ export const pageSeo: Record<string, PageSeo> = {
   "/events": {
     title: "AI, EdTech & Technology Events | eQOURSE",
     description: "Explore upcoming eQOURSE events, AI conferences, EdTech exhibitions and global business tours. Meet our team and discover our AI data and learning solutions.",
+    image: "https://www.eqourse.com/assets/events/global-connections-hero.webp",
   },
   "/faq": {
     title: "Eqourse FAQs: Everything You Need to Know",

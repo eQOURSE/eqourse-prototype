@@ -80,13 +80,8 @@
   inset: 0;
   z-index: -2;
   background:
-    linear-gradient(
-      90deg,
-      rgba(5, 17, 37, 0.97) 0%,
-      rgba(5, 17, 37, 0.757) 20%,
-      rgba(5, 17, 37, 0) 100%
-    ),
-    linear-gradient(0deg, #07152a 0%, transparent 55%);
+    linear-gradient(90deg, rgba(3, 15, 34, 0.72) 0%, rgba(3, 15, 34, 0.42) 30%, rgba(3, 15, 34, 0.1) 58%, transparent 78%),
+    linear-gradient(0deg, rgba(5, 17, 37, 0.1), transparent 45%);
 }
 .hero-coordinate-grid {
   position: absolute;
@@ -107,6 +102,7 @@
   position: relative;
   z-index: 2;
   max-width: 760px;
+  text-shadow: 0 2px 14px rgba(2, 12, 28, 0.9);
 }
 .events-hero .events-eyebrow {
   color: #abc7ef;
@@ -127,7 +123,7 @@
   color: #91b9ff;
 }
 .hero-description {
-  color: #c3cddd;
+  color: #edf3fb;
   max-width: 560px;
   font-size: 16px;
   margin-bottom: 30px;
@@ -198,62 +194,6 @@
   color: #aebbd0;
   font-size: 9px;
   letter-spacing: 0.16em;
-}
-.hero-orbit {
-  position: absolute;
-  right: -15px;
-  top: 120px;
-  width: 330px;
-  height: 330px;
-  color: #a9d5ff;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero-orbit > svg {
-  width: 160px;
-  height: 160px;
-  stroke-width: 0.35;
-}
-.orbit-ring {
-  position: absolute;
-  inset: 0;
-  border: 1px solid #acd4ff50;
-  border-radius: 50%;
-  transform: rotate(-24deg) scaleY(0.6);
-}
-.ring-two {
-  transform: rotate(37deg) scaleY(0.65);
-  inset: 20px;
-}
-.ring-three {
-  transform: rotate(90deg) scaleY(0.68);
-  inset: 35px;
-}
-.orbit-dot {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #c0e5ff;
-  box-shadow: 0 0 18px #8cc8ff;
-  animation: eventOrbit 9s linear infinite;
-}
-.dot-one {
-  top: 17%;
-  left: 20%;
-}
-.dot-two {
-  right: 20%;
-  bottom: 17%;
-  animation-delay: -4s;
-}
-.orbit-label {
-  position: absolute;
-  bottom: -25px;
-  font-size: 9px;
-  letter-spacing: 0.22em;
 }
 .events-section-nav {
   position: sticky;
@@ -1004,7 +944,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 22px;
-  color: #c1cee2;
+  color: #eef3fb;
   font-size: 13px;
   margin-bottom: 22px;
 }
@@ -1071,17 +1011,6 @@
 .events-detail-related a:hover {
   color: var(--event-blue);
 }
-@keyframes eventOrbit {
-  0%,
-  100% {
-    transform: translate(0, 0);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(12px, -10px);
-    opacity: 1;
-  }
-}
 @keyframes eventRoute {
   to {
     stroke-dashoffset: -100;
@@ -1096,19 +1025,10 @@
   .hero-copy {
     max-width: 800px;
   }
-  .hero-orbit {
-    right: 10px;
-    width: 380px;
-    height: 380px;
-  }
 }
 @media (max-width: 1100px) {
   .events-shell {
     width: calc(100% - 64px);
-  }
-  .hero-orbit {
-    right: -65px;
-    opacity: 0.38;
   }
   .events-hero h1 {
     font-size: 52px;
@@ -1164,14 +1084,6 @@
   .hero-copy {
     max-width: 100%;
   }
-  .hero-orbit {
-    width: 250px;
-    height: 250px;
-    right: -90px;
-    top: 280px;
-    opacity: 0.2;
-    pointer-events: none;
-  }
   .hero-bottom {
     font-size: 8px;
     bottom: 24px;
@@ -1183,8 +1095,11 @@
   }
   .events-hero-shade {
     background:
-      linear-gradient(90deg, #051125f0, #051125a6),
-      linear-gradient(0deg, #07152a, transparent);
+      linear-gradient(90deg, rgba(3, 15, 34, 0.74), rgba(3, 15, 34, 0.48) 72%, rgba(3, 15, 34, 0.28)),
+      linear-gradient(0deg, rgba(5, 17, 37, 0.12), transparent 55%);
+  }
+  .events-index-hero .events-hero-photo {
+    object-position: 65% center;
   }
   .events-section-nav {
     top: 64px;
@@ -1468,12 +1383,6 @@
   .events-tour-card:hover img,
   .gallery-frame:hover img {
     transform: none;
-  }
-}
-
-@media (max-width: 767px) {
-  .orbit-label {
-    display: none;
   }
 }
 
@@ -1789,6 +1698,7 @@
 .upcoming-chapter { border-top: 2px solid var(--event-blue); background: #f5f8fc; }
 .upcoming-tour-photo { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #e4ebf5; }
 .upcoming-tour-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.upcoming-tour-photo-placeholder { display: grid; place-items: center; height: 100%; padding: 24px; color: #465775; font-size: 13px; text-align: center; }
 a:hover > .upcoming-tour-photo img { transform: scale(1.035); }
 .upcoming-tour-photo > span { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 12px 9px; background: linear-gradient(transparent, #061832d9); color: #fff; font-size: 11px; line-height: 1.4; }
 .upcoming-chapter-current { display: flex; flex-direction: column; justify-content: center; gap: 12px; aspect-ratio: 16 / 10; padding: 25px; color: #fff; background: linear-gradient(135deg, #123778, #071b3a); }
