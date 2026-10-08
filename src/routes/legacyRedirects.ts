@@ -19,6 +19,7 @@ export const legacyRedirects: Record<string, string> = {
   "/events/business-tour-2026": "/events",
   "/events/business-tour-2026/brochure": "/events/brochure",
   "/events/business-tour-2026/video": "/events/presentation",
+  "/downloads/Brochure.pdf": "/events/brochure",
   // Homepage and old PHP/static aliases reported by Search Console.
   "/index": "/",
   "/index.php": "/",
@@ -65,7 +66,6 @@ export const legacyRedirects: Record<string, string> = {
   "/casestudy/on-demand-video-solutions-for-us-content-services-company": "/casestudy/on-demand-video-solutions-us-content-services-company",
   "/k12-elearning-services": "/k12-and-higher-education",
   "/blogs/what-are-the-different-roles-of-teachers-in-the-classroom": "/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter",
-  "/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services": "/blog/emsat-content-solutions-scalable-test-prep-uae",
   "/blogs/scorm-and-lms-integration-corporate-training-success": "/blog/scorm-and-lms-integration-made-simple",
   "/blogs/Role-of-SMEs-in-EdTech-and-Multilingual-Learning": "/blog/sourcing-deploying-elite-subject-matter-experts-digital-education",
   "/blogs/Online-Learning-DOs-and-DONOTs-for-Institutions": "/blog/online-learning-dos-and-donts-for-institutions",

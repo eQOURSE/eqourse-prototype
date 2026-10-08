@@ -10,6 +10,11 @@ const fallbackBlogSource = readFileSync(join(root, "src", "components", "blog", 
 const manifestPath = join(distDir, "seo-manifest.json");
 const SITE_URL = "https://www.eqourse.com";
 const requiredLegacyRedirects = new Map([
+  ["/kindergarden-to-k5-samples", "/educational-publishing-content-development-samples"],
+  ["/ai-", "/ai-data-services"],
+  ["/events/business-tour-2026", "/events"],
+  ["/blogs/what-are-the-different-roles-of-teachers-in-the-classroom", "/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter"],
+  ["/downloads/Brochure.pdf", "/events/brochure"],
   ["/contact-us.html", "/contact-us"],
   ["/avatar-video-samples", "/ai-videos-samples"],
   ["/ai-avatar-video-samples", "/ai-videos-samples"],
@@ -227,6 +232,9 @@ for (const [from, to] of requiredLegacyRedirects) {
   if (!redirectsConfig.includes(`${from} ${to} 301!`)) {
     failures.push(`_redirects is missing GSC legacy redirect ${from} -> ${to}`);
   }
+  if (!redirectsConfig.includes(`${from}/ ${to} 301!`)) {
+    failures.push(`_redirects is missing direct trailing-slash redirect ${from}/ -> ${to}`);
+  }
 }
 const apacheConfig = existsSync(join(distDir, ".htaccess"))
   ? readFileSync(join(distDir, ".htaccess"), "utf8")
@@ -305,7 +313,7 @@ if (!nginxConfig.includes("try_files $uri/index.html $uri =404;")) {
 if (!nginxConfig.includes("location = /career {") || !nginxConfig.includes("try_files /career/index.html =404;")) {
   failures.push("Nginx config is missing query-safe handling for career and vendor share links");
 }
-if (/try_files[^;]*\$uri\//.test(nginxConfig.replace("$uri/index.html", ""))) {
+if (/try_files[^;]*\$uri\//.test(nginxConfig.replaceAll("$uri/index.html", ""))) {
   failures.push("Nginx config contains a directory try_files fallback that can force trailing slashes");
 }
 if (!nginxConfig.includes("location ~ ^/(.+)/+$")) {
