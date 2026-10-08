@@ -16,6 +16,7 @@ RewriteRule ^events/china-tour-202/?$ https://www.eqourse.com/events/china-tour-
 RewriteRule ^events/business-tour-2026/?$ https://www.eqourse.com/events [R=301,L,NE]
 RewriteRule ^events/business-tour-2026/brochure/?$ https://www.eqourse.com/events/brochure [R=301,L,NE]
 RewriteRule ^events/business-tour-2026/video/?$ https://www.eqourse.com/events/presentation [R=301,L,NE]
+RewriteRule ^downloads/Brochure\.pdf/?$ https://www.eqourse.com/events/brochure [R=301,L,NE]
 RewriteRule ^index/?$ https://www.eqourse.com/ [R=301,L,NE]
 RewriteRule ^index\.php/?$ https://www.eqourse.com/ [R=301,L,NE]
 RewriteRule ^index\.html/?$ https://www.eqourse.com/ [R=301,L,NE]

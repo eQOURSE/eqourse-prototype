@@ -51,7 +51,10 @@ const trailingSlashRedirects = [...canonicalPaths]
 const netlify = [
   "# Generated from src/routes/legacyRedirects.ts. Do not edit by hand.",
   "https://eqourse.com/* https://www.eqourse.com/:splat 301!",
-  ...redirects.map(({ from, to }) => `${from} ${to} 301!`),
+  ...redirects.flatMap(({ from, to }) => [
+    `${from} ${to} 301!`,
+    `${from}/ ${to} 301!`,
+  ]),
   "# Known /blogs/ articles redirect above; unknown retired slugs return 404.",
   "# Canonicals, sitemap URLs and internal links use no trailing slash.",
   ...trailingSlashRedirects,
