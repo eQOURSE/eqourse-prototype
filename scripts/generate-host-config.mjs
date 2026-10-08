@@ -28,7 +28,7 @@ const canonicalPaths = new Set(
 // Published CMS articles and case studies have their own canonical routes,
 // which are generated from the live CMS rather than the static pageSeo map.
 const cmsDetailPath = /^\/(?:blog|casestudy)\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const nonIndexedResourcePaths = new Set(['/events/presentation']);
+const nonIndexedResourcePaths = new Set([]);
 const invalidTargets = redirects.filter(({ to }) => !canonicalPaths.has(to) && !cmsDetailPath.test(to) && !nonIndexedResourcePaths.has(to));
 if (invalidTargets.length > 0) {
   throw new Error(`Redirect targets missing from pageSeo: ${invalidTargets.map(({ to }) => to).join(", ")}`);
@@ -51,7 +51,10 @@ const trailingSlashRedirects = [...canonicalPaths]
 const netlify = [
   "# Generated from src/routes/legacyRedirects.ts. Do not edit by hand.",
   "https://eqourse.com/* https://www.eqourse.com/:splat 301!",
-  ...redirects.map(({ from, to }) => `${from} ${to} 301!`),
+  ...redirects.flatMap(({ from, to }) => [
+    `${from} ${to} 301!`,
+    `${from}/ ${to} 301!`,
+  ]),
   "# Known /blogs/ articles redirect above; unknown retired slugs return 404.",
   "# Canonicals, sitemap URLs and internal links use no trailing slash.",
   ...trailingSlashRedirects,

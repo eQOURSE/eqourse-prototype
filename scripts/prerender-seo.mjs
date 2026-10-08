@@ -1280,7 +1280,7 @@ function buildHomepageFallback() {
       </section>
       <section>
         <h2>AI Data &amp; Content Services Case Studies</h2>
-        <p>Explore measurable outcomes across AI data operations, model quality, education content and multilingual delivery in our <a href="/case-studies">case studies</a>.</p>
+        <p>Explore measurable outcomes across AI data operations, model quality, education content and multilingual delivery in our <a href="/casestudy">case studies</a>.</p>
       </section>
       <section>
         <h2>Why Global Teams Choose eQOURSE</h2>
@@ -1471,6 +1471,7 @@ function buildEventsFallback(path) {
   const past = catalog.filter(event => event.status === 'completed');
   const link = event => '<a href="/events/' + event.slug + '">' + escapeHtml(event.title) + '</a>';
   const resource = event => '<section><h2>Brochure &amp; Presentation</h2><p><a href="/events/brochure">Open brochure</a> <a href="' + event.brochure.url + '">Download current company brochure</a> <a href="/events/presentation">Open presentation</a></p><p>The presentation video is in development.</p></section>';
+  if (path === '/events/presentation') return '<main data-seo-prerender="true"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/events">Events</a> / <span>Company Presentation</span></nav><h1>eQOURSE Company Presentation</h1><p>Explore eQOURSE’s AI data services, multilingual expertise and learning solutions. The company presentation video is in development.</p><p><a href="/events/brochure">Open the company brochure</a> or <a href="/events">explore our events</a>.</p></main>';
   if (path === '/events/brochure') return '<main data-seo-prerender="true"><h1>eQOURSE Company &amp; Business Tour Brochure</h1><p>Explore AI data, multilingual, learning and content services.</p>' + resource(catalog[0]) + '<a href="/events">Explore country tours</a></main>';
   const detail = catalog.find(event => path === '/events/' + event.slug);
   if (detail) {
@@ -1785,15 +1786,6 @@ async function main() {
     JSON.stringify(entries.map(({ crawlHtml, ...entry }) => entry), null, 2),
     "utf-8",
   );
-
-  const presentationPath = join(distDir, 'events/presentation/index.html');
-  mkdirSync(dirname(presentationPath), { recursive: true });
-  const presentation = buildHead(template, {
-    path: '/events/presentation', title: 'eQOURSE Company Presentation',
-    description: 'The eQOURSE company presentation video is in development. Explore our brochure and country tours.',
-    crawlHtml: '<h2>Presentation in development</h2><p>Our video is coming soon.</p><a href="/events/brochure">Open Brochure</a>',
-  }).replace('index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1', 'noindex,follow');
-  writeFileSync(presentationPath, presentation, 'utf8');
 
   const sitemap = [
     '<?xml version="1.0" encoding="UTF-8"?>',

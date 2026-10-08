@@ -19,6 +19,7 @@ export const legacyRedirects: Record<string, string> = {
   "/events/business-tour-2026": "/events",
   "/events/business-tour-2026/brochure": "/events/brochure",
   "/events/business-tour-2026/video": "/events/presentation",
+  "/downloads/Brochure.pdf": "/events/brochure",
   // Homepage and old PHP/static aliases reported by Search Console.
   "/index": "/",
   "/index.php": "/",
@@ -39,12 +40,14 @@ export const legacyRedirects: Record<string, string> = {
   // Historical AI-avatar URLs now resolve to the dedicated AI Videos page.
   "/avatar-video-samples": "/ai-videos-samples",
   "/ai-avatar-video-samples": "/ai-videos-samples",
+  "/ai-": "/ai-data-services",
   "/flash-to-htm-samples": "/audio-samples",
   "/flash-to-html-samples": "/audio-samples",
 
   // Retired Text Samples taxonomy. Preserve indexed URLs and backlinks with
   // permanent redirects to the closest page in the current service structure.
   "/kindergarten-to-k5-samples": "/educational-publishing-content-development-samples",
+  "/kindergarden-to-k5-samples": "/educational-publishing-content-development-samples",
   "/k6-to-k12-samples": "/educational-publishing-content-development-samples",
   "/curriculum-samples": "/educational-publishing-content-development-samples",
   "/stem-content-samples": "/educational-publishing-content-development-samples",

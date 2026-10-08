@@ -12,7 +12,7 @@ import { pageSeo } from "@/seo/pageSeo";
 const PAGE_SEO = pageSeo["/sitemap"];
 
 const sitemapData = [
-  { category: "Events & Business Tours", links: [{ name: "Events Overview", to: "/events" }, ...events.map(event => ({ name: event.title, to: `/events/${event.slug}` }))] },
+  { category: "Events & Business Tours", links: [{ name: "Events Overview", to: "/events" }, ...events.map(event => ({ name: event.title, to: `/events/${event.slug}` })), { name: "Company Presentation", to: "/events/presentation" }] },
   {
     category: "Company & Resources",
     links: [
@@ -64,10 +64,14 @@ const sitemapData = [
     links: [
       { name: "Content Services overview", to: "/content-services" },
       { name: "Custom E-Learning Content", to: "/custom-e-learning-content" },
+      { name: "- K12 & Higher Education", to: "/k12-and-higher-education" },
+      { name: "- K12 Curriculum Development", to: "/k12-curriculum-development-and-design-services" },
       { name: "Exam Preparation Content", to: "/test-prep-content" },
       { name: "Learning Solutions", to: "/learning-solutions" },
+      { name: "- Instructional Design Services", to: "/instructional-design-services" },
       { name: "E-Learning Video Solutions", to: "/elearning-video-solutions" },
       { name: "Localization Services", to: "/localization-services" },
+      { name: "- Translation Services", to: "/translation-services" },
       { name: "Technology Solutions", to: "/technology-solutions" },
       { name: "Subject Matter Experts", to: "/smes" },
       { name: "Accessibility Services", to: "/accessibility" },
