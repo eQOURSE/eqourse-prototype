@@ -73,6 +73,10 @@ export const pageSeo: Record<string, PageSeo> = {
     title: "eQOURSE Company & Business Tour Brochure",
     description: "Open and download the eQOURSE brochure for AI data services, multilingual expertise, learning solutions and global business tours.",
   },
+  "/events/presentation": {
+    title: "eQOURSE Company Presentation",
+    description: "Explore eQOURSE’s AI data services, multilingual expertise and learning solutions through our company presentation.",
+  },
   "/": {
     title: "AI Data Services & Content Services Company | eQOURSE",
     description: "eQOURSE provides AI data services for data collection, annotation, cleaning, validation, model testing and robotics, plus scalable content services for global teams.",

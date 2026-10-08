@@ -20,9 +20,11 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /custom-elearning-solutions /custom-e-learning-content 301!
 /avatar-video-samples /ai-videos-samples 301!
 /ai-avatar-video-samples /ai-videos-samples 301!
+/ai- /ai-data-services 301!
 /flash-to-htm-samples /audio-samples 301!
 /flash-to-html-samples /audio-samples 301!
 /kindergarten-to-k5-samples /educational-publishing-content-development-samples 301!
+/kindergarden-to-k5-samples /educational-publishing-content-development-samples 301!
 /k6-to-k12-samples /educational-publishing-content-development-samples 301!
 /curriculum-samples /educational-publishing-content-development-samples 301!
 /stem-content-samples /educational-publishing-content-development-samples 301!
@@ -118,6 +120,7 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /events/ksa-tour-2024/ /events/ksa-tour-2024 301!
 /events/uae-tour-2024/ /events/uae-tour-2024 301!
 /events/brochure/ /events/brochure 301!
+/events/presentation/ /events/presentation 301!
 /2d-3d-video-samples/ /2d-3d-video-samples 301!
 /2d-3d-videos/ /2d-3d-videos 301!
 /aboutus/ /aboutus 301!

@@ -21,7 +21,7 @@ export default function EventVideo() {
           name="description"
           content="Explore eQOURSE’s AI data services, multilingual expertise and learning solutions through our company presentation."
         />
-        {!event.video && <meta name="robots" content="noindex,follow" />}
+
         <link
           rel="canonical"
           href="https://www.eqourse.com/events/presentation"

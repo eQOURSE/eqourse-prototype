@@ -39,12 +39,14 @@ export const legacyRedirects: Record<string, string> = {
   // Historical AI-avatar URLs now resolve to the dedicated AI Videos page.
   "/avatar-video-samples": "/ai-videos-samples",
   "/ai-avatar-video-samples": "/ai-videos-samples",
+  "/ai-": "/ai-data-services",
   "/flash-to-htm-samples": "/audio-samples",
   "/flash-to-html-samples": "/audio-samples",
 
   // Retired Text Samples taxonomy. Preserve indexed URLs and backlinks with
   // permanent redirects to the closest page in the current service structure.
   "/kindergarten-to-k5-samples": "/educational-publishing-content-development-samples",
+  "/kindergarden-to-k5-samples": "/educational-publishing-content-development-samples",
   "/k6-to-k12-samples": "/educational-publishing-content-development-samples",
   "/curriculum-samples": "/educational-publishing-content-development-samples",
   "/stem-content-samples": "/educational-publishing-content-development-samples",
@@ -63,6 +65,7 @@ export const legacyRedirects: Record<string, string> = {
   "/casestudy/on-demand-video-solutions-for-us-content-services-company": "/casestudy/on-demand-video-solutions-us-content-services-company",
   "/k12-elearning-services": "/k12-and-higher-education",
   "/blogs/what-are-the-different-roles-of-teachers-in-the-classroom": "/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter",
+  "/blog/emsat-content-solutions-scalable-test-prep-for-uae-content-services": "/blog/emsat-content-solutions-scalable-test-prep-uae",
   "/blogs/scorm-and-lms-integration-corporate-training-success": "/blog/scorm-and-lms-integration-made-simple",
   "/blogs/Role-of-SMEs-in-EdTech-and-Multilingual-Learning": "/blog/sourcing-deploying-elite-subject-matter-experts-digital-education",
   "/blogs/Online-Learning-DOs-and-DONOTs-for-Institutions": "/blog/online-learning-dos-and-donts-for-institutions",
