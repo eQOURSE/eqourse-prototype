@@ -13,13 +13,13 @@ Deploy the backend and frontend together. The backend process must have write ac
 
 Confirmed production host: `103.189.88.129` (`tutrain-webapp`). Node.js/PM2 runs as `deployer` on the same host, and `/var/www/eqourse-cdn` is owned by `deployer:deployer`. No mount or sudo is needed to save images. Existing image locations already return `Cache-Control: public, max-age=31536000, immutable` and are cached by Google Cloud CDN.
 
-Antigravity confirmed the active API Nginx server block already contains:
+The active API Nginx server block must contain:
 
 ```nginx
-client_max_body_size 25m;
+client_max_body_size 100m;
 ```
 
-Keep this existing 25 MB limit. It accommodates the application's 10 MB per-image limit and multipart overhead; no Nginx change or additional upload-limit include is required. The earlier report of a default 1 MB API limit was superseded by this active-config confirmation. Live upload verification remains necessary after deployment.
+This accommodates the admin sample uploader's 100 MB file limit and multipart overhead. The deployment workflows enforce this setting and reload Nginx. Live upload verification remains necessary after deployment.
 
 Set the production backend environment to the values above, then restart the `eqourse` PM2 process with `--update-env`. Confirm `deployer` can also write the frontend document root and `sitemap.xml` for SEO publishing. These production paths should not replace the Windows development frontend output directory.
 

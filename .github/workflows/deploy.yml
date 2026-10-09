@@ -25,6 +25,14 @@ jobs:
           script: |
             set -e
             echo "🚀 Deploying eQOURSE Backend..."
+            NGINX_CONFIG=/etc/nginx/conf.d/eqourse.conf
+            if sudo grep -Eq '^[[:space:]]*client_max_body_size[[:space:]]' "$NGINX_CONFIG"; then
+              sudo sed -i -E 's/^[[:space:]]*client_max_body_size[[:space:]]+.*/    client_max_body_size 100m;/' "$NGINX_CONFIG"
+            else
+              sudo sed -i '/server_name .*eqourse.com;/a\    client_max_body_size 100m;' "$NGINX_CONFIG"
+            fi
+            sudo nginx -t
+            sudo systemctl reload nginx
             cd /opt/eqourse-prototype/eqourse-backend
             git -C /opt/eqourse-prototype fetch origin production
             git -C /opt/eqourse-prototype reset --hard origin/production
