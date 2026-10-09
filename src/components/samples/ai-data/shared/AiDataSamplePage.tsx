@@ -188,7 +188,13 @@ const RoboticsShowcase = ({ showcases }: { showcases: SampleShowcase[] }) => {
   const [visibility, setVisibility] = useState<Record<string, boolean>>({});
   const visibleShowcases = showcases.filter((item) => visibility[item.title] !== false);
   const current = visibleShowcases[active] || visibleShowcases[0] || showcases[0];
-  useEffect(() => { const timer = window.setInterval(() => { if (visibleShowcases.length > 1) setActive((value) => (value + 1) % visibleShowcases.length); }, 5200); return () => window.clearInterval(timer); }, [visibleShowcases.length]);
+  useEffect(() => {
+    if (showPreview || visibleShowcases.length <= 1) return;
+    const timer = window.setInterval(() => {
+      setActive((value) => (value + 1) % visibleShowcases.length);
+    }, 5200);
+    return () => window.clearInterval(timer);
+  }, [showPreview, visibleShowcases.length]);
   useEffect(() => {
     let mounted = true;
     const refresh = () => fetchSampleTabSettings("robotics-samples").then((settings) => { if (mounted) { setVisibility(settings); setActive(0); } });
