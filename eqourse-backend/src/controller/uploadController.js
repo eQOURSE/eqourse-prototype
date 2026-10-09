@@ -50,6 +50,7 @@ const fileFilter = (req, file, cb) => {
   const extensionAllowed = [
     ".md", ".markdown", ".txt", ".log", ".xml", ".sitemap", ".tsv", ".html", ".htm",
     ".jsonl", ".ndjson", ".conll",
+    ".tfrecord", ".tfrecords",
   ]
     .includes(path.extname(file.originalname).toLowerCase());
   if (allowedMimes.includes(file.mimetype) || extensionAllowed || file.mimetype.startsWith("video/") || file.mimetype.startsWith("audio/")) {
