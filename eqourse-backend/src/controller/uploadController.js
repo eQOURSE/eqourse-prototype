@@ -62,7 +62,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   fileFilter,
-  limits: { fileSize: 100 * 1024 * 1024 }, // 100MB
+  limits: { fileSize: 100 * 1024 * 1024 }, // 100MB; keep this aligned with the admin UI
 });
 
 // ─── Upload middleware ──────────────────────────────────────
@@ -76,7 +76,7 @@ const uploadFile = (req, res) => {
   uploadMiddleware(req, res, (err) => {
     if (err instanceof multer.MulterError) {
       if (err.code === "LIMIT_FILE_SIZE") {
-        return res.status(400).json({ success: false, message: "File too large. Maximum size is 10MB." });
+        return res.status(400).json({ success: false, message: "File too large. Maximum size is 100MB." });
       }
       return res.status(400).json({ success: false, message: err.message });
     }
