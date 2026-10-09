@@ -255,15 +255,10 @@ const parseExample = (bytes: Uint8Array) => {
     if (wireType !== 2) { reader.skip(wireType); continue; }
     const value = reader.bytesValue();
     if (field !== 1) continue;
-    const mapReader = new ProtoReader(value);
-    while (!mapReader.done) {
-      const mapTag = Number(mapReader.varint());
-      const mapValue = mapReader.bytesValue();
-      if ((mapTag >>> 3) === 1) {
-        const entry = parseFeatureEntry(mapValue);
-        if (entry) features[entry[0]] = entry[1];
-      }
-    }
+    // Features.feature is a repeated map-entry field. Each field-1 payload
+    // is one complete { key, value } entry, not a container of entries.
+    const entry = parseFeatureEntry(value);
+    if (entry) features[entry[0]] = entry[1];
   }
   return Object.keys(features).length ? features : null;
 };
