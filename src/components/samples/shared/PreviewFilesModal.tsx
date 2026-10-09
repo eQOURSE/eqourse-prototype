@@ -40,6 +40,7 @@ const getFileIcon = (fileType: string) => {
   if (['pdf', 'doc', 'docx', 'txt', 'rtf', 'xls', 'xlsx'].includes(type)) return FileText;
   if (['mp4', 'avi', 'mov', 'mkv', 'webm', 'scorm'].includes(type)) return FileVideo;
   if (['json', 'jsonl', 'csv'].includes(type)) return FileJson;
+  if (['tfrecord', 'tfrecords'].includes(type)) return Database;
   if (['wav', 'mp3', 'rttm', 'textgrid'].includes(type)) return FileMusic;
   if (['zip', 'tar', 'gz'].includes(type)) return FileArchive;
   if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg', 'kitti', 'coco json'].includes(type)) return FileImage;
@@ -67,6 +68,7 @@ const isInlinePreviewable = (file: PreviewFile) => {
     "audio", "mp3", "wav", "ogg", "oga", "m4a",
     "video", "mp4", "webm", "mov", "m4v", "ogv",
     "pdf", "json", "jsonl", "ndjson", "csv", "tsv", "txt", "text", "xml", "md", "markdown",
+    "tfrecord", "tfrecords",
   ].some((candidate) => type === candidate || type.startsWith(`${candidate}/`));
 };
 
