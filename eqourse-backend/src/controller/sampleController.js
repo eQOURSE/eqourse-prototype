@@ -133,9 +133,9 @@ const listFilesByPage = async (req, res) => {
       return res.status(400).json({ success: false, message: "pageSlug or page_path query param is required" });
     }
     const filter = page_path ? { pagePaths: normalizePagePath(page_path) } : { pageSlug };
-    if (tab) filter.tabName = tab;
+    if (tab) filter.tabName = tab === "LiDAR Annotation" ? { $in: ["LiDAR Annotation", "3D Cuboid Annotation"] } : tab;
     if (pageSlug && tab) {
-      const setting = await SampleTabSetting.findOne({ pageSlug, tabName: tab });
+      const setting = await SampleTabSetting.findOne({ pageSlug, tabName: tab === "LiDAR Annotation" ? { $in: ["LiDAR Annotation", "3D Cuboid Annotation"] } : tab });
       if (setting?.visible === false) return res.json({ success: true, data: { files: [] } });
     }
     const items = await SampleItem.find(filter).sort({ order: 1 });
@@ -324,7 +324,7 @@ const adminListItemsByPage = async (req, res) => {
       return res.status(400).json({ success: false, message: "pageSlug query param is required" });
     }
     const filter = { pageSlug };
-    if (tab) filter.tabName = tab;
+    if (tab) filter.tabName = tab === "LiDAR Annotation" ? { $in: ["LiDAR Annotation", "3D Cuboid Annotation"] } : tab;
     const items = await SampleItem.find(filter).sort({ order: 1 });
     return res.json({ success: true, data: { items: items.map(formatItem) } });
   } catch (err) {
