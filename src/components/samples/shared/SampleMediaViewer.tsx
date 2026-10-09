@@ -246,20 +246,65 @@ const parseFeatureEntry = (bytes: Uint8Array) => {
   return key && feature ? [key, feature] as const : null;
 };
 
-const parseExample = (bytes: Uint8Array) => {
+const parseFeatureMap = (bytes: Uint8Array) => {
+  const mapReader = new ProtoReader(bytes);
+  const features: Record<string, TfRecordFeature> = {};
+  while (!mapReader.done) {
+    const tag = Number(mapReader.varint());
+    const field = tag >>> 3;
+    const wireType = tag & 7;
+    if (field === 1 && wireType === 2) {
+      const entry = parseFeatureEntry(mapReader.bytesValue());
+      if (entry) features[entry[0]] = entry[1];
+    } else {
+      mapReader.skip(wireType);
+    }
+  }
+  return features;
+};
+
+const parseFeatureListEntry = (bytes: Uint8Array) => {
+  const reader = new ProtoReader(bytes);
+  let key = "";
+  const values: TfRecordFeature[] = [];
+  while (!reader.done) {
+    const tag = Number(reader.varint());
+    const field = tag >>> 3;
+    const wireType = tag & 7;
+    if (field === 1 && wireType === 2) key = utf8(reader.bytesValue());
+    else if (field === 2 && wireType === 2) {
+      const featureListReader = new ProtoReader(reader.bytesValue());
+      while (!featureListReader.done) {
+        const featureTag = Number(featureListReader.varint());
+        if ((featureTag >>> 3) === 1 && (featureTag & 7) === 2) values.push(parseFeature(featureListReader.bytesValue()));
+        else featureListReader.skip(featureTag & 7);
+      }
+    } else reader.skip(wireType);
+  }
+  return key && values.length ? [key, values] as const : null;
+};
+
+const parseTfPayload = (bytes: Uint8Array) => {
   const reader = new ProtoReader(bytes);
   const features: Record<string, TfRecordFeature> = {};
+  let sequenceIndex = 0;
   while (!reader.done) {
     const tag = Number(reader.varint());
     const field = tag >>> 3;
     const wireType = tag & 7;
     if (wireType !== 2) { reader.skip(wireType); continue; }
     const value = reader.bytesValue();
-    if (field !== 1) continue;
-    // Features.feature is a repeated map-entry field. Each field-1 payload
-    // is one complete { key, value } entry, not a container of entries.
-    const entry = parseFeatureEntry(value);
-    if (entry) features[entry[0]] = entry[1];
+    if (field === 1) Object.assign(features, parseFeatureMap(value));
+    if (field === 2) {
+      const listsReader = new ProtoReader(value);
+      while (!listsReader.done) {
+        const listTag = Number(listsReader.varint());
+        if ((listTag >>> 3) === 1 && (listTag & 7) === 2) {
+          const entry = parseFeatureListEntry(listsReader.bytesValue());
+          if (entry) entry[1].forEach((feature) => { features[`${entry[0]}[${sequenceIndex++}]`] = feature; });
+        } else listsReader.skip(listTag & 7);
+      }
+    }
   }
   return Object.keys(features).length ? features : null;
 };
@@ -274,7 +319,7 @@ const parseTfRecords = (buffer: ArrayBuffer): TfRecordPreview[] => {
     if (!Number.isSafeInteger(length) || length < 0 || offset + 16 + length > bytes.length) break;
     const payload = bytes.slice(offset + 12, offset + 12 + length);
     let features: Record<string, TfRecordFeature> | null = null;
-    try { features = parseExample(payload); } catch { features = null; }
+    try { features = parseTfPayload(payload); } catch { features = null; }
     records.push({ index: records.length + 1, byteLength: length, features: features || {}, raw: !features });
     offset += 16 + length;
   }
@@ -606,7 +651,7 @@ function TfRecordPreviewPanel({ records, file, url }: { records: TfRecordPreview
               Record {record.index} <span className="ml-2 font-normal text-slate-500">{record.byteLength.toLocaleString()} bytes</span>
             </summary>
             {record.raw ? (
-              <p className="px-3 pb-3 text-slate-500">Serialized payload detected, but it is not a standard <code>tf.train.Example</code> message.</p>
+              <p className="px-3 pb-3 text-slate-500">Serialized payload detected, but it is not a standard <code>tf.train.Example</code> or <code>tf.train.SequenceExample</code> message.</p>
             ) : (
               <div className="overflow-x-auto px-3 pb-3">
                 <table className="min-w-full border-collapse">
