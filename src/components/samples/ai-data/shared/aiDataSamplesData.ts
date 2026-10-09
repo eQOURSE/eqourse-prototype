@@ -147,18 +147,18 @@ export const aiDataSamples: AiDataSample[] = [
     seoTitle:
       "Computer Vision Annotation Samples │ Bounding Box, Segmentation │ eQOURSE",
     seoDescription:
-      "Explore eQOURSE computer vision annotation samples: bounding boxes, semantic segmentation, instance segmentation, polygon, keypoint, and 3D cuboid annotation. COCO JSON output. 98%+ accuracy.",
+      "Explore eQOURSE computer vision annotation samples: bounding boxes, semantic segmentation, instance segmentation, polygon, keypoint, and LiDAR annotation. COCO JSON output. 98%+ accuracy.",
     keywords:
-      "computer vision annotation, bounding box, semantic segmentation, instance segmentation, keypoint detection, 3D cuboid, COCO JSON, CV samples",
+      "computer vision annotation, bounding box, semantic segmentation, instance segmentation, keypoint detection, LiDAR annotation, COCO JSON, CV samples",
     preHeadline: "AI Data Samples",
     headline: "Computer Vision",
     headlineAccent: "Annotation Samples",
     subtext:
-      "Browse our computer vision annotation samples including bounding boxes, semantic segmentation, instance segmentation, polygon tracing, keypoint annotation, and 3D cuboid labeling. Delivered in COCO JSON with 98%+ accuracy.",
+      "Browse our computer vision annotation samples including bounding boxes, semantic segmentation, instance segmentation, polygon tracing, keypoint annotation, and LiDAR annotation. Delivered in COCO JSON with 98%+ accuracy.",
     ctaText: "Request CV Pilot Dataset",
     heroVisual: "cv",
     shortDescription:
-      "Bounding box, segmentation, polygon, keypoint and 3D cuboid annotation delivered in COCO JSON.",
+      "Bounding box, segmentation, polygon, keypoint and LiDAR annotation delivered in COCO JSON.",
     showcases: [
       {
         id: "bbox",
@@ -218,7 +218,7 @@ export const aiDataSamples: AiDataSample[] = [
       },
       {
         id: "cuboid",
-        title: "3D Cuboid Annotation",
+        title: "LiDAR Annotation",
         teaser: "Estimate depth, rotation, and dimensions in 3D space.",
         description:
           "Driving data with depth-aware 3D bounding cuboids for vehicles and obstacles. Yaw, pitch, roll rotation and distance estimation per object.",
