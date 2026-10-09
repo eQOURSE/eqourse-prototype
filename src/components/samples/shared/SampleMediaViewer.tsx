@@ -27,9 +27,9 @@ const extensionOf = (url: string) => {
 };
 
 const typeCandidates = (file: PreviewFile) => [
-  extensionOf(file.fileUrl),
   file.fileType,
   file.mimeType,
+  extensionOf(file.fileUrl),
   extensionOf(file.thumbnailUrl || ""),
 ]
   .filter(Boolean)
@@ -54,6 +54,7 @@ const normalizedType = (file: PreviewFile) => {
     "xls", "xlsx", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     "json", "jsonl", "ndjson", "csv", "tsv", "conll", "text/csv", "text",
     "txt", "text/plain", "xml", "sitemap", "application/xml", "text/xml", "html", "html5", "htm", "text/html", "md", "markdown",
+    "tfrecord", "tfrecords",
   ].includes(value) || value.startsWith("image/") || value.startsWith("audio/") || value.startsWith("video/"));
   return known || candidates[0] || "";
 };
