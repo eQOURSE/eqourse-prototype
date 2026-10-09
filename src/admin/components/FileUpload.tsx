@@ -9,7 +9,7 @@ export default function FileUpload({
   onChange,
   kind,
   label = "File",
-  accept = ".pdf,.doc,.docx,.xls,.xlsx,.zip",
+  accept = ".pdf,.doc,.docx,.xls,.xlsx,.zip,.mp4,.webm,.mov,.avi,.ogv",
 }: {
   value?: { url: string; originalName: string; size?: number };
   onChange: (file: { url: string; originalName: string; size: number; mimeType?: string } | null) => void;
@@ -21,8 +21,8 @@ export default function FileUpload({
   const [busy, setBusy] = useState(false);
 
   const handlePick = async (file: File) => {
-    if (file.size > 50 * 1024 * 1024) {
-      toast.error("File must be ≤ 50 MB");
+    if (file.size > 100 * 1024 * 1024) {
+      toast.error("File must be ≤ 100 MB");
       return;
     }
     setBusy(true);
