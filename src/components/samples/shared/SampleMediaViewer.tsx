@@ -14,6 +14,8 @@ interface SampleMediaViewerProps {
 }
 
 const MAX_TEXT_BYTES = 2 * 1024 * 1024;
+const MAX_TFRECORD_BYTES = 8 * 1024 * 1024;
+const MAX_TFRECORD_RECORDS = 50;
 
 const extensionOf = (url: string) => {
   try {
@@ -125,6 +127,164 @@ const isSpreadsheetType = (type: string) => matches(type, [
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 ]);
 
+const isTfRecordType = (type: string) => matches(type, ["tfrecord", "tfrecords"]);
+
+type TfRecordFeature = { kind: "bytes" | "float" | "int64" | "unknown"; values: string[] };
+type TfRecordPreview = { index: number; byteLength: number; features: Record<string, TfRecordFeature>; raw: boolean };
+
+class ProtoReader {
+  private offset = 0;
+
+  constructor(private readonly bytes: Uint8Array) {}
+
+  get done() { return this.offset >= this.bytes.length; }
+
+  varint() {
+    let value = 0n;
+    let shift = 0n;
+    while (!this.done && shift <= 63n) {
+      const byte = this.bytes[this.offset++];
+      value |= BigInt(byte & 0x7f) << shift;
+      if ((byte & 0x80) === 0) return value;
+      shift += 7n;
+    }
+    throw new Error("Invalid protobuf varint");
+  }
+
+  bytesValue() {
+    const length = Number(this.varint());
+    if (!Number.isSafeInteger(length) || length < 0 || this.offset + length > this.bytes.length) throw new Error("Invalid protobuf length");
+    const value = this.bytes.slice(this.offset, this.offset + length);
+    this.offset += length;
+    return value;
+  }
+
+  skip(wireType: number) {
+    if (wireType === 0) { this.varint(); return; }
+    if (wireType === 1) { this.offset += 8; return; }
+    if (wireType === 2) { this.bytesValue(); return; }
+    if (wireType === 5) { this.offset += 4; return; }
+    throw new Error("Unsupported protobuf wire type");
+  }
+}
+
+const utf8 = (bytes: Uint8Array) => new TextDecoder().decode(bytes);
+const displayBytes = (bytes: Uint8Array) => {
+  const decoded = utf8(bytes);
+  const hasUnreadableCharacters = Array.from(decoded).some((character) => {
+    const code = character.charCodeAt(0);
+    return code === 0xfffd || (code < 32 && code !== 9 && code !== 10 && code !== 13);
+  });
+  return decoded && !hasUnreadableCharacters
+    ? decoded
+    : `binary (${bytes.byteLength} bytes)`;
+};
+
+const parsePackedNumbers = (bytes: Uint8Array, kind: "float" | "int64") => {
+  const values: string[] = [];
+  if (kind === "float") {
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    for (let offset = 0; offset + 4 <= bytes.byteLength; offset += 4) values.push(String(view.getFloat32(offset, true)));
+  } else {
+    const reader = new ProtoReader(bytes);
+    while (!reader.done) values.push(String(reader.varint()));
+  }
+  return values;
+};
+
+const parseFeatureList = (bytes: Uint8Array, kind: "bytes" | "float" | "int64") => {
+  const reader = new ProtoReader(bytes);
+  const values: string[] = [];
+  while (!reader.done) {
+    const tag = Number(reader.varint());
+    const field = tag >>> 3;
+    const wireType = tag & 7;
+    if (field !== 1) { reader.skip(wireType); continue; }
+    if (kind === "bytes" && wireType === 2) {
+      const value = reader.bytesValue();
+      values.push(displayBytes(value));
+    } else if (kind === "float" && wireType === 2) {
+      values.push(...parsePackedNumbers(reader.bytesValue(), "float"));
+    } else if (kind === "int64" && wireType === 2) {
+      values.push(...parsePackedNumbers(reader.bytesValue(), "int64"));
+    } else {
+      reader.skip(wireType);
+    }
+  }
+  return values;
+};
+
+const parseFeature = (bytes: Uint8Array): TfRecordFeature => {
+  const reader = new ProtoReader(bytes);
+  while (!reader.done) {
+    const tag = Number(reader.varint());
+    const field = tag >>> 3;
+    const wireType = tag & 7;
+    if (wireType !== 2) { reader.skip(wireType); continue; }
+    const value = reader.bytesValue();
+    if (field === 1) return { kind: "bytes", values: parseFeatureList(value, "bytes") };
+    if (field === 2) return { kind: "float", values: parseFeatureList(value, "float") };
+    if (field === 3) return { kind: "int64", values: parseFeatureList(value, "int64") };
+  }
+  return { kind: "unknown", values: [] };
+};
+
+const parseFeatureEntry = (bytes: Uint8Array) => {
+  const reader = new ProtoReader(bytes);
+  let key = "";
+  let feature: TfRecordFeature | null = null;
+  while (!reader.done) {
+    const tag = Number(reader.varint());
+    const field = tag >>> 3;
+    const wireType = tag & 7;
+    if (wireType !== 2) { reader.skip(wireType); continue; }
+    const value = reader.bytesValue();
+    if (field === 1) key = utf8(value);
+    if (field === 2) feature = parseFeature(value);
+  }
+  return key && feature ? [key, feature] as const : null;
+};
+
+const parseExample = (bytes: Uint8Array) => {
+  const reader = new ProtoReader(bytes);
+  const features: Record<string, TfRecordFeature> = {};
+  while (!reader.done) {
+    const tag = Number(reader.varint());
+    const field = tag >>> 3;
+    const wireType = tag & 7;
+    if (wireType !== 2) { reader.skip(wireType); continue; }
+    const value = reader.bytesValue();
+    if (field !== 1) continue;
+    const mapReader = new ProtoReader(value);
+    while (!mapReader.done) {
+      const mapTag = Number(mapReader.varint());
+      const mapValue = mapReader.bytesValue();
+      if ((mapTag >>> 3) === 1) {
+        const entry = parseFeatureEntry(mapValue);
+        if (entry) features[entry[0]] = entry[1];
+      }
+    }
+  }
+  return Object.keys(features).length ? features : null;
+};
+
+const parseTfRecords = (buffer: ArrayBuffer): TfRecordPreview[] => {
+  const bytes = new Uint8Array(buffer);
+  const view = new DataView(buffer);
+  const records: TfRecordPreview[] = [];
+  let offset = 0;
+  while (offset + 16 <= bytes.length && records.length < MAX_TFRECORD_RECORDS) {
+    const length = Number(view.getBigUint64(offset, true));
+    if (!Number.isSafeInteger(length) || length < 0 || offset + 16 + length > bytes.length) break;
+    const payload = bytes.slice(offset + 12, offset + 12 + length);
+    let features: Record<string, TfRecordFeature> | null = null;
+    try { features = parseExample(payload); } catch { features = null; }
+    records.push({ index: records.length + 1, byteLength: length, features: features || {}, raw: !features });
+    offset += 16 + length;
+  }
+  return records;
+};
+
 const formatJson = (source: string, type: string) => {
   if (matches(type, ["jsonl", "ndjson"])) {
     return source
@@ -143,10 +303,10 @@ const formatJson = (source: string, type: string) => {
 };
 
 export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
-  console.log(file)
   const url = resolveUrl(file.fileUrl);
   const type = normalizedType(file);
   const [text, setText] = useState<string | null>(null);
+  const [tfRecords, setTfRecords] = useState<TfRecordPreview[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -177,6 +337,36 @@ export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
       .catch((reason: unknown) => {
         if (reason instanceof DOMException && reason.name === "AbortError") return;
         setError(reason instanceof Error ? reason.message : "The file could not be previewed.");
+      })
+      .finally(() => setLoading(false));
+
+    return () => controller.abort();
+  }, [type, url]);
+
+  useEffect(() => {
+    if (!isTfRecordType(type)) return;
+
+    const controller = new AbortController();
+    setLoading(true);
+    setError(null);
+    setTfRecords(null);
+
+    fetch(url, { signal: controller.signal, cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Preview request failed (${response.status})`);
+        const length = Number(response.headers.get("content-length") || 0);
+        if (length > MAX_TFRECORD_BYTES) throw new Error("This TFRecord file is too large to preview. Download it to inspect the full dataset.");
+        return response.arrayBuffer();
+      })
+      .then((buffer) => {
+        if (buffer.byteLength > MAX_TFRECORD_BYTES) throw new Error("This TFRecord file is too large to preview. Download it to inspect the full dataset.");
+        const records = parseTfRecords(buffer);
+        if (!records.length) throw new Error("No complete TFRecord entries were found in this file.");
+        setTfRecords(records);
+      })
+      .catch((reason: unknown) => {
+        if (reason instanceof DOMException && reason.name === "AbortError") return;
+        setError(reason instanceof Error ? reason.message : "The TFRecord file could not be previewed.");
       })
       .finally(() => setLoading(false));
 
@@ -224,6 +414,12 @@ export default function SampleMediaViewer({ file }: SampleMediaViewerProps) {
     const crossOriginHostedHtml = file.isExternal && externalOrigin && externalOrigin !== window.location.origin;
     const sandbox = `allow-scripts allow-forms allow-modals allow-popups allow-presentation${crossOriginHostedHtml ? " allow-same-origin" : ""}`;
     return <MediaWithDownload file={file} url={url}><iframe title={file.title} src={url} sandbox={sandbox} allow="autoplay; fullscreen; xr-spatial-tracking; web-share" allowFullScreen onContextMenu={(event) => event.preventDefault()} className="h-[62vh] w-full rounded-lg border bg-white" /></MediaWithDownload>;
+  }
+
+  if (isTfRecordType(type)) {
+    if (loading) return <LoadingPreview />;
+    if (error) return <PreviewFallback message={error} url={url} allowDownload={file.allowDownload === true} />;
+    return <TfRecordPreviewPanel records={tfRecords || []} file={file} url={url} />;
   }
 
   if (isTextType(type)) {
@@ -398,6 +594,36 @@ function SpreadsheetPreview({ file, url }: { file: PreviewFile; url: string }) {
 
 function LoadingPreview() {
   return <div className="flex h-40 items-center justify-center"><Loader2 className="h-6 w-6 animate-spin" /></div>;
+}
+
+function TfRecordPreviewPanel({ records, file, url }: { records: TfRecordPreview[]; file: PreviewFile; url: string }) {
+  return (
+    <div className="flex w-full flex-col gap-3">
+      <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
+        <span>Showing {records.length} record{records.length === 1 ? "" : "s"} from the preview window</span>
+        {file.allowDownload && <DownloadLink url={url} />}
+      </div>
+      <div className="max-h-[62vh] w-full overflow-auto rounded-lg border bg-white text-left text-xs text-slate-800">
+        {records.map((record) => (
+          <details key={record.index} className="border-b last:border-b-0" open={record.index === 1}>
+            <summary className="cursor-pointer px-3 py-2 font-semibold hover:bg-slate-50">
+              Record {record.index} <span className="ml-2 font-normal text-slate-500">{record.byteLength.toLocaleString()} bytes</span>
+            </summary>
+            {record.raw ? (
+              <p className="px-3 pb-3 text-slate-500">Serialized payload detected, but it is not a standard <code>tf.train.Example</code> message.</p>
+            ) : (
+              <div className="overflow-x-auto px-3 pb-3">
+                <table className="min-w-full border-collapse">
+                  <thead className="bg-slate-100 text-left font-semibold text-slate-700"><tr><th className="border px-3 py-2">Feature</th><th className="border px-3 py-2">Type</th><th className="border px-3 py-2">Value</th></tr></thead>
+                  <tbody>{Object.entries(record.features).map(([name, feature]) => <tr key={name}><td className="border px-3 py-2 font-medium">{name}</td><td className="border px-3 py-2">{feature.kind}</td><td className="border px-3 py-2 whitespace-pre-wrap">{feature.values.join(", ")}</td></tr>)}</tbody>
+                </table>
+              </div>
+            )}
+          </details>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function PdfJsViewer({ file, url }: { file: PreviewFile; url: string }) {
