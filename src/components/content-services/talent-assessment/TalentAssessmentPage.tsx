@@ -44,7 +44,7 @@ const TalentAssessmentPage = () => (
     <SEOHead
       title="Talent Assessment & Workforce Evaluation Solutions | eQOURSE"
       description="Build reliable talent, skills and workforce evaluation programmes with psychometric, competency and digital assessment support from eQOURSE."
-      canonical="https://www.eqourse.com/talent-assessment-workforce-evaluation/"
+      canonical="https://www.eqourse.com/talent-assessment-workforce-evaluation"
       keywords="talent assessment services, workforce evaluation solutions, psychometric assessment services, skill assessment services, competency framework development, candidate evaluation tools, learning readiness assessment, organisational diagnostics, digital assessment infrastructure, assessment content development"
     />
 

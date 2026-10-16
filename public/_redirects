@@ -10,6 +10,8 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /events/business-tour-2026/video/ /events/presentation 301!
 /downloads/Brochure.pdf /events/brochure 301!
 /downloads/Brochure.pdf/ /events/brochure 301!
+/talent-assessment /talent-assessment-workforce-evaluation 301!
+/talent-assessment/ /talent-assessment-workforce-evaluation 301!
 /index / 301!
 /index/ / 301!
 /index.php / 301!
@@ -82,6 +84,12 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /k12-elearning-services/ /k12-and-higher-education 301!
 /blogs/what-are-the-different-roles-of-teachers-in-the-classroom /blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter 301!
 /blogs/what-are-the-different-roles-of-teachers-in-the-classroom/ /blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter 301!
+/blog/key-roles-teachers-play-in-the-classroom /blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter 301!
+/blog/key-roles-teachers-play-in-the-classroom/ /blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter 301!
+/blog/eqourse-launches-in-singapore-scaling-content-services-across-asia /blog/eqourse-launches-singapore-scaling-content-services-across-asia 301!
+/blog/eqourse-launches-in-singapore-scaling-content-services-across-asia/ /blog/eqourse-launches-singapore-scaling-content-services-across-asia 301!
+/casestudy/k-12-worksheets-and-ppt-solutions-for-2-000-schools /casestudy/k12-worksheets-ppt-solutions-2000-schools 301!
+/casestudy/k-12-worksheets-and-ppt-solutions-for-2-000-schools/ /casestudy/k12-worksheets-ppt-solutions-2000-schools 301!
 /blogs/scorm-and-lms-integration-corporate-training-success /blog/scorm-and-lms-integration-made-simple 301!
 /blogs/scorm-and-lms-integration-corporate-training-success/ /blog/scorm-and-lms-integration-made-simple 301!
 /blogs/Role-of-SMEs-in-EdTech-and-Multilingual-Learning /blog/sourcing-deploying-elite-subject-matter-experts-digital-education 301!

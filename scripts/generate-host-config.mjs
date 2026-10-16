@@ -84,7 +84,10 @@ const legacyQueryArticles = [
   { query: "subtitling-in-edtech-transforming-digital-learning", to: "/blog/how-subtitling-is-transforming-learning-content-services" },
   { query: "why-are-subject-matter-experts-important-in-edtech", to: "/blog/sourcing-deploying-elite-subject-matter-experts-digital-education" },
 ];
-const retiredQueryArticle = "Factors-affecting-academic-performance-of-the-students-in-the-classroom";
+const retiredQueryArticles = [
+  "Factors-affecting-academic-performance-of-the-students-in-the-classroom",
+  "Why-is-it-necessary-for-the-students-to-learn-about-investment-in-school-irrespective-of-their-streams",
+];
 
 const apache = [
   "# Generated from src/routes/legacyRedirects.ts. Do not edit by hand.",
@@ -99,8 +102,10 @@ const apache = [
     `RewriteCond %{QUERY_STRING} ^${query}$ [NC]`,
     `RewriteRule ^blog-detail(?:[.]php)?/?$ https://www.eqourse.com${to} [R=301,L,NE,QSD]`,
   ]),
-  `RewriteCond %{QUERY_STRING} ^${retiredQueryArticle}$ [NC]`,
-  "RewriteRule ^blog-detail(?:[.]php)?/?$ - [G,L]",
+  ...retiredQueryArticles.flatMap((query) => [
+    `RewriteCond %{QUERY_STRING} ^${query}$ [NC]`,
+    "RewriteRule ^blog-detail(?:[.]php)?/?$ - [G,L]",
+  ]),
   ...redirects.map(({ from, to }) => {
     const flags = from.startsWith("/blog-detail") || from.startsWith("/blog/detail")
       ? "R=301,L,NE,QSD"
@@ -161,7 +166,7 @@ const nginxRedirects = redirects.filter(({ from }) => !["/blog-detail.php", "/bl
 const nginxQueryArticleLocations = ["/blog-detail.php", "/blog-detail"].flatMap((path) => [path, `${path}/`].map((variant) => [
   `location = ${variant} {`,
   ...legacyQueryArticles.map(({ query, to }) => `  if ($args ~* "^${query}$") { return 301 https://www.eqourse.com${to}; }`),
-  `  if ($args ~* "^${retiredQueryArticle}$") { return 410; }`,
+  ...retiredQueryArticles.map((query) => `  if ($args ~* "^${query}$") { return 410; }`),
   "  return 301 https://www.eqourse.com/blog;",
   "}",
 ].join("\n")));
@@ -200,10 +205,10 @@ const nginx = [
   "# CMS detail pages published after the last build have no prerendered HTML.",
   "# Fall back to the metadata-clean SPA shell so React can hydrate cleanly",
   "# without producing duplicate title/description tags from a 404 page.",
-  "location ^~ /blog/ {",
+  "location /blog/ {",
   "  try_files $uri/index.html $uri /cms-shell.html;",
   "}",
-  "location ^~ /casestudy/ {",
+  "location /casestudy/ {",
   "  try_files $uri/index.html $uri /cms-shell.html;",
   "}",
   "",
