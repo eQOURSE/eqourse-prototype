@@ -42,8 +42,7 @@ export const legacyRedirects: Record<string, string> = {
   "/avatar-video-samples": "/ai-videos-samples",
   "/ai-avatar-video-samples": "/ai-videos-samples",
   "/ai-": "/ai-data-services",
-  "/flash-to-htm-samples": "/audio-samples",
-  "/flash-to-html-samples": "/audio-samples",
+  "/ai-data-": "/ai-data-services",
 
   // Retired Text Samples taxonomy. Preserve indexed URLs and backlinks with
   // permanent redirects to the closest page in the current service structure.

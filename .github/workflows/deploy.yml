@@ -176,6 +176,9 @@ jobs:
               "https://www.eqourse.com/talent-assessment" \
               "https://www.eqourse.com/talent-assessment-workforce-evaluation"
             check_redirect \
+              "https://www.eqourse.com/ai-data-" \
+              "https://www.eqourse.com/ai-data-services"
+            check_redirect \
               "https://www.eqourse.com/blog/key-roles-teachers-play-in-the-classroom" \
               "https://www.eqourse.com/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter"
             check_redirect \
@@ -190,6 +193,14 @@ jobs:
               restore_nginx_config
               exit 1
             fi
+            for retired_sample in flash-to-htm-samples flash-to-html-samples; do
+              retired_sample_status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "https://www.eqourse.com/$retired_sample")"
+              if [ "$retired_sample_status" != "410" ]; then
+                echo "❌ $retired_sample returned $retired_sample_status; expected 410"
+                restore_nginx_config
+                exit 1
+              fi
+            done
             sudo rm -f "$NGINX_BACKUP"
             echo "✅ eQOURSE Frontend deployed"
 
