@@ -46,10 +46,8 @@ https://eqourse.com/* https://www.eqourse.com/:splat 301!
 /ai-avatar-video-samples/ /ai-videos-samples 301!
 /ai- /ai-data-services 301!
 /ai-/ /ai-data-services 301!
-/flash-to-htm-samples /audio-samples 301!
-/flash-to-htm-samples/ /audio-samples 301!
-/flash-to-html-samples /audio-samples 301!
-/flash-to-html-samples/ /audio-samples 301!
+/ai-data- /ai-data-services 301!
+/ai-data-/ /ai-data-services 301!
 /kindergarten-to-k5-samples /educational-publishing-content-development-samples 301!
 /kindergarten-to-k5-samples/ /educational-publishing-content-development-samples 301!
 /kindergarden-to-k5-samples /educational-publishing-content-development-samples 301!

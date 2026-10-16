@@ -88,6 +88,9 @@ const retiredQueryArticles = [
   "Factors-affecting-academic-performance-of-the-students-in-the-classroom",
   "Why-is-it-necessary-for-the-students-to-learn-about-investment-in-school-irrespective-of-their-streams",
 ];
+// These old sample pages have no matching published Flash-to-HTML work.
+// The CMS category with a similar name contains an unrelated audio file.
+const retiredSamplePaths = ["/flash-to-htm-samples", "/flash-to-html-samples"];
 
 const apache = [
   "# Generated from src/routes/legacyRedirects.ts. Do not edit by hand.",
@@ -106,6 +109,9 @@ const apache = [
     `RewriteCond %{QUERY_STRING} ^${query}$ [NC]`,
     "RewriteRule ^blog-detail(?:[.]php)?/?$ - [G,L]",
   ]),
+  ...retiredSamplePaths.map((path) =>
+    `RewriteRule ^${escapeRewritePattern(path)}/?$ - [G,L]`,
+  ),
   ...redirects.map(({ from, to }) => {
     const flags = from.startsWith("/blog-detail") || from.startsWith("/blog/detail")
       ? "R=301,L,NE,QSD"
@@ -163,6 +169,10 @@ const nginxRedirects = redirects.filter(({ from }) => !["/blog-detail.php", "/bl
   `location = ${from} { return 301 https://www.eqourse.com${to}; }`,
   `location = ${from}/ { return 301 https://www.eqourse.com${to}; }`,
 ]);
+const nginxRetiredSampleLocations = retiredSamplePaths.flatMap((path) => [
+  `location = ${path} { return 410; }`,
+  `location = ${path}/ { return 410; }`,
+]);
 const nginxQueryArticleLocations = ["/blog-detail.php", "/blog-detail"].flatMap((path) => [path, `${path}/`].map((variant) => [
   `location = ${variant} {`,
   ...legacyQueryArticles.map(({ query, to }) => `  if ($args ~* "^${query}$") { return 301 https://www.eqourse.com${to}; }`),
@@ -178,6 +188,7 @@ const nginx = [
   "",
   "# Legacy URLs redirect directly to their final canonical destinations.",
   ...nginxRedirects,
+  ...nginxRetiredSampleLocations,
   ...nginxQueryArticleLocations,
   "",
   "# Known /blogs/ articles redirect above; unknown retired slugs return 404.",

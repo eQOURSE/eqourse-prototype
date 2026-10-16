@@ -8,6 +8,8 @@ const GSC_CRITICAL_URLS = [
   `${SITE_URL}/video-samples`,
   `${SITE_URL}/ai-videos-samples`,
   `${SITE_URL}/audio-samples`,
+  `${SITE_URL}/k12-curriculum-development-and-design-services`,
+  `${SITE_URL}/instructional-design-services`,
 ];
 const GSC_REDIRECTS = new Map([
   [`${SITE_URL}/talent-assessment`, `${SITE_URL}/talent-assessment-workforce-evaluation`],
@@ -17,9 +19,7 @@ const GSC_REDIRECTS = new Map([
   [`${SITE_URL}/avatar-video-samples`, `${SITE_URL}/ai-videos-samples`],
   [`${SITE_URL}/ai-avatar-video-samples`, `${SITE_URL}/ai-videos-samples`],
   [`${SITE_URL}/ai-avatar-video-samples/`, `${SITE_URL}/ai-videos-samples`],
-  [`${SITE_URL}/flash-to-htm-samples`, `${SITE_URL}/audio-samples`],
-  [`${SITE_URL}/flash-to-htm-samples/`, `${SITE_URL}/audio-samples`],
-  [`${SITE_URL}/flash-to-html-samples`, `${SITE_URL}/audio-samples`],
+  [`${SITE_URL}/ai-data-`, `${SITE_URL}/ai-data-services`],
   [`${SITE_URL}/kindergarten-to-k5-samples`, `${SITE_URL}/educational-publishing-content-development-samples`],
   [`${SITE_URL}/k6-to-k12-samples`, `${SITE_URL}/educational-publishing-content-development-samples`],
   [`${SITE_URL}/curriculum-samples`, `${SITE_URL}/educational-publishing-content-development-samples`],
@@ -51,6 +51,7 @@ const robotsResponse = await request(`${SITE_URL}/robots.txt`);
 if (robotsResponse.status !== 200) failures.push(`robots.txt returned ${robotsResponse.status}`);
 const robots = await robotsResponse.text();
 if (/Disallow:\s*\/$/im.test(robots)) failures.push("robots.txt blocks the complete site");
+if (!/Disallow:\s*\/admin\b/im.test(robots)) failures.push("robots.txt does not block admin crawling");
 if (!robots.includes(`Sitemap: ${SITEMAP_URL}`)) failures.push("robots.txt does not reference the canonical sitemap");
 
 const sitemapResponse = await request(SITEMAP_URL);
@@ -61,6 +62,20 @@ if (urls.length === 0) failures.push("sitemap.xml contains no URLs");
 if (new Set(urls).size !== urls.length) failures.push("sitemap.xml contains duplicate URLs");
 for (const url of GSC_CRITICAL_URLS) {
   if (!urls.includes(url)) failures.push(`GSC priority URL is missing from sitemap.xml: ${url}`);
+}
+for (const path of ["/ai-data-", "/flash-to-htm-samples", "/flash-to-html-samples", "/admin/careers", "/admin/careersEmail"]) {
+  if (urls.includes(`${SITE_URL}${path}`)) failures.push(`sitemap.xml includes a retired or private URL: ${path}`);
+}
+
+for (const path of ["/admin/careers", "/admin/careersEmail"]) {
+  const response = await request(`${SITE_URL}${path}`, { method: "HEAD" });
+  if (!/noindex/i.test(response.headers.get("x-robots-tag") || "")) {
+    failures.push(`${path} is missing its noindex response header`);
+  }
+}
+const privateCareersResponse = await request(`${SITE_URL}/api/admin/careers`);
+if (privateCareersResponse.status !== 401) {
+  failures.push(`/api/admin/careers must reject an unauthenticated request; got ${privateCareersResponse.status}`);
 }
 
 for (const [url, expectedLocation] of GSC_REDIRECTS) {
@@ -74,6 +89,14 @@ const retiredInvestmentArticle = `${SITE_URL}/blog-detail.php?Why-is-it-necessar
 const retiredInvestmentResponse = await request(retiredInvestmentArticle, { method: "HEAD" });
 if (retiredInvestmentResponse.status !== 410) {
   failures.push(`${retiredInvestmentArticle} must return 410; got ${retiredInvestmentResponse.status}`);
+}
+for (const path of ["/flash-to-htm-samples", "/flash-to-html-samples"]) {
+  for (const variant of [path, `${path}/`]) {
+    const response = await request(`${SITE_URL}${variant}`, { method: "HEAD" });
+    if (response.status !== 410) {
+      failures.push(`${variant} must return 410; got ${response.status}`);
+    }
+  }
 }
 
 for (const url of urls) {
