@@ -10,6 +10,10 @@ const GSC_CRITICAL_URLS = [
   `${SITE_URL}/audio-samples`,
 ];
 const GSC_REDIRECTS = new Map([
+  [`${SITE_URL}/talent-assessment`, `${SITE_URL}/talent-assessment-workforce-evaluation`],
+  [`${SITE_URL}/blog/key-roles-teachers-play-in-the-classroom`, `${SITE_URL}/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter`],
+  [`${SITE_URL}/blog/eqourse-launches-in-singapore-scaling-content-services-across-asia`, `${SITE_URL}/blog/eqourse-launches-singapore-scaling-content-services-across-asia`],
+  [`${SITE_URL}/casestudy/k-12-worksheets-and-ppt-solutions-for-2-000-schools`, `${SITE_URL}/casestudy/k12-worksheets-ppt-solutions-2000-schools`],
   [`${SITE_URL}/avatar-video-samples`, `${SITE_URL}/ai-videos-samples`],
   [`${SITE_URL}/ai-avatar-video-samples`, `${SITE_URL}/ai-videos-samples`],
   [`${SITE_URL}/ai-avatar-video-samples/`, `${SITE_URL}/ai-videos-samples`],
@@ -65,6 +69,11 @@ for (const [url, expectedLocation] of GSC_REDIRECTS) {
   if (response.status !== 301 || location !== expectedLocation) {
     failures.push(`${url} must return one 301 directly to ${expectedLocation}; got ${response.status} ${location || "(no Location)"}`);
   }
+}
+const retiredInvestmentArticle = `${SITE_URL}/blog-detail.php?Why-is-it-necessary-for-the-students-to-learn-about-investment-in-school-irrespective-of-their-streams`;
+const retiredInvestmentResponse = await request(retiredInvestmentArticle, { method: "HEAD" });
+if (retiredInvestmentResponse.status !== 410) {
+  failures.push(`${retiredInvestmentArticle} must return 410; got ${retiredInvestmentResponse.status}`);
 }
 
 for (const url of urls) {
