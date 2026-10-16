@@ -128,7 +128,7 @@ const Footer = () => {
                 </Link>
               ))}
             </div>
-          </div>
+          </div> 
 
           {/* ── Content Services + Legal ── */}
           <div>
@@ -164,7 +164,10 @@ const Footer = () => {
             <h4 className={headingClass} style={headingColor}>Contact</h4>
             <div className="space-y-4">
               <a href="tel:+919214445870" className="flex items-center gap-2 text-sm hover:text-primary transition-colors text-white/80" style={linkColor}>
-                <Phone className="w-4 h-4 text-primary flex-shrink-0" /> +91 - 92144 - 45870
+                <Phone className="w-4 h-4 text-primary flex-shrink-0" /> IN +91-92144-45870
+              </a>
+              <a href="tel:+6580565682" className="flex items-center gap-2 text-sm hover:text-primary transition-colors text-white/80" style={linkColor}>
+                <Phone className="w-4 h-4 text-primary flex-shrink-0" /> SG +65-8056-5682
               </a>
               <a href="mailto:info@eqourse.com" className="flex items-center gap-2 text-sm hover:text-primary transition-colors text-white/80" style={linkColor}>
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" /> info@eqourse.com
