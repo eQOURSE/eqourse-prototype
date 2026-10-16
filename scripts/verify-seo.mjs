@@ -16,14 +16,13 @@ const requiredLegacyRedirects = new Map([
   ["/casestudy/k-12-worksheets-and-ppt-solutions-for-2-000-schools", "/casestudy/k12-worksheets-ppt-solutions-2000-schools"],
   ["/kindergarden-to-k5-samples", "/educational-publishing-content-development-samples"],
   ["/ai-", "/ai-data-services"],
+  ["/ai-data-", "/ai-data-services"],
   ["/events/business-tour-2026", "/events"],
   ["/blogs/what-are-the-different-roles-of-teachers-in-the-classroom", "/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter"],
   ["/downloads/Brochure.pdf", "/events/brochure"],
   ["/contact-us.html", "/contact-us"],
   ["/avatar-video-samples", "/ai-videos-samples"],
   ["/ai-avatar-video-samples", "/ai-videos-samples"],
-  ["/flash-to-htm-samples", "/audio-samples"],
-  ["/flash-to-html-samples", "/audio-samples"],
   ["/kindergarten-to-k5-samples", "/educational-publishing-content-development-samples"],
   ["/k6-to-k12-samples", "/educational-publishing-content-development-samples"],
   ["/curriculum-samples", "/educational-publishing-content-development-samples"],
@@ -333,6 +332,18 @@ if (!nginxConfig.includes("location ~ ^/(.+)/+$")) {
 }
 if (!nginxConfig.includes('if ($args ~* "^Why-is-it-necessary-for-the-students-to-learn-about-investment-in-school-irrespective-of-their-streams$") { return 410; }')) {
   failures.push("Nginx config is missing the retired investment article 410 rule");
+}
+for (const path of ["/flash-to-htm-samples", "/flash-to-html-samples"]) {
+  if (!nginxConfig.includes(`location = ${path} { return 410; }`) ||
+      !nginxConfig.includes(`location = ${path}/ { return 410; }`)) {
+    failures.push(`Nginx config is missing the retired sample 410 rule for ${path}`);
+  }
+  if (!apacheConfig.includes(`RewriteRule ^${path.slice(1)}/?$ - [G,L]`)) {
+    failures.push(`Apache config is missing the retired sample 410 rule for ${path}`);
+  }
+  if (redirectsConfig.includes(`${path} `) || redirectsConfig.includes(`${path}/ `)) {
+    failures.push(`_redirects still routes the retired sample ${path}`);
+  }
 }
 if (nginxConfig.includes("location ^~ /blog/") || nginxConfig.includes("location ^~ /casestudy/")) {
   failures.push("Nginx CMS location prevents trailing-slash normalization");
