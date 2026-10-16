@@ -112,16 +112,18 @@ jobs:
             rm -f dist-output.tar.gz
             NGINX_CONFIG=/etc/nginx/conf.d/eqourse.conf
             NGINX_ROUTES=/opt/eqourse-prototype/deploy/nginx/eqourse-route-handling.conf
+            NGINX_CANONICAL=/opt/eqourse-prototype/deploy/nginx/eqourse-canonical-origin.conf
             NGINX_BACKUP="$(mktemp)"
             sudo cp -a "$NGINX_CONFIG" "$NGINX_BACKUP"
 
             restore_nginx_config() {
               sudo cp -a "$NGINX_BACKUP" "$NGINX_CONFIG"
               sudo nginx -t
+              sudo systemctl reload nginx
               sudo rm -f "$NGINX_BACKUP"
             }
 
-            if ! sudo "$(command -v node)" scripts/install-nginx-route-include.mjs "$NGINX_CONFIG" "$NGINX_ROUTES"; then
+            if ! sudo "$(command -v node)" scripts/install-nginx-route-include.mjs "$NGINX_CONFIG" "$NGINX_ROUTES" "$NGINX_CANONICAL"; then
               restore_nginx_config
               exit 1
             fi
@@ -136,7 +138,6 @@ jobs:
               exit 1
             }
             sudo systemctl reload nginx
-            sudo rm -f "$NGINX_BACKUP"
 
             check_redirect() {
               source_url="$1"
@@ -144,6 +145,7 @@ jobs:
               actual="$(curl --silent --show-error --output /dev/null --write-out '%{http_code} %{redirect_url}' "$source_url")"
               if [ "$actual" != "301 $expected_url" ]; then
                 echo "❌ Redirect check failed: $source_url returned '$actual'; expected '301 $expected_url'"
+                restore_nginx_config
                 exit 1
               fi
               echo "✅ $source_url -> $expected_url"
@@ -158,6 +160,37 @@ jobs:
             check_redirect \
               "https://www.eqourse.com/blogs/Key-Factors-Shaping-Student-Outcomes-%7C-eQOURSE" \
               "https://www.eqourse.com/blog/designing-outcomes-driven-education-custom-e-learning-content"
+            check_redirect \
+              "https://eqourse.com/ai-data-services" \
+              "https://www.eqourse.com/ai-data-services"
+            check_redirect \
+              "http://eqourse.com/ai-data-services" \
+              "https://www.eqourse.com/ai-data-services"
+            check_redirect \
+              "http://www.eqourse.com/ai-data-services" \
+              "https://www.eqourse.com/ai-data-services"
+            check_redirect \
+              "https://www.eqourse.com/blog/scaling-exam-performance-blueprint-aligned-test-prep-content/" \
+              "https://www.eqourse.com/blog/scaling-exam-performance-blueprint-aligned-test-prep-content"
+            check_redirect \
+              "https://www.eqourse.com/talent-assessment" \
+              "https://www.eqourse.com/talent-assessment-workforce-evaluation"
+            check_redirect \
+              "https://www.eqourse.com/blog/key-roles-teachers-play-in-the-classroom" \
+              "https://www.eqourse.com/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter"
+            check_redirect \
+              "https://www.eqourse.com/blog/eqourse-launches-in-singapore-scaling-content-services-across-asia" \
+              "https://www.eqourse.com/blog/eqourse-launches-singapore-scaling-content-services-across-asia"
+            check_redirect \
+              "https://www.eqourse.com/casestudy/k-12-worksheets-and-ppt-solutions-for-2-000-schools" \
+              "https://www.eqourse.com/casestudy/k12-worksheets-ppt-solutions-2000-schools"
+            retired_article_status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' 'https://www.eqourse.com/blog-detail.php?Why-is-it-necessary-for-the-students-to-learn-about-investment-in-school-irrespective-of-their-streams')"
+            if [ "$retired_article_status" != "410" ]; then
+              echo "❌ Retired investment article returned $retired_article_status; expected 410"
+              restore_nginx_config
+              exit 1
+            fi
+            sudo rm -f "$NGINX_BACKUP"
             echo "✅ eQOURSE Frontend deployed"
 
   create-backup-tag:

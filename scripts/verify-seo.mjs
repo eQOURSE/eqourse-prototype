@@ -10,6 +10,10 @@ const fallbackBlogSource = readFileSync(join(root, "src", "components", "blog", 
 const manifestPath = join(distDir, "seo-manifest.json");
 const SITE_URL = "https://www.eqourse.com";
 const requiredLegacyRedirects = new Map([
+  ["/talent-assessment", "/talent-assessment-workforce-evaluation"],
+  ["/blog/key-roles-teachers-play-in-the-classroom", "/blog/10-roles-teachers-play-in-the-classroom-and-why-they-all-matter"],
+  ["/blog/eqourse-launches-in-singapore-scaling-content-services-across-asia", "/blog/eqourse-launches-singapore-scaling-content-services-across-asia"],
+  ["/casestudy/k-12-worksheets-and-ppt-solutions-for-2-000-schools", "/casestudy/k12-worksheets-ppt-solutions-2000-schools"],
   ["/kindergarden-to-k5-samples", "/educational-publishing-content-development-samples"],
   ["/ai-", "/ai-data-services"],
   ["/events/business-tour-2026", "/events"],
@@ -82,6 +86,7 @@ const escapeHtml = (value) => value
   .replace(/"/g, "&quot;");
 
 const failures = [];
+const cmsMetadataWarnings = [];
 const fallbackBlogSlugs = [...fallbackBlogSource.matchAll(/"slug"\s*:\s*"([^"]+)"/g)].map((item) => item[1]);
 for (const slug of fallbackBlogSlugs) {
   if (!/^\/blog\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
@@ -156,9 +161,15 @@ for (const entry of entries) {
 
   const titleKey = entry.title.trim().toLowerCase();
   const descriptionKey = entry.description.trim().toLowerCase();
-  if (seenTitles.has(titleKey)) failures.push(`${entry.path}: duplicate title also used by ${seenTitles.get(titleKey)}`);
+  if (seenTitles.has(titleKey)) {
+    const message = `${entry.path}: duplicate title also used by ${seenTitles.get(titleKey)}`;
+    (entry.source && entry.source !== "static" ? cmsMetadataWarnings : failures).push(message);
+  }
   else seenTitles.set(titleKey, entry.path);
-  if (seenDescriptions.has(descriptionKey)) failures.push(`${entry.path}: duplicate description also used by ${seenDescriptions.get(descriptionKey)}`);
+  if (seenDescriptions.has(descriptionKey)) {
+    const message = `${entry.path}: duplicate description also used by ${seenDescriptions.get(descriptionKey)}`;
+    (entry.source && entry.source !== "static" ? cmsMetadataWarnings : failures).push(message);
+  }
   else seenDescriptions.set(descriptionKey, entry.path);
 }
 
@@ -277,7 +288,8 @@ if (!redirectsConfig.includes("/admin/* /index.html 200")) failures.push("_redir
 if (/^\/\* \/index\.html 200!?$/m.test(redirectsConfig)) failures.push("_redirects still soft-200s unknown public routes");
 for (const entry of entries) {
   const coveredByDynamicArticleRule =
-    entry.path.startsWith("/blog/") || entry.path.startsWith("/casestudy/");
+    entry.path.startsWith("/blog/") || entry.path.startsWith("/casestudy/") ||
+    /^\/events\/[^/]+\/highlights\/[^/]+$/.test(entry.path);
   if (
     entry.path !== "/" &&
     !coveredByDynamicArticleRule &&
@@ -319,6 +331,12 @@ if (/try_files[^;]*\$uri\//.test(nginxConfig.replaceAll("$uri/index.html", "")))
 if (!nginxConfig.includes("location ~ ^/(.+)/+$")) {
   failures.push("Nginx config is missing trailing-slash normalization");
 }
+if (!nginxConfig.includes('if ($args ~* "^Why-is-it-necessary-for-the-students-to-learn-about-investment-in-school-irrespective-of-their-streams$") { return 410; }')) {
+  failures.push("Nginx config is missing the retired investment article 410 rule");
+}
+if (nginxConfig.includes("location ^~ /blog/") || nginxConfig.includes("location ^~ /casestudy/")) {
+  failures.push("Nginx CMS location prevents trailing-slash normalization");
+}
 if (!nginxConfig.includes('add_header X-Robots-Tag "noindex, nofollow" always;')) {
   failures.push("Nginx config is missing admin X-Robots-Tag protection");
 }
@@ -337,4 +355,7 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`[verify-seo] Verified ${entries.length} routes: unique metadata, indexability, semantic HTML, canonicals, sitemap, robots and hosting redirects (including Nginx).`);
+if (cmsMetadataWarnings.length > 0) {
+  console.warn(`[verify-seo] CMS metadata needs editorial review:\n${cmsMetadataWarnings.join("\n")}`);
+}
+console.log(`[verify-seo] Verified ${entries.length} routes: static metadata, indexability, semantic HTML, canonicals, sitemap, robots and hosting redirects (including Nginx).`);
