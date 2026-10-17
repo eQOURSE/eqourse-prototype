@@ -201,6 +201,12 @@ jobs:
                 exit 1
               fi
             done
+            main_js="$(find dist/assets -maxdepth 1 -name 'index-*.js' -size +100k -print -quit)"
+            if [ -z "$main_js" ] || ! curl --silent --show-error --output /dev/null --dump-header - -H 'Accept-Encoding: gzip' "https://www.eqourse.com/${main_js#dist/}" | grep -qi '^content-encoding: gzip'; then
+              echo "❌ Main JavaScript is not served with gzip compression"
+              restore_nginx_config
+              exit 1
+            fi
             sudo rm -f "$NGINX_BACKUP"
             echo "✅ eQOURSE Frontend deployed"
 

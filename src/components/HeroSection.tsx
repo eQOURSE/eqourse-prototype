@@ -92,6 +92,7 @@ const HeroSection = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
+  const [loadVideo, setLoadVideo] = useState(false);
 
   const goTo = useCallback(
     (idx: number) => {
@@ -109,14 +110,32 @@ const HeroSection = () => {
   }, [current, goTo]);
 
   useEffect(() => {
-    if (videoReady || videoFailed) return;
+    // Keep the poster visible during the initial document load. The decorative
+    // video can use bandwidth after the critical CSS, JS and poster have loaded.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData) {
+      return;
+    }
+
+    if (document.readyState === "complete") {
+      setLoadVideo(true);
+      return;
+    }
+
+    const onLoad = () => setLoadVideo(true);
+    window.addEventListener("load", onLoad, { once: true });
+    return () => window.removeEventListener("load", onLoad);
+  }, []);
+
+  useEffect(() => {
+    if (!loadVideo || videoReady || videoFailed) return;
 
     const timeout = window.setTimeout(() => {
       setVideoFailed(true);
     }, 6000);
 
     return () => window.clearTimeout(timeout);
-  }, [videoReady, videoFailed]);
+  }, [loadVideo, videoReady, videoFailed]);
 
   const slide = slides[current];
   const Icon = slide.icon;
@@ -133,9 +152,10 @@ const HeroSection = () => {
           alt=""
           aria-hidden="true"
           decoding="async"
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        {!videoFailed && (
+        {loadVideo && !videoFailed && (
           <video
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
               videoReady ? "opacity-100" : "opacity-0"
