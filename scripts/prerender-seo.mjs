@@ -1621,7 +1621,7 @@ function buildHead(template, entry) {
     // loads. Only the homepage gets this treatment; other routes retain normal CSS.
     html = html.replace(
       /<link rel="stylesheet" crossorigin href="(\/assets\/index-[^"]+\.css)">/,
-      (_, href) => `<link rel="preload" as="style" href="${href}" />\n    <link rel="stylesheet" crossorigin href="${href}" media="print" onload="this.media='all'" data-deferred-app-css />\n    <noscript><link rel="stylesheet" crossorigin href="${href}" /></noscript>`,
+      (_, href) => `<link rel="stylesheet" crossorigin href="${href}" media="print" onload="this.media='all'" fetchpriority="high" data-deferred-app-css />\n    <noscript><link rel="stylesheet" crossorigin href="${href}" /></noscript>`,
     );
   }
 
