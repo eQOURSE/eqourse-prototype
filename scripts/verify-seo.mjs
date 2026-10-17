@@ -114,7 +114,8 @@ for (const entry of entries) {
   const canonicals = html.match(/<link[^>]*\brel="canonical"[^>]*>/g) ?? [];
   const robots = html.match(/<meta[^>]*\bname="robots"[^>]*>/g) ?? [];
   const crawlFallbacks = html.match(/<main[^>]*\bdata-seo-prerender="true"[^>]*>/g) ?? [];
-  const fallbackHeadings = html.match(/<main[^>]*\bdata-seo-prerender="true"[^>]*>[\s\S]*?<h1>[^<]+<\/h1>/g) ?? [];
+  const fallbackHeadings = html.match(/<main[^>]*\bdata-seo-prerender="true"[^>]*>[\s\S]*?<h1\b[^>]*>[\s\S]*?<\/h1>/g) ?? [];
+  const fallbackHeadingText = fallbackHeadings[0]?.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g, "").trim();
   const expectedCanonical = entry.canonical || `${SITE_URL}${entry.path === "/" ? "/" : entry.path}`;
 
   if (titles.length !== 1 || !titles[0]?.includes(`>${escapeHtml(entry.title)}</title>`)) {
@@ -135,7 +136,7 @@ for (const entry of entries) {
   if (/\bnoindex\b/i.test(html)) {
     failures.push(`${entry.path}: prerendered HTML contains noindex`);
   }
-  if (crawlFallbacks.length !== 1 || fallbackHeadings.length !== 1) {
+  if (crawlFallbacks.length !== 1 || fallbackHeadings.length !== 1 || !fallbackHeadingText) {
     failures.push(`${entry.path}: missing one semantic prerender fallback with an H1`);
   }
   if (soft404RegressionPaths.includes(entry.path)) {

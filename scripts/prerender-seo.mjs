@@ -19,7 +19,7 @@
 // falling back to the SPA rewrite for unmapped routes) — confirm with whoever
 // owns the deploy.
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import React from "react";
@@ -1262,9 +1262,35 @@ function buildMultimodalSensorDataFallback() {
     <section><h2>Find Out Whether Your Streams Actually Agree</h2><p><a href="/contact-us">Scope a Capture Programme</a></p></section><script type="application/ld+json">${JSON.stringify(schema).replace(/</g,"\u003c")}</script></main>`;
 }
 
+function heroPosterUrl() {
+  const poster = readdirSync(join(distDir, "assets")).find((name) => /^hero-video-poster-[\w-]+\.webp$/.test(name));
+  if (!poster) throw new Error("Homepage poster asset missing from the production build");
+  return `/assets/${poster}`;
+}
+
+function homepageLogoUrl() {
+  const logo = readdirSync(join(distDir, "assets")).find((name) => /^eqourse-logo-light-[\w-]+\.webp$/.test(name));
+  if (!logo) throw new Error("Homepage logo asset missing from the production build");
+  return `/assets/${logo}`;
+}
+
 function buildHomepageFallback() {
-  return `<main data-seo-prerender="true">
-      <h1>AI Data Services &amp; Content Solutions for Global Teams</h1>
+  return `<main data-seo-prerender="true" data-home-splash="true">
+      <section class="seo-home-hero" aria-label="eQOURSE AI data services and content solutions">
+        <img src="${heroPosterUrl()}" alt="" aria-hidden="true" fetchpriority="high" width="1280" height="720" />
+        <header class="seo-home-nav">
+          <div class="seo-home-contact">+91 92144 45870 &nbsp;&nbsp; info@eqourse.com</div>
+          <nav aria-label="Primary navigation"><img src="${homepageLogoUrl()}" alt="eQOURSE" width="536" height="160" /><a href="/">Home</a><a href="/ai-data-services">AI Data Services</a><a href="/content-services">Content Services</a><a href="/aboutus">About Us</a><a href="/samples">Samples</a></nav>
+        </header>
+        <div class="seo-home-hero-content">
+          <div class="seo-home-hero-copy">
+            <span>AI Data Services</span>
+            <h1>AI Data Services &amp; Content Solutions <span>for Global Teams</span></h1>
+            <a href="/ai-data-services">Explore AI Data Services</a>
+          </div>
+          <div class="seo-home-services"><strong>AI training data first. Expert learning content alongside it.</strong><div><b>AI Data Services</b><p>Collect, annotate, clean and test production AI data across language, vision, speech and robotics.</p></div><div><b>Content Services</b><p>Build accurate learning content, localization and digital education programmes at scale.</p></div></div>
+        </div>
+      </section>
       <p>eQOURSE delivers production-ready AI training data and scalable learning content through specialist-led, ISO-aligned global workflows.</p>
       <section>
         <h2>AI Data Services for Production-Ready AI</h2>
@@ -1588,6 +1614,16 @@ function buildHead(template, entry) {
   const d = escapeHtml(description);
 
   let html = template;
+  html = html.replace(/<link[^>]*data-home-poster-preload[^>]*>\s*/g, "");
+  if (path === "/") {
+    html = html.replace(/(<meta name="viewport"[^>]*>)/, `$1\n    <link rel="preload" as="image" href="${heroPosterUrl()}" fetchpriority="high" data-home-poster-preload />`);
+    // The inline splash CSS can paint the real headline while the app stylesheet
+    // loads. Only the homepage gets this treatment; other routes retain normal CSS.
+    html = html.replace(
+      /<link rel="stylesheet" crossorigin href="(\/assets\/index-[^"]+\.css)">/,
+      (_, href) => `<link rel="preload" as="style" href="${href}" />\n    <link rel="stylesheet" crossorigin href="${href}" media="print" onload="this.media='all'" data-deferred-app-css />\n    <noscript><link rel="stylesheet" crossorigin href="${href}" /></noscript>`,
+    );
+  }
 
   // Strip any previously injected (or stale template) tags so re-runs stay
   // idempotent and no route ever ships more than one of these.
